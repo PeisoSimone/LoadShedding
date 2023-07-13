@@ -6,17 +6,17 @@
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
-		<RootNamespace>LoadShedding</RootNamespace>
+		<RootNamespace>loadshedding</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>LoadShedding</ApplicationTitle>
+		<ApplicationTitle>loadshedding</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.loadshedding</ApplicationId>
-		<ApplicationIdGuid>863dd942-5564-4bbc-9037-91201777d3aa</ApplicationIdGuid>
+		<ApplicationIdGuid>052359fd-ebf7-413a-9313-e2fb5ed2c1e4</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

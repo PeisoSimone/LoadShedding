@@ -1,4 +1,4 @@
-﻿namespace LoadShedding;
+﻿namespace loadshedding;
 
 public static class MauiProgram
 {

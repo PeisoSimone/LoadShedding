@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace LoadShedding;
+namespace loadshedding;
 
 [Application]
 public class MainApplication : MauiApplication

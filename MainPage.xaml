@@ -1,41 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LoadShedding.MainPage">
+             x:Class="loadshedding.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        <VerticalStackLayout >
+            <StackLayout BackgroundColor="Black" HeightRequest="100" >
+                <!-- Content for the first VerticalStackLayout -->
+                <Label 
+                    Text="Theresapark" 
+                    FontSize="25" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    />
+            </StackLayout>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <StackLayout Orientation="Horizontal" BackgroundColor="Green" Padding="10">
+                <StackLayout  BackgroundColor="Yellow">
+                    <Label 
+                    Text="Theresapark" 
+                    FontSize="25" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    />
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+                    <!-- Content for the first HorizontalStackLayout -->
+                </StackLayout>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+                <StackLayout BackgroundColor="Blue" >
+                    <Label 
+                    Text="Theresapark" 
+                    FontSize="25" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                    <!-- Content for the second HorizontalStackLayout -->
+                </StackLayout>
+            </StackLayout>
 
+            <StackLayout BackgroundColor="Purple" HeightRequest="100" 
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <!-- Content for the third VerticalStackLayout -->
+            </StackLayout>
+
+            <StackLayout BackgroundColor="Orange" HeightRequest="100" >
+                <!-- Content for the fourth VerticalStackLayout -->
+            </StackLayout>
+
+            <StackLayout BackgroundColor="Pink" HeightRequest="100" >
+                <!-- Content for the fifth VerticalStackLayout -->
+            </StackLayout>
         </VerticalStackLayout>
+
+
     </ScrollView>
 
 </ContentPage>

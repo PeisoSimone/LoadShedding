@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace LoadShedding;
+namespace loadshedding;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

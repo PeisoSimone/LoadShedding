@@ -1,4 +1,4 @@
-﻿namespace LoadShedding;
+﻿namespace loadshedding;
 
 public partial class AppShell : Shell
 {
