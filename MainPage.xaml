@@ -1,65 +1,107 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="loadshedding.MainPage">
+             x:Class="loadshedding.MainPage"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls.Compatibility"
+             xmlns:control="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
+             Title="MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout >
-            <StackLayout BackgroundColor="Black" HeightRequest="100" >
-                <!-- Content for the first VerticalStackLayout -->
+    <Grid>
+
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="100"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+            
+                <ColumnDefinition Width="0.80*" />
+                <ColumnDefinition Width="0.20*" />
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal" BackgroundColor="AliceBlue" HorizontalOptions="FillAndExpand">
+                
+                <!-- Add your content here -->
+                <Label
+                    Text="28C"
+                    FontSize="20"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"/>
                 <Label 
-                    Text="Theresapark" 
-                    FontSize="25" 
-                    HorizontalOptions="Center"
-                    VerticalOptions="CenterAndExpand"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    />
+                Text="Theresapark"
+                FontSize="35"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                />
+                <Label
+                    Text="28 July 2023"
+                    FontSize="15"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"/>
+                
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal" BackgroundColor="Green" Padding="10">
-                <StackLayout  BackgroundColor="Yellow">
-                    <Label 
-                    Text="Theresapark" 
-                    FontSize="25" 
-                    HorizontalOptions="Center"
-                    VerticalOptions="CenterAndExpand"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    />
-
-                    <!-- Content for the first HorizontalStackLayout -->
-                </StackLayout>
-
-                <StackLayout BackgroundColor="Blue" >
-                    <Label 
-                    Text="Theresapark" 
-                    FontSize="25" 
-                    HorizontalOptions="Center"
-                    VerticalOptions="CenterAndExpand"
-                    FontAttributes="Bold"
-                    TextColor="White"
-                    />
-
-                    <!-- Content for the second HorizontalStackLayout -->
-                </StackLayout>
+            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" BackgroundColor="AntiqueWhite" HorizontalOptions="FillAndExpand">
+                <!-- Second StackLayout with 0.25 width -->
+                <!-- Add your content here -->
+                <Label 
+                Text="Loc Icon"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand"
+                />
+               
             </StackLayout>
 
-            <StackLayout BackgroundColor="Purple" HeightRequest="100" 
-                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <!-- Content for the third VerticalStackLayout -->
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="350"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" BackgroundColor="Aqua" HorizontalOptions="FillAndExpand">
+                <Label 
+                Text="Progress Bar"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand" 
+                />
+                <control:SfLinearProgressBar Margin="50" Progress="25">
+                    
+                </control:SfLinearProgressBar>
+
+            </StackLayout>
+            <StackLayout Grid.Row="2" Orientation="Horizontal" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" >
+                <Label 
+                Text="Circular Progress Bar"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand" 
+                />
+
             </StackLayout>
 
-            <StackLayout BackgroundColor="Orange" HeightRequest="100" >
-                <!-- Content for the fourth VerticalStackLayout -->
+            <StackLayout Grid.Row="3" Orientation="Horizontal" BackgroundColor="AliceBlue"  HorizontalOptions="FillAndExpand">
+                <Label 
+                Text="News WebView"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand"
+                />
+                
+
             </StackLayout>
 
-            <StackLayout BackgroundColor="Pink" HeightRequest="100" >
-                <!-- Content for the fifth VerticalStackLayout -->
-            </StackLayout>
-        </VerticalStackLayout>
 
 
-    </ScrollView>
+        </Grid>
+
+
+    </Grid>
 
 </ContentPage>
