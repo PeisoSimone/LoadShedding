@@ -18,12 +18,17 @@
                 <Label Text="Your Location"
                        FontSize="Default"
                     />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer
+                        x:Name="TapLocation" Tapped="TapLocation_Tapped"/>
+                </Frame.GestureRecognizers>
 
             </Frame>
             <ImageButton Source="location.png"
                          HeightRequest="30"
                          WidthRequest="30"
-                         HorizontalOptions="EndAndExpand"/>
+                         HorizontalOptions="EndAndExpand"
+                         Clicked="ImageButton_Clicked"/>
         </StackLayout>
 
         <StackLayout Grid.Row="1"
@@ -32,7 +37,7 @@
                    FontSize="40"
                    HorizontalOptions="Center"
                    TextColor="Gray"
-                   Text="Location"/>
+                   />
 
         </StackLayout>
 
@@ -46,7 +51,7 @@
                    FontSize="Small"
                    HorizontalOptions="Center"
                    TextColor="SlateGray"
-                   Text="25 C"/>
+                   />
 
             <Label x:Name="LblDate"
                    Grid.Row="0"
@@ -62,7 +67,7 @@
                    FontSize="Small"
                    HorizontalOptions="Center"
                    TextColor="SlateGray"
-                   Text="Clear Sky"/>
+                   />
         </Grid>
         <StackLayout Grid.Row="3"
                      Orientation="Vertical">
