@@ -55,6 +55,7 @@ namespace loadshedding.Model
         public int id { get; set; }
         public string name { get; set; }
         public int cod { get; set; }
+
     }
 
     public class Sys

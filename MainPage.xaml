@@ -59,7 +59,7 @@
                    FontSize="Small"
                    HorizontalOptions="Center"
                    TextColor="SlateGray"
-                   Text="20 Jul 2023"/>
+                   />
 
             <Label x:Name="LblWeatherDescription"
                    Grid.Row="0"
@@ -83,7 +83,7 @@
                    FontSize="Small"
                    HorizontalOptions="Center"
                    TextColor="SlateGray"
-                   Text="Stage 2"/>
+                   />
             </Frame>
         </StackLayout>
         
