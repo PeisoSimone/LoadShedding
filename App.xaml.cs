@@ -4,7 +4,7 @@ public partial class App : Application
 {
 	public App()
 	{
-		Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NGaF5cXmdCeUx0Rnxbf1xzZFRHal5QTnJfUiweQnxTdEZjXn5YcXVXR2RcVkN+Ww==");
+		Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjYxMDUwMkAzMjMyMmUzMDJlMzBpUGExL3NtVVVKTHZsMGdrRmRzNDVnL2wyOWZSRDBOSEw3ZzZQMnkzNWVFPQ==");
 		InitializeComponent();
 
 		MainPage = new MainPage();

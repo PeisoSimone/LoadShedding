@@ -6,14 +6,6 @@ using System.Threading.Tasks;
 
 namespace loadshedding.Model
 {
-    public class Schedule
-    {
-        public string area_name { get; set; }
-        public int stage { get; set; }
-        public DateTime start { get; set; }
-        public DateTime finsh { get; set; }
-        public string source { get; set; }
-    }
     public class Outage
     {
         public string start_time { get; set; }
@@ -27,10 +19,15 @@ namespace loadshedding.Model
     {
         public int id { get; set; }
         public List<Outage> outages { get; set; }
-        public List<object> source { get; set; }
         public List<object> info { get; set; }
         public object last_updated { get; set; }
         public object valid_from { get; set; }
         public object valid_until { get; set; }
+        public string area_name { get; set; }
+        public int stage { get; set; }
+        public DateTime start { get; set; }
+        public DateTime finsh { get; set; }
+        public string source { get; set; }
     }
 }
+

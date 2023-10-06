@@ -10,19 +10,19 @@ public partial class MainPage : ContentPage
     private double latitude;
     private double longitude;
     private string area;
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    public MainPage()
+    {
+        InitializeComponent();
+    }
 
     protected async override void OnAppearing()
     {
         base.OnAppearing();
         await GetLocation();
-        
+
         await GetWeatherByLocation(latitude, longitude);
         LblDate.Text = DateAndTime.DateString;
-        await GetLoadsheddingSchedule(area);
+        //await GetLoadsheddingSchedule(area);
     }
 
     public async Task GetLocation()
@@ -42,16 +42,16 @@ public partial class MainPage : ContentPage
     {
         var results = await WeatherServices.GetWeather(latitude, longitude);
         UpdateUI(results);
-        
+
     }
 
     private async void ImageButton_Clicked(object sender, EventArgs e)
     {
         var response = await DisplayPromptAsync(title: "", message: "", placeholder: "Search City", accept: "Search", cancel: "Cancel");
-        if(response != null)
+        if (response != null)
         {
             await GetWeatherByCity(response);
-            
+
         }
     }
 
@@ -59,7 +59,7 @@ public partial class MainPage : ContentPage
     {
         var results = await WeatherServices.GetWeatherByCity(city);
         UpdateUI(results);
-        
+
     }
 
     public void UpdateUI(dynamic results)
@@ -69,10 +69,17 @@ public partial class MainPage : ContentPage
         LblTemperature.Text = results.main.temperature + "°C";
     }
 
-    public async Task GetLoadsheddingSchedule(string area)
-    {
-        area = "north-west-zeerust";
-        var results = await LoadSheddingServices.GetLoadsheddingSchedule(area);
-        LblCurrentStage.Text = results.outages[0].stage.ToString();
-    }
+    //public async Task GetLoadsheddingSchedule(string area)
+    //{
+    //    area = "north-west-zeerust";
+    //    var results = await LoadSheddingServices.GetLoadsheddingSchedule(area);
+    //    LblSchedulesCurrentStage.Text = results.outages[0].stage.ToString();
+    //}
+
+//    public async Task GetLoadSheddingOutages(string area)
+//    {
+//        area = "north-west-zeerust";
+//        var results = await LoadSheddingServices.GetLoadSheddingOutages(area);
+//        LblOutagesCurrentStage.Text = results.array[0].stage.ToString();
+//    }
 }

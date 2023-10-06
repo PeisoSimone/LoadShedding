@@ -44,49 +44,107 @@
         <Grid Grid.Row="2"
               ColumnDefinitions="0.33*,0.33*,0.33*"
               RowDefinitions="Auto, Auto">
-            
+
             <Label x:Name="LblTemperature"
                    Grid.Row="0"
                    Grid.Column="0"
                    FontSize="Small"
                    HorizontalOptions="Center"
-                   TextColor="SlateGray"
-                   />
+                   TextColor="SlateGray"/>
 
             <Label x:Name="LblDate"
                    Grid.Row="0"
                    Grid.Column="1"
-                   FontSize="Small"
+                   FontSize="Medium"
                    HorizontalOptions="Center"
-                   TextColor="SlateGray"
-                   />
+                   TextColor="SlateGray"/>
 
             <Label x:Name="LblWeatherDescription"
                    Grid.Row="0"
                    Grid.Column="2"
                    FontSize="Small"
                    HorizontalOptions="Center"
-                   TextColor="SlateGray"
-                   />
+                   TextColor="SlateGray"/>
         </Grid>
         <StackLayout Grid.Row="3"
                      Orientation="Vertical">
 
             <Frame Padding="10"
+                   HeightRequest="50"
+                   CornerRadius="5"
+                   HasShadow="True"
+                   BorderColor="LightGrey"
+                   Margin="5,0,5,0">
+
+                <Grid ColumnDefinitions="0.5*,0.5*"
+                      RowDefinitions="Auto,Auto">
+                    <Label Grid.Row="0"
+                       Grid.Column="0"
+                       FontSize="Medium"
+                       HorizontalOptions="End"
+                       TextColor="SlateGray"
+                       Text="Stage: "/>
+
+                        <Label x:Name="LblSchedulesCurrentStage"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       FontSize="Medium"
+                       HorizontalOptions="Start"
+                       TextColor="SlateGray"
+                       Text="2"/>
+                    
+                </Grid>
+                
+
+            </Frame>
+            <Frame Padding="5"
+                   HeightRequest="100"
+                   CornerRadius="5"
+                   HasShadow="True"
+                   BorderColor="LightGrey"
+                   >
+
+                <StackLayout>
+                    <control:SfLinearProgressBar 
+                        Margin="50"  
+                        Progress="50" 
+                        HorizontalOptions="FillAndExpand"
+                       >
+
+                    </control:SfLinearProgressBar>
+                </StackLayout>
+                    
+            </Frame>
+
+
+            <!--<Frame Padding="10"
                    HeightRequest="100"
                    CornerRadius="5"
                    HasShadow="True"
                    BorderColor="LightGrey"
                    Margin="5,0,5,0">
 
-                <Label x:Name="LblCurrentStage"
-                   FontSize="Small"
-                   HorizontalOptions="Center"
-                   TextColor="SlateGray"
-                   />
-            </Frame>
+                <Grid ColumnDefinitions="0.5*,0.5*"
+                      RowDefinitions="Auto,Auto">
+                    <Label Grid.Row="0"
+                       Grid.Column="0"
+                       FontSize="Medium"
+                       HorizontalOptions="End"
+                       TextColor="SlateGray"
+                       Text="Stage: "/>
+
+                    <Label x:Name="LblOutagesCurrentStage"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       FontSize="Medium"
+                       HorizontalOptions="Start"
+                       TextColor="SlateGray"/>
+
+                </Grid>
+
+            </Frame>-->
         </StackLayout>
-        
+
         <StackLayout Grid.Row="4"
                      Orientation="Vertical">
 
@@ -96,6 +154,9 @@
                    HasShadow="True"
                    BorderColor="LightGrey"
                    Margin="5,0,5,0">
+                <control:SfCircularProgressBar Margin="30"  Progress="50" HorizontalOptions="Fill" VerticalOptions="Fill">
+
+                </control:SfCircularProgressBar>
             </Frame>
         </StackLayout>
 
