@@ -90,8 +90,7 @@
                        Grid.Column="1"
                        FontSize="Medium"
                        HorizontalOptions="Start"
-                       TextColor="SlateGray"
-                       Text="2"/>
+                       TextColor="SlateGray"/>
                     
                 </Grid>
                 

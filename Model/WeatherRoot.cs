@@ -39,7 +39,7 @@ namespace loadshedding.Model
         public double _1h { get; set; }
     }
 
-    public class Root
+    public class WeatherRoot
     {
         public Coord coord { get; set; }
         public List<Weather> weather { get; set; }
@@ -79,5 +79,7 @@ namespace loadshedding.Model
         public int deg { get; set; }
         public double gust { get; set; }
     }
+
+   
 
 }

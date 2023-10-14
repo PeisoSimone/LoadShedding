@@ -1,51 +1,57 @@
-﻿using loadshedding.Model;
+﻿
+using loadshedding.Model;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
+using System.Net.Http;
+
 
 namespace loadshedding.Services
 {
     public static class WeatherServices
     {
-
-        public static async Task<Root> GetWeather(double latitude, double longitude)
+        public static async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
         {
             var httpClient = new HttpClient();
             var response = await httpClient.GetStringAsync(string.Format("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&units=metric&appid=f9269e5ecd3313a8bab2ed1d692a92b9", latitude, longitude));
-            return JsonConvert.DeserializeObject<Root>(response);
+            return JsonConvert.DeserializeObject<WeatherRoot>(response);
         }
 
-        public static async Task<Root> GetWeatherByCity(string city)
+        public static async Task<WeatherRoot> GetWeatherByCity(string city)
         {
             var httpClient = new HttpClient();
             var response = await httpClient.GetStringAsync(string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid=f9269e5ecd3313a8bab2ed1d692a92b9", city));
-            return JsonConvert.DeserializeObject<Root>(response);
+            return JsonConvert.DeserializeObject<WeatherRoot>(response);
         }
-
     }
 
     public static class LoadSheddingServices
     {
-        public static async Task<LoadSheddingRoot> GetLoadsheddingSchedule(string area)
-        {
-            var httpClient = new HttpClient();
-            var response = await httpClient.GetStringAsync(string.Format("https://eskom-calendar-api.shuttleapp.rs/schedules/{0}", area));
-            return JsonConvert.DeserializeObject<LoadSheddingRoot>(response);
+            public static async Task<StatusRoot> GetStatus()
+            {
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        client.DefaultRequestHeaders.Add("token", "8ED8EBBF-FEBE40C3-89D33271-27C7A791");
+                        HttpResponseMessage response = await client.GetAsync("https://developer.sepush.co.za/business/2.0/status");
 
-        }
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string content = await response.Content.ReadAsStringAsync();
 
-        public static async Task<LoadSheddingRoot> GetLoadSheddingOutages(string area)
-        {
-            var httpClient = new HttpClient();
-            var response = await httpClient.GetStringAsync(string.Format("https://eskom-calendar-api.shuttleapp.rs/outages/{0}", area));
-            return JsonConvert.DeserializeObject<LoadSheddingRoot>(response);
-
+                        return JsonConvert.DeserializeObject<StatusRoot>(content);
+                    }
+                        else
+                        {
+                            Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                            return null;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                    return null;
+                }
+            }
         }
     }
-}
-
-

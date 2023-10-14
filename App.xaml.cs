@@ -1,4 +1,6 @@
-﻿namespace loadshedding;
+﻿using loadshedding.Services;
+
+namespace loadshedding;
 
 public partial class App : Application
 {
@@ -8,5 +10,9 @@ public partial class App : Application
 		InitializeComponent();
 
 		MainPage = new MainPage();
-	}
+
+        //var loadSheddingServices = new LoadSheddingServices(/* constructor arguments */);
+
+        //MainPage = new MainPage(loadSheddingServices);
+    }
 }

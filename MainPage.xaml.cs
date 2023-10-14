@@ -1,7 +1,7 @@
-using loadshedding.Model;
+
 using loadshedding.Services;
-using Microsoft.Maui.Controls;
 using Microsoft.VisualBasic;
+using Microsoft.Extensions.Configuration;
 
 namespace loadshedding;
 
@@ -19,10 +19,9 @@ public partial class MainPage : ContentPage
     {
         base.OnAppearing();
         await GetLocation();
-
+        await GetLoadSheddingStatus();
         await GetWeatherByLocation(latitude, longitude);
         LblDate.Text = DateAndTime.DateString;
-        //await GetLoadsheddingSchedule(area);
     }
 
     public async Task GetLocation()
@@ -40,9 +39,8 @@ public partial class MainPage : ContentPage
 
     public async Task GetWeatherByLocation(double latitude, double longitude)
     {
-        var results = await WeatherServices.GetWeather(latitude, longitude);
+        var results = await WeatherServices.GetWeatherByGPS(latitude, longitude);
         UpdateUI(results);
-
     }
 
     private async void ImageButton_Clicked(object sender, EventArgs e)
@@ -51,7 +49,6 @@ public partial class MainPage : ContentPage
         if (response != null)
         {
             await GetWeatherByCity(response);
-
         }
     }
 
@@ -59,7 +56,6 @@ public partial class MainPage : ContentPage
     {
         var results = await WeatherServices.GetWeatherByCity(city);
         UpdateUI(results);
-
     }
 
     public void UpdateUI(dynamic results)
@@ -69,17 +65,14 @@ public partial class MainPage : ContentPage
         LblTemperature.Text = results.main.temperature + "°C";
     }
 
-    //public async Task GetLoadsheddingSchedule(string area)
-    //{
-    //    area = "north-west-zeerust";
-    //    var results = await LoadSheddingServices.GetLoadsheddingSchedule(area);
-    //    LblSchedulesCurrentStage.Text = results.outages[0].stage.ToString();
-    //}
+    public void LoadUpdateUI(dynamic loadSheddingResults)
+    {
+        LblSchedulesCurrentStage.Text = loadSheddingResults.status.eskom.next_stages[0].stage;
+    }
 
-//    public async Task GetLoadSheddingOutages(string area)
-//    {
-//        area = "north-west-zeerust";
-//        var results = await LoadSheddingServices.GetLoadSheddingOutages(area);
-//        LblOutagesCurrentStage.Text = results.array[0].stage.ToString();
-//    }
+    public async Task GetLoadSheddingStatus()
+    {
+       var loadSheddingResults = await LoadSheddingServices.GetStatus();
+        LoadUpdateUI(loadSheddingResults);
+    }
 }
