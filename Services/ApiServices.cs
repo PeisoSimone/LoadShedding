@@ -29,12 +29,12 @@ namespace loadshedding.Services
         {
             using (HttpClient client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("token", "8ED8EBBF-FEBE40C3-89D33271-27C7A791");
+                client.DefaultRequestHeaders.Add("token", "18F86816-BCBC4CFA-B0DF9CB8-CA2E2DA7");
                 HttpResponseMessage response = await client.GetAsync("https://developer.sepush.co.za/business/2.0/status");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string content = await response.Content.ReadAsStringAsync();
+                    string content = await response.Content?.ReadAsStringAsync();
 
                     return JsonConvert.DeserializeObject<StatusRoot>(content);
                 }
@@ -48,22 +48,23 @@ namespace loadshedding.Services
 
         public static async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude,double longitude)
         {
+            var id = "";
+
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-
-                    client.DefaultRequestHeaders.Add("token", "8ED8EBBF-FEBE40C3-89D33271-27C7A791");
+                    client.DefaultRequestHeaders.Add("token", "18F86816-BCBC4CFA-B0DF9CB8-CA2E2DA7");
                     HttpResponseMessage response = await client.GetAsync($"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}");
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var content = await response.Content.ReadFromJsonAsync<AreasNearbyGPSRoot>();
+                        var content = await response.Content?.ReadFromJsonAsync<AreasNearbyGPSRoot>();
 
                         if (content != null)
                         {
-                            string id = content.areas[0].id;
-                            
+                            id = content.areas[0].id;
+                            var areaInfo = await GetAreaInformation(id);
                         }
                         return content;
                     }
@@ -84,16 +85,17 @@ namespace loadshedding.Services
 
         public static async Task<AreaInformationRoot> GetAreaInformation(string id)
         {
+            id = "tshwane-16-onderstepoortext9";
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.DefaultRequestHeaders.Add("token", "8ED8EBBF-FEBE40C3-89D33271-27C7A791");
+                    client.DefaultRequestHeaders.Add("token", "18F86816-BCBC4CFA-B0DF9CB8-CA2E2DA7");
                     HttpResponseMessage response = await client.GetAsync($"https://developer.sepush.co.za/business/2.0/area?id={id}&test=current");
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var content = await response.Content.ReadFromJsonAsync<AreaInformationRoot>();
+                        var content = await response.Content?.ReadFromJsonAsync<AreaInformationRoot>();
                         return content;
                     }
                     else
@@ -107,7 +109,6 @@ namespace loadshedding.Services
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
                 return null;
-
             }
         }
 

@@ -4,13 +4,14 @@ using Microsoft.VisualBasic;
 using Microsoft.Extensions.Configuration;
 using loadshedding.Model;
 
+
 namespace loadshedding;
 
 public partial class MainPage : ContentPage
 {
     private double latitude;
     private double longitude;
-    private string area;
+    private string id;
     public MainPage()
     {
         InitializeComponent();
@@ -21,10 +22,10 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
-        
-        
+
         await GetLoadSheddingStatus();
-        await GetLoadSheddingByGPS(latitude, longitude);
+        //await GetLoadSheddingByGPS(latitude, longitude);
+        await GetAreaLoadShedding(id);
         LblDate.Text = DateAndTime.DateString;
     }
 
@@ -44,7 +45,7 @@ public partial class MainPage : ContentPage
     public async Task GetWeatherByLocation(double latitude, double longitude)
     {
         var results = await WeatherServices.GetWeatherByGPS(latitude, longitude);
-        UpdateUI(results);
+        WeatherUpdateUI(results);
     }
 
     private async void ImageButton_Clicked(object sender, EventArgs e)
@@ -59,30 +60,56 @@ public partial class MainPage : ContentPage
     public async Task GetWeatherByCity(string city)
     {
         var results = await WeatherServices.GetWeatherByCity(city);
-        UpdateUI(results);
+        WeatherUpdateUI(results);
     }
 
-    public void UpdateUI(dynamic results)
+    public void WeatherUpdateUI(dynamic results)
     {
         LblCity.Text = results.name;
         LblWeatherDescription.Text = results.weather[0].description;
         LblTemperature.Text = results.main.temperature + "°C";
     }
 
-    public void LoadUpdateUI(dynamic loadSheddingResults)
-    {
-        LblSchedulesCurrentStage.Text = loadSheddingResults.status.eskom.next_stages[0].stage;
-    }
 
+
+
+    //Update Stages
     public async Task GetLoadSheddingStatus()
     {
-       var loadSheddingResults = await LoadSheddingServices.GetStatus();
-        LoadUpdateUI(loadSheddingResults);
+        var loadSheddingStatus = await LoadSheddingServices.GetStatus();
+        LoadSheddingStatusUpdateUI(loadSheddingStatus);
+    }
+    public void LoadSheddingStatusUpdateUI(dynamic loadSheddingStatus)
+    {
+        LblSchedulesCurrentStage.Text = loadSheddingStatus.status.eskom.next_stages[0].stage;
     }
 
-    public async Task GetLoadSheddingByGPS(double latitude, double longitude)
+   // Update Area Info
+    //public async Task GetLoadSheddingByGPS(double latitude, double longitude)
+    //{
+    //    var loadSheddingResults = await LoadSheddingServices.GetAreasNearByGPS(latitude, longitude);
+    //    LoadSheddingAreaUpdateUI(loadSheddingResults);
+    //}
+
+    public async Task GetAreaLoadShedding(string id)
     {
-        var loadSheddingResults = await LoadSheddingServices.GetAreasNearByGPS(latitude, longitude);
-        UpdateUI(loadSheddingResults);
+        var loadSheddingAreaResults = await LoadSheddingServices.GetAreaInformation(id);
+        LoadSheddingAreaUpdateUI(loadSheddingAreaResults);
+    }
+    public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)
+    {
+        if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
+        {
+            var firstEvent = loadSheddingAreaResults.events[0];
+            DateTime startTime = firstEvent.start;
+            DateTime endTime = firstEvent.end;
+
+            // Format the DateTime objects as strings
+            string startTimeString = startTime.ToString("HH:mm");
+            string endTimeString = endTime.ToString("HH:mm");
+
+            LblSchedulesEvetStart.Text = startTimeString;
+            LblSchedulesEvetStop.Text = endTimeString;
+        }
     }
 }
