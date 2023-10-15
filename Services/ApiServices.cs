@@ -1,7 +1,6 @@
-﻿
-using loadshedding.Model;
+﻿using loadshedding.Model;
 using Newtonsoft.Json;
-using System.Net.Http;
+using System.Net.Http.Json;
 
 
 namespace loadshedding.Services
@@ -25,33 +24,92 @@ namespace loadshedding.Services
 
     public static class LoadSheddingServices
     {
-            public static async Task<StatusRoot> GetStatus()
+
+        public static async Task<StatusRoot> GetStatus()
+        {
+            using (HttpClient client = new HttpClient())
             {
-                try
+                client.DefaultRequestHeaders.Add("token", "8ED8EBBF-FEBE40C3-89D33271-27C7A791");
+                HttpResponseMessage response = await client.GetAsync("https://developer.sepush.co.za/business/2.0/status");
+
+                if (response.IsSuccessStatusCode)
                 {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        client.DefaultRequestHeaders.Add("token", "8ED8EBBF-FEBE40C3-89D33271-27C7A791");
-                        HttpResponseMessage response = await client.GetAsync("https://developer.sepush.co.za/business/2.0/status");
+                    string content = await response.Content.ReadAsStringAsync();
 
-                        if (response.IsSuccessStatusCode)
-                        {
-                            string content = await response.Content.ReadAsStringAsync();
-
-                        return JsonConvert.DeserializeObject<StatusRoot>(content);
-                    }
-                        else
-                        {
-                            Console.WriteLine("API request failed with status code: " + response.StatusCode);
-                            return null;
-                        }
-                    }
+                    return JsonConvert.DeserializeObject<StatusRoot>(content);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine("An error occurred: " + ex.Message);
+                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
                     return null;
                 }
             }
         }
+
+        public static async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude,double longitude)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+
+                    client.DefaultRequestHeaders.Add("token", "8ED8EBBF-FEBE40C3-89D33271-27C7A791");
+                    HttpResponseMessage response = await client.GetAsync($"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadFromJsonAsync<AreasNearbyGPSRoot>();
+
+                        if (content != null)
+                        {
+                            string id = content.areas[0].id;
+                            
+                        }
+                        return content;
+                    }
+                    else
+                    {
+                        Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
+        }
+
+
+        public static async Task<AreaInformationRoot> GetAreaInformation(string id)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("token", "8ED8EBBF-FEBE40C3-89D33271-27C7A791");
+                    HttpResponseMessage response = await client.GetAsync($"https://developer.sepush.co.za/business/2.0/area?id={id}&test=current");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadFromJsonAsync<AreaInformationRoot>();
+                        return content;
+                    }
+                    else
+                    {
+                        Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+
+            }
+        }
+
     }
+}

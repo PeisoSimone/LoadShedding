@@ -2,6 +2,7 @@
 using loadshedding.Services;
 using Microsoft.VisualBasic;
 using Microsoft.Extensions.Configuration;
+using loadshedding.Model;
 
 namespace loadshedding;
 
@@ -19,8 +20,11 @@ public partial class MainPage : ContentPage
     {
         base.OnAppearing();
         await GetLocation();
-        await GetLoadSheddingStatus();
         await GetWeatherByLocation(latitude, longitude);
+        
+        
+        await GetLoadSheddingStatus();
+        await GetLoadSheddingByGPS(latitude, longitude);
         LblDate.Text = DateAndTime.DateString;
     }
 
@@ -74,5 +78,11 @@ public partial class MainPage : ContentPage
     {
        var loadSheddingResults = await LoadSheddingServices.GetStatus();
         LoadUpdateUI(loadSheddingResults);
+    }
+
+    public async Task GetLoadSheddingByGPS(double latitude, double longitude)
+    {
+        var loadSheddingResults = await LoadSheddingServices.GetAreasNearByGPS(latitude, longitude);
+        UpdateUI(loadSheddingResults);
     }
 }
