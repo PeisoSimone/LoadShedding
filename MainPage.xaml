@@ -120,6 +120,8 @@
                        TextColor="SlateGray"/>
 
                 </Grid>
+                
+                
 
                 <!--<StackLayout>
                     <control:SfLinearProgressBar 
