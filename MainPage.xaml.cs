@@ -23,7 +23,7 @@ public partial class MainPage : ContentPage
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
 
-        await GetLoadSheddingStatus();
+        await GetNationalLoadSheddingStatus();
         await GetLoadSheddingByGPS(latitude, longitude);
         await GetAreaLoadShedding(id);
         LblDate.Text = DateAndTime.DateString;
@@ -74,7 +74,7 @@ public partial class MainPage : ContentPage
 
 
     //Update Stages
-    public async Task GetLoadSheddingStatus()
+    public async Task GetNationalLoadSheddingStatus()
     {
         var loadSheddingStatus = await LoadSheddingServices.GetStatus();
         LoadSheddingStatusUpdateUI(loadSheddingStatus);
@@ -84,17 +84,19 @@ public partial class MainPage : ContentPage
         LblSchedulesCurrentStage.Text = loadSheddingStatus.status.eskom.next_stages[0].stage;
     }
 
-    //Update Area Info
+    //Update Area GPS
     public async Task GetLoadSheddingByGPS(double latitude, double longitude)
-    //{
- 
-    //    string id = await LoadSheddingServices.GetAreasNearByGPS(latitude, longitude);
-    //    if (id != null)
-    //    {
-    //        AreaInformationRoot areaInformation = await LoadSheddingServices.GetAreaInformation(id);
-    //    }
-    //}
+    {
+        var loadSheddingAreaGPSResults = await LoadSheddingServices.GetAreasNearByGPS(latitude, longitude);
+        LoadSheddingAreaUpdate(loadSheddingAreaGPSResults);
+    }
 
+    public void LoadSheddingAreaUpdate(dynamic loadSheddingAreaGPSResults)
+    {
+
+    }
+
+    //Update Area Information
     public async Task GetAreaLoadShedding(string id)
     {
         var loadSheddingAreaResults = await LoadSheddingServices.GetAreaInformation(id);

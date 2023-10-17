@@ -6,7 +6,7 @@ public partial class App : Application
 {
 	public App()
 	{
-		Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjYxMDUwMkAzMjMyMmUzMDJlMzBpUGExL3NtVVVKTHZsMGdrRmRzNDVnL2wyOWZSRDBOSEw3ZzZQMnkzNWVFPQ==");
+		Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWH9fdnVWR2BZVExzW0o=");
 		InitializeComponent();
 
 		MainPage = new MainPage();

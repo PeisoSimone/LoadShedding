@@ -45,11 +45,11 @@ namespace loadshedding.Services
 
     public static class LoadSheddingServices
     {
-        private static readonly HttpClient client = new HttpClient();
         private const string SepushToken = "18F86816-BCBC4CFA-B0DF9CB8-CA2E2DA7";
 
         public static async Task<StatusRoot> GetStatus()
         {
+            var client = new HttpClient();
             try
             {
                 client.DefaultRequestHeaders.Add("token", SepushToken);
@@ -75,10 +75,12 @@ namespace loadshedding.Services
 
         public static async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
         {
+            var client = new HttpClient();
             try
             {
                 client.DefaultRequestHeaders.Add("token", SepushToken);
-                HttpResponseMessage response = await client.GetAsync($"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}");
+                var response = await client.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -107,10 +109,12 @@ namespace loadshedding.Services
 
         public static async Task<AreaInformationRoot> GetAreaInformation(string id)
         {
+            var client = new HttpClient();
             try
             {
                 client.DefaultRequestHeaders.Add("token", SepushToken);
-                HttpResponseMessage response = await client.GetAsync($"https://developer.sepush.co.za/business/2.0/area?id={id}&test=current");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/area?id={id}&test=current");
+                var response = await client.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {

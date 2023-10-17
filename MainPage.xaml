@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="loadshedding.MainPage"
-             
+             xmlns:scheduler="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
              xmlns:control="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
              Title="MainPage">
 
@@ -102,6 +102,7 @@
                    HasShadow="True"
                    BorderColor="LightGrey">
 
+
                 <Grid ColumnDefinitions="0.5*,0.5*"
                       RowDefinitions="Auto,Auto">
                     <Label x:Name="LblSchedulesEvetStart"
@@ -119,17 +120,28 @@
                        HorizontalOptions="Start"
                        TextColor="SlateGray"/>
 
+                    <StackLayout x:Name="TimelineContainer">
+                        <!-- You can dynamically add TimelineItems here -->
+                    </StackLayout>
+
+                    <!--<scheduler:SfScheduler x:Name="Scheduler" MaximumHeightRequest="10"
+                       View="TimelineWeek">
+                        <scheduler:SfScheduler.TimelineView>
+                            <scheduler:SchedulerTimelineView 
+                       CurrentTimeIndicatorBrush="Green" />
+                        </scheduler:SfScheduler.TimelineView>
+                    </scheduler:SfScheduler>-->
+
                 </Grid>
                 
-                
-
                 <!--<StackLayout>
-                    <control:SfLinearProgressBar 
-                        Margin="50"  
-                        Progress="50" 
-                        HorizontalOptions="FillAndExpand">
-
-                    </control:SfLinearProgressBar>
+                    <scheduler:SfScheduler x:Name="Scheduler" 
+                       View="TimelineWeek">
+                        <scheduler:SfScheduler.TimelineView>
+                            <scheduler:SchedulerTimelineView 
+                       CurrentTimeIndicatorBrush="Green" />
+                        </scheduler:SfScheduler.TimelineView>
+                    </scheduler:SfScheduler>
                 </StackLayout>-->
                     
             </Frame>
