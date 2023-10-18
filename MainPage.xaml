@@ -120,9 +120,9 @@
                        HorizontalOptions="Start"
                        TextColor="SlateGray"/>
 
-                    <StackLayout x:Name="TimelineContainer">
-                        <!-- You can dynamically add TimelineItems here -->
-                    </StackLayout>
+                    <!--<StackLayout x:Name="TimelineContainer">
+                        --><!-- You can dynamically add TimelineItems here --><!--
+                    </StackLayout>-->
 
                     <!--<scheduler:SfScheduler x:Name="Scheduler" MaximumHeightRequest="10"
                        View="TimelineWeek">
@@ -184,9 +184,40 @@
                    HasShadow="True"
                    BorderColor="LightGrey"
                    Margin="5,0,5,0">
-                <control:SfCircularProgressBar Margin="30"  Progress="50" HorizontalOptions="Fill" VerticalOptions="Fill">
+                <!--<control:SfCircularProgressBar Margin="30"  Progress="50" HorizontalOptions="Fill" VerticalOptions="Fill">
 
-                </control:SfCircularProgressBar>
+                </control:SfCircularProgressBar>-->
+                <Grid ColumnDefinitions="0.5*,0.5*"
+                      RowDefinitions="Auto,Auto">
+                    <Label x:Name="LblScheduleAreaName"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       FontSize="Medium"
+                       HorizontalOptions="End"
+                       TextColor="SlateGray"/>
+
+
+                    <Label x:Name="LblScheduleAreaRegion"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       FontSize="Medium"
+                       HorizontalOptions="Start"
+                       TextColor="SlateGray"/>
+
+                    <StackLayout x:Name="TimelineContainer">
+                        <!-- You can dynamically add TimelineItems here -->
+                    </StackLayout>
+
+                    <!--<scheduler:SfScheduler x:Name="Scheduler" MaximumHeightRequest="10"
+                       View="TimelineWeek">
+                        <scheduler:SfScheduler.TimelineView>
+                            <scheduler:SchedulerTimelineView 
+                       CurrentTimeIndicatorBrush="Green" />
+                        </scheduler:SfScheduler.TimelineView>
+                    </scheduler:SfScheduler>-->
+
+                </Grid>
+                
             </Frame>
         </StackLayout>
 

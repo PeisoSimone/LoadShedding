@@ -7,17 +7,15 @@ using System.Threading.Tasks;
 namespace loadshedding.Model
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-    public class AreasGPS
+    public class AreaSearch
     {
-        public int count { get; set; }
         public string id { get; set; }
         public string name { get; set; }
         public string region { get; set; }
     }
 
-    public class AreasNearbyGPSRoot
+    public class AreaSearchRoot
     {
-        public List<AreasGPS> areas { get; set; }
-
+        public List<AreaSearch> areas { get; set; }
     }
 }

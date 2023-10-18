@@ -12,6 +12,7 @@ public partial class MainPage : ContentPage
     private double latitude;
     private double longitude;
     private string id;
+    private string name;
     public MainPage()
     {
         InitializeComponent();
@@ -20,13 +21,15 @@ public partial class MainPage : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
+        LblDate.Text = DateAndTime.DateString;
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
+        //await GetWeatherByCity(city);
 
         await GetNationalLoadSheddingStatus();
         await GetLoadSheddingByGPS(latitude, longitude);
         await GetAreaLoadShedding(id);
-        LblDate.Text = DateAndTime.DateString;
+
     }
 
     public async Task GetLocation()
@@ -54,12 +57,14 @@ public partial class MainPage : ContentPage
         if (response != null)
         {
             await GetWeatherByCity(response);
+
+            await GetLoadSheddingBySearch(response);
         }
     }
 
-    public async Task GetWeatherByCity(string city)
+    public async Task GetWeatherByCity(string text)
     {
-        var results = await WeatherServices.GetWeatherByCity(city);
+        var results = await WeatherServices.GetWeatherByCity(text);
         WeatherUpdateUI(results);
     }
 
@@ -69,9 +74,6 @@ public partial class MainPage : ContentPage
         LblWeatherDescription.Text = results.weather[0].description;
         LblTemperature.Text = results.main.temperature + "°C";
     }
-
-
-
 
     //Update Stages
     public async Task GetNationalLoadSheddingStatus()
@@ -88,13 +90,37 @@ public partial class MainPage : ContentPage
     public async Task GetLoadSheddingByGPS(double latitude, double longitude)
     {
         var loadSheddingAreaGPSResults = await LoadSheddingServices.GetAreasNearByGPS(latitude, longitude);
-        LoadSheddingAreaUpdate(loadSheddingAreaGPSResults);
+        LoadSheddingAreaUpdateAsync(loadSheddingAreaGPSResults);
+
+        string areaId = loadSheddingAreaGPSResults.areas[0].id.ToString();
+        if (areaId != null)
+        {
+            var areaInformation = await LoadSheddingServices.GetAreaInformation(areaId);
+            // Use the area information as needed
+        }
     }
 
-    public void LoadSheddingAreaUpdate(dynamic loadSheddingAreaGPSResults)
+    //Update Area Search
+    public async Task GetLoadSheddingBySearch(string text)
     {
+        var loadSheddingAreaSearchResults = await LoadSheddingServices.GetAreaBySearch(text);
+        LoadSheddingAreaUpdateAsync(loadSheddingAreaSearchResults);
+
+        string areaId = loadSheddingAreaSearchResults.areas[0].id.ToString();
+        if (areaId != null)
+        {
+            var areaInformation = await LoadSheddingServices.GetAreaInformation(areaId);
+            // Use the area information as needed
+        }
 
     }
+    public void  LoadSheddingAreaUpdateAsync(dynamic loadSheddingAreaGPSResults)
+    {
+        LblScheduleAreaName.Text = loadSheddingAreaGPSResults.areas[0].name;
+        LblScheduleAreaRegion.Text = loadSheddingAreaGPSResults.areas[0].region;
+  
+    }
+
 
     //Update Area Information
     public async Task GetAreaLoadShedding(string id)
