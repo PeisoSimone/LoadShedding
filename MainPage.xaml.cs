@@ -11,8 +11,9 @@ public partial class MainPage : ContentPage
 {
     private double latitude;
     private double longitude;
-    private string id;
-    private string name;
+    private string AreaId;
+   // private string name;
+    private string text;
     public MainPage()
     {
         InitializeComponent();
@@ -24,11 +25,10 @@ public partial class MainPage : ContentPage
         LblDate.Text = DateAndTime.DateString;
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
-        //await GetWeatherByCity(city);
 
         await GetNationalLoadSheddingStatus();
         await GetLoadSheddingByGPS(latitude, longitude);
-        await GetAreaLoadShedding(id);
+ 
 
     }
 
@@ -43,6 +43,8 @@ public partial class MainPage : ContentPage
     {
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
+        await GetNationalLoadSheddingStatus();
+        await GetLoadSheddingByGPS(latitude, longitude);
     }
 
     public async Task GetWeatherByLocation(double latitude, double longitude)
@@ -95,8 +97,8 @@ public partial class MainPage : ContentPage
         string areaId = loadSheddingAreaGPSResults.areas[0].id.ToString();
         if (areaId != null)
         {
-            var areaInformation = await LoadSheddingServices.GetAreaInformation(areaId);
-            // Use the area information as needed
+            await GetAreaLoadShedding(areaId);
+
         }
     }
 
@@ -109,8 +111,7 @@ public partial class MainPage : ContentPage
         string areaId = loadSheddingAreaSearchResults.areas[0].id.ToString();
         if (areaId != null)
         {
-            var areaInformation = await LoadSheddingServices.GetAreaInformation(areaId);
-            // Use the area information as needed
+            await GetAreaLoadShedding(areaId);
         }
 
     }
@@ -123,9 +124,9 @@ public partial class MainPage : ContentPage
 
 
     //Update Area Information
-    public async Task GetAreaLoadShedding(string id)
+    public async Task GetAreaLoadShedding(string AreaId)
     {
-        var loadSheddingAreaResults = await LoadSheddingServices.GetAreaInformation(id);
+        var loadSheddingAreaResults = await LoadSheddingServices.GetAreaInformation(AreaId);
         LoadSheddingAreaUpdateUI(loadSheddingAreaResults);
     }
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)

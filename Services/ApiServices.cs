@@ -48,7 +48,7 @@ namespace loadshedding.Services
     {
         public static string AreaId;
 
-        private const string SepushToken = "B6261F56-30024CFF-AADE04A6-F22D7195";
+        private const string SepushToken = "18F86816-BCBC4CFA-B0DF9CB8-CA2E2DA7";
 
         public static async Task<StatusRoot> GetStatus()
         {
@@ -149,7 +149,6 @@ namespace loadshedding.Services
 
         public static async Task<AreaInformationRoot> GetAreaInformation(string AreaId)
         {
-            //AreaId = "tshwane-16-onderstepoortext9";
 
             var client = new HttpClient();
             try
