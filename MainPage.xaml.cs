@@ -1,8 +1,6 @@
 
 using loadshedding.Services;
 using Microsoft.VisualBasic;
-using Microsoft.Extensions.Configuration;
-using loadshedding.Model;
 
 
 namespace loadshedding;
@@ -11,11 +9,21 @@ public partial class MainPage : ContentPage
 {
     private double latitude;
     private double longitude;
-    private string AreaId;
-   // private string name;
-    private string text;
-    public MainPage()
+    private readonly ILoadSheddingServices _loadsheddingService;
+    private readonly IWeatherServices _weatherService;
+
+
+    public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
+        _loadsheddingService = loadSheddingServices;
+        _weatherService = weatherServices;
+
+        var loadshedding = new ServiceCollection();
+        loadshedding.AddTransient<ILoadSheddingServices, LoadSheddingServices>();
+
+        var weather = new ServiceCollection();  
+        weather.AddTransient<IWeatherServices, WeatherServices>();
+
         InitializeComponent();
     }
 
@@ -28,8 +36,7 @@ public partial class MainPage : ContentPage
 
         await GetNationalLoadSheddingStatus();
         await GetLoadSheddingByGPS(latitude, longitude);
- 
-
+        
     }
 
     public async Task GetLocation()
@@ -49,7 +56,7 @@ public partial class MainPage : ContentPage
 
     public async Task GetWeatherByLocation(double latitude, double longitude)
     {
-        var results = await WeatherServices.GetWeatherByGPS(latitude, longitude);
+        var results = await _weatherService.GetWeatherByGPS(latitude, longitude);
         WeatherUpdateUI(results);
     }
 
@@ -59,14 +66,13 @@ public partial class MainPage : ContentPage
         if (response != null)
         {
             await GetWeatherByCity(response);
-
             await GetLoadSheddingBySearch(response);
         }
     }
 
     public async Task GetWeatherByCity(string text)
     {
-        var results = await WeatherServices.GetWeatherByCity(text);
+        var results = await _weatherService.GetWeatherByCity(text);
         WeatherUpdateUI(results);
     }
 
@@ -80,7 +86,7 @@ public partial class MainPage : ContentPage
     //Update Stages
     public async Task GetNationalLoadSheddingStatus()
     {
-        var loadSheddingStatus = await LoadSheddingServices.GetStatus();
+        var loadSheddingStatus = await _loadsheddingService.GetStatus();
         LoadSheddingStatusUpdateUI(loadSheddingStatus);
     }
     public void LoadSheddingStatusUpdateUI(dynamic loadSheddingStatus)
@@ -91,7 +97,7 @@ public partial class MainPage : ContentPage
     //Update Area GPS
     public async Task GetLoadSheddingByGPS(double latitude, double longitude)
     {
-        var loadSheddingAreaGPSResults = await LoadSheddingServices.GetAreasNearByGPS(latitude, longitude);
+        var loadSheddingAreaGPSResults = await _loadsheddingService.GetAreasNearByGPS(latitude, longitude);
         LoadSheddingAreaUpdateAsync(loadSheddingAreaGPSResults);
 
         string areaId = loadSheddingAreaGPSResults.areas[0].id.ToString();
@@ -105,7 +111,7 @@ public partial class MainPage : ContentPage
     //Update Area Search
     public async Task GetLoadSheddingBySearch(string text)
     {
-        var loadSheddingAreaSearchResults = await LoadSheddingServices.GetAreaBySearch(text);
+        var loadSheddingAreaSearchResults = await _loadsheddingService.GetAreaBySearch(text);
         LoadSheddingAreaUpdateAsync(loadSheddingAreaSearchResults);
 
         string areaId = loadSheddingAreaSearchResults.areas[0].id.ToString();
@@ -126,7 +132,7 @@ public partial class MainPage : ContentPage
     //Update Area Information
     public async Task GetAreaLoadShedding(string AreaId)
     {
-        var loadSheddingAreaResults = await LoadSheddingServices.GetAreaInformation(AreaId);
+        var loadSheddingAreaResults = await _loadsheddingService.GetAreaInformation(AreaId);
         LoadSheddingAreaUpdateUI(loadSheddingAreaResults);
     }
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)

@@ -1,25 +1,44 @@
-﻿using System;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
-using System.Net.Http.Json;
+﻿using Newtonsoft.Json;
 using loadshedding.Model;
+using System.Net.Http.Json;
 
 namespace loadshedding.Services
 {
-
-    public static class WeatherServices
+    public interface IWeatherServices
     {
-        private static readonly HttpClient httpClient = new HttpClient();
-        private const string WeatherApiKey = "f9269e5ecd3313a8bab2ed1d692a92b9";
+        Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude);
+        Task<WeatherRoot> GetWeatherByCity(string text);
+    }
 
-        public static async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
+    public class WeatherServices : IWeatherServices
+    {
+        private readonly HttpClient _httpClient;
+        private readonly string WeatherApiKey;
+
+        public WeatherServices(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+            WeatherApiKey = "f9269e5ecd3313a8bab2ed1d692a92b9";
+        }
+
+        public async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
         {
             try
             {
-                string url = $"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=metric&appid={WeatherApiKey}";
-                string response = await httpClient.GetStringAsync(url);
-                return JsonConvert.DeserializeObject<WeatherRoot>(response);
+                _httpClient.DefaultRequestHeaders.Clear();
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=metric&appid={WeatherApiKey}");
+                var response = await _httpClient.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadFromJsonAsync<WeatherRoot>();
+                    return content;
+                }
+                else
+                {
+                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    return null;
+                }
             }
             catch (Exception ex)
             {
@@ -28,13 +47,24 @@ namespace loadshedding.Services
             }
         }
 
-        public static async Task<WeatherRoot> GetWeatherByCity(string text)
+        public async Task<WeatherRoot> GetWeatherByCity(string text)
         {
             try
             {
-                string url = $"https://api.openweathermap.org/data/2.5/weather?q={text}&units=metric&appid={WeatherApiKey}";
-                string response = await httpClient.GetStringAsync(url);
-                return JsonConvert.DeserializeObject<WeatherRoot>(response);
+                _httpClient.DefaultRequestHeaders.Clear();
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.openweathermap.org/data/2.5/weather?q={text}&units=metric&appid={WeatherApiKey}");
+                var response = await _httpClient.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadFromJsonAsync<WeatherRoot>();
+                    return content;
+                }
+                else
+                {
+                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    return null;
+                }
             }
             catch (Exception ex)
             {
@@ -44,19 +74,32 @@ namespace loadshedding.Services
         }
     }
 
-    public static class LoadSheddingServices
+    public interface ILoadSheddingServices
     {
-        public static string AreaId;
+        Task<StatusRoot> GetStatus();
+        Task<AreaSearchRoot> GetAreaBySearch(string text);
+        Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude);
+        Task<AreaInformationRoot> GetAreaInformation(string AreaId);
+    }
 
-        private const string SepushToken = "18F86816-BCBC4CFA-B0DF9CB8-CA2E2DA7";
+    public class LoadSheddingServices : ILoadSheddingServices
+    {
+        private readonly HttpClient _httpClient;
+        private readonly string _loadSheddingKey;
 
-        public static async Task<StatusRoot> GetStatus()
+        public LoadSheddingServices(HttpClient httpClient)
         {
-            var client = new HttpClient();
+            _httpClient = httpClient;
+            _loadSheddingKey = "8ED8EBBF-FEBE40C3-89D33271-27C7A791";
+        }
+
+        public async Task<StatusRoot> GetStatus()
+        {
             try
             {
-                client.DefaultRequestHeaders.Add("token", SepushToken);
-                HttpResponseMessage response = await client.GetAsync("https://developer.sepush.co.za/business/2.0/status");
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
+                HttpResponseMessage response = await _httpClient.GetAsync("https://developer.sepush.co.za/business/2.0/status");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -76,26 +119,18 @@ namespace loadshedding.Services
             }
         }
 
-        public static async Task<AreaSearchRoot> GetAreaBySearch(string text)
+        public async Task<AreaSearchRoot> GetAreaBySearch(string text)
         {
-            var client = new HttpClient();
             try
             {
-                client.DefaultRequestHeaders.Add("token", SepushToken);
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
                 var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/areas_search?text={text}");
-                var response = await client.SendAsync(request);
+                var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadFromJsonAsync<AreaSearchRoot>();
-
-                    if (content != null && content.areas.Count > 0)
-                    {
-
-                        string id = content.areas[0].id;
-                        AreaId = id;
-                    }
-
                     return content;
                 }
                 else
@@ -103,7 +138,6 @@ namespace loadshedding.Services
                     Console.WriteLine("API request failed with status code: " + response.StatusCode);
                     return null;
                 }
-
             }
             catch (Exception ex)
             {
@@ -112,26 +146,18 @@ namespace loadshedding.Services
             }
         }
 
-        public static async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
+        public async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
         {
-            var client = new HttpClient();
             try
             {
-                client.DefaultRequestHeaders.Add("token", SepushToken);
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
                 var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}");
-                var response = await client.SendAsync(request);
+                var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadFromJsonAsync<AreasNearbyGPSRoot>();
-
-                    if (content != null && content.areas.Count > 0)
-                    {
-
-                        string id = content.areas[0].id;
-                        AreaId = id;
-                    }
-
                     return content;
                 }
                 else
@@ -147,16 +173,15 @@ namespace loadshedding.Services
             }
         }
 
-        public static async Task<AreaInformationRoot> GetAreaInformation(string AreaId)
+        public async Task<AreaInformationRoot> GetAreaInformation(string AreaId)
         {
-
-            var client = new HttpClient();
             try
             {
-                client.DefaultRequestHeaders.Add("token", SepushToken);
+                _httpClient.DefaultRequestHeaders.Clear();
+                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
                 var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/area?id={AreaId}&test=current");
 
-                var response = await client.SendAsync(request);
+                var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {

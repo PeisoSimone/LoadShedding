@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 
 
@@ -21,7 +22,6 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-
         return builder.Build();
 	}
 }
