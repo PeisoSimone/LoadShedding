@@ -13,12 +13,12 @@ namespace loadshedding.Services
     public class WeatherServices : IWeatherServices
     {
         private readonly HttpClient _httpClient;
-        private readonly string WeatherApiKey;
+        private readonly string _weatherApiKey;
 
         public WeatherServices(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            WeatherApiKey = "f9269e5ecd3313a8bab2ed1d692a92b9";
+            _weatherApiKey = "f9269e5ecd3313a8bab2ed1d692a92b9";
         }
 
         public async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
@@ -26,7 +26,7 @@ namespace loadshedding.Services
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=metric&appid={WeatherApiKey}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=metric&appid={_weatherApiKey}");
                 var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
@@ -52,7 +52,7 @@ namespace loadshedding.Services
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.openweathermap.org/data/2.5/weather?q={text}&units=metric&appid={WeatherApiKey}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.openweathermap.org/data/2.5/weather?q={text}&units=metric&appid={_weatherApiKey}");
                 var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
