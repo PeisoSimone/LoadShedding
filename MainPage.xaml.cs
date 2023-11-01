@@ -14,16 +14,17 @@ public partial class MainPage : ContentPage
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
+        InitializeComponent();
+
         _loadsheddingServices = loadSheddingServices;
         _weatherServices = weatherServices;
 
         var loadshedding = new ServiceCollection();
         loadshedding.AddSingleton<ILoadSheddingServices, LoadSheddingServices>();
 
-        var weather = new ServiceCollection();  
+        var weather = new ServiceCollection();
         weather.AddSingleton<IWeatherServices, WeatherServices>();
 
-        InitializeComponent();
     }
     protected async override void OnAppearing()
     {
