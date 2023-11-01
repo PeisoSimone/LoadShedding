@@ -33,8 +33,14 @@
 
         <StackLayout Grid.Row="1"
                      Orientation="Vertical">
+
             <Label x:Name="LblCity"
                    FontSize="40"
+                   HorizontalOptions="Center"
+                   TextColor="Gray"
+                   />
+            <Label x:Name="LblScheduleAreaName"
+                   FontSize="20"
                    HorizontalOptions="Center"
                    TextColor="Gray"
                    />
@@ -76,32 +82,23 @@
                    BorderColor="LightGrey"
                    Margin="5,0,5,0">
 
-                <Grid ColumnDefinitions="0.5*,0.5*"
-                      RowDefinitions="Auto,Auto">
-                    <Label Grid.Row="0"
-                       Grid.Column="0"
-                       FontSize="Medium"
-                       HorizontalOptions="End"
-                       TextColor="SlateGray"
-                       Text="Stage: "/>
+                <Grid ColumnDefinitions="1*"
+                      RowDefinitions="Auto">
 
-                        <Label x:Name="LblSchedulesCurrentStage"
+                    <Label x:Name="LblSchedulesCurrentStage"
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="Medium"
-                       HorizontalOptions="Start"
+                       HorizontalOptions="Center"
                        TextColor="SlateGray"/>
-                    
                 </Grid>
-                
-
             </Frame>
-            <Frame Padding="5"
+            <Frame Padding="10"
                    HeightRequest="100"
                    CornerRadius="5"
                    HasShadow="True"
-                   BorderColor="LightGrey">
-
+                   BorderColor="LightGrey"
+                   Margin="5,0,5,0">
 
                 <Grid ColumnDefinitions="0.5*,0.5*"
                       RowDefinitions="Auto,Auto">
@@ -187,17 +184,17 @@
                 <!--<control:SfCircularProgressBar Margin="30"  Progress="50" HorizontalOptions="Fill" VerticalOptions="Fill">
 
                 </control:SfCircularProgressBar>-->
-                <Grid ColumnDefinitions="0.5*,0.5*"
+                <Grid ColumnDefinitions="1*"
                       RowDefinitions="Auto,Auto">
-                    <Label x:Name="LblScheduleAreaName"
+                    <!--<Label x:Name="LblScheduleAreaName"
                        Grid.Row="0"
                        Grid.Column="0"
                        FontSize="Medium"
                        HorizontalOptions="End"
-                       TextColor="SlateGray"/>
+                       TextColor="SlateGray"/>-->
 
 
-                    <Label x:Name="LblScheduleAreaRegion"
+                    <Label x:Name="LblStage"
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="Medium"

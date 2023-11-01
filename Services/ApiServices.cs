@@ -76,7 +76,6 @@ namespace loadshedding.Services
 
     public interface ILoadSheddingServices
     {
-        Task<StatusRoot> GetStatus();
         Task<AreaSearchRoot> GetAreaBySearch(string text);
         Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude);
         Task<AreaInformationRoot> GetAreaInformation(string AreaId);
@@ -90,21 +89,22 @@ namespace loadshedding.Services
         public LoadSheddingServices(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _loadSheddingKey = "8ED8EBBF-FEBE40C3-89D33271-27C7A791";
+            _loadSheddingKey = "D86FA409-56684B92-A5A192EC-6DD0A531";
         }
 
-        public async Task<StatusRoot> GetStatus()
+        public async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
         {
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
-                HttpResponseMessage response = await _httpClient.GetAsync("https://developer.sepush.co.za/business/2.0/status");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}&test=current");
+                var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<StatusRoot>(content);
+                    var content = await response.Content.ReadFromJsonAsync<AreasNearbyGPSRoot>();
+                    return content;
                 }
                 else
                 {
@@ -146,40 +146,13 @@ namespace loadshedding.Services
             }
         }
 
-        public async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
-        {
-            try
-            {
-                _httpClient.DefaultRequestHeaders.Clear();
-                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}");
-                var response = await _httpClient.SendAsync(request);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadFromJsonAsync<AreasNearbyGPSRoot>();
-                    return content;
-                }
-                else
-                {
-                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
-            }
-        }
-
         public async Task<AreaInformationRoot> GetAreaInformation(string AreaId)
         {
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/area?id={AreaId}&test=current");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/area?id={AreaId}");
 
                 var response = await _httpClient.SendAsync(request);
 

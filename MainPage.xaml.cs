@@ -29,10 +29,9 @@ public partial class MainPage : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        LblDate.Text = DateAndTime.DateString;
+        LblDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
-        await GetNationalLoadSheddingStatus();
         await GetLoadSheddingByGPS(latitude, longitude);
     }
 
@@ -47,7 +46,6 @@ public partial class MainPage : ContentPage
     {
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
-        await GetNationalLoadSheddingStatus();
         await GetLoadSheddingByGPS(latitude, longitude);
     }
 
@@ -80,56 +78,56 @@ public partial class MainPage : ContentPage
         LblTemperature.Text = results.main.temperature + "°C";
     }
 
-    //Update Stages
-    public async Task GetNationalLoadSheddingStatus()
-    {
-        var loadSheddingStatus = await _loadsheddingServices.GetStatus();
-        LoadSheddingStatusUpdateUI(loadSheddingStatus);
-    }
-    public void LoadSheddingStatusUpdateUI(dynamic loadSheddingStatus)
-    {
-        LblSchedulesCurrentStage.Text = loadSheddingStatus.status.eskom.next_stages[0].stage;
-    }
-
     //Update Area GPS
     public async Task GetLoadSheddingByGPS(double latitude, double longitude)
     {
         var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
-        LoadSheddingAreaUpdateAsync(loadSheddingAreaGPSResults);
 
-        string areaId = loadSheddingAreaGPSResults.areas[0].id.ToString();
-        if (areaId != null)
+        string[] areaNames = loadSheddingAreaGPSResults.areas.Select(area => area.name).ToArray();
+        var selectedAreaName = await DisplayActionSheet("Current Load Shedding Area", "Cancel", null, areaNames);
+
+        if (selectedAreaName != null && selectedAreaName != "Cancel")
         {
+            // User selected an area
+            string areaId = loadSheddingAreaGPSResults.areas
+                .First(area => area.name == selectedAreaName).id;
             await GetAreaLoadShedding(areaId);
         }
     }
+
 
     //Update Area Search
     public async Task GetLoadSheddingBySearch(string text)
     {
         var loadSheddingAreaSearchResults = await _loadsheddingServices.GetAreaBySearch(text);
-        LoadSheddingAreaUpdateAsync(loadSheddingAreaSearchResults);
 
-        string areaId = loadSheddingAreaSearchResults.areas[0].id.ToString();
-        if (areaId != null)
+        string[] areaNames = loadSheddingAreaSearchResults.areas.Select(area => area.name).ToArray();
+        var selectedAreaName = await DisplayActionSheet("Select Load Shedding Area", "Cancel", null, areaNames);
+
+        if (selectedAreaName != null && selectedAreaName != "Cancel")
         {
+            // User selected an area
+            string areaId = loadSheddingAreaSearchResults.areas
+                .First(area => area.name == selectedAreaName).id;
             await GetAreaLoadShedding(areaId);
         }
     }
-    public void  LoadSheddingAreaUpdateAsync(dynamic loadSheddingAreaGPSResults)
-    {
-        LblScheduleAreaName.Text = loadSheddingAreaGPSResults.areas[0].name;
-        LblScheduleAreaRegion.Text = loadSheddingAreaGPSResults.areas[0].region;
-    }
 
-    //Update Area Information
     public async Task GetAreaLoadShedding(string AreaId)
     {
         var loadSheddingAreaResults = await _loadsheddingServices.GetAreaInformation(AreaId);
         LoadSheddingAreaUpdateUI(loadSheddingAreaResults);
     }
+
+    //Update Area Information
+
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)
     {
+        if (loadSheddingAreaResults.info != null)
+        {
+            LblScheduleAreaName.Text = loadSheddingAreaResults.info.name;
+        }
+
         if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
         {
             var firstEvent = loadSheddingAreaResults.events[0];
@@ -142,6 +140,59 @@ public partial class MainPage : ContentPage
 
             LblSchedulesEvetStart.Text = startTimeString;
             LblSchedulesEvetStop.Text = endTimeString;
+            LblSchedulesCurrentStage.Text = firstEvent.note;
+
+            string currentStage = LblSchedulesCurrentStage.Text;
+
+
+
+            if (currentStage != null)
+            {
+                var stageLoadshedding = loadSheddingAreaResults.schedule.days[0];
+
+                if(currentStage == "Stage 0") 
+                {
+                    LblStage.Text = stageLoadshedding.stage[0];
+                }
+
+                if (currentStage == "Stage 1")
+                {
+                    LblStage.Text = stageLoadshedding.stage[1];
+                }
+
+                if (currentStage == "Stage 2")
+                {
+                    foreach(var i in stageLoadshedding.stages[4])
+                    {
+                        LblStage.Text = i;
+                    }
+                }
+
+                if (currentStage == "Stage 3")
+                {
+                    LblStage.Text = stageLoadshedding.stage[3];
+                }
+
+                if (currentStage == "Stage 4")
+                {
+                    LblStage.Text = stageLoadshedding.stage[4];
+                }
+
+                if (currentStage == "Stage 5")
+                {
+                    LblStage.Text = stageLoadshedding.stage[5];
+                }
+
+                if (currentStage == "Stage 6")
+                {
+                    LblStage.Text = stageLoadshedding.stage[6];
+                }
+
+                if (currentStage == "Stage 7")
+                {
+                    LblStage.Text = stageLoadshedding.stage[7];
+                }
+            }
         }
     }
 }
