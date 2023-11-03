@@ -49,15 +49,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="LibLog" Version="5.0.0">
+	  <PackageReference Include="LibLog" Version="5.0.8">
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-	  <PackageReference Include="Syncfusion.Maui.ProgressBar" Version="23.1.40" />
-	  <PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.40" />
+	  <PackageReference Include="Syncfusion.Maui.ProgressBar" Version="23.1.43" />
+	  <PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.43" />
+	  <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.5" />
 	</ItemGroup>
 
 	<ItemGroup>

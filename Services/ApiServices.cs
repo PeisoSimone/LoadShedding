@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using loadshedding.Model;
+﻿using loadshedding.Model;
 using System.Net.Http.Json;
 
 namespace loadshedding.Services
@@ -89,7 +88,7 @@ namespace loadshedding.Services
         public LoadSheddingServices(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _loadSheddingKey = "D86FA409-56684B92-A5A192EC-6DD0A531";
+            _loadSheddingKey = "B6261F56-30024CFF-AADE04A6-F22D7195";
         }
 
         public async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
@@ -98,7 +97,7 @@ namespace loadshedding.Services
             {
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}&test=current");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"https://developer.sepush.co.za/business/2.0/areas_nearby?lat={latitude}&lon={longitude}");
                 var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)

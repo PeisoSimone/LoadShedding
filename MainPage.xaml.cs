@@ -1,7 +1,5 @@
-
 using loadshedding.Services;
-using Microsoft.VisualBasic;
-
+using System.Text;
 
 namespace loadshedding;
 
@@ -15,6 +13,7 @@ public partial class MainPage : ContentPage
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
         InitializeComponent();
+    
 
         _loadsheddingServices = loadSheddingServices;
         _weatherServices = weatherServices;
@@ -26,10 +25,11 @@ public partial class MainPage : ContentPage
         weather.AddSingleton<IWeatherServices, WeatherServices>();
 
     }
+
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        LblDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
         await GetLoadSheddingByGPS(latitude, longitude);
@@ -95,7 +95,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-
     //Update Area Search
     public async Task GetLoadSheddingBySearch(string text)
     {
@@ -120,7 +119,6 @@ public partial class MainPage : ContentPage
     }
 
     //Update Area Information
-
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)
     {
         if (loadSheddingAreaResults.info != null)
@@ -131,66 +129,80 @@ public partial class MainPage : ContentPage
         if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
         {
             var firstEvent = loadSheddingAreaResults.events[0];
-            DateTime startTime = firstEvent.start;
-            DateTime endTime = firstEvent.end;
 
-            // Format the DateTime objects as strings
-            string startTimeString = startTime.ToString("HH:mm");
-            string endTimeString = endTime.ToString("HH:mm");
-
-            LblSchedulesEvetStart.Text = startTimeString;
-            LblSchedulesEvetStop.Text = endTimeString;
+            LblSchedulesEvetStart.Text = firstEvent.start.ToString("HH:mm");
+            LblSchedulesEvetStop.Text = firstEvent.end.ToString("HH:mm");
             LblSchedulesCurrentStage.Text = firstEvent.note;
 
             string currentStage = LblSchedulesCurrentStage.Text;
 
-
-
             if (currentStage != null)
             {
+                StringBuilder sb = new StringBuilder();
+
                 var stageLoadshedding = loadSheddingAreaResults.schedule.days[0];
 
-                if(currentStage == "Stage 0") 
+                switch(currentStage)
                 {
-                    LblStage.Text = stageLoadshedding.stage[0];
-                }
 
-                if (currentStage == "Stage 1")
-                {
-                    LblStage.Text = stageLoadshedding.stage[1];
-                }
-
-                if (currentStage == "Stage 2")
-                {
-                    foreach(var i in stageLoadshedding.stages[4])
+                    case "Stage 0":
+                    foreach (var schedule in stageLoadshedding.stages[0])
                     {
-                        LblStage.Text = i;
+                        sb.AppendLine(schedule);
                     }
-                }
+                        break;
 
-                if (currentStage == "Stage 3")
-                {
-                    LblStage.Text = stageLoadshedding.stage[3];
-                }
+                    case "Stage 1":
+                        foreach (var schedule in stageLoadshedding.stages[1])
+                        {
+                            sb.AppendLine(schedule);
+                        }
+                        break;
 
-                if (currentStage == "Stage 4")
-                {
-                    LblStage.Text = stageLoadshedding.stage[4];
-                }
+                    case "Stage 2":
+                        foreach (var schedule in stageLoadshedding.stages[2])
+                        {
+                            sb.AppendLine(schedule);
+                        }
+                        break;
 
-                if (currentStage == "Stage 5")
-                {
-                    LblStage.Text = stageLoadshedding.stage[5];
-                }
+                    case "Stage 3":
+                        foreach (var schedule in stageLoadshedding.stages[3])
+                        {
+                            sb.AppendLine(schedule);
+                        }
+                        break;
 
-                if (currentStage == "Stage 6")
-                {
-                    LblStage.Text = stageLoadshedding.stage[6];
-                }
+                    case "Stage 4":
+                        foreach (var schedule in stageLoadshedding.stages[4])
+                        {
+                            sb.AppendLine(schedule);
+                        }
+                        break;
 
-                if (currentStage == "Stage 7")
-                {
-                    LblStage.Text = stageLoadshedding.stage[7];
+                    case "Stage 5":
+                        foreach (var schedule in stageLoadshedding.stages[5])
+                        {
+                            sb.AppendLine(schedule);
+                        }
+                        break;
+
+                    case "Stage 6":
+                        foreach (var schedule in stageLoadshedding.stages[6])
+                        {
+                            sb.AppendLine(schedule);
+                        }
+                        break;
+
+                    case "Stage 7":
+                        foreach (var schedule in stageLoadshedding.stages[7])
+                        {
+                            sb.AppendLine(schedule);
+                        }
+                        break;
+
+                    default:
+                        break;
                 }
             }
         }
