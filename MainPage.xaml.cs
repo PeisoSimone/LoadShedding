@@ -9,24 +9,22 @@ public partial class MainPage : ContentPage
 {
     private double latitude;
     private double longitude;
-    private readonly ILoadSheddingServices _loadsheddingServices;
     private readonly IWeatherServices _weatherServices;
+    private readonly ILoadSheddingServices _loadsheddingServices;
     private string AreaId;
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
         InitializeComponent();
 
-
-        _loadsheddingServices = loadSheddingServices;
         _weatherServices = weatherServices;
+        _loadsheddingServices = loadSheddingServices;
 
-        var loadshedding = new ServiceCollection();
-        loadshedding.AddSingleton<ILoadSheddingServices, LoadSheddingServices>();
+        //var weather = new ServiceCollection();
+        //weather.AddSingleton<IWeatherServices, WeatherServices>();
 
-        var weather = new ServiceCollection();
-        weather.AddSingleton<IWeatherServices, WeatherServices>();
-
+        //var loadshedding = new ServiceCollection();
+        //loadshedding.AddSingleton<ILoadSheddingServices, LoadSheddingServices>();
     }
 
     protected async override void OnAppearing()
@@ -35,8 +33,8 @@ public partial class MainPage : ContentPage
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
-        //await GetLoadSheddingByGPS(latitude, longitude);
-        await GetAreaLoadShedding(AreaId);
+        await GetLoadSheddingByGPS(latitude, longitude);
+        //await GetAreaLoadShedding(AreaId);
     }
 
     public async Task GetLocation()
@@ -50,7 +48,7 @@ public partial class MainPage : ContentPage
     {
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
-        //    await GetLoadSheddingByGPS(latitude, longitude);
+        await GetLoadSheddingByGPS(latitude, longitude);
     }
 
     public async Task GetWeatherByLocation(double latitude, double longitude)
@@ -65,7 +63,7 @@ public partial class MainPage : ContentPage
         if (response != null)
         {
             await GetWeatherByCity(response);
-            //await GetLoadSheddingBySearch(response);
+            await GetLoadSheddingBySearch(response);
         }
     }
 
@@ -82,39 +80,39 @@ public partial class MainPage : ContentPage
         LblTemperature.Text = results.main.temperature + "°C";
     }
 
-    ////Update Area GPS
-    //public async Task GetLoadSheddingByGPS(double latitude, double longitude)
-    //{
-    //    var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
+    //Update Area GPS
+    public async Task GetLoadSheddingByGPS(double latitude, double longitude)
+    {
+        var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
 
-    //    string[] areaNames = loadSheddingAreaGPSResults.areas.Select(area => area.name).ToArray();
-    //    var selectedAreaName = await DisplayActionSheet("Current Load Shedding Area", "Cancel", null, areaNames);
+        string[] areaNames = loadSheddingAreaGPSResults.areas.Select(area => area.name).ToArray();
+        var selectedAreaName = await DisplayActionSheet("Current Load Shedding Area", "Cancel", null, areaNames);
 
-    //    if (selectedAreaName != null && selectedAreaName != "Cancel")
-    //    {
-    //        // User selected an area
-    //        string areaId = loadSheddingAreaGPSResults.areas
-    //            .First(area => area.name == selectedAreaName).id;
-    //        await GetAreaLoadShedding(areaId);
-    //    }
-    //}
+        if (selectedAreaName != null && selectedAreaName != "Cancel")
+        {
+            // User selected an area
+            string areaId = loadSheddingAreaGPSResults.areas
+                .First(area => area.name == selectedAreaName).id;
+            await GetAreaLoadShedding(areaId);
+        }
+    }
 
-    ////Update Area Search
-    //public async Task GetLoadSheddingBySearch(string text)
-    //{
-    //    var loadSheddingAreaSearchResults = await _loadsheddingServices.GetAreaBySearch(text);
+    //Update Area Search
+    public async Task GetLoadSheddingBySearch(string text)
+    {
+        var loadSheddingAreaSearchResults = await _loadsheddingServices.GetAreaBySearch(text);
 
-    //    string[] areaNames = loadSheddingAreaSearchResults.areas.Select(area => area.name).ToArray();
-    //    var selectedAreaName = await DisplayActionSheet("Select Load Shedding Area", "Cancel", null, areaNames);
+        string[] areaNames = loadSheddingAreaSearchResults.areas.Select(area => area.name).ToArray();
+        var selectedAreaName = await DisplayActionSheet("Select Load Shedding Area", "Cancel", null, areaNames);
 
-    //    if (selectedAreaName != null && selectedAreaName != "Cancel")
-    //    {
-    //        // User selected an area
-    //        string areaId = loadSheddingAreaSearchResults.areas
-    //            .First(area => area.name == selectedAreaName).id;
-    //        await GetAreaLoadShedding(areaId);
-    //    }
-    //}
+        if (selectedAreaName != null && selectedAreaName != "Cancel")
+        {
+            // User selected an area
+            string areaId = loadSheddingAreaSearchResults.areas
+                .First(area => area.name == selectedAreaName).id;
+            await GetAreaLoadShedding(areaId);
+        }
+    }
 
     public async Task GetAreaLoadShedding(string AreaId)
     {
@@ -154,7 +152,7 @@ public partial class MainPage : ContentPage
                     case "Stage 0":
                         foreach (var schedule in stageLoadshedding.stages[0])
                         {
-                            sb.Append(schedule).Append("  ");
+                            sb.Append(schedule).Append(" ");
                         }
                         break;
 

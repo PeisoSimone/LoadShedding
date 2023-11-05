@@ -1,4 +1,7 @@
-﻿using loadshedding.Services;
+﻿
+using loadshedding.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace loadshedding;
 
@@ -10,8 +13,9 @@ public partial class App : Application
 
         InitializeComponent();
 
-        ILoadSheddingServices loadSheddingServices = new LoadSheddingServices(new HttpClient());
-        IWeatherServices weatherServices = new WeatherServices(new HttpClient());
+        
+        IWeatherServices weatherServices = new WeatherServices();
+        ILoadSheddingServices loadSheddingServices = new LoadSheddingServices();
 
         MainPage = new MainPage(loadSheddingServices, weatherServices);
     }
