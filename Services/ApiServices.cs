@@ -1,4 +1,5 @@
 ﻿using loadshedding.Model;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 
@@ -12,15 +13,18 @@ namespace loadshedding.Services
 
     public class WeatherServices : IWeatherServices
     {
-        private readonly string _weatherApiKey = "f9269e5ecd3313a8bab2ed1d692a92b9";
+        private readonly string _weatherApiKey;
+        private readonly HttpClient _httpClient;
 
-        private readonly HttpClient _httpClient = new ()
-
+        public WeatherServices(ApiKeysConfiguration apiKeysConfiguration)
+        {
+            _weatherApiKey = apiKeysConfiguration.WeatherApiKey;
+            _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/")
             };
-
-    public async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
+        }
+        public async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
         {
             try
             {
@@ -81,13 +85,17 @@ namespace loadshedding.Services
 
     public class LoadSheddingServices : ILoadSheddingServices
     {
-        private readonly string _loadSheddingKey = "8ED8EBBF-FEBE40C3-89D33271-27C7A791";
+        private readonly string _loadSheddingKey;
+        private readonly HttpClient _httpClient;
 
-        private readonly HttpClient _httpClient = new()
+        public LoadSheddingServices(ApiKeysConfiguration apiKeysConfiguration)
         {
-            BaseAddress = new Uri("https://developer.sepush.co.za/business/2.0/")
-        };
-
+            _loadSheddingKey = apiKeysConfiguration.LoadSheddingApiKey;
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://developer.sepush.co.za/business/2.0/")
+            };
+        }
 
         public async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
         {
@@ -148,7 +156,6 @@ namespace loadshedding.Services
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
-                //AreaId = "tshwane-16-onderstepoortext9";
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
                 var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
 

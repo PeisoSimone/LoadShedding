@@ -1,28 +1,30 @@
-﻿using Microsoft.Maui.Controls;
-using Microsoft.Extensions.Logging;
-using Syncfusion.Maui.Core.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Syncfusion.Maui.Core.Hosting;
 using loadshedding.Services;
 using loadshedding.Model;
-using System.Configuration;
 
 namespace loadshedding;
-
 
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+
         builder
-            .UseMauiApp<App>()
-            .ConfigureSyncfusionCore()
-            .ConfigureFonts(fonts =>
-            {
-                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            });
+        .UseMauiApp<App>()
+        .ConfigureSyncfusionCore()
+        .ConfigureFonts(fonts =>
+        {
+            fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+            fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+        });
+
+        var apiKeysConfiguration = new ApiKeysConfiguration
+        {
+            WeatherApiKey = "f9269e5ecd3313a8bab2ed1d692a92b9",
+            LoadSheddingApiKey = "8ED8EBBF-FEBE40C3-89D33271-27C7A791"
+        };
+        builder.Services.AddSingleton(apiKeysConfiguration);
 
         builder.Services.AddSingleton<IWeatherServices, WeatherServices>();
         builder.Services.AddSingleton<ILoadSheddingServices, LoadSheddingServices>();

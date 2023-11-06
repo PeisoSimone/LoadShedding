@@ -20,11 +20,6 @@ public partial class MainPage : ContentPage
         _weatherServices = weatherServices;
         _loadsheddingServices = loadSheddingServices;
 
-        //var weather = new ServiceCollection();
-        //weather.AddSingleton<IWeatherServices, WeatherServices>();
-
-        //var loadshedding = new ServiceCollection();
-        //loadshedding.AddSingleton<ILoadSheddingServices, LoadSheddingServices>();
     }
 
     protected async override void OnAppearing()
