@@ -16,14 +16,12 @@ namespace loadshedding.Services
         private readonly string _weatherApiKey;
         private readonly HttpClient _httpClient;
 
-        public WeatherServices(ApiKeysConfiguration apiKeysConfiguration)
+        public WeatherServices(HttpClient httpClient, ApiKeysConfiguration apiKeys)
         {
-            _weatherApiKey = apiKeysConfiguration.WeatherApiKey;
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/")
-            };
+            _httpClient = httpClient;
+            _weatherApiKey = apiKeys.WeatherApiKey;
         }
+
         public async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
         {
             try
@@ -85,24 +83,23 @@ namespace loadshedding.Services
 
     public class LoadSheddingServices : ILoadSheddingServices
     {
-        private readonly string _loadSheddingKey;
+        private readonly string _loadSheddingApiKey;
         private readonly HttpClient _httpClient;
 
-        public LoadSheddingServices(ApiKeysConfiguration apiKeysConfiguration)
+        public LoadSheddingServices(HttpClient httpClient, ApiKeysConfiguration apiKeys)
         {
-            _loadSheddingKey = apiKeysConfiguration.LoadSheddingApiKey;
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("https://developer.sepush.co.za/business/2.0/")
-            };
+            _httpClient = httpClient;
+
+            _loadSheddingApiKey = apiKeys.LoadSheddingApiKey;
         }
+
 
         public async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
         {
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
-                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
+                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
                 var request = new HttpRequestMessage(HttpMethod.Get, $"areas_nearby?lat={latitude}&lon={longitude}");
                 var response = await _httpClient.SendAsync(request);
 
@@ -129,7 +126,7 @@ namespace loadshedding.Services
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
-                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
+                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
                 var request = new HttpRequestMessage(HttpMethod.Get, $"areas_search?text={text}");
                 var response = await _httpClient.SendAsync(request);
 
@@ -156,7 +153,7 @@ namespace loadshedding.Services
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
-                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingKey);
+                _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
                 var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
 
                 var response = await _httpClient.SendAsync(request);

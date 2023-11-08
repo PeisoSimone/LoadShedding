@@ -7,8 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "loadshedding", "loadsheddin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D497DD5-A12D-4DD7-BABB-C894A6CA65BE}"
 	ProjectSection(SolutionItems) = preProject
+		appsettings.json = appsettings.json
 		Page.xaml = Page.xaml
 		Startup.cs = Startup.cs
+		test.txt = test.txt
 	EndProjectSection
 EndProject
 Global

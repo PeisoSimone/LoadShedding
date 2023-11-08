@@ -11,7 +11,7 @@ public partial class MainPage : ContentPage
     private double longitude;
     private readonly IWeatherServices _weatherServices;
     private readonly ILoadSheddingServices _loadsheddingServices;
-    private string AreaId;
+   // private string AreaId;
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
@@ -25,10 +25,10 @@ public partial class MainPage : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
-        LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         await GetLocation();
         await GetWeatherByLocation(latitude, longitude);
         await GetLoadSheddingByGPS(latitude, longitude);
+        LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         //await GetAreaLoadShedding(AreaId);
     }
 
