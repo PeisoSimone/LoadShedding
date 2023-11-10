@@ -5,6 +5,8 @@ using loadshedding.Services;
 using loadshedding.Model;
 using Microsoft.Extensions.Configuration;
 using System.Text;
+using Microsoft.AspNetCore.Hosting;
+using System.Reflection;
 
 namespace loadshedding;
 
@@ -23,23 +25,21 @@ public static class MauiProgram
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
         });
 
-        var jsonFilePath = @"C:\Users\Pee_Jay Simone\source\repos\Codility\LoadShedding\test.txt";
+        builder.AddAppSettings();
 
-        var configuration = new ConfigurationBuilder()
-            .AddJsonFile(jsonFilePath)
-            .AddEnvironmentVariables()
-            .Build();
-
-
-        var apiKeys = new ApiKeysConfiguration();
-        configuration.GetSection("ApiKeys").Bind(apiKeys);
+        var apiKeysConfig = builder.Configuration.GetSection("ApiKeys").Get<ApiKeysConfiguration>();
+        var apiKeys = new ApiKeysConfiguration
+        {
+            WeatherApiKey = apiKeysConfig?.WeatherApiKey,
+            LoadSheddingApiKey = apiKeysConfig?.LoadSheddingApiKey,
+        };
 
         builder.Services.AddSingleton(apiKeys);
-
 
         builder.Services.AddHttpClient<IWeatherServices, WeatherServices>(weatherclient =>
         {
             weatherclient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
+            
         });
 
         builder.Services.AddHttpClient<ILoadSheddingServices, LoadSheddingServices>(loadsheddigclient =>
@@ -47,17 +47,22 @@ public static class MauiProgram
             loadsheddigclient.BaseAddress = new Uri("https://developer.sepush.co.za/business/2.0/");
         });
 
-
-        //var apiKeysConfiguration = new ApiKeysConfiguration
-        //{
-        //    WeatherApiKey = "f9269e5ecd3313a8bab2ed1d692a92b9",
-        //    LoadSheddingApiKey = "8ED8EBBF-FEBE40C3-89D33271-27C7A791"
-        //};
-        //builder.Services.AddSingleton(apiKeysConfiguration);
-
-        //builder.Services.AddSingleton<IWeatherServices, WeatherServices>();
-        //builder.Services.AddSingleton<ILoadSheddingServices, LoadSheddingServices>();
-
         return builder.Build();
+    }
+
+    private static void AddAppSettings(this MauiAppBuilder builder)
+    {
+        using Stream stream = Assembly
+            .GetExecutingAssembly()
+            .GetManifestResourceStream("loadshedding.appsettings.json");
+
+        if(stream != null)
+        {
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddJsonStream(stream)
+                .Build();
+
+            builder.Configuration.AddConfiguration(config);
+        }
     }
 }

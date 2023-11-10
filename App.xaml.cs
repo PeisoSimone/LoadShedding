@@ -15,9 +15,9 @@ public partial class App : Application
             this.weatherServices = weatherServices;
             this.loadSheddingServices = loadSheddingServices;
 
-           
+             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("License Here");
 
-            InitializeComponent();
+        InitializeComponent();
 
             MainPage = new MainPage(loadSheddingServices, weatherServices);
         }
