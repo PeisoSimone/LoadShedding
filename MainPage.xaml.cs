@@ -26,8 +26,9 @@ public partial class MainPage : ContentPage
     {
         base.OnAppearing();
         await GetLocation();
-        await GetWeatherByLocation(latitude, longitude);
+        
         await GetLoadSheddingByGPS(latitude, longitude);
+        await GetWeatherByLocation(latitude, longitude);
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         //await GetAreaLoadShedding(AreaId);
     }
@@ -42,8 +43,8 @@ public partial class MainPage : ContentPage
     private async void TapLocation_Tapped(object sender, EventArgs e)
     {
         await GetLocation();
-        await GetWeatherByLocation(latitude, longitude);
         await GetLoadSheddingByGPS(latitude, longitude);
+        await GetWeatherByLocation(latitude, longitude);
     }
 
     public async Task GetWeatherByLocation(double latitude, double longitude)
@@ -57,8 +58,9 @@ public partial class MainPage : ContentPage
         var response = await DisplayPromptAsync(title: "", message: "", placeholder: "Search City", accept: "Search", cancel: "Cancel");
         if (response != null)
         {
-            await GetWeatherByCity(response);
+            
             await GetLoadSheddingBySearch(response);
+            await GetWeatherByCity(response);
         }
     }
 
