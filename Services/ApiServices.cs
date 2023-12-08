@@ -152,8 +152,10 @@ namespace loadshedding.Services
         {
             try
             {
+               // AreaId = "tshwane-16-onderstepoortext9";
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
+               // var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
                 var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
 
                 var response = await _httpClient.SendAsync(request);

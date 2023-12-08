@@ -1,5 +1,7 @@
+using loadshedding.CustomControl;
 using loadshedding.Model;
 using loadshedding.Services;
+using Syncfusion.Maui.ProgressBar;
 using System.Collections.ObjectModel;
 using System.Text;
 
@@ -11,27 +13,32 @@ public partial class MainPage : ContentPage
     private double longitude;
     private readonly IWeatherServices _weatherServices;
     private readonly ILoadSheddingServices _loadsheddingServices;
-   // private string AreaId;
+    //private string AreaId;
+    private CircularProgressBarControl circularProgressBarControl;
+
+    public DateTime startdatetime { get; private set; }
+    public DateTime enddatetime { get; private set; }
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
-        InitializeComponent();
+       InitializeComponent();
 
         _weatherServices = weatherServices;
         _loadsheddingServices = loadSheddingServices;
-
+        circularProgressBarControl = new CircularProgressBarControl();
     }
 
     protected async override void OnAppearing()
     {
         base.OnAppearing();
         await GetLocation();
-        
-        await GetLoadSheddingByGPS(latitude, longitude);
+        //await GetLoadSheddingByGPS(latitude, longitude);
         await GetWeatherByLocation(latitude, longitude);
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         //await GetAreaLoadShedding(AreaId);
+        
     }
+
 
     public async Task GetLocation()
     {
@@ -58,7 +65,6 @@ public partial class MainPage : ContentPage
         var response = await DisplayPromptAsync(title: "", message: "", placeholder: "Search City", accept: "Search", cancel: "Cancel");
         if (response != null)
         {
-            
             await GetLoadSheddingBySearch(response);
             await GetWeatherByCity(response);
         }
@@ -120,6 +126,7 @@ public partial class MainPage : ContentPage
     //Update Area Information
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)
     {
+
         if (loadSheddingAreaResults.info != null)
         {
             LblScheduleAreaName.Text = loadSheddingAreaResults.info.name;
@@ -129,11 +136,15 @@ public partial class MainPage : ContentPage
         {
             var firstEvent = loadSheddingAreaResults.events[0];
 
+            DateTime startdatetime = firstEvent.start;
+            DateTime enddatetime = firstEvent.end;
+
+            circularProgressBarControl.UpdateProgressBar(startdatetime, enddatetime);
+
             LblSchedulesEvetStart.Text = firstEvent.start.ToString("HH:mm");
             LblSchedulesEvetStop.Text = firstEvent.end.ToString("HH:mm");
             LblSchedulesCurrentStage.Text = firstEvent.note;
             LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
-
 
             string currentStage = LblSchedulesCurrentStage.Text;
 
