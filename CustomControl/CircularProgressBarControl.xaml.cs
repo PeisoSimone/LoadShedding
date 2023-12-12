@@ -1,44 +1,88 @@
 using Syncfusion.Maui.ProgressBar;
-using loadshedding.Services;
-using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace loadshedding.CustomControl;
 
 public partial class CircularProgressBarControl : ContentView
 {
     private SfCircularProgressBar circularProgressBar;
+    private dynamic loadSheddingAreaResults;
 
     public CircularProgressBarControl()
     {
         InitializeComponent();
 
-       // UpdateProgressBar(startdatetime, enddatetime);
+        circularProgressBar = new SfCircularProgressBar();
+
+        this.Content = circularProgressBar;
+
+        UpdateProgressBar(loadSheddingAreaResults);
     }
 
-    public DateTime enddatetime { get; set; }
-    public DateTime startdatetime { get; set; }
 
-    public void UpdateProgressBar(DateTime startdatetime, DateTime enddatetime)
+    public void UpdateProgressBar(dynamic loadSheddingAreaResults)
     {
-        DateTime startTime = startdatetime;
-        DateTime currentTime = DateTime.Now;
-        DateTime endTime = enddatetime;
-        DateTime enddTime = startTime.AddHours(2);
+        if (loadSheddingAreaResults?.events?.Count > 0)
+        {
+            var firstEvent = loadSheddingAreaResults.events[0];
 
-        TimeSpan totalDuration = enddTime - startTime;
-        TimeSpan elapsedTime = currentTime - startTime;
+            DateTime currentTime = DateTime.Now;
+            DateTime eventStartTime = firstEvent.start;
+            DateTime eventEndTime = firstEvent.end.AddMinutes(-30);
+            
+
+            //Therefore loadshedding is active
+            if (IsTimeBetween(currentTime, eventStartTime, eventEndTime))
+            {
+                UpdateProgressBarUI(currentTime, eventStartTime, eventEndTime);
+            }
+
+            //Therefore loadshedding in not active
+            if (!IsTimeBetween(currentTime, eventStartTime, eventEndTime))
+            {
+                eventStartTime = eventEndTime;
+                eventEndTime = eventStartTime;
+
+                UpdateProgressBarUI(currentTime, eventStartTime, eventEndTime);
+            }
+        }
+        else
+        {
+            DateTime currentTime = DateTime.Now;
+            DateTime eventStartTime = DateTime.Now.AddHours(-1);
+            DateTime eventEndTime = eventStartTime.AddHours(2);
+
+            UpdateProgressBarUI(currentTime, eventStartTime, eventEndTime);
+        }
+    }
+
+    static bool IsTimeBetween(DateTime currentTime, DateTime eventStartTime, DateTime eventEndTime)
+    {
+        return currentTime >= eventStartTime && currentTime <= eventEndTime;
+    }
+
+    private void UpdateProgressBarUI(DateTime currentTime,DateTime eventStartTime, DateTime eventEndTime)
+    {
+        TimeSpan totalDuration = eventEndTime - eventStartTime;
+        TimeSpan elapsedTime = currentTime - eventStartTime;
 
         double progress = (elapsedTime.TotalMilliseconds / totalDuration.TotalMilliseconds) * 100;
 
-        progress = Math.Max(0, Math.Min(100, progress));
+        progress = Math.Max(0, Math.Min(100,progress));
 
         double remainingProgress = 100 - progress;
 
-        circularProgressBar = new SfCircularProgressBar();
+        if (circularProgressBar == null)
+        {
+            circularProgressBar = new SfCircularProgressBar();
+            this.Content = circularProgressBar;
 
-        circularProgressBar.Progress = 20;
+            StackLayout stackLayout = this.Content.FindByName<StackLayout>("Circular");
+            if (stackLayout != null)
+            {
+                stackLayout.Children.Add(circularProgressBar);
+            }
+        }
 
-        this.Content = circularProgressBar;
+        circularProgressBar.Progress = remainingProgress;
     }
 }

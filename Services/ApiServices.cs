@@ -1,6 +1,4 @@
 ﻿using loadshedding.Model;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using System.Net.Http.Json;
 
 namespace loadshedding.Services
@@ -89,7 +87,6 @@ namespace loadshedding.Services
         public LoadSheddingServices(HttpClient httpClient, ApiKeysConfiguration apiKeys)
         {
             _httpClient = httpClient;
-
             _loadSheddingApiKey = apiKeys.LoadSheddingApiKey;
         }
 
@@ -152,10 +149,10 @@ namespace loadshedding.Services
         {
             try
             {
-               // AreaId = "tshwane-16-onderstepoortext9";
+                //AreaId = "tshwane-16-onderstepoortext9";
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
-               // var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
+                //var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
                 var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
 
                 var response = await _httpClient.SendAsync(request);

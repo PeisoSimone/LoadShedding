@@ -1,8 +1,6 @@
 using loadshedding.CustomControl;
-using loadshedding.Model;
 using loadshedding.Services;
 using Syncfusion.Maui.ProgressBar;
-using System.Collections.ObjectModel;
 using System.Text;
 
 namespace loadshedding;
@@ -13,15 +11,13 @@ public partial class MainPage : ContentPage
     private double longitude;
     private readonly IWeatherServices _weatherServices;
     private readonly ILoadSheddingServices _loadsheddingServices;
-    //private string AreaId;
     private CircularProgressBarControl circularProgressBarControl;
-
-    public DateTime startdatetime { get; private set; }
-    public DateTime enddatetime { get; private set; }
+    //private string AreaId;
+    private dynamic loadSheddingAreaResults;
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
-       InitializeComponent();
+        InitializeComponent();
 
         _weatherServices = weatherServices;
         _loadsheddingServices = loadSheddingServices;
@@ -32,12 +28,13 @@ public partial class MainPage : ContentPage
     {
         base.OnAppearing();
         await GetLocation();
-        //await GetLoadSheddingByGPS(latitude, longitude);
+        await GetLoadSheddingByGPS(latitude, longitude);
         await GetWeatherByLocation(latitude, longitude);
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
-        //await GetAreaLoadShedding(AreaId);
-        
+       // await GetAreaLoadShedding(AreaId);
+        circularProgressBarControl.UpdateProgressBar(loadSheddingAreaResults);
     }
+
 
 
     public async Task GetLocation()
@@ -121,7 +118,9 @@ public partial class MainPage : ContentPage
     {
         var loadSheddingAreaResults = await _loadsheddingServices.GetAreaInformation(AreaId);
         LoadSheddingAreaUpdateUI(loadSheddingAreaResults);
+        circularProgressBarControl.UpdateProgressBar(loadSheddingAreaResults);
     }
+
 
     //Update Area Information
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)
@@ -135,11 +134,6 @@ public partial class MainPage : ContentPage
         if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
         {
             var firstEvent = loadSheddingAreaResults.events[0];
-
-            DateTime startdatetime = firstEvent.start;
-            DateTime enddatetime = firstEvent.end;
-
-            circularProgressBarControl.UpdateProgressBar(startdatetime, enddatetime);
 
             LblSchedulesEvetStart.Text = firstEvent.start.ToString("HH:mm");
             LblSchedulesEvetStop.Text = firstEvent.end.ToString("HH:mm");
