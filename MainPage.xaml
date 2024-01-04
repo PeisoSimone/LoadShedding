@@ -4,7 +4,7 @@
              xmlns:customCotrol="clr-namespace:loadshedding.CustomControl"
              x:Class="loadshedding.MainPage"
              Title="MainPage">
-    
+
     <ScrollView>
         <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
               RowSpacing="20">
@@ -83,7 +83,7 @@
                        CornerRadius="5"
                        HasShadow="True"
                        BorderColor="LightGrey"
-                       Margin="5,0,5,0">
+                       Margin="5,5,5,5">
 
                     <Grid ColumnDefinitions="1*"
                           RowDefinitions="Auto">
@@ -102,7 +102,7 @@
                        HasShadow="True"
                        BackgroundColor="Transparent"
                        BorderColor="LightGrey"
-                       Margin="5,0,5,0">
+                       Margin="5,5,5,0">
 
                     <Grid ColumnDefinitions="1*"
                           RowDefinitions="Auto,Auto">
@@ -135,22 +135,11 @@
 
             </StackLayout>
 
+
             <!--Circular ProgressBar-->
-            <StackLayout x:Name="Circular" Grid.Row="4" 
-                         Orientation="Vertical">
+            <StackLayout x:Name="Circular" Grid.Row="4">
 
-                <Frame Padding="10" 
-                       HeightRequest="300" 
-                       CornerRadius="5" BackgroundColor="Transparent" 
-                       HasShadow="True" 
-                       BorderColor="LightGrey" 
-                       Margin="5,0,5,0">
-
-                    <customCotrol:CircularProgressBarControl>
-                        
-                    </customCotrol:CircularProgressBarControl>
-
-                </Frame>
+                <customCotrol:CircularProgressBarControl />
 
             </StackLayout>
 
@@ -166,7 +155,7 @@
                        HasShadow="True"
                        BorderColor="LightGrey"
                        Margin="5,0,5,0">
-                    
+
                     <Grid RowDefinitions="0.2*,0.8*"
                           ColumnDefinitions="0.5*,0.5*">
 

@@ -1,88 +1,158 @@
+
 using Syncfusion.Maui.ProgressBar;
+using System;
 
 namespace loadshedding.CustomControl;
 
 public partial class CircularProgressBarControl : ContentView
 {
     private SfCircularProgressBar circularProgressBar;
-    private dynamic loadSheddingAreaResults;
+
+    public DateTime EventStartTime { get; set; }
+    public DateTime EventEndTime { get; set; }
+    public DateTime secEventStartTime { get; set; }
 
     public CircularProgressBarControl()
     {
         InitializeComponent();
-
-        circularProgressBar = new SfCircularProgressBar();
-
-        this.Content = circularProgressBar;
-
-        UpdateProgressBar(loadSheddingAreaResults);
     }
 
-
-    public void UpdateProgressBar(dynamic loadSheddingAreaResults)
+    public void UpdateProgressBar()
     {
-        if (loadSheddingAreaResults?.events?.Count > 0)
+        DateTime currentTime = DateTime.Now;
+
+        if (currentTime > EventStartTime && currentTime < EventEndTime)
         {
-            var firstEvent = loadSheddingAreaResults.events[0];
-
-            DateTime currentTime = DateTime.Now;
-            DateTime eventStartTime = firstEvent.start;
-            DateTime eventEndTime = firstEvent.end.AddMinutes(-30);
-            
-
-            //Therefore loadshedding is active
-            if (IsTimeBetween(currentTime, eventStartTime, eventEndTime))
-            {
-                UpdateProgressBarUI(currentTime, eventStartTime, eventEndTime);
-            }
-
-            //Therefore loadshedding in not active
-            if (!IsTimeBetween(currentTime, eventStartTime, eventEndTime))
-            {
-                eventStartTime = eventEndTime;
-                eventEndTime = eventStartTime;
-
-                UpdateProgressBarUI(currentTime, eventStartTime, eventEndTime);
-            }
+            ActiveLoadSheddingUI(currentTime, EventStartTime, EventEndTime);
         }
-        else
+        else if(currentTime > EventEndTime && currentTime < secEventStartTime)
         {
-            DateTime currentTime = DateTime.Now;
-            DateTime eventStartTime = DateTime.Now.AddHours(-1);
-            DateTime eventEndTime = eventStartTime.AddHours(2);
+            EventEndTime = EventStartTime;
 
-            UpdateProgressBarUI(currentTime, eventStartTime, eventEndTime);
+            secEventStartTime = EventEndTime;
+
+            NotActiveLoadSheddingUI(currentTime, EventStartTime, EventEndTime);
         }
     }
 
-    static bool IsTimeBetween(DateTime currentTime, DateTime eventStartTime, DateTime eventEndTime)
+    private void ActiveLoadSheddingUI(DateTime currentTime, DateTime eventStartTime, DateTime eventEndTime)
     {
-        return currentTime >= eventStartTime && currentTime <= eventEndTime;
-    }
-
-    private void UpdateProgressBarUI(DateTime currentTime,DateTime eventStartTime, DateTime eventEndTime)
-    {
-        TimeSpan totalDuration = eventEndTime - eventStartTime;
-        TimeSpan elapsedTime = currentTime - eventStartTime;
+        TimeSpan totalDuration = EventEndTime - EventStartTime;
+        TimeSpan elapsedTime = currentTime - EventStartTime;
 
         double progress = (elapsedTime.TotalMilliseconds / totalDuration.TotalMilliseconds) * 100;
 
-        progress = Math.Max(0, Math.Min(100,progress));
+        progress = Math.Max(0, Math.Min(100, progress));
 
-        double remainingProgress = 100 - progress;
+        circularProgressBar = new SfCircularProgressBar();
+        Content = circularProgressBar;
 
-        if (circularProgressBar == null)
+        StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
+        if (stackLayout != null)
         {
-            circularProgressBar = new SfCircularProgressBar();
-            this.Content = circularProgressBar;
-
-            StackLayout stackLayout = this.Content.FindByName<StackLayout>("Circular");
-            if (stackLayout != null)
-            {
-                stackLayout.Children.Add(circularProgressBar);
-            }
+            stackLayout.Children.Add(circularProgressBar);
         }
 
-        circularProgressBar.Progress = remainingProgress;
+        circularProgressBar.Progress = progress;
+
+        //for loadsheddinng condition
+        if (progress >= 75)
+        {
+            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#b96516"));
+            circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#f5e2d1"));
+        }
+        else if (progress < 75)
+        {
+            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#fcd1d1"));
+            circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#d61717"));
+        }
+
+        circularProgressBar.HeightRequest = 280;
+        circularProgressBar.TrackThickness = 10;
+        circularProgressBar.ProgressThickness = 10;
+
+        Grid grid = new Grid();
+        grid.RowDefinitions.Add(new RowDefinition());
+        grid.RowDefinitions.Add(new RowDefinition());
+
+        Label textToplabel = new Label();
+        textToplabel.Text = "POWER";
+        textToplabel.HorizontalTextAlignment = TextAlignment.Center;
+        textToplabel.VerticalOptions = LayoutOptions.End;
+        textToplabel.TextColor = Color.FromArgb("#d61717");
+        Grid.SetRow(textToplabel, 0);
+        grid.Children.Add(textToplabel);
+
+        Label textBottomLabel = new Label();
+        textBottomLabel.Text = "OFF";
+        textBottomLabel.FontSize = 25;
+        textBottomLabel.HorizontalTextAlignment = TextAlignment.Center;
+        textBottomLabel.VerticalOptions = LayoutOptions.Start;
+        textBottomLabel.TextColor = Color.FromArgb("#d61717");
+        Grid.SetRow(textBottomLabel, 1);
+        grid.Children.Add(textBottomLabel);
+        circularProgressBar.Content = grid;
+    }
+
+    private void NotActiveLoadSheddingUI(DateTime currentTime, DateTime eventStartTime, DateTime eventEndTime)
+    {
+        TimeSpan totalDuration = EventEndTime - EventStartTime;
+        TimeSpan elapsedTime = currentTime - EventStartTime;
+
+        double progress = (elapsedTime.TotalMilliseconds / totalDuration.TotalMilliseconds) * 100;
+
+        progress = Math.Max(0, Math.Min(100, progress));
+
+        circularProgressBar = new SfCircularProgressBar();
+        Content = circularProgressBar;
+
+        StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
+        if (stackLayout != null)
+        {
+            stackLayout.Children.Add(circularProgressBar);
+        }
+
+        circularProgressBar.Progress = progress;
+
+        //for non-loadshedding condition
+        if (progress >= 75)
+        {
+            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#b96516"));
+            circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#f5e2d1"));
+        }
+        else if (progress < 75)
+        {
+            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#beecc9"));
+
+            circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#25be4a"));
+        }
+
+        circularProgressBar.HeightRequest = 280;
+        circularProgressBar.TrackThickness = 10;
+        circularProgressBar.ProgressThickness = 10;
+
+        Grid grid = new Grid();
+        grid.RowDefinitions.Add(new RowDefinition());
+        grid.RowDefinitions.Add(new RowDefinition());
+
+        Label textToplabel = new Label();
+        textToplabel.Text = "POWER";
+        textToplabel.HorizontalTextAlignment = TextAlignment.Center;
+        textToplabel.VerticalOptions = LayoutOptions.End;
+        textToplabel.TextColor = Color.FromArgb("#25be4a");
+        Grid.SetRow(textToplabel, 0);
+        grid.Children.Add(textToplabel);
+
+        Label textBottomLabel = new Label();
+        textBottomLabel.Text = "ON";
+        textBottomLabel.FontSize = 25;
+        textBottomLabel.HorizontalTextAlignment = TextAlignment.Center;
+        textBottomLabel.VerticalOptions = LayoutOptions.Start;
+        textBottomLabel.TextColor = Color.FromArgb("#25be4a");
+        Grid.SetRow(textBottomLabel, 1);
+        grid.Children.Add(textBottomLabel);
+        circularProgressBar.Content = grid;
+
     }
 }
+

@@ -12,16 +12,28 @@ public partial class MainPage : ContentPage
     private readonly IWeatherServices _weatherServices;
     private readonly ILoadSheddingServices _loadsheddingServices;
     private CircularProgressBarControl circularProgressBarControl;
-    //private string AreaId;
-    private dynamic loadSheddingAreaResults;
+    private SfCircularProgressBar circularProgressBar;
+
+
+    public DateTime EventStartTime { get; private set; }
+    public DateTime EventEndTime { get; private set; }
+
+    public DateTime secEventStartTime { get; private set; }
+    public DateTime secEventEndTime { get; private set; }
+
+    public DateTime thirEventStartTime { get; private set; }
+    public DateTime thirEventEndTime { get; private set; }
+    //Test Mode
+    private string AreaId;
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
         InitializeComponent();
-
         _weatherServices = weatherServices;
         _loadsheddingServices = loadSheddingServices;
         circularProgressBarControl = new CircularProgressBarControl();
+        circularProgressBarControl.UpdateProgressBar();
+
     }
 
     protected async override void OnAppearing()
@@ -31,11 +43,8 @@ public partial class MainPage : ContentPage
         await GetLoadSheddingByGPS(latitude, longitude);
         await GetWeatherByLocation(latitude, longitude);
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
-       // await GetAreaLoadShedding(AreaId);
-        circularProgressBarControl.UpdateProgressBar(loadSheddingAreaResults);
+        await GetAreaLoadShedding(AreaId);
     }
-
-
 
     public async Task GetLocation()
     {
@@ -118,9 +127,7 @@ public partial class MainPage : ContentPage
     {
         var loadSheddingAreaResults = await _loadsheddingServices.GetAreaInformation(AreaId);
         LoadSheddingAreaUpdateUI(loadSheddingAreaResults);
-        circularProgressBarControl.UpdateProgressBar(loadSheddingAreaResults);
     }
-
 
     //Update Area Information
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)
@@ -134,6 +141,29 @@ public partial class MainPage : ContentPage
         if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
         {
             var firstEvent = loadSheddingAreaResults.events[0];
+            var secondEvent = loadSheddingAreaResults.events[1];
+            var thirdEvent = loadSheddingAreaResults.events[2];
+            //var fourthEvent = loadSheddingAreaResults.events[3];
+            //var fivethEvent = loadSheddingAreaResults.events[4];
+
+            EventStartTime = firstEvent.start;
+            EventEndTime = firstEvent.end;
+
+            secEventStartTime = secondEvent.start;
+            secEventEndTime = secondEvent.end;
+
+            thirEventStartTime = thirdEvent.start;
+            thirEventEndTime = thirdEvent.end;
+
+            circularProgressBarControl.EventStartTime = firstEvent.start;
+            circularProgressBarControl.EventEndTime = firstEvent.end;
+            circularProgressBarControl.secEventStartTime = secondEvent.start;
+
+            circularProgressBarControl.UpdateProgressBar();
+
+            StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
+  
+                stackLayout.Children.Add(circularProgressBarControl);
 
             LblSchedulesEvetStart.Text = firstEvent.start.ToString("HH:mm");
             LblSchedulesEvetStop.Text = firstEvent.end.ToString("HH:mm");
@@ -206,7 +236,7 @@ public partial class MainPage : ContentPage
                             sb.Append(schedule).Append("  ");
                         }
                         break;
-
+                        //Test Mode
                     case "Stage 8 (TESTING: current)":
                         foreach (var schedule in stageLoadshedding.stages[7])
                         {
@@ -229,4 +259,5 @@ public partial class MainPage : ContentPage
             }
         }
     }
+
 }

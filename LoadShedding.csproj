@@ -68,6 +68,7 @@
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="Syncfusion.Maui.Core" Version="23.1.43" />
 	  <PackageReference Include="Syncfusion.Maui.ProgressBar" Version="23.1.43" />
 	  <PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.43" />
 	  <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
@@ -75,13 +76,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="CustomControl\CircularProgressBarControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="CustomControls\" />
 	</ItemGroup>
 
 </Project>
