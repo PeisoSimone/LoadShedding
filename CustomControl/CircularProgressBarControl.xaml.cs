@@ -54,6 +54,7 @@ public partial class CircularProgressBarControl : ContentView
         StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
         if (stackLayout != null)
         {
+            stackLayout.Children.Clear();
             stackLayout.Children.Add(circularProgressBar);
         }
 
@@ -113,6 +114,7 @@ public partial class CircularProgressBarControl : ContentView
         StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
         if (stackLayout != null)
         {
+            stackLayout.Children.Clear();
             stackLayout.Children.Add(circularProgressBar);
         }
 
@@ -148,7 +150,8 @@ public partial class CircularProgressBarControl : ContentView
 
         Label textBottomLabel = new Label();
         textBottomLabel.Text = "ON";
-        textBottomLabel.FontSize = 25;
+        textBottomLabel.FontAttributes = FontAttributes.Bold;
+        textBottomLabel.FontSize = 30;
         textBottomLabel.HorizontalTextAlignment = TextAlignment.Center;
         textBottomLabel.VerticalOptions = LayoutOptions.Start;
         textBottomLabel.TextColor = Color.FromArgb("#25be4a");

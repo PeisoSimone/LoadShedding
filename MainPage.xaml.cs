@@ -162,8 +162,12 @@ public partial class MainPage : ContentPage
             circularProgressBarControl.UpdateProgressBar();
 
             StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
-  
+
+            if (stackLayout != null)
+            {
+                stackLayout.Children.Clear();
                 stackLayout.Children.Add(circularProgressBarControl);
+            }
 
             //LblSchedulesEvetStart.Text = firstEvent.start.ToString("HH:mm");
             //LblSchedulesEvetStop.Text = firstEvent.end.ToString("HH:mm");
@@ -252,9 +256,9 @@ public partial class MainPage : ContentPage
         }
         else
         {
-            LblStage.Text = "LoadShedding Suspended";
+            LblSchedulesCurrentStage.Text = "LoadShedding Suspended";
             LblDay.Text = DateTime.Today.DayOfWeek.ToString();
-            LblSchedulesCurrentStage.Text = "No LoadShedding Today";
+            LblStage.Text = "No LoadShedding Today";
 
             DateTime EventStartTime = DateTime.Now;
             DateTime EventEndTime = DateTime.Now;
@@ -268,8 +272,12 @@ public partial class MainPage : ContentPage
             circularProgressBarControl.UpdateProgressBar();
 
             StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
-
-            stackLayout.Children.Add(circularProgressBarControl);
+            if(stackLayout != null)
+            {
+                stackLayout.Children.Clear();
+                stackLayout.Children.Add(circularProgressBarControl);
+            }
+            
         }
     }
 

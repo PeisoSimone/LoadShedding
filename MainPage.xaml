@@ -8,17 +8,20 @@
     <ScrollView>
         <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
               RowSpacing="20">
+            
             <StackLayout Grid.Row="0"
                          Margin="20,10,20,0"
                          Orientation="Horizontal">
+                
                 <Frame Padding="10"
                        CornerRadius="5"
                        HasShadow="True"
                        BorderColor="LightGrey"
                        BackgroundColor="Transparent">
+                    
                     <Label Text="My Location"
-                           FontSize="Default"
-                        />
+                           FontSize="Default"/>
+                    
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer
                             x:Name="TapLocation" Tapped="TapLocation_Tapped"/>
@@ -38,14 +41,12 @@
                 <Label x:Name="LblCity"
                        FontSize="40"
                        HorizontalOptions="Center"
-                       TextColor="Gray"
-                       />
+                       TextColor="Gray"/>
+
                 <Label x:Name="LblScheduleAreaName"
                        FontSize="20"
                        HorizontalOptions="Center"
-                       TextColor="Gray"
-                       />
-
+                       TextColor="Gray"/>
             </StackLayout>
 
             <Grid Grid.Row="2"
@@ -96,6 +97,7 @@
                            TextColor="SlateGray"/>
                     </Grid>
                 </Frame>
+                
                 <Frame Padding="10"
                        HeightRequest="100"
                        CornerRadius="5"
@@ -114,7 +116,6 @@
                            HorizontalOptions="Center"
                            TextColor="SlateGray"/>
 
-
                         <Label x:Name="LblStage"
                                Grid.Row="1"
                                Grid.Column="1"
@@ -122,33 +123,24 @@
                                FontAttributes="Bold"
                                FontFamily="Helvetica Neue"
                                HorizontalOptions="CenterAndExpand"
-                               VerticalOptions="CenterAndExpand"
                                TextColor="SlateGray">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text=" "/>
-                                </FormattedString>
-                            </Label.FormattedText>
+
                         </Label>
                     </Grid>
                 </Frame>
-
             </StackLayout>
-
 
             <!--Circular ProgressBar-->
             <StackLayout x:Name="Circular" Grid.Row="4">
-
                 <customCotrol:CircularProgressBarControl />
-
             </StackLayout>
             <!--Bottom cards-->
 
             <Grid Grid.Row="5"
                   RowDefinitions="Auto, Auto, Auto"
                   ColumnDefinitions="0.33*,0.33*,0.33*">
-                
-                    <!--Tomorrow card-->
+
+                <!--Tomorrow card-->
                 <Frame Grid.Row="0" Grid.Column="0"
                         Padding="10"
                            HeightRequest="100"
@@ -198,9 +190,7 @@
                            BorderColor="LightGrey"
                            Margin="5,0,5,0">
                 </Frame>
-
             </Grid>
-
         </Grid>
     </ScrollView>
 </ContentPage>
