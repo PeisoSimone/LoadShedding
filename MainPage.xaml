@@ -142,62 +142,65 @@
                 <customCotrol:CircularProgressBarControl />
 
             </StackLayout>
+            <!--Bottom cards-->
 
             <Grid Grid.Row="5"
-                  RowDefinitions="Auto, Auto"
+                  RowDefinitions="Auto, Auto, Auto"
                   ColumnDefinitions="0.33*,0.33*,0.33*">
-
+                
+                    <!--Tomorrow card-->
                 <Frame Grid.Row="0" Grid.Column="0"
-                    Padding="10"
-                       HeightRequest="100"
-                       CornerRadius="5"
-                       BackgroundColor="Transparent"
-                       HasShadow="True"
-                       BorderColor="LightGrey"
-                       Margin="5,0,5,0">
+                        Padding="10"
+                           HeightRequest="100"
+                           CornerRadius="5"
+                           BackgroundColor="Transparent"
+                           HasShadow="True"
+                           BorderColor="LightGrey"
+                           Margin="5,0,5,0">
 
                     <Grid RowDefinitions="0.2*,0.8*"
-                          ColumnDefinitions="0.5*,0.5*">
+                            ColumnDefinitions="0.5*,0.5*">
 
-                        <Label x:Name="LblSchedulesEvetStart"
-                           Grid.Row="0"
-                           Grid.Column="0"
-                           FontSize="Medium"
-                           HorizontalOptions="End"
-                           TextColor="SlateGray"/>
-
+                        <!--<Label x:Name="LblSchedulesEvetStart"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               FontSize="Medium"
+                               HorizontalOptions="End"
+                               TextColor="SlateGray"/>
 
                         <Label x:Name="LblSchedulesEvetStop"
-                           Grid.Row="0"
-                           Grid.Column="1"
-                           FontSize="Medium"
-                           HorizontalOptions="Start"
-                           TextColor="SlateGray"/>
-
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               FontSize="Medium"
+                               HorizontalOptions="Start"
+                               TextColor="SlateGray"/>-->
                     </Grid>
 
-
                 </Frame>
-
+                <!--Tomorrow card-->
                 <Frame Grid.Row="0" Grid.Column="1"
-                    Padding="10"
-                       HeightRequest="100"
-                       CornerRadius="5"
-                       BackgroundColor="Transparent"
-                       HasShadow="True"
-                       BorderColor="LightGrey"
-                       Margin="5,0,5,0">
+                        Padding="10"
+                           HeightRequest="100"
+                           CornerRadius="5"
+                           BackgroundColor="Transparent"
+                           HasShadow="True"
+                           BorderColor="LightGrey"
+                           Margin="5,0,5,0">
                 </Frame>
+
+                <!--Tomorrow card-->
                 <Frame Grid.Row="0" Grid.Column="2"
-                    Padding="10"
-                       HeightRequest="100"
-                       CornerRadius="5"
-                       BackgroundColor="Transparent"
-                       HasShadow="True"
-                       BorderColor="LightGrey"
-                       Margin="5,0,5,0">
+                        Padding="10"
+                           HeightRequest="100"
+                           CornerRadius="5"
+                           BackgroundColor="Transparent"
+                           HasShadow="True"
+                           BorderColor="LightGrey"
+                           Margin="5,0,5,0">
                 </Frame>
+
             </Grid>
+
         </Grid>
     </ScrollView>
 </ContentPage>

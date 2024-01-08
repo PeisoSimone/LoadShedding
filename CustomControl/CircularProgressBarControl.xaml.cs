@@ -1,4 +1,5 @@
 
+
 using Syncfusion.Maui.ProgressBar;
 using System;
 
@@ -25,17 +26,20 @@ public partial class CircularProgressBarControl : ContentView
         {
             ActiveLoadSheddingUI(currentTime, EventStartTime, EventEndTime);
         }
-        else if(currentTime > EventEndTime && currentTime < secEventStartTime)
+        else
         {
-            EventEndTime = EventStartTime;
+            DateTime activeEventStartTime = EventStartTime;
+            DateTime activeEventEndTime = EventEndTime;
+            DateTime futureEventStartTime = secEventStartTime;
 
-            secEventStartTime = EventEndTime;
+            DateTime newEventStartTime = activeEventEndTime;
+            DateTime newEventEndTime = futureEventStartTime;
 
-            NotActiveLoadSheddingUI(currentTime, EventStartTime, EventEndTime);
+            NotActiveLoadSheddingUI(currentTime, newEventStartTime, newEventEndTime);
         }
     }
 
-    private void ActiveLoadSheddingUI(DateTime currentTime, DateTime eventStartTime, DateTime eventEndTime)
+    private void ActiveLoadSheddingUI(DateTime currentTime, DateTime EventStartTime, DateTime EventEndTime)
     {
         TimeSpan totalDuration = EventEndTime - EventStartTime;
         TimeSpan elapsedTime = currentTime - EventStartTime;
@@ -55,7 +59,6 @@ public partial class CircularProgressBarControl : ContentView
 
         circularProgressBar.Progress = progress;
 
-        //for loadsheddinng condition
         if (progress >= 75)
         {
             circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#b96516"));
@@ -85,7 +88,8 @@ public partial class CircularProgressBarControl : ContentView
 
         Label textBottomLabel = new Label();
         textBottomLabel.Text = "OFF";
-        textBottomLabel.FontSize = 25;
+        textBottomLabel.FontAttributes = FontAttributes.Bold;
+        textBottomLabel.FontSize = 30;
         textBottomLabel.HorizontalTextAlignment = TextAlignment.Center;
         textBottomLabel.VerticalOptions = LayoutOptions.Start;
         textBottomLabel.TextColor = Color.FromArgb("#d61717");
@@ -94,10 +98,10 @@ public partial class CircularProgressBarControl : ContentView
         circularProgressBar.Content = grid;
     }
 
-    private void NotActiveLoadSheddingUI(DateTime currentTime, DateTime eventStartTime, DateTime eventEndTime)
+    private void NotActiveLoadSheddingUI(DateTime currentTime, DateTime newEventStartTime, DateTime newEventEndTime)
     {
-        TimeSpan totalDuration = EventEndTime - EventStartTime;
-        TimeSpan elapsedTime = currentTime - EventStartTime;
+        TimeSpan totalDuration = newEventEndTime - newEventStartTime;
+        TimeSpan elapsedTime = currentTime - newEventStartTime;
 
         double progress = (elapsedTime.TotalMilliseconds / totalDuration.TotalMilliseconds) * 100;
 
@@ -114,7 +118,6 @@ public partial class CircularProgressBarControl : ContentView
 
         circularProgressBar.Progress = progress;
 
-        //for non-loadshedding condition
         if (progress >= 75)
         {
             circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#b96516"));

@@ -21,10 +21,9 @@ public partial class MainPage : ContentPage
     public DateTime secEventStartTime { get; private set; }
     public DateTime secEventEndTime { get; private set; }
 
-    public DateTime thirEventStartTime { get; private set; }
-    public DateTime thirEventEndTime { get; private set; }
+
     //Test Mode
-    private string AreaId;
+    //private string AreaId;
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
@@ -40,10 +39,13 @@ public partial class MainPage : ContentPage
     {
         base.OnAppearing();
         await GetLocation();
+
+        //Comment out below line for test mode
         await GetLoadSheddingByGPS(latitude, longitude);
+
         await GetWeatherByLocation(latitude, longitude);
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
-        await GetAreaLoadShedding(AreaId);
+        //await GetAreaLoadShedding(AreaId);
     }
 
     public async Task GetLocation()
@@ -141,22 +143,21 @@ public partial class MainPage : ContentPage
         if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
         {
             var firstEvent = loadSheddingAreaResults.events[0];
+
+            //Comment out below line for test mode
             var secondEvent = loadSheddingAreaResults.events[1];
-            var thirdEvent = loadSheddingAreaResults.events[2];
-            //var fourthEvent = loadSheddingAreaResults.events[3];
-            //var fivethEvent = loadSheddingAreaResults.events[4];
 
             EventStartTime = firstEvent.start;
             EventEndTime = firstEvent.end;
 
+            //Comment out below 2 lines for test mode
             secEventStartTime = secondEvent.start;
             secEventEndTime = secondEvent.end;
 
-            thirEventStartTime = thirdEvent.start;
-            thirEventEndTime = thirdEvent.end;
-
             circularProgressBarControl.EventStartTime = firstEvent.start;
             circularProgressBarControl.EventEndTime = firstEvent.end;
+
+            //Comment out below line for test mode
             circularProgressBarControl.secEventStartTime = secondEvent.start;
 
             circularProgressBarControl.UpdateProgressBar();
@@ -165,8 +166,8 @@ public partial class MainPage : ContentPage
   
                 stackLayout.Children.Add(circularProgressBarControl);
 
-            LblSchedulesEvetStart.Text = firstEvent.start.ToString("HH:mm");
-            LblSchedulesEvetStop.Text = firstEvent.end.ToString("HH:mm");
+            //LblSchedulesEvetStart.Text = firstEvent.start.ToString("HH:mm");
+            //LblSchedulesEvetStop.Text = firstEvent.end.ToString("HH:mm");
             LblSchedulesCurrentStage.Text = firstEvent.note;
             LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
 
@@ -236,7 +237,7 @@ public partial class MainPage : ContentPage
                             sb.Append(schedule).Append("  ");
                         }
                         break;
-                        //Test Mode
+                        //Test Mode case
                     case "Stage 8 (TESTING: current)":
                         foreach (var schedule in stageLoadshedding.stages[7])
                         {
@@ -248,15 +249,25 @@ public partial class MainPage : ContentPage
                         break;
                 }
 
-                if (sb != null && sb.Length > 0)
-                {
-                    LblStage.Text = sb.ToString();
-                }
-                else
-                {
-                    LblDate.Text = "There is no LoadShedding";
-                }
             }
+        }
+        else
+        {
+            LblStage.Text = "LoadShedding Suspended";
+            LblSchedulesCurrentStage.Text = "No LoadShedding Today";
+            LblDay.Text = DateTime.Today.DayOfWeek.ToString();
+
+            DateTime EventStartTime = DateTime.Now;
+            DateTime EventEndTime = DateTime.Now;
+
+            circularProgressBarControl.EventStartTime = EventStartTime;
+            circularProgressBarControl.EventEndTime = EventEndTime;
+
+            circularProgressBarControl.UpdateProgressBar();
+
+            StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
+
+            stackLayout.Children.Add(circularProgressBarControl);
         }
     }
 
