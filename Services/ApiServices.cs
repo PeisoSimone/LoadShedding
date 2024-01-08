@@ -148,13 +148,17 @@ namespace loadshedding.Services
         public async Task<AreaInformationRoot> GetAreaInformation(string AreaId)
         {
             try
-            {   //Test Mode
-                 //AreaId = "tshwane-16-onderstepoortext9";
+            {
+                //Uncomment out below line for test mode
+                //AreaId = "tshwane-16-onderstepoortext9";
+
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
+
+                //Comment out below line for test mode
                 var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
 
-                //Test Mode
+                //Uncomment out below line for test mode
                 //var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
 
                 var response = await _httpClient.SendAsync(request);

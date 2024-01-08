@@ -17,7 +17,6 @@ public partial class MainPage : ContentPage
 
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
-
     public DateTime secEventStartTime { get; private set; }
     public DateTime secEventEndTime { get; private set; }
 
@@ -254,14 +253,17 @@ public partial class MainPage : ContentPage
         else
         {
             LblStage.Text = "LoadShedding Suspended";
-            LblSchedulesCurrentStage.Text = "No LoadShedding Today";
             LblDay.Text = DateTime.Today.DayOfWeek.ToString();
+            LblSchedulesCurrentStage.Text = "No LoadShedding Today";
 
             DateTime EventStartTime = DateTime.Now;
             DateTime EventEndTime = DateTime.Now;
 
             circularProgressBarControl.EventStartTime = EventStartTime;
             circularProgressBarControl.EventEndTime = EventEndTime;
+
+            //LblSchedulesEvetStart.Text = "";
+            //LblSchedulesEvetStop.Text = "";
 
             circularProgressBarControl.UpdateProgressBar();
 
