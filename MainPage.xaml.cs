@@ -145,191 +145,206 @@ public partial class MainPage : ContentPage
 
         if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
         {
-            var firstEvent = loadSheddingAreaResults.events[0];
-
-            //Comment below line for test mode
-            var secondEvent = loadSheddingAreaResults.events[1];
-
-            EventStartTime = firstEvent.start;
-            EventEndTime = firstEvent.end;
-
-            //Comment out below 2 lines for test mode
-            secEventStartTime = secondEvent.start;
-            secEventEndTime = secondEvent.end;
-
-            circularProgressBarControl.EventStartTime = firstEvent.start;
-            circularProgressBarControl.EventEndTime = firstEvent.end;
-
-            //Comment out below line for test mode
-            circularProgressBarControl.secEventStartTime = secondEvent.start;
-
-            circularProgressBarControl.UpdateProgressBar();
-
-            StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
-
-            if (stackLayout != null)
-            {
-                stackLayout.Children.Clear();
-                stackLayout.Children.Add(circularProgressBarControl);
-            }
-
-            LblSchedulesEventStart.Text = firstEvent.start.ToString("HH:mm");
-            LblSchedulesEventStop.Text = firstEvent.end.ToString("HH:mm");
-            LblSchedulesCurrentStage.Text = firstEvent.note;
-            LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
-
-            string currentStage = LblSchedulesCurrentStage.Text;
-
-            if (currentStage != null)
-            {
-                StringBuilder sb = new StringBuilder();
-
-                var stageLoadshedding = loadSheddingAreaResults.schedule.days[0];
-
-                switch (currentStage)
-                {
-                    case "Stage 0":
-                        foreach (var schedule in stageLoadshedding.stages[0])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-
-                    case "Stage 1":
-                        foreach (var schedule in stageLoadshedding.stages[1])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-
-                    case "Stage 2":
-                        foreach (var schedule in stageLoadshedding.stages[2])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-
-                    case "Stage 3":
-                        foreach (var schedule in stageLoadshedding.stages[3])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-
-                    case "Stage 4":
-                        foreach (var schedule in stageLoadshedding.stages[4])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-
-                    case "Stage 5":
-                        foreach (var schedule in stageLoadshedding.stages[5])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-
-                    case "Stage 6":
-                        foreach (var schedule in stageLoadshedding.stages[6])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-
-                    case "Stage 7":
-                        foreach (var schedule in stageLoadshedding.stages[7])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-                        //Test Mode case
-                    case "Stage 8 (TESTING: current)":
-                        foreach (var schedule in stageLoadshedding.stages[7])
-                        {
-                            sb.Append(schedule).Append("  ");
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-
-                if (sb != null && sb.Length > 0)
-                {
-                    if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
-                    {
-                        EventStartTime = firstEvent.start;
-                        EventEndTime = firstEvent.end;
-
-                        string SchedulesEventStart = EventStartTime.ToString("HH:mm");
-                        string SchedulesEventEnd = EventEndTime.ToString("HH:mm");
-                        string ScheduleJoin = "-";
-
-                        StringBuilder ScheduleShow = new StringBuilder();
-                        ScheduleShow.Append(SchedulesEventStart);
-                        ScheduleShow.Append(ScheduleJoin);
-                        ScheduleShow.Append(SchedulesEventEnd);
-
-                        string ScheduleHighlight = ScheduleShow.ToString();
-
-                        string[] sbTexts = sb.ToString().Split(" ");
-
-                        var formattedString = new FormattedString();
-
-                        foreach (var sbText in sbTexts)
-                        {
-                            if (ScheduleHighlight.Equals(sbText))
-                            {
-                                var span = new Span
-                                {
-                                    Text = sbText + " ",
-                                    FontAttributes = FontAttributes.Bold,
-                                    ///TextDecorations = TextDecorations.Underline,
-                                    FontSize = 25,
-                                };
-
-                                formattedString.Spans.Add(span);
-                            }
-                            else
-                            {
-                                formattedString.Spans.Add(new Span { Text = sbText + " " });
-                            }
-                        }
-
-                        LblStage.FormattedText = formattedString;
-                        LblStage.SizeChanged += LblStage_LayoutChanged;
-                    }
-                }
-                else
-                {
-                    LblStage.Text = "No LoadShedding Today";
-                }
-            }
+            LoadSheddingActive(loadSheddingAreaResults);
         }
         else
         {
-            LblSchedulesCurrentStage.Text = "LoadShedding Suspended";
-            LblDay.Text = DateTime.Today.DayOfWeek.ToString();
-            LblStage.Text = "No LoadShedding Today";
-
-            DateTime EventStartTime = DateTime.Now;
-            DateTime EventEndTime = DateTime.Now;
-
-            circularProgressBarControl.EventStartTime = EventStartTime;
-            circularProgressBarControl.EventEndTime = EventEndTime;
-
-            circularProgressBarControl.UpdateProgressBar();
-
-            StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
-            if(stackLayout != null)
-            {
-                stackLayout.Children.Clear();
-                stackLayout.Children.Add(circularProgressBarControl);
-            }
+            LoadSheddingSuspended();
         }
     }
 
+    private void LoadSheddingActive(dynamic loadSheddingAreaResults)
+    {
+        var firstEvent = loadSheddingAreaResults.events[0];
+
+        //Comment below line for test mode
+        var secondEvent = loadSheddingAreaResults.events[1];
+
+        EventStartTime = firstEvent.start;
+        EventEndTime = firstEvent.end;
+
+        //Comment out below 2 lines for test mode
+        secEventStartTime = secondEvent.start;
+        secEventEndTime = secondEvent.end;
+
+        circularProgressBarControl.EventStartTime = firstEvent.start;
+        circularProgressBarControl.EventEndTime = firstEvent.end;
+
+        //Comment out below line for test mode
+        circularProgressBarControl.secEventStartTime = secondEvent.start;
+
+        circularProgressBarControl.UpdateProgressBar();
+
+        ProgressBarUpdated();
+
+        LblSchedulesEventStart.Text = firstEvent.start.ToString("HH:mm");
+        LblSchedulesEventStop.Text = firstEvent.end.ToString("HH:mm");
+        LblSchedulesCurrentStage.Text = firstEvent.note;
+        LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
+
+        StageSwitch(loadSheddingAreaResults);
+
+    }
+    private void LoadSheddingSuspended()
+    {
+        LblSchedulesCurrentStage.Text = "LoadShedding Suspended";
+        LblDay.Text = DateTime.Today.DayOfWeek.ToString();
+        LblStage.Text = "No LoadShedding Today";
+
+        DateTime EventStartTime = DateTime.Now;
+        DateTime EventEndTime = DateTime.Now;
+
+        circularProgressBarControl.EventStartTime = EventStartTime;
+        circularProgressBarControl.EventEndTime = EventEndTime;
+
+        circularProgressBarControl.UpdateProgressBar();
+
+        ProgressBarUpdated();
+    }
+    private void ProgressBarUpdated()
+    {
+        StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
+        if (stackLayout != null)
+        {
+            stackLayout.Children.Clear();
+            stackLayout.Children.Add(circularProgressBarControl);
+        }
+    }
+
+    private void StageSwitch(dynamic loadSheddingAreaResults)
+    {
+        string currentStage = LblSchedulesCurrentStage.Text;
+
+        StringBuilder sb = new StringBuilder();
+
+        var stageLoadshedding = loadSheddingAreaResults.schedule.days[0];
+
+        switch (currentStage)
+        {
+            case "Stage 0":
+                foreach (var schedule in stageLoadshedding.stages[0])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+
+            case "Stage 1":
+                foreach (var schedule in stageLoadshedding.stages[1])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+
+            case "Stage 2":
+                foreach (var schedule in stageLoadshedding.stages[2])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+
+            case "Stage 3":
+                foreach (var schedule in stageLoadshedding.stages[3])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+
+            case "Stage 4":
+                foreach (var schedule in stageLoadshedding.stages[4])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+
+            case "Stage 5":
+                foreach (var schedule in stageLoadshedding.stages[5])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+
+            case "Stage 6":
+                foreach (var schedule in stageLoadshedding.stages[6])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+
+            case "Stage 7":
+                foreach (var schedule in stageLoadshedding.stages[7])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+            //Test Mode case
+            case "Stage 8 (TESTING: current)":
+                foreach (var schedule in stageLoadshedding.stages[7])
+                {
+                    sb.Append(schedule).Append("  ");
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        if (sb != null && sb.Length > 0)
+        {
+            LoadSheddingActiveHours(loadSheddingAreaResults, sb);
+        }
+        else
+        {
+            LblStage.Text = "No LoadShedding Today";
+        }
+    }
+
+
+    private void LoadSheddingActiveHours(dynamic loadSheddingAreaResults, StringBuilder sb)
+    {
+        var firstEvent = loadSheddingAreaResults.events[0];
+
+        EventStartTime = firstEvent.start;
+        EventEndTime = firstEvent.end;
+
+        string SchedulesEventStart = EventStartTime.ToString("HH:mm");
+        string SchedulesEventEnd = EventEndTime.ToString("HH:mm");
+        string ScheduleJoin = "-";
+
+        StringBuilder ScheduleShow = new StringBuilder();
+        ScheduleShow.Append(SchedulesEventStart);
+        ScheduleShow.Append(ScheduleJoin);
+        ScheduleShow.Append(SchedulesEventEnd);
+
+        string ScheduleHighlight = ScheduleShow.ToString();
+
+        //StringBuilder sb = new StringBuilder();
+
+        string[] sbTexts = sb.ToString().Split(" ");
+
+        var formattedString = new FormattedString();
+
+        foreach (var sbText in sbTexts)
+        {
+            if (ScheduleHighlight.Equals(sbText))
+            {
+                var span = new Span
+                {
+                    Text = sbText + " ",
+                    FontAttributes = FontAttributes.Bold,
+                    FontSize = 25,
+                };
+
+                formattedString.Spans.Add(span);
+            }
+            else
+            {
+                formattedString.Spans.Add(new Span { Text = sbText + " " });
+            }
+        }
+
+        LblStage.FormattedText = formattedString;
+        LblStage.SizeChanged += LblStage_LayoutChanged;
+    }
     private void LblStage_LayoutChanged(object sender, EventArgs e)
     {
         Label lblStage = (Label)sender;
@@ -337,13 +352,11 @@ public partial class MainPage : ContentPage
         double fontSize = CalculateFontSize(availableWidth);
         lblStage.FontSize = fontSize;
     }
-
     private double CalculateFontSize(double availableWidth)
     {
         double baseFontSize = 20;
-
         double calculatedFontSize = baseFontSize * availableWidth / 300;
-
         return Math.Min(Math.Max(calculatedFontSize, 50), 15);
     }
+    
 }
