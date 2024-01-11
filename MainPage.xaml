@@ -113,19 +113,19 @@
                            Grid.Row="0"
                            Grid.Column="1"
                            FontSize="Medium"
+                           Margin="0,0,0,5"    
                            HorizontalOptions="Center"
                            TextColor="SlateGray"/>
 
                         <Label x:Name="LblStage"
                                Grid.Row="1"
                                Grid.Column="1"
-                               FontSize="Medium"
-                               FontAttributes="Bold"
-                               FontFamily="Helvetica Neue"
+                               TextColor="SlateGray"
                                HorizontalOptions="CenterAndExpand"
-                               TextColor="SlateGray">
+                               HorizontalTextAlignment="Start"
+                               SizeChanged="LblStage_LayoutChanged"/>
 
-                        </Label>
+
                     </Grid>
                 </Frame>
             </StackLayout>
@@ -153,19 +153,19 @@
                     <Grid RowDefinitions="0.2*,0.8*"
                             ColumnDefinitions="0.5*,0.5*">
 
-                        <!--<Label x:Name="LblSchedulesEvetStart"
+                        <Label x:Name="LblSchedulesEventStart"
                                Grid.Row="0"
                                Grid.Column="0"
                                FontSize="Medium"
                                HorizontalOptions="End"
                                TextColor="SlateGray"/>
 
-                        <Label x:Name="LblSchedulesEvetStop"
+                        <Label x:Name="LblSchedulesEventStop"
                                Grid.Row="0"
                                Grid.Column="1"
                                FontSize="Medium"
                                HorizontalOptions="Start"
-                               TextColor="SlateGray"/>-->
+                               TextColor="SlateGray"/>
                     </Grid>
 
                 </Frame>

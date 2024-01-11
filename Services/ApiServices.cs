@@ -149,16 +149,16 @@ namespace loadshedding.Services
         {
             try
             {
-                //Uncomment out below line for test mode
+                //Uncomment below line for test mode
                 //AreaId = "tshwane-16-onderstepoortext9";
 
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
 
-                //Comment out below line for test mode
+                //Comment below line for test mode
                 var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
 
-                //Uncomment out below line for test mode
+                //Uncomment below line for test mode
                 //var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
 
                 var response = await _httpClient.SendAsync(request);

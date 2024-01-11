@@ -1,6 +1,8 @@
+using Itenso.TimePeriod;
 using loadshedding.CustomControl;
 using loadshedding.Services;
 using Syncfusion.Maui.ProgressBar;
+using System.Drawing;
 using System.Text;
 
 namespace loadshedding;
@@ -21,7 +23,7 @@ public partial class MainPage : ContentPage
     public DateTime secEventEndTime { get; private set; }
 
 
-    //Test Mode
+    //Unomment below line for test mode
     //private string AreaId;
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
@@ -39,11 +41,13 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
         await GetLocation();
 
-        //Comment out below line for test mode
+        //Comment below line for test mode
         await GetLoadSheddingByGPS(latitude, longitude);
 
         await GetWeatherByLocation(latitude, longitude);
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
+
+        //Uncomment out below line for test mode
         //await GetAreaLoadShedding(AreaId);
     }
 
@@ -143,7 +147,7 @@ public partial class MainPage : ContentPage
         {
             var firstEvent = loadSheddingAreaResults.events[0];
 
-            //Comment out below line for test mode
+            //Comment below line for test mode
             var secondEvent = loadSheddingAreaResults.events[1];
 
             EventStartTime = firstEvent.start;
@@ -169,8 +173,8 @@ public partial class MainPage : ContentPage
                 stackLayout.Children.Add(circularProgressBarControl);
             }
 
-            //LblSchedulesEvetStart.Text = firstEvent.start.ToString("HH:mm");
-            //LblSchedulesEvetStop.Text = firstEvent.end.ToString("HH:mm");
+            LblSchedulesEventStart.Text = firstEvent.start.ToString("HH:mm");
+            LblSchedulesEventStop.Text = firstEvent.end.ToString("HH:mm");
             LblSchedulesCurrentStage.Text = firstEvent.note;
             LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
 
@@ -184,11 +188,10 @@ public partial class MainPage : ContentPage
 
                 switch (currentStage)
                 {
-
                     case "Stage 0":
                         foreach (var schedule in stageLoadshedding.stages[0])
                         {
-                            sb.Append(schedule).Append(" ");
+                            sb.Append(schedule).Append("  ");
                         }
                         break;
 
@@ -252,6 +255,56 @@ public partial class MainPage : ContentPage
                         break;
                 }
 
+                if (sb != null && sb.Length > 0)
+                {
+                    if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
+                    {
+                        EventStartTime = firstEvent.start;
+                        EventEndTime = firstEvent.end;
+
+                        string SchedulesEventStart = EventStartTime.ToString("HH:mm");
+                        string SchedulesEventEnd = EventEndTime.ToString("HH:mm");
+                        string ScheduleJoin = "-";
+
+                        StringBuilder ScheduleShow = new StringBuilder();
+                        ScheduleShow.Append(SchedulesEventStart);
+                        ScheduleShow.Append(ScheduleJoin);
+                        ScheduleShow.Append(SchedulesEventEnd);
+
+                        string ScheduleHighlight = ScheduleShow.ToString();
+
+                        string[] sbTexts = sb.ToString().Split(" ");
+
+                        var formattedString = new FormattedString();
+
+                        foreach (var sbText in sbTexts)
+                        {
+                            if (ScheduleHighlight.Equals(sbText))
+                            {
+                                var span = new Span
+                                {
+                                    Text = sbText + " ",
+                                    FontAttributes = FontAttributes.Bold,
+                                    ///TextDecorations = TextDecorations.Underline,
+                                    FontSize = 25,
+                                };
+
+                                formattedString.Spans.Add(span);
+                            }
+                            else
+                            {
+                                formattedString.Spans.Add(new Span { Text = sbText + " " });
+                            }
+                        }
+
+                        LblStage.FormattedText = formattedString;
+                        LblStage.SizeChanged += LblStage_LayoutChanged;
+                    }
+                }
+                else
+                {
+                    LblStage.Text = "No LoadShedding Today";
+                }
             }
         }
         else
@@ -266,9 +319,6 @@ public partial class MainPage : ContentPage
             circularProgressBarControl.EventStartTime = EventStartTime;
             circularProgressBarControl.EventEndTime = EventEndTime;
 
-            //LblSchedulesEvetStart.Text = "";
-            //LblSchedulesEvetStop.Text = "";
-
             circularProgressBarControl.UpdateProgressBar();
 
             StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
@@ -277,8 +327,23 @@ public partial class MainPage : ContentPage
                 stackLayout.Children.Clear();
                 stackLayout.Children.Add(circularProgressBarControl);
             }
-            
         }
     }
 
+    private void LblStage_LayoutChanged(object sender, EventArgs e)
+    {
+        Label lblStage = (Label)sender;
+        double availableWidth = lblStage.Width;
+        double fontSize = CalculateFontSize(availableWidth);
+        lblStage.FontSize = fontSize;
+    }
+
+    private double CalculateFontSize(double availableWidth)
+    {
+        double baseFontSize = 20;
+
+        double calculatedFontSize = baseFontSize * availableWidth / 300;
+
+        return Math.Min(Math.Max(calculatedFontSize, 50), 15);
+    }
 }
