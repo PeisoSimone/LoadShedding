@@ -317,7 +317,6 @@ public partial class MainPage : ContentPage
 
         string ScheduleHighlight = ScheduleShow.ToString();
 
-        //StringBuilder sb = new StringBuilder();
 
         string[] sbTexts = sb.ToString().Split(" ");
 
