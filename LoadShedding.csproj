@@ -50,6 +50,7 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\background.png" />
 	</ItemGroup>
 
 	<ItemGroup>

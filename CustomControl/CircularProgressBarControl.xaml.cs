@@ -47,7 +47,6 @@ public partial class CircularProgressBarControl : ContentView
             DateTime newEventStartTime = futureEventBeforeStart;
             DateTime newEventEndTime = futureEventStartTime;
 
-
             NotActiveLoadSheddingUI(currentTime, newEventStartTime, newEventEndTime);
         }
     }
@@ -75,18 +74,17 @@ public partial class CircularProgressBarControl : ContentView
 
         if (progress == 100)
         {
-            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#ff0f0f"));//SOLID RED
+            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#Ff0000"));//SOLID RED
         }
         else
         {
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#ff0f0f"), Value = 0 });//RED
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#ff0f0f"), Value = 75 });//RED
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#ff830f"), Value = 80 });//ORANGE
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#faff0f"), Value = 85 });//YELLOW
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#45c53b"), Value = 99 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Ff0000"), Value = 0 });//RED
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Ff0000"), Value = 75 });//RED
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Fffa00"), Value = 85 });//YELLOW
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#0dff00"), Value = 95 });//GREEN
         }
 
-        circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#fcb3b3"));//Light RED Track
+        circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#Ff0000"));//RED Track
         circularProgressBar.HeightRequest = 300;
         circularProgressBar.TrackRadiusFactor = 0.8;
         circularProgressBar.ProgressRadiusFactor = 0.75;
@@ -118,7 +116,6 @@ public partial class CircularProgressBarControl : ContentView
         grid.Children.Add(textBottomLabel);
         circularProgressBar.Content = grid;
     }
-
     private void NotActiveLoadSheddingUI(DateTime currentTime, DateTime newEventStartTime, DateTime newEventEndTime)
     {
         TimeSpan totalDuration = newEventEndTime - newEventStartTime;
@@ -148,14 +145,13 @@ public partial class CircularProgressBarControl : ContentView
         }
         else
         {
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#45c53b"), Value = 0 });//GREEN
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#45c53b"), Value = 75 });//GREEN
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#faff0f"), Value = 80 });//YELLOW
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#ff830f"), Value = 93 });//ORANGE
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#ff0f0f"), Value = 99 });//RED
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#0dff00"), Value = 0 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#0dff00"), Value = 75 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Fffa00"), Value = 85 });//YELLOW
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Ff0000"), Value = 95 });//ORANGE
         }
 
-        circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#bafcb3"));//Light GREEN Track
+        circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#0dff00"));//GREEN Track
         circularProgressBar.HeightRequest = 300;
         circularProgressBar.TrackRadiusFactor = 0.8;
         circularProgressBar.ProgressRadiusFactor = 0.75;
@@ -186,7 +182,6 @@ public partial class CircularProgressBarControl : ContentView
         Grid.SetRow(textBottomLabel, 1);
         grid.Children.Add(textBottomLabel);
         circularProgressBar.Content = grid;
-
     }
 }
 
