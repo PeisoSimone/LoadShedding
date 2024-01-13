@@ -2,8 +2,8 @@ using Itenso.TimePeriod;
 using loadshedding.CustomControl;
 using loadshedding.Services;
 using Syncfusion.Maui.ProgressBar;
-using System.Drawing;
 using System.Text;
+
 
 namespace loadshedding;
 
@@ -157,21 +157,13 @@ public partial class MainPage : ContentPage
     {
         var firstEvent = loadSheddingAreaResults.events[0];
 
-        //Comment below line for test mode
-        var secondEvent = loadSheddingAreaResults.events[1];
-
         EventStartTime = firstEvent.start;
         EventEndTime = firstEvent.end;
 
-        //Comment out below 2 lines for test mode
-        secEventStartTime = secondEvent.start;
-        secEventEndTime = secondEvent.end;
+        EventEndTime = EventEndTime.AddMinutes(-30);
 
-        circularProgressBarControl.EventStartTime = firstEvent.start;
-        circularProgressBarControl.EventEndTime = firstEvent.end;
-
-        //Comment out below line for test mode
-        circularProgressBarControl.secEventStartTime = secondEvent.start;
+        circularProgressBarControl.EventStartTime = EventStartTime;
+        circularProgressBarControl.EventEndTime = EventEndTime;
 
         circularProgressBarControl.UpdateProgressBar();
 
@@ -180,7 +172,15 @@ public partial class MainPage : ContentPage
         LblSchedulesEventStart.Text = firstEvent.start.ToString("HH:mm");
         LblSchedulesEventStop.Text = firstEvent.end.ToString("HH:mm");
         LblSchedulesCurrentStage.Text = firstEvent.note;
-        LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
+
+        if(EventStartTime.Date == DateTime.Today.Date)
+        {
+            LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
+        }
+        else 
+        {
+            LblDay.Text = loadSheddingAreaResults.schedule.days[1].name;
+        }
 
         StageSwitch(loadSheddingAreaResults);
 
@@ -331,6 +331,9 @@ public partial class MainPage : ContentPage
                     Text = sbText + " ",
                     FontAttributes = FontAttributes.Bold,
                     FontSize = 25,
+                    //BackgroundColor = Color.LightSlateGray;  // Added for transparent background
+                    //CornerRadius = 5,                  // Added for rounded corners
+                    //HasShadow = true,                // Added for shadow effect
                 };
 
                 formattedString.Spans.Add(span);
