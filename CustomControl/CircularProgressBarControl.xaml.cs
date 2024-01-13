@@ -3,6 +3,7 @@
 using Syncfusion.Maui.ProgressBar;
 using System;
 
+
 namespace loadshedding.CustomControl;
 
 public partial class CircularProgressBarControl : ContentView
@@ -74,17 +75,17 @@ public partial class CircularProgressBarControl : ContentView
 
         if (progress == 100)
         {
-            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#Ff0000"));//SOLID RED
+            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#c20c08"));//SOLID RED
         }
         else
         {
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Ff0000"), Value = 0 });//RED
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Ff0000"), Value = 75 });//RED
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 0 });//RED
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 75 });//RED
             circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Fffa00"), Value = 85 });//YELLOW
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#0dff00"), Value = 95 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 95 });//GREEN
         }
 
-        circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#Ff0000"));//RED Track
+        circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#c20c08"));//RED Track
         circularProgressBar.HeightRequest = 300;
         circularProgressBar.TrackRadiusFactor = 0.8;
         circularProgressBar.ProgressRadiusFactor = 0.75;
@@ -97,21 +98,23 @@ public partial class CircularProgressBarControl : ContentView
         grid.RowDefinitions.Add(new RowDefinition());
         grid.RowDefinitions.Add(new RowDefinition());
 
-        Label textToplabel = new Label();
-        textToplabel.Text = "POWER";
-        textToplabel.HorizontalTextAlignment = TextAlignment.Center;
-        textToplabel.VerticalOptions = LayoutOptions.End;
-        textToplabel.TextColor = Color.FromArgb("#d61717");
-        Grid.SetRow(textToplabel, 0);
-        grid.Children.Add(textToplabel);
+        Label textTopLabel = new Label();
+        textTopLabel.Text = "POWER";
+        textTopLabel.FontFamily = "Nexa-Light";
+        textTopLabel.HorizontalTextAlignment = TextAlignment.Center;
+        textTopLabel.VerticalOptions = LayoutOptions.End;
+        textTopLabel.TextColor = Color.FromArgb("#c20c08");
+        Grid.SetRow(textTopLabel, 0);
+        grid.Children.Add(textTopLabel);
 
         Label textBottomLabel = new Label();
         textBottomLabel.Text = "OFF";
+        textBottomLabel.FontFamily = "Nexa-Heavy";
         textBottomLabel.FontAttributes = FontAttributes.Bold;
-        textBottomLabel.FontSize = 30;
+        textBottomLabel.FontSize = 40;
         textBottomLabel.HorizontalTextAlignment = TextAlignment.Center;
         textBottomLabel.VerticalOptions = LayoutOptions.Start;
-        textBottomLabel.TextColor = Color.FromArgb("#d61717");
+        textBottomLabel.TextColor = Color.FromArgb("#c20c08");
         Grid.SetRow(textBottomLabel, 1);
         grid.Children.Add(textBottomLabel);
         circularProgressBar.Content = grid;
@@ -141,17 +144,17 @@ public partial class CircularProgressBarControl : ContentView
 
         if(progress == 100)
         {
-            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#45c53b"));//SOLID GREEN
+            circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#61c208"));//SOLID GREEN
         }
         else
         {
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#0dff00"), Value = 0 });//GREEN
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#0dff00"), Value = 75 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 0 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 75 });//GREEN
             circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Fffa00"), Value = 85 });//YELLOW
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Ff0000"), Value = 95 });//ORANGE
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 95 });//ORANGE
         }
 
-        circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#0dff00"));//GREEN Track
+        circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#61c208"));//GREEN Track
         circularProgressBar.HeightRequest = 300;
         circularProgressBar.TrackRadiusFactor = 0.8;
         circularProgressBar.ProgressRadiusFactor = 0.75;
@@ -164,21 +167,23 @@ public partial class CircularProgressBarControl : ContentView
         grid.RowDefinitions.Add(new RowDefinition());
         grid.RowDefinitions.Add(new RowDefinition());
 
-        Label textToplabel = new Label();
-        textToplabel.Text = "POWER";
-        textToplabel.HorizontalTextAlignment = TextAlignment.Center;
-        textToplabel.VerticalOptions = LayoutOptions.End;
-        textToplabel.TextColor = Color.FromArgb("#25be4a");
-        Grid.SetRow(textToplabel, 0);
-        grid.Children.Add(textToplabel);
+        Label textTopLabel = new Label();
+        textTopLabel.Text = "POWER";
+        textTopLabel.FontFamily = "Nexa-Light";
+        textTopLabel.HorizontalTextAlignment = TextAlignment.Center;
+        textTopLabel.VerticalOptions = LayoutOptions.End;
+        textTopLabel.TextColor = Color.FromArgb("#61c208");
+        Grid.SetRow(textTopLabel, 0);
+        grid.Children.Add(textTopLabel);
 
         Label textBottomLabel = new Label();
         textBottomLabel.Text = "ON";
         textBottomLabel.FontAttributes = FontAttributes.Bold;
-        textBottomLabel.FontSize = 30;
+        textBottomLabel.FontSize = 40;
+        textBottomLabel.FontFamily = "Nexa-Heavy";
         textBottomLabel.HorizontalTextAlignment = TextAlignment.Center;
         textBottomLabel.VerticalOptions = LayoutOptions.Start;
-        textBottomLabel.TextColor = Color.FromArgb("#25be4a");
+        textBottomLabel.TextColor = Color.FromArgb("#61c208");
         Grid.SetRow(textBottomLabel, 1);
         grid.Children.Add(textBottomLabel);
         circularProgressBar.Content = grid;

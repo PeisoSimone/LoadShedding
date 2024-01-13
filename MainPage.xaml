@@ -3,24 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:customCotrol="clr-namespace:loadshedding.CustomControl"
              x:Class="loadshedding.MainPage"
-             Title="MainPage"
-            >
+             Title="MainPage">
+    
+    
 
     <ScrollView>
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+        <Grid BackgroundColor="#0d0118" 
+              RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
               RowSpacing="20">
-            
+            <Grid.Background>
+                <RadialGradientBrush Center="0.50,0.68" >
+                    <GradientStopCollection>
+                        <GradientStop Offset="0" Color="#7f00ff"/>
+                        <GradientStop Offset="0.3" Color="#000000"/>
+                        <GradientStop Offset="0.5" Color="#1f023a"/>
+                        <!--<GradientStop Offset="0.7" Color="#3b056d"/>-->
+                        <GradientStop Offset="1.0" Color="#0d0019"/>
+                    </GradientStopCollection>
+                </RadialGradientBrush>
+            </Grid.Background>
+
             <StackLayout Grid.Row="0"
                          Margin="20,10,20,0"
                          Orientation="Horizontal">
                 
                 <Frame Padding="10"
-                       CornerRadius="5"
+                       CornerRadius="10"
                        HasShadow="True"
-                       BorderColor="LightGrey"
-                       BackgroundColor="Transparent">
+                       BorderColor="#08bec2"
+                       BackgroundColor="#1f023a">
                     
                     <Label Text="My Location"
+                           FontFamily="Nexa-Heavy"
+                           TextColor="#9e99a3"
+
                            FontSize="Default"/>
                     
                     <Frame.GestureRecognizers>
@@ -41,13 +57,16 @@
 
                 <Label x:Name="LblCity"
                        FontSize="40"
+                       FontFamily="Nexa-Heavy"
+                       FontAttributes="Bold"
                        HorizontalOptions="Center"
-                       TextColor="Gray"/>
+                       TextColor="#d9b3ff"/>
 
                 <Label x:Name="LblScheduleAreaName"
                        FontSize="20"
+                       FontFamily="Nexa-Light"
                        HorizontalOptions="Center"
-                       TextColor="Gray"/>
+                       TextColor="#9e99a3"/>
             </StackLayout>
 
             <Grid Grid.Row="2"
@@ -58,22 +77,25 @@
                        Grid.Row="0"
                        Grid.Column="0"
                        FontSize="Small"
+                       FontFamily="Nexa-Light"
                        HorizontalOptions="Center"
-                       TextColor="SlateGray"/>
+                       TextColor="#9e99a3"/>
 
                 <Label x:Name="LblDate"
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="Medium"
+                       FontFamily="Nexa-Light"
                        HorizontalOptions="Center"
-                       TextColor="SlateGray"/>
+                       TextColor="#9e99a3"/>
 
                 <Label x:Name="LblWeatherDescription"
                        Grid.Row="0"
                        Grid.Column="2"
                        FontSize="Small"
+                       FontFamily="Nexa-Light"
                        HorizontalOptions="Center"
-                       TextColor="SlateGray"/>
+                       TextColor="#9e99a3"/>
             </Grid>
             <!--timeline and highlight loadshedding schedules-->
             <StackLayout Grid.Row="3"
@@ -82,9 +104,9 @@
                 <Frame Padding="10"
                        HeightRequest="50"
                        BackgroundColor="Transparent"
-                       CornerRadius="5"
+                       CornerRadius="10"
                        HasShadow="True"
-                       BorderColor="LightGrey"
+                       BorderColor="#08bec2"
                        Margin="5,5,5,5">
 
                     <Grid ColumnDefinitions="1*"
@@ -94,17 +116,18 @@
                            Grid.Row="0"
                            Grid.Column="1"
                            FontSize="Medium"
+                           FontFamily="Nexa-Light"
                            HorizontalOptions="Center"
-                           TextColor="SlateGray"/>
+                           TextColor="#9e99a3"/>
                     </Grid>
                 </Frame>
                 
                 <Frame Padding="10"
                        HeightRequest="100"
-                       CornerRadius="5"
+                       CornerRadius="10"
                        HasShadow="True"
                        BackgroundColor="Transparent"
-                       BorderColor="LightGrey"
+                       BorderColor="#08bec2"
                        Margin="5,5,5,0">
 
                     <Grid ColumnDefinitions="1*"
@@ -114,14 +137,17 @@
                            Grid.Row="0"
                            Grid.Column="1"
                            FontSize="Medium"
+                           FontFamily="Nexa-Heavy"
+                           FontAttributes="Bold"
                            Margin="0,0,0,5"    
                            HorizontalOptions="Center"
-                           TextColor="SlateGray"/>
+                           TextColor="#9e99a3"/>
 
                         <Label x:Name="LblStage"
                                Grid.Row="1"
                                Grid.Column="1"
-                               TextColor="SlateGray"
+                               TextColor="#9e99a3"
+                               FontFamily="Nexa-Light"
                                HorizontalOptions="CenterAndExpand"
                                HorizontalTextAlignment="Start"
                                SizeChanged="LblStage_LayoutChanged"/>
@@ -132,7 +158,9 @@
             </StackLayout>
 
             <!--Circular ProgressBar-->
-            <StackLayout x:Name="Circular" Grid.Row="4">
+            <StackLayout x:Name="Circular" Grid.Row="4" >
+                
+
                 <customCotrol:CircularProgressBarControl />
             </StackLayout>
             <!--Bottom cards-->
@@ -159,14 +187,14 @@
                                Grid.Column="0"
                                FontSize="Medium"
                                HorizontalOptions="End"
-                               TextColor="SlateGray"/>
+                               TextColor="#9e99a3"/>
 
                         <Label x:Name="LblSchedulesEventStop"
                                Grid.Row="0"
                                Grid.Column="1"
                                FontSize="Medium"
                                HorizontalOptions="Start"
-                               TextColor="SlateGray"/>
+                               TextColor="#9e99a3"/>
                     </Grid>
 
                 </Frame>

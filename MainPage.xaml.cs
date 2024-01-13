@@ -331,9 +331,7 @@ public partial class MainPage : ContentPage
                     Text = sbText + " ",
                     FontAttributes = FontAttributes.Bold,
                     FontSize = 25,
-                    //BackgroundColor = Color.LightSlateGray;  // Added for transparent background
-                    //CornerRadius = 5,                  // Added for rounded corners
-                    //HasShadow = true,                // Added for shadow effect
+
                 };
 
                 formattedString.Spans.Add(span);

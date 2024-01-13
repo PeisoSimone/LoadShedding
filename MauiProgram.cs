@@ -23,6 +23,8 @@ public static class MauiProgram
         {
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            fonts.AddFont("Nexa-ExtraLight.ttf", "Nexa-Light");
+            fonts.AddFont("Nexa-Heavy.ttf", "Nexa-Heavy");
         });
 
         builder.AddAppSettings();
