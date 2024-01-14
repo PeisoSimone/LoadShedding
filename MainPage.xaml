@@ -131,26 +131,35 @@
                        Margin="5,5,5,0">
 
                     <Grid ColumnDefinitions="1*"
-                          RowDefinitions="Auto,Auto">
+                          RowDefinitions="Auto,Auto,Auto">
 
                         <Label x:Name="LblDay"
-                           Grid.Row="0"
-                           Grid.Column="1"
-                           FontSize="Medium"
-                           FontFamily="Nexa-Heavy"
-                           FontAttributes="Bold"
-                           Margin="0,0,0,5"    
-                           HorizontalOptions="Center"
-                           TextColor="#9e99a3"/>
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               FontSize="Medium"
+                               FontFamily="Nexa-Heavy"
+                               FontAttributes="Bold"
+                               Margin="0,0,0,5"    
+                               HorizontalOptions="Center"
+                               TextColor="#9e99a3"/>
+
 
                         <Label x:Name="LblStage"
-                               Grid.Row="1"
+                               Grid.Row="2"
                                Grid.Column="1"
                                TextColor="#9e99a3"
                                FontFamily="Nexa-Light"
                                HorizontalOptions="CenterAndExpand"
                                HorizontalTextAlignment="Start"
                                SizeChanged="LblStage_LayoutChanged"/>
+
+                        <Label x:Name="LblOccure"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               FontSize="Small"
+                               FontFamily="Nexa-Light"
+                               HorizontalOptions="Center"
+                               TextColor="#9e99a3"/>
 
 
                     </Grid>

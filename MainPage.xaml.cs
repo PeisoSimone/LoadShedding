@@ -24,7 +24,7 @@ public partial class MainPage : ContentPage
 
 
     //Unomment below line for test mode
-    //private string AreaId;
+    private string AreaId;
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
     {
@@ -33,22 +33,36 @@ public partial class MainPage : ContentPage
         _loadsheddingServices = loadSheddingServices;
         circularProgressBarControl = new CircularProgressBarControl();
         circularProgressBarControl.UpdateProgressBar();
-
     }
 
     protected async override void OnAppearing()
     {
-        base.OnAppearing();
-        await GetLocation();
+        string savedWeatherName = Preferences.Get("WeatherLocationName", string.Empty);
+        string savedLoadSheddingName = Preferences.Get("LoadSheddingLocationName", string.Empty);
 
-        //Comment below line for test mode
-        await GetLoadSheddingByGPS(latitude, longitude);
+        if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
+        {
+            await GetWeatherBySearch(savedWeatherName);
 
-        await GetWeatherByLocation(latitude, longitude);
+            //Uncomment line below for test mode
+            //savedLoadSheddingName = "Dorandia Ext 15 (10)";
+
+            await GetAreaLoadShedding(savedLoadSheddingName);
+        }
+        else
+        {
+            Preferences.Remove("WeatherLocationName");
+            Preferences.Remove("LoadSheddingLocationName");
+
+            await GetLocation();
+            await GetWeatherByGPS(latitude, longitude);
+
+            //Comment below line for test mode
+            await GetLoadSheddingByGPS(latitude, longitude);
+        }
+
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
-
-        //Uncomment out below line for test mode
-        //await GetAreaLoadShedding(AreaId);
+        base.OnAppearing();
     }
 
     public async Task GetLocation()
@@ -62,10 +76,10 @@ public partial class MainPage : ContentPage
     {
         await GetLocation();
         await GetLoadSheddingByGPS(latitude, longitude);
-        await GetWeatherByLocation(latitude, longitude);
+        await GetWeatherByGPS(latitude, longitude);
     }
 
-    public async Task GetWeatherByLocation(double latitude, double longitude)
+    public async Task GetWeatherByGPS(double latitude, double longitude)
     {
         var results = await _weatherServices.GetWeatherByGPS(latitude, longitude);
         WeatherUpdateUI(results);
@@ -77,13 +91,13 @@ public partial class MainPage : ContentPage
         if (response != null)
         {
             await GetLoadSheddingBySearch(response);
-            await GetWeatherByCity(response);
+            await GetWeatherBySearch(response);
         }
     }
 
-    public async Task GetWeatherByCity(string text)
+    public async Task GetWeatherBySearch(string text)
     {
-        var results = await _weatherServices.GetWeatherByCity(text);
+        var results = await _weatherServices.GetWeatherBySearch(text);
         WeatherUpdateUI(results);
     }
 
@@ -173,17 +187,16 @@ public partial class MainPage : ContentPage
         LblSchedulesEventStop.Text = firstEvent.end.ToString("HH:mm");
         LblSchedulesCurrentStage.Text = firstEvent.note;
 
-        if(EventStartTime.Date == DateTime.Today.Date)
+        if (EventStartTime.Date == DateTime.Today.Date)
         {
             LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
         }
-        else 
+        else
         {
             LblDay.Text = loadSheddingAreaResults.schedule.days[1].name;
         }
 
         StageSwitch(loadSheddingAreaResults);
-
     }
     private void LoadSheddingSuspended()
     {
@@ -298,7 +311,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-
     private void LoadSheddingActiveHours(dynamic loadSheddingAreaResults, StringBuilder sb)
     {
         var firstEvent = loadSheddingAreaResults.events[0];
@@ -317,7 +329,6 @@ public partial class MainPage : ContentPage
 
         string ScheduleHighlight = ScheduleShow.ToString();
 
-
         string[] sbTexts = sb.ToString().Split(" ");
 
         var formattedString = new FormattedString();
@@ -326,12 +337,21 @@ public partial class MainPage : ContentPage
         {
             if (ScheduleHighlight.Equals(sbText))
             {
+
+                if (EventStartTime > DateTime.Now)
+                {
+                    LblOccure.Text = "Next Schedule";
+                }
+                else if (EventStartTime < DateTime.Now)
+                {
+                    LblOccure.Text = "Active Now";
+                }
+
                 var span = new Span
                 {
                     Text = sbText + " ",
                     FontAttributes = FontAttributes.Bold,
                     FontSize = 25,
-
                 };
 
                 formattedString.Spans.Add(span);
@@ -341,7 +361,6 @@ public partial class MainPage : ContentPage
                 formattedString.Spans.Add(new Span { Text = sbText + " " });
             }
         }
-
         LblStage.FormattedText = formattedString;
         LblStage.SizeChanged += LblStage_LayoutChanged;
     }
@@ -358,5 +377,5 @@ public partial class MainPage : ContentPage
         double calculatedFontSize = baseFontSize * availableWidth / 300;
         return Math.Min(Math.Max(calculatedFontSize, 50), 15);
     }
-    
+
 }

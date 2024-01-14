@@ -6,7 +6,7 @@ namespace loadshedding.Services
     public interface IWeatherServices
     {
         Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude);
-        Task<WeatherRoot> GetWeatherByCity(string text);
+        Task<WeatherRoot> GetWeatherBySearch(string text);
     }
 
     public class WeatherServices : IWeatherServices
@@ -20,6 +20,7 @@ namespace loadshedding.Services
             _weatherApiKey = apiKeys.WeatherApiKey;
         }
 
+
         public async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
         {
             try
@@ -30,11 +31,14 @@ namespace loadshedding.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadFromJsonAsync<WeatherRoot>();
+                    SaveLocationSettings(content?.name);
                     return content;
+
                 }
                 else
                 {
                     Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    ClearWeatherSettings();
                     return null;
                 }
             }
@@ -45,7 +49,7 @@ namespace loadshedding.Services
             }
         }
 
-        public async Task<WeatherRoot> GetWeatherByCity(string text)
+        public async Task<WeatherRoot> GetWeatherBySearch(string text)
         {
             try
             {
@@ -55,11 +59,13 @@ namespace loadshedding.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadFromJsonAsync<WeatherRoot>();
+                    SaveLocationSettings(content?.name);
                     return content;
                 }
                 else
                 {
                     Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    ClearWeatherSettings();
                     return null;
                 }
             }
@@ -68,6 +74,17 @@ namespace loadshedding.Services
                 Console.WriteLine("An error occurred: " + ex.Message);
                 return null;
             }
+        }
+        public void ClearWeatherSettings()
+        {
+            // Clear the saved location settings
+            Preferences.Remove("WeatherLocationName");
+        }
+
+        private void SaveLocationSettings(string weatherName)
+        {
+            // Save location name using Preferences (persistent storage)
+            Preferences.Set("WeatherLocationName", weatherName);
         }
     }
 
@@ -103,6 +120,7 @@ namespace loadshedding.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadFromJsonAsync<AreasNearbyGPSRoot>();
+
                     return content;
                 }
                 else
@@ -156,20 +174,22 @@ namespace loadshedding.Services
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
 
                 //Comment below line for test mode
-                var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
+                //var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
 
                 //Uncomment below line for test mode
-                //var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
 
                 var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadFromJsonAsync<AreaInformationRoot>();
+                    SaveLoadSheddingSettings(AreaId);
                     return content;
                 }
                 else
                 {
+                    ClearLoadSheddingSettings();
                     Console.WriteLine("API request failed with status code: " + response.StatusCode);
                     return null;
                 }
@@ -179,6 +199,18 @@ namespace loadshedding.Services
                 Console.WriteLine("An error occurred: " + ex.Message);
                 return null;
             }
+        }
+
+        private void SaveLoadSheddingSettings(string loadSheddingName)
+        {
+            // Save location name using Preferences (persistent storage)
+            Preferences.Set("LoadSheddingLocationName", loadSheddingName);
+        }
+
+        public void ClearLoadSheddingSettings()
+        {
+            // Clear the saved location settings
+            Preferences.Remove("LoadSheddingLocationName");
         }
     }
 }
