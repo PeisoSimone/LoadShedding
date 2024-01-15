@@ -174,61 +174,68 @@
             </StackLayout>
             <!--Bottom cards-->
 
-            <Grid Grid.Row="5"
-                  RowDefinitions="Auto, Auto, Auto"
-                  ColumnDefinitions="0.33*,0.33*,0.33*">
 
-                <!--Tomorrow card-->
-                <Frame Grid.Row="0" Grid.Column="0"
-                        Padding="10"
-                           HeightRequest="100"
-                           CornerRadius="5"
-                           BackgroundColor="Transparent"
-                           HasShadow="True"
-                           BorderColor="LightGrey"
-                           Margin="5,0,5,0">
+                <Grid Grid.Row="5"
+                      RowDefinitions="Auto, Auto, Auto"
+                      ColumnDefinitions="0.33*,0.33*,0.33*">
 
-                    <Grid RowDefinitions="0.2*,0.8*"
-                            ColumnDefinitions="0.5*,0.5*">
+                    <!--Tomorrow card-->
+                    <Frame Grid.Row="0" Grid.Column="0"
+                            Padding="5"
+                               HeightRequest="100"
+                               CornerRadius="5"
+                               BackgroundColor="Transparent"
+                               HasShadow="True"
+                               BorderColor="LightGrey"
+                               Margin="5,0,5,0">
+                        
+                    <StackLayout Orientation="Vertical">
 
-                        <Label x:Name="LblSchedulesEventStart"
-                               Grid.Row="0"
-                               Grid.Column="0"
-                               FontSize="Medium"
-                               HorizontalOptions="End"
-                               TextColor="#9e99a3"/>
 
-                        <Label x:Name="LblSchedulesEventStop"
-                               Grid.Row="0"
-                               Grid.Column="1"
-                               FontSize="Medium"
-                               HorizontalOptions="Start"
-                               TextColor="#9e99a3"/>
-                    </Grid>
+                        <Grid ColumnDefinitions="1*"
+                          RowDefinitions="Auto,Auto">
 
+                            <Label x:Name="LblNextDay"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="Medium"
+                                   FontFamily="Nexa-Heavy"
+                                   HorizontalOptions="CenterAndExpand"
+                                   TextColor="#d9b3ff"/>
+
+                            <Label x:Name="LblNextSchedule"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontFamily="Nexa-Light"
+                                   FontSize="Small"
+                                   HorizontalOptions="Center"
+                                   TextColor="#9e99a3"/>
+                        </Grid>
+                    </StackLayout>
                 </Frame>
-                <!--Tomorrow card-->
-                <Frame Grid.Row="0" Grid.Column="1"
-                        Padding="10"
-                           HeightRequest="100"
-                           CornerRadius="5"
-                           BackgroundColor="Transparent"
-                           HasShadow="True"
-                           BorderColor="LightGrey"
-                           Margin="5,0,5,0">
-                </Frame>
+                    <!--Tomorrow card-->
+                    <Frame Grid.Row="0" Grid.Column="1"
+                            Padding="10"
+                               HeightRequest="100"
+                               CornerRadius="5"
+                               BackgroundColor="Transparent"
+                               HasShadow="True"
+                               BorderColor="LightGrey"
+                               Margin="5,0,5,0">
+                    </Frame>
 
-                <!--Tomorrow card-->
-                <Frame Grid.Row="0" Grid.Column="2"
-                        Padding="10"
-                           HeightRequest="100"
-                           CornerRadius="5"
-                           BackgroundColor="Transparent"
-                           HasShadow="True"
-                           BorderColor="LightGrey"
-                           Margin="5,0,5,0">
-                </Frame>
-            </Grid>
+                    <!--Tomorrow card-->
+                    <Frame Grid.Row="0" Grid.Column="2"
+                            Padding="10"
+                               HeightRequest="100"
+                               CornerRadius="5"
+                               BackgroundColor="Transparent"
+                               HasShadow="True"
+                               BorderColor="LightGrey"
+                               Margin="5,0,5,0">
+                    </Frame>
+                </Grid>
+      
         </Grid>
     </ScrollView>
 </ContentPage>

@@ -174,10 +174,10 @@ namespace loadshedding.Services
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
 
                 //Comment below line for test mode
-                //var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}");
 
                 //Uncomment below line for test mode
-                var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
+                //var request = new HttpRequestMessage(HttpMethod.Get, $"area?id={AreaId}&test=current");
 
                 var response = await _httpClient.SendAsync(request);
 

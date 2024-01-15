@@ -64,12 +64,12 @@ public partial class CircularProgressBarControl : ContentView
         circularProgressBar = new SfCircularProgressBar();
         Content = circularProgressBar;
 
-        StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
-        if (stackLayout != null)
-        {
-            stackLayout.Children.Clear();
-            stackLayout.Children.Add(circularProgressBar);
-        }
+        //StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
+        //if (stackLayout != null)
+        //{
+        //    stackLayout.Children.Clear();
+        //    stackLayout.Children.Add(circularProgressBar);
+        //}
 
         circularProgressBar.Progress = progress;
 
@@ -133,12 +133,12 @@ public partial class CircularProgressBarControl : ContentView
         circularProgressBar = new SfCircularProgressBar();
         Content = circularProgressBar;
 
-        StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
-        if (stackLayout != null)
-        {
-            stackLayout.Children.Clear();
-            stackLayout.Children.Add(circularProgressBar);
-        }
+        //StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
+        //if (stackLayout != null)
+        //{
+        //    stackLayout.Children.Clear();
+        //    stackLayout.Children.Add(circularProgressBar);
+        //}
 
         circularProgressBar.Progress = progress;
 

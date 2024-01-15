@@ -183,8 +183,8 @@ public partial class MainPage : ContentPage
 
         ProgressBarUpdated();
 
-        LblSchedulesEventStart.Text = firstEvent.start.ToString("HH:mm");
-        LblSchedulesEventStop.Text = firstEvent.end.ToString("HH:mm");
+        //LblSchedulesEventStart.Text = firstEvent.start.ToString("HH:mm");
+        //LblSchedulesEventStop.Text = firstEvent.end.ToString("HH:mm");
         LblSchedulesCurrentStage.Text = firstEvent.note;
 
         if (EventStartTime.Date == DateTime.Today.Date)
@@ -196,8 +196,10 @@ public partial class MainPage : ContentPage
             LblDay.Text = loadSheddingAreaResults.schedule.days[1].name;
         }
 
+        //First Card =  Tomorrow Data
         StageSwitch(loadSheddingAreaResults);
     }
+
     private void LoadSheddingSuspended()
     {
         LblSchedulesCurrentStage.Text = "LoadShedding Suspended";
@@ -228,82 +230,117 @@ public partial class MainPage : ContentPage
     {
         string currentStage = LblSchedulesCurrentStage.Text;
 
+        List<string> dayResults = new List<string>();
+
         StringBuilder sb = new StringBuilder();
 
-        var stageLoadshedding = loadSheddingAreaResults.schedule.days[0];
-
-        switch (currentStage)
+        if (loadSheddingAreaResults.schedule != null)
         {
-            case "Stage 0":
-                foreach (var schedule in stageLoadshedding.stages[0])
-                {
-                    sb.Append(schedule).Append("  ");
-                }
-                break;
+            var scheduleDays = loadSheddingAreaResults.schedule.days;
 
-            case "Stage 1":
-                foreach (var schedule in stageLoadshedding.stages[1])
-                {
-                    sb.Append(schedule).Append("  ");
-                }
-                break;
+            for (int i = 0; i < scheduleDays.Count; i++)
+            {
+                var stageLoadshedding = scheduleDays[i];
 
-            case "Stage 2":
-                foreach (var schedule in stageLoadshedding.stages[2])
+                switch (currentStage)
                 {
-                    sb.Append(schedule).Append("  ");
-                }
-                break;
+                    case "Stage 0":
+                        foreach (var schedule in stageLoadshedding.stages[0])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
 
-            case "Stage 3":
-                foreach (var schedule in stageLoadshedding.stages[3])
+                    case "Stage 1":
+                        foreach (var schedule in stageLoadshedding.stages[1])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
+
+                    case "Stage 2":
+                        foreach (var schedule in stageLoadshedding.stages[2])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
+
+                    case "Stage 3":
+                        foreach (var schedule in stageLoadshedding.stages[3])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
+
+                    case "Stage 4":
+                        foreach (var schedule in stageLoadshedding.stages[4])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
+
+                    case "Stage 5":
+                        foreach (var schedule in stageLoadshedding.stages[5])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
+
+                    case "Stage 6":
+                        foreach (var schedule in stageLoadshedding.stages[6])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
+
+                    case "Stage 7":
+                        foreach (var schedule in stageLoadshedding.stages[7])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
+                    //Test Mode case
+                    case "Stage 8 (TESTING: current)":
+                        foreach (var schedule in stageLoadshedding.stages[7])
+                        {
+                            sb.Append(schedule).Append(" ");
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+
+                dayResults.Add(sb.ToString());
+                sb.Clear();
+            }
+            if (dayResults != null)
+            {
+
+                for (int i = 1; i < 3; i++)
                 {
-                    sb.Append(schedule).Append("  ");
-                }
-                break;
+                    if (i == 1)
+                    {
+                        string scheduleContent = dayResults[i].ToString();
+                        string[] scheduleArray = scheduleContent.Split(' ');
+                        string joinedSchedule = string.Join("\n", scheduleArray);
 
-            case "Stage 4":
-                foreach (var schedule in stageLoadshedding.stages[4])
-                {
-                    sb.Append(schedule).Append("  ");
-                }
-                break;
+                        LblNextSchedule.Text = joinedSchedule;
 
-            case "Stage 5":
-                foreach (var schedule in stageLoadshedding.stages[5])
-                {
-                    sb.Append(schedule).Append("  ");
+                        DateTime nextDay = DateTime.Today.AddDays(i);
+                        LblNextDay.Text = nextDay.DayOfWeek.ToString();
+                    }
                 }
-                break;
 
-            case "Stage 6":
-                foreach (var schedule in stageLoadshedding.stages[6])
-                {
-                    sb.Append(schedule).Append("  ");
-                }
-                break;
 
-            case "Stage 7":
-                foreach (var schedule in stageLoadshedding.stages[7])
-                {
-                    sb.Append(schedule).Append("  ");
-                }
-                break;
-            //Test Mode case
-            case "Stage 8 (TESTING: current)":
-                foreach (var schedule in stageLoadshedding.stages[7])
-                {
-                    sb.Append(schedule).Append("  ");
-                }
-                break;
-
-            default:
-                break;
-        }
-
-        if (sb != null && sb.Length > 0)
-        {
-            LoadSheddingActiveHours(loadSheddingAreaResults, sb);
+                string result = dayResults[0].ToString();
+                LoadSheddingActiveHours(loadSheddingAreaResults, result);
+            }
+            else
+            {
+                //LblNextDay
+                //LblNextSchedule
+            }
         }
         else
         {
@@ -311,7 +348,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void LoadSheddingActiveHours(dynamic loadSheddingAreaResults, StringBuilder sb)
+    private void LoadSheddingActiveHours(dynamic loadSheddingAreaResults, string result)
     {
         var firstEvent = loadSheddingAreaResults.events[0];
 
@@ -329,7 +366,7 @@ public partial class MainPage : ContentPage
 
         string ScheduleHighlight = ScheduleShow.ToString();
 
-        string[] sbTexts = sb.ToString().Split(" ");
+        string[] sbTexts = result.ToString().Split(" ");
 
         var formattedString = new FormattedString();
 
