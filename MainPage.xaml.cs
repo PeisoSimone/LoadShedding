@@ -1,3 +1,4 @@
+
 using Itenso.TimePeriod;
 using loadshedding.CustomControl;
 using loadshedding.Services;
@@ -42,12 +43,12 @@ public partial class MainPage : ContentPage
 
         if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
         {
-            await GetWeatherBySearch(savedWeatherName);
-
             //Uncomment line below for test mode
             //savedLoadSheddingName = "Dorandia Ext 15 (10)";
 
             await GetAreaLoadShedding(savedLoadSheddingName);
+
+            await GetWeatherBySearch(savedWeatherName);
         }
         else
         {
@@ -196,7 +197,6 @@ public partial class MainPage : ContentPage
             LblDay.Text = loadSheddingAreaResults.schedule.days[1].name;
         }
 
-        //First Card =  Tomorrow Data
         StageSwitch(loadSheddingAreaResults);
     }
 
@@ -226,6 +226,7 @@ public partial class MainPage : ContentPage
         }
     }
 
+    //Need to refacter below method
     private void StageSwitch(dynamic loadSheddingAreaResults)
     {
         string currentStage = LblSchedulesCurrentStage.Text;
@@ -317,7 +318,7 @@ public partial class MainPage : ContentPage
             if (dayResults != null)
             {
 
-                for (int i = 1; i < 3; i++)
+                for (int i = 1; i < 4; i++)
                 {
                     if (i == 1)
                     {
@@ -330,8 +331,30 @@ public partial class MainPage : ContentPage
                         DateTime nextDay = DateTime.Today.AddDays(i);
                         LblNextDay.Text = nextDay.DayOfWeek.ToString();
                     }
-                }
+                    else if (i == 2)
+                    { 
+                        string scheduleContent = dayResults[i].ToString();
+                        string[] scheduleArray = scheduleContent.Split(' ');
+                        string joinedSchedule = string.Join("\n", scheduleArray);
 
+                        LblNextNextSchedule.Text = joinedSchedule;
+
+                        DateTime nextDay = DateTime.Today.AddDays(i);
+                        LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                    }
+                    else if (i == 3)
+                    {
+                        string scheduleContent = dayResults[i].ToString();
+                        string[] scheduleArray = scheduleContent.Split(' ');
+                        string joinedSchedule = string.Join("\n", scheduleArray);
+
+                        LblNextNextNextSchedule.Text = joinedSchedule;
+
+                        DateTime nextDay = DateTime.Today.AddDays(i);
+                        LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
+                    }
+                }
 
                 string result = dayResults[0].ToString();
                 LoadSheddingActiveHours(loadSheddingAreaResults, result);
@@ -347,6 +370,7 @@ public partial class MainPage : ContentPage
             LblStage.Text = "No LoadShedding Today";
         }
     }
+
 
     private void LoadSheddingActiveHours(dynamic loadSheddingAreaResults, string result)
     {
