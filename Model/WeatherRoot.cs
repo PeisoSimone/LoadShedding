@@ -23,7 +23,7 @@ namespace loadshedding.Model
     {
         public double temp { get; set; }
 
-        public double temperature => Math.Round(temp);
+        public double temperature => Math.Round(temp) - 2;
         public double feels_like { get; set; }
         public double temp_min { get; set; }
         public double temp_max { get; set; }
