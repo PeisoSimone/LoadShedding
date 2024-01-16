@@ -64,25 +64,20 @@ public partial class CircularProgressBarControl : ContentView
         circularProgressBar = new SfCircularProgressBar();
         Content = circularProgressBar;
 
-        //StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
-        //if (stackLayout != null)
-        //{
-        //    stackLayout.Children.Clear();
-        //    stackLayout.Children.Add(circularProgressBar);
-        //}
+        double remainingProgress = 100 - progress;
 
-        circularProgressBar.Progress = progress;
+        circularProgressBar.Progress = remainingProgress;
 
-        if (progress == 100)
+        if (remainingProgress == 100)
         {
             circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#c20c08"));//SOLID RED
         }
         else
         {
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 0 });//RED
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 75 });//RED
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Fffa00"), Value = 85 });//YELLOW
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 95 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 99.9 });//RED
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 25 });//RED
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Fffa00"), Value = 15 });//YELLOW
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 05 });//GREEN
         }
 
         circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#c20c08"));//RED Track
@@ -133,25 +128,20 @@ public partial class CircularProgressBarControl : ContentView
         circularProgressBar = new SfCircularProgressBar();
         Content = circularProgressBar;
 
-        //StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
-        //if (stackLayout != null)
-        //{
-        //    stackLayout.Children.Clear();
-        //    stackLayout.Children.Add(circularProgressBar);
-        //}
+        double remainingProgress = 100 - progress;
 
-        circularProgressBar.Progress = progress;
+        circularProgressBar.Progress = remainingProgress;
 
-        if(progress == 100)
+        if (remainingProgress == 0)
         {
             circularProgressBar.ProgressFill = new SolidColorBrush(Color.FromArgb("#61c208"));//SOLID GREEN
         }
         else
         {
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 0 });//GREEN
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 75 });//GREEN
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Fffa00"), Value = 85 });//YELLOW
-            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 95 });//ORANGE
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 100 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#61c208"), Value = 25 });//GREEN
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#Fffa00"), Value = 15 });//YELLOW
+            circularProgressBar.GradientStops.Add(new ProgressGradientStop { Color = Color.FromArgb("#c20c08"), Value = 05 });//ORANGE
         }
 
         circularProgressBar.TrackFill = new SolidColorBrush(Color.FromArgb("#61c208"));//GREEN Track
