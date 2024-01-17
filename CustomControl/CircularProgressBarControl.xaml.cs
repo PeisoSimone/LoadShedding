@@ -1,5 +1,4 @@
 
-
 using Syncfusion.Maui.ProgressBar;
 using System;
 
@@ -22,21 +21,28 @@ public partial class CircularProgressBarControl : ContentView
     public void UpdateProgressBar()
     {
         DateTime currentTime = DateTime.Now;
-
+        DateTime defaultTime = DateTime.MinValue;
+        //Active LoadShedding
         if (currentTime > EventStartTime && currentTime < EventEndTime)
         {
             ActiveLoadSheddingUI(currentTime, EventStartTime, EventEndTime);
         }
+        //Not active LoadShedding
         else
         {
             DateTime futureEventStartTime = EventStartTime;
             DateTime futureEventBeforeStart = EventStartTime;
 
-            if(DateTime.Now > DateTime.MinValue && futureEventBeforeStart > DateTime.Now )
+            if (defaultTime < currentTime && futureEventBeforeStart > currentTime)//default < current > start
             {
-                futureEventBeforeStart = EventStartTime.AddHours(-2);
+                //futureEventBeforeStart = EventStartTime.AddHours(-2);
+                if (currentTime > futureEventStartTime.AddDays(-2))
+                {
+                    futureEventBeforeStart = EventStartTime.AddHours(-2);
+                }
+            
             }
-            else if (futureEventBeforeStart > DateTime.MinValue)
+            else if (futureEventBeforeStart > defaultTime)
             {
                 futureEventBeforeStart = EventStartTime;
             }
@@ -88,6 +94,7 @@ public partial class CircularProgressBarControl : ContentView
         circularProgressBar.ProgressThickness = 0.075;
         circularProgressBar.ThicknessUnit = SizeUnit.Factor;
         circularProgressBar.ProgressCornerStyle = CornerStyle.EndCurve;
+        circularProgressBar.FlowDirection = FlowDirection.LeftToRight;
 
         Grid grid = new Grid();
         grid.RowDefinitions.Add(new RowDefinition());
@@ -152,6 +159,7 @@ public partial class CircularProgressBarControl : ContentView
         circularProgressBar.ProgressThickness = 0.075;
         circularProgressBar.ThicknessUnit = SizeUnit.Factor;
         circularProgressBar.ProgressCornerStyle = CornerStyle.EndCurve;
+        circularProgressBar.FlowDirection = FlowDirection.LeftToRight;
 
         Grid grid = new Grid();
         grid.RowDefinitions.Add(new RowDefinition());
