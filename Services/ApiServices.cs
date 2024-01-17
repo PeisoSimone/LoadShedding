@@ -1,8 +1,23 @@
 ﻿using loadshedding.Model;
 using System.Net.Http.Json;
+using Microsoft.Maui.Controls;
 
 namespace loadshedding.Services
 {
+    public interface IAlertServices
+    {
+        Task ShowAlert(string message);
+    }
+
+    public class AlertServices : IAlertServices
+    {
+        public async Task ShowAlert(string message)
+        {
+            Page currentPage = Application.Current.MainPage;
+            await currentPage.DisplayAlert("Alert Message", message, "OK");
+        }
+    }
+
     public interface IWeatherServices
     {
         Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude);
@@ -13,13 +28,14 @@ namespace loadshedding.Services
     {
         private readonly string _weatherApiKey;
         private readonly HttpClient _httpClient;
+        private readonly IAlertServices _alertServices;
 
-        public WeatherServices(HttpClient httpClient, ApiKeysConfiguration apiKeys)
+        public WeatherServices(HttpClient httpClient, ApiKeysConfiguration apiKeys, IAlertServices alertServices)
         {
             _httpClient = httpClient;
             _weatherApiKey = apiKeys.WeatherApiKey;
+            _alertServices = alertServices;
         }
-
 
         public async Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude)
         {
@@ -37,14 +53,14 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
                     ClearWeatherSettings();
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
                 return null;
             }
         }
@@ -64,26 +80,25 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
                     ClearWeatherSettings();
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
                 return null;
             }
         }
+
         public void ClearWeatherSettings()
         {
-            // Clear the saved location settings
             Preferences.Remove("WeatherLocationName");
         }
 
         private void SaveLocationSettings(string weatherName)
         {
-            // Save location name using Preferences (persistent storage)
             Preferences.Set("WeatherLocationName", weatherName);
         }
     }
@@ -100,13 +115,14 @@ namespace loadshedding.Services
     {
         private readonly string _loadSheddingApiKey;
         private readonly HttpClient _httpClient;
+        private readonly IAlertServices _alertServices;
 
-        public LoadSheddingServices(HttpClient httpClient, ApiKeysConfiguration apiKeys)
+        public LoadSheddingServices(HttpClient httpClient, ApiKeysConfiguration apiKeys, IAlertServices alertServices)
         {
             _httpClient = httpClient;
             _loadSheddingApiKey = apiKeys.LoadSheddingApiKey;
+            _alertServices = alertServices;
         }
-
 
         public async Task<AreasNearbyGPSRoot> GetAreasNearByGPS(double latitude, double longitude)
         {
@@ -125,13 +141,13 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
                 return null;
             }
         }
@@ -152,13 +168,13 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
                 return null;
             }
         }
@@ -167,9 +183,6 @@ namespace loadshedding.Services
         {
             try
             {
-                //Uncomment below line for test mode
-                //AreaId = "tshwane-16-onderstepoortext9";
-
                 _httpClient.DefaultRequestHeaders.Clear();
                 _httpClient.DefaultRequestHeaders.Add("token", _loadSheddingApiKey);
 
@@ -190,26 +203,24 @@ namespace loadshedding.Services
                 else
                 {
                     ClearLoadSheddingSettings();
-                    Console.WriteLine("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
                 return null;
             }
         }
 
         private void SaveLoadSheddingSettings(string loadSheddingName)
         {
-            // Save location name using Preferences (persistent storage)
             Preferences.Set("LoadSheddingLocationName", loadSheddingName);
         }
 
         public void ClearLoadSheddingSettings()
         {
-            // Clear the saved location settings
             Preferences.Remove("LoadSheddingLocationName");
         }
     }

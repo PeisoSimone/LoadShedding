@@ -1,5 +1,3 @@
-
-using Itenso.TimePeriod;
 using loadshedding.CustomControl;
 using loadshedding.Services;
 using Syncfusion.Maui.ProgressBar;
@@ -14,24 +12,25 @@ public partial class MainPage : ContentPage
     private double longitude;
     private readonly IWeatherServices _weatherServices;
     private readonly ILoadSheddingServices _loadsheddingServices;
+    private readonly IAlertServices _alertServices; 
     private CircularProgressBarControl circularProgressBarControl;
     private SfCircularProgressBar circularProgressBar;
 
 
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
-    public DateTime secEventStartTime { get; private set; }
-    public DateTime secEventEndTime { get; private set; }
+
 
 
     //Unomment below line for test mode
     private string AreaId;
 
-    public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices)
+    public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices, IAlertServices alertServices)
     {
         InitializeComponent();
         _weatherServices = weatherServices;
         _loadsheddingServices = loadSheddingServices;
+        _alertServices = alertServices;
         circularProgressBarControl = new CircularProgressBarControl();
         circularProgressBarControl.UpdateProgressBar();
     }
@@ -43,11 +42,7 @@ public partial class MainPage : ContentPage
 
         if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
         {
-            //Uncomment line below for test mode
-            //savedLoadSheddingName = "Dorandia Ext 15 (10)";
-
             await GetAreaLoadShedding(savedLoadSheddingName);
-
             await GetWeatherBySearch(savedWeatherName);
         }
         else
@@ -57,8 +52,6 @@ public partial class MainPage : ContentPage
 
             await GetLocation();
             await GetWeatherByGPS(latitude, longitude);
-
-            //Comment below line for test mode
             await GetLoadSheddingByGPS(latitude, longitude);
         }
 
@@ -73,11 +66,27 @@ public partial class MainPage : ContentPage
         longitude = location.Longitude;
     }
 
-    private async void TapLocation_Tapped(object sender, EventArgs e)
+    private async void Mylocation_Clicked(object sender, EventArgs e)
     {
-        await GetLocation();
-        await GetLoadSheddingByGPS(latitude, longitude);
-        await GetWeatherByGPS(latitude, longitude);
+        var response = await DisplayAlert(
+            title: "",
+            message: "Detect Current Location?",
+            accept: "OK",
+            cancel: "CANCEL");
+
+        if (response)
+        {
+            await GetLocation();
+            await GetLoadSheddingByGPS(latitude, longitude);
+            await GetWeatherByGPS(latitude, longitude);
+        }
+        else
+        {
+            await DisplayAlert(
+                title :"",
+                message: "Canceling the action.",
+                cancel: "OK");
+        }
     }
 
     public async Task GetWeatherByGPS(double latitude, double longitude)
@@ -86,13 +95,27 @@ public partial class MainPage : ContentPage
         WeatherUpdateUI(results);
     }
 
-    private async void ImageButton_Clicked(object sender, EventArgs e)
+    private async void SearchLocation_Clicked(object sender, EventArgs e)
     {
-        var response = await DisplayPromptAsync(title: "", message: "", placeholder: "Search City", accept: "Search", cancel: "Cancel");
-        if (response != null)
+        var response = await DisplayPromptAsync(
+            title: "Search City",
+            message: "",
+            placeholder: "City Name...",
+            accept: "SEARCH",
+            cancel: "CANCEL"
+            );
+
+        if (response!= null)
         {
             await GetLoadSheddingBySearch(response);
             await GetWeatherBySearch(response);
+        }
+        else
+        {
+            await DisplayAlert(
+                title: "",
+                message: "You did not enter City Name!.",
+                cancel: "OK");
         }
     }
 
@@ -115,9 +138,13 @@ public partial class MainPage : ContentPage
         var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
 
         string[] areaNames = loadSheddingAreaGPSResults.areas.Select(area => area.name).ToArray();
-        var selectedAreaName = await DisplayActionSheet("Current Load Shedding Area", "Cancel", null, areaNames);
+        var selectedAreaName = await DisplayActionSheet(
+            "Current LoadShedding Area",
+            "CANCEL",
+            null,
+            areaNames);
 
-        if (selectedAreaName != null && selectedAreaName != "Cancel")
+        if (selectedAreaName != null && selectedAreaName != "CANCEL")
         {
             // User selected an area
             string areaId = loadSheddingAreaGPSResults.areas
@@ -132,9 +159,13 @@ public partial class MainPage : ContentPage
         var loadSheddingAreaSearchResults = await _loadsheddingServices.GetAreaBySearch(text);
 
         string[] areaNames = loadSheddingAreaSearchResults.areas.Select(area => area.name).ToArray();
-        var selectedAreaName = await DisplayActionSheet("Select Load Shedding Area", "Cancel", null, areaNames);
+        var selectedAreaName = await DisplayActionSheet(
+            "Select LoadShedding Area",
+            "CANCEL",
+            null,
+            areaNames);
 
-        if (selectedAreaName != null && selectedAreaName != "Cancel")
+        if (selectedAreaName != null && selectedAreaName != "CANCEL")
         {
             // User selected an area
             string areaId = loadSheddingAreaSearchResults.areas
@@ -142,6 +173,7 @@ public partial class MainPage : ContentPage
             await GetAreaLoadShedding(areaId);
         }
     }
+
 
     public async Task GetAreaLoadShedding(string AreaId)
     {
@@ -226,7 +258,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    //Need to refacter below method
+    //Need to refactor below method
     private void StageSwitch(dynamic loadSheddingAreaResults)
     {
         string currentStage = LblSchedulesCurrentStage.Text;
@@ -332,7 +364,7 @@ public partial class MainPage : ContentPage
                         LblNextDay.Text = nextDay.DayOfWeek.ToString();
                     }
                     else if (i == 2)
-                    { 
+                    {
                         string scheduleContent = dayResults[i].ToString();
                         string[] scheduleArray = scheduleContent.Split(' ');
                         string joinedSchedule = string.Join("\n", scheduleArray);

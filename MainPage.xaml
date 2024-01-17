@@ -12,12 +12,11 @@
               RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
               RowSpacing="20">
             <Grid.Background>
-                <RadialGradientBrush Center="0.50,0.68" >
+                <RadialGradientBrush Center="0.50,0.65" >
                     <GradientStopCollection>
                         <GradientStop Offset="0" Color="#7f00ff"/>
                         <GradientStop Offset="0.3" Color="#000000"/>
                         <GradientStop Offset="0.5" Color="#1f023a"/>
-                        <!--<GradientStop Offset="0.7" Color="#3b056d"/>-->
                         <GradientStop Offset="1.0" Color="#0d0019"/>
                     </GradientStopCollection>
                 </RadialGradientBrush>
@@ -30,26 +29,35 @@
                 <Frame Padding="10"
                        CornerRadius="10"
                        HasShadow="True"
+                       HeightRequest="40"
+                       WidthRequest="50"
                        BorderColor="#08bec2"
+                       HorizontalOptions="StartAndExpand"
                        BackgroundColor="#1f023a">
-                    
-                    <Label Text="My Location"
-                           FontFamily="Nexa-Heavy"
-                           TextColor="#9e99a3"
 
-                           FontSize="Default"/>
                     
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            x:Name="TapLocation" Tapped="TapLocation_Tapped"/>
-                    </Frame.GestureRecognizers>
+                    <ImageButton Source="location.png"
+                         HeightRequest="30"
+                         WidthRequest="30"
+                         HorizontalOptions="Center"
+                         Clicked="Mylocation_Clicked"/>
 
                 </Frame>
-                <ImageButton Source="location.png"
+                <Frame Padding="10"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       HeightRequest="40"
+                       WidthRequest="50"
+                       BorderColor="#08bec2"
+                       HorizontalOptions="EndAndExpand"
+                       BackgroundColor="#1f023a">
+                    
+                    <ImageButton Source="search.png"
                              HeightRequest="30"
                              WidthRequest="30"
-                             HorizontalOptions="EndAndExpand"
-                             Clicked="ImageButton_Clicked"/>
+                             HorizontalOptions="Center"
+                             Clicked="SearchLocation_Clicked"/>
+                </Frame>
             </StackLayout>
 
             <StackLayout Grid.Row="1"

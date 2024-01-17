@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using System.Reflection;
+using CommunityToolkit.Maui;
 
 namespace loadshedding;
 
@@ -15,6 +16,7 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+        builder.UseMauiApp<App>().UseMauiCommunityToolkit();
 
         builder
         .UseMauiApp<App>()
@@ -35,19 +37,17 @@ public static class MauiProgram
             WeatherApiKey = apiKeysConfig?.WeatherApiKey,
             LoadSheddingApiKey = apiKeysConfig?.LoadSheddingApiKey,
         };
-
         builder.Services.AddSingleton(apiKeys);
-
         builder.Services.AddHttpClient<IWeatherServices, WeatherServices>(weatherclient =>
         {
             weatherclient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
             
         });
-
         builder.Services.AddHttpClient<ILoadSheddingServices, LoadSheddingServices>(loadsheddigclient =>
         {
             loadsheddigclient.BaseAddress = new Uri("https://developer.sepush.co.za/business/2.0/");
         });
+        builder.Services.AddSingleton<IAlertServices, AlertServices>();
 
         return builder.Build();
     }
