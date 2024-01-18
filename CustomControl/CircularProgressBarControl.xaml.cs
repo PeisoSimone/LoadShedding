@@ -36,9 +36,13 @@ public partial class CircularProgressBarControl : ContentView
             if (defaultTime < currentTime && futureEventBeforeStart > currentTime)//default < current > start
             {
                 //futureEventBeforeStart = EventStartTime.AddHours(-2);
-                if (currentTime > futureEventStartTime.AddDays(-2))
+                if (currentTime > futureEventStartTime.AddHours(-2))
                 {
                     futureEventBeforeStart = EventStartTime.AddHours(-2);
+                }
+                else if(currentTime < futureEventBeforeStart)
+                {
+                    futureEventBeforeStart = EventStartTime;
                 }
             
             }
