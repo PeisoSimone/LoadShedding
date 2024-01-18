@@ -107,8 +107,10 @@ public partial class MainPage : ContentPage
 
         if (response!= null)
         {
-            await GetLoadSheddingBySearch(response);
-            await GetWeatherBySearch(response);
+        string results = response.Trim();
+
+            await GetLoadSheddingBySearch(results);
+            await GetWeatherBySearch(results);
         }
         else
         {
