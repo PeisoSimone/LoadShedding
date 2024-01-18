@@ -356,37 +356,33 @@ public partial class MainPage : ContentPage
                 {
                     if (i == 1)
                     {
+                        DateTime nextDay = DateTime.Today.AddDays(i);
+                        LblNextDay.Text = nextDay.DayOfWeek.ToString();
+
                         string scheduleContent = dayResults[i].ToString();
                         string[] scheduleArray = scheduleContent.Split(' ');
                         string joinedSchedule = string.Join("\n", scheduleArray);
-
-                        LblNextSchedule.Text = joinedSchedule;
-
-                        DateTime nextDay = DateTime.Today.AddDays(i);
-                        LblNextDay.Text = nextDay.DayOfWeek.ToString();
+                        LblNextSchedule.Text = joinedSchedule;  
                     }
                     else if (i == 2)
                     {
-                        string scheduleContent = dayResults[i].ToString();
-                        string[] scheduleArray = scheduleContent.Split(' ');
-                        string joinedSchedule = string.Join("\n", scheduleArray);
-
-                        LblNextNextSchedule.Text = joinedSchedule;
-
                         DateTime nextDay = DateTime.Today.AddDays(i);
                         LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
 
-                    }
-                    else if (i == 3)
-                    {
                         string scheduleContent = dayResults[i].ToString();
                         string[] scheduleArray = scheduleContent.Split(' ');
                         string joinedSchedule = string.Join("\n", scheduleArray);
-
-                        LblNextNextNextSchedule.Text = joinedSchedule;
-
+                        LblNextNextSchedule.Text = joinedSchedule;
+                    }
+                    else if (i == 3)
+                    {
                         DateTime nextDay = DateTime.Today.AddDays(i);
                         LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                        string scheduleContent = dayResults[i].ToString();
+                        string[] scheduleArray = scheduleContent.Split(' ');
+                        string joinedSchedule = string.Join("\n", scheduleArray);
+                        LblNextNextNextSchedule.Text = joinedSchedule;  
                     }
                 }
 
@@ -395,8 +391,31 @@ public partial class MainPage : ContentPage
             }
             else
             {
-                //LblNextDay
-                //LblNextSchedule
+                for (int i = 1; i < 4; i++)
+                {
+                    if (i == 1)
+                    {
+                        DateTime nextDay = DateTime.Today.AddDays(i);
+                        LblNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                        LblNextSchedule.Text = "There is no LoadSheding on "+ LblNextDay;
+                    }
+                    else if (i == 2)
+                    {
+                        DateTime nextDay = DateTime.Today.AddDays(i);
+                        LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                        LblNextNextSchedule.Text = "There is no LoadSheding on " + LblNextNextDay;
+
+                    }
+                    else if (i == 3)
+                    {
+                        DateTime nextDay = DateTime.Today.AddDays(i);
+                        LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                        LblNextNextNextSchedule.Text = "There is no LoadSheding on " + LblNextNextNextDay;
+                    }
+                }
             }
         }
         else
