@@ -53,14 +53,14 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("GetWeatherByGPS-API request failed with status code: " + response.StatusCode);
                     ClearWeatherSettings();
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("GetWeatherByGPS-An error occurred: " + ex.Message);
                 return null;
             }
         }
@@ -80,14 +80,14 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("GetWeatherBySearch-API request failed with status code: " + response.StatusCode);
                     ClearWeatherSettings();
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("GetWeatherBySearch-An error occurred: " + ex.Message);
                 return null;
             }
         }
@@ -141,13 +141,13 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("GetAreasNearByGPS-API request failed with status code: " + response.StatusCode);
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("GetAreasNearByGPS-An error occurred: " + ex.Message);
                 return null;
             }
         }
@@ -168,13 +168,13 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("GetAreaBySearch-API request failed with status code: " + response.StatusCode);
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("GetAreaBySearch-An error occurred: " + ex.Message);
                 return null;
             }
         }
@@ -203,13 +203,13 @@ namespace loadshedding.Services
                 else
                 {
                     ClearLoadSheddingSettings();
-                    await _alertServices.ShowAlert("API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert("GetAreaInformation-API request failed with status code: " + response.StatusCode);
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                await _alertServices.ShowAlert("An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert("GetAreaInformation-An error occurred: " + ex.Message);
                 return null;
             }
         }
