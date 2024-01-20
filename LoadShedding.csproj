@@ -32,14 +32,14 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <MauiIcon Include="Resources\AppIcon\icon2.png" Color="#21009C" BaseSize="110,160" ForegroundScale="0.6" />
+    
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Splash\splashicon.png" Color="#2E1347"/>
 
-		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
-		<!-- Images -->
+    <!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -50,12 +50,20 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\icon2.png" />
+	  <None Remove="Resources\Splash\splashicon.png" />
+	  <None Remove="Resources\Splash\splashv.mp4" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Include="appsettings.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiSplashScreen Include="Resources\Splash\gif.gif" />
+	  <MauiSplashScreen Include="Resources\Splash\splashv.mp4" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,6 +82,10 @@
 	  <PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.43" />
 	  <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
 	  <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiSplashScreen Include="Resources\Splash\splashicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
