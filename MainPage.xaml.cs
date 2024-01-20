@@ -1,5 +1,6 @@
 using loadshedding.CustomControl;
 using loadshedding.Services;
+using Microsoft.Maui.Controls;
 using Syncfusion.Maui.ProgressBar;
 using System.Text;
 
@@ -12,18 +13,13 @@ public partial class MainPage : ContentPage
     private double longitude;
     private readonly IWeatherServices _weatherServices;
     private readonly ILoadSheddingServices _loadsheddingServices;
-    private readonly IAlertServices _alertServices; 
+    private readonly IAlertServices _alertServices;
     private CircularProgressBarControl circularProgressBarControl;
     private SfCircularProgressBar circularProgressBar;
-
-
+    private Frame SplashScreen;
+    private List<string> dayResults;
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
-
-
-
-    //Unomment below line for test mode
-    private string AreaId;
 
     public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices, IAlertServices alertServices)
     {
@@ -37,6 +33,8 @@ public partial class MainPage : ContentPage
 
     protected async override void OnAppearing()
     {
+        base.OnAppearing();
+
         string savedWeatherName = Preferences.Get("WeatherLocationName", string.Empty);
         string savedLoadSheddingName = Preferences.Get("LoadSheddingLocationName", string.Empty);
 
@@ -54,9 +52,7 @@ public partial class MainPage : ContentPage
             await GetWeatherByGPS(latitude, longitude);
             await GetLoadSheddingByGPS(latitude, longitude);
         }
-
         LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
-        base.OnAppearing();
     }
 
     public async Task GetLocation()
@@ -83,8 +79,8 @@ public partial class MainPage : ContentPage
         else
         {
             await DisplayAlert(
-                title :"",
-                message: "Canceling the action.",
+                title: "",
+                message: "Action Cancelled.",
                 cancel: "OK");
         }
     }
@@ -105,9 +101,9 @@ public partial class MainPage : ContentPage
             cancel: "CANCEL"
             );
 
-        if (response!= null)
+        if (response != null)
         {
-        string results = response.Trim();
+            string results = response.Trim();
 
             await GetLoadSheddingBySearch(results);
             await GetWeatherBySearch(results);
@@ -116,7 +112,7 @@ public partial class MainPage : ContentPage
         {
             await DisplayAlert(
                 title: "",
-                message: "You did not enter City Name!.",
+                message: "Action Cancelled.",
                 cancel: "OK");
         }
     }
@@ -134,7 +130,6 @@ public partial class MainPage : ContentPage
         LblTemperature.Text = results.main.temperature + "°C";
     }
 
-    //Update Area GPS
     public async Task GetLoadSheddingByGPS(double latitude, double longitude)
     {
         var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
@@ -176,7 +171,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-
     public async Task GetAreaLoadShedding(string AreaId)
     {
         var loadSheddingAreaResults = await _loadsheddingServices.GetAreaInformation(AreaId);
@@ -215,13 +209,11 @@ public partial class MainPage : ContentPage
         circularProgressBarControl.EventEndTime = EventEndTime;
 
         circularProgressBarControl.UpdateProgressBar();
-
         ProgressBarUpdated();
 
-        //LblSchedulesEventStart.Text = firstEvent.start.ToString("HH:mm");
-        //LblSchedulesEventStop.Text = firstEvent.end.ToString("HH:mm");
         LblSchedulesCurrentStage.Text = firstEvent.note;
 
+        //Check if the next LoadShedding event is today or the following day
         if (EventStartTime.Date == DateTime.Today.Date)
         {
             LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
@@ -247,8 +239,9 @@ public partial class MainPage : ContentPage
         circularProgressBarControl.EventEndTime = EventEndTime;
 
         circularProgressBarControl.UpdateProgressBar();
-
         ProgressBarUpdated();
+
+        FillBottomCardsUI();
     }
     private void ProgressBarUpdated()
     {
@@ -260,12 +253,11 @@ public partial class MainPage : ContentPage
         }
     }
 
-    //Need to refactor below method
     private void StageSwitch(dynamic loadSheddingAreaResults)
     {
         string currentStage = LblSchedulesCurrentStage.Text;
 
-        List<string> dayResults = new List<string>();
+        dayResults = new List<string>();
 
         StringBuilder sb = new StringBuilder();
 
@@ -351,81 +343,12 @@ public partial class MainPage : ContentPage
             }
             if (dayResults != null)
             {
-
-                for (int i = 1; i < 4; i++)
-                {
-                    if (i == 1)
-                    {
-                        DateTime nextDay = DateTime.Today.AddDays(i);
-                        LblNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                        string scheduleContent = dayResults[i].ToString();
-                        string[] scheduleArray = scheduleContent.Split(' ');
-                        string joinedSchedule = string.Join("\n", scheduleArray);
-                        LblNextSchedule.Text = joinedSchedule;  
-                    }
-                    else if (i == 2)
-                    {
-                        DateTime nextDay = DateTime.Today.AddDays(i);
-                        LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                        string scheduleContent = dayResults[i].ToString();
-                        string[] scheduleArray = scheduleContent.Split(' ');
-                        string joinedSchedule = string.Join("\n", scheduleArray);
-                        LblNextNextSchedule.Text = joinedSchedule;
-                    }
-                    else if (i == 3)
-                    {
-                        DateTime nextDay = DateTime.Today.AddDays(i);
-                        LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                        string scheduleContent = dayResults[i].ToString();
-                        string[] scheduleArray = scheduleContent.Split(' ');
-                        string joinedSchedule = string.Join("\n", scheduleArray);
-                        LblNextNextNextSchedule.Text = joinedSchedule;  
-                    }
-                }
-
-                string result = dayResults[0].ToString();
-                LoadSheddingActiveHours(loadSheddingAreaResults, result);
+                LoadSheddingActiveHours(loadSheddingAreaResults);
             }
-            else
-            {
-                for (int i = 1; i < 4; i++)
-                {
-                    if (i == 1)
-                    {
-                        DateTime nextDay = DateTime.Today.AddDays(i);
-                        LblNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                        LblNextSchedule.Text = "There is no LoadSheding on "+ LblNextDay;
-                    }
-                    else if (i == 2)
-                    {
-                        DateTime nextDay = DateTime.Today.AddDays(i);
-                        LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                        LblNextNextSchedule.Text = "There is no LoadSheding on " + LblNextNextDay;
-
-                    }
-                    else if (i == 3)
-                    {
-                        DateTime nextDay = DateTime.Today.AddDays(i);
-                        LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                        LblNextNextNextSchedule.Text = "There is no LoadSheding on " + LblNextNextNextDay;
-                    }
-                }
-            }
-        }
-        else
-        {
-            LblStage.Text = "No LoadShedding Today";
         }
     }
 
-
-    private void LoadSheddingActiveHours(dynamic loadSheddingAreaResults, string result)
+    private void LoadSheddingActiveHours(dynamic loadSheddingAreaResults)
     {
         var firstEvent = loadSheddingAreaResults.events[0];
 
@@ -441,17 +364,28 @@ public partial class MainPage : ContentPage
         ScheduleShow.Append(ScheduleJoin);
         ScheduleShow.Append(SchedulesEventEnd);
 
-        string ScheduleHighlight = ScheduleShow.ToString();
+        string scheduleHighlight = ScheduleShow.ToString();
+
+        string result = dayResults[0].ToString();
 
         string[] sbTexts = result.ToString().Split(" ");
 
         var formattedString = new FormattedString();
 
+        NextScheduleHighlight(sbTexts,scheduleHighlight,formattedString );
+        
+        LblStage.FormattedText = formattedString;
+        LblStage.SizeChanged += LblStage_LayoutChanged;
+
+        FillBottomCardsUI();
+    }
+
+    private void NextScheduleHighlight(string[] sbTexts, string scheduleHighlight, FormattedString formattedString)
+    { 
         foreach (var sbText in sbTexts)
         {
-            if (ScheduleHighlight.Equals(sbText))
+            if (scheduleHighlight.Equals(sbText))
             {
-
                 if (EventStartTime > DateTime.Now)
                 {
                     LblOccure.Text = "Next Schedule";
@@ -475,9 +409,66 @@ public partial class MainPage : ContentPage
                 formattedString.Spans.Add(new Span { Text = sbText + " " });
             }
         }
-        LblStage.FormattedText = formattedString;
-        LblStage.SizeChanged += LblStage_LayoutChanged;
     }
+
+    public void FillBottomCardsUI()
+    {
+        for (int i = 1; i < 4; i++)
+        {
+            if (i == 1)
+            {
+                DateTime nextDay = DateTime.Today.AddDays(i);
+                LblNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                if (dayResults!=null) 
+                {
+                    string scheduleContent = dayResults[i].ToString();
+                    string[] scheduleArray = scheduleContent.Split(' ');
+                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    LblNextSchedule.Text = joinedSchedule;
+                }
+                else
+                {
+                    LblNextSchedule.Text = "Suspended till further notice";
+                }
+            }
+            else if (i == 2)
+            {
+                DateTime nextDay = DateTime.Today.AddDays(i);
+                LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                if(dayResults!= null)
+                {
+                    string scheduleContent = dayResults[i].ToString();
+                    string[] scheduleArray = scheduleContent.Split(' ');
+                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    LblNextNextSchedule.Text = joinedSchedule;
+                }
+                else
+                {
+                    LblNextNextSchedule.Text = "Suspended till further notice";
+                }
+            }
+            else if (i == 3)
+            {
+                DateTime nextDay = DateTime.Today.AddDays(i);
+                LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                if (dayResults!= null)
+                {
+                    string scheduleContent = dayResults[i].ToString();
+                    string[] scheduleArray = scheduleContent.Split(' ');
+                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    LblNextNextNextSchedule.Text = joinedSchedule;
+                }
+                else
+                {
+                    LblNextNextNextSchedule.Text = "Suspended till further notice";
+                }
+            }
+        }
+    }
+
     private void LblStage_LayoutChanged(object sender, EventArgs e)
     {
         Label lblStage = (Label)sender;
@@ -491,5 +482,4 @@ public partial class MainPage : ContentPage
         double calculatedFontSize = baseFontSize * availableWidth / 300;
         return Math.Min(Math.Max(calculatedFontSize, 50), 15);
     }
-
 }
