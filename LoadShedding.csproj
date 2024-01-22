@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
 		<RootNamespace>loadshedding</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -35,7 +35,7 @@
     <MauiIcon Include="Resources\AppIcon\icon2.png" Color="#21009C" BaseSize="110,160" ForegroundScale="0.6" />
     
     <!-- Splash Screen -->
-    <MauiSplashScreen Include="Resources\Splash\splashicon.png" Color="#2E1347"/>
+    <MauiSplashScreen Include="Resources\Splash\splashicon.png" Color="#2E1347" />
 
 
     <!-- Images -->
@@ -67,20 +67,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="1.0.0" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 	  <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions" Version="2.2.0" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="Syncfusion.Maui.Core" Version="23.1.43" />
 	  <PackageReference Include="Syncfusion.Maui.ProgressBar" Version="23.1.43" />
-	  <PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.43" />
-	  <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+	  <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
 	  <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.5" />
 	</ItemGroup>
 
@@ -95,6 +94,14 @@
 	  <MauiXaml Update="MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.6" />
 	</ItemGroup>
 
 </Project>
