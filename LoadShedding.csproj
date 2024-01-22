@@ -32,11 +32,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-    <MauiIcon Include="Resources\AppIcon\icon2.png" Color="#21009C" BaseSize="110,160" ForegroundScale="0.6" />
+    <MauiIcon Include="Resources\AppIcon\centeredicon.png" Color="#21009C" BaseSize="110,160" ForegroundScale="0.6" />
     
     <!-- Splash Screen -->
     <MauiSplashScreen Include="Resources\Splash\splashicon.png" Color="#2E1347" />
-
 
     <!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -50,9 +49,10 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\AppIcon\zoomedicon.png" />
 	  <None Remove="Resources\Images\icon2.png" />
 	  <None Remove="Resources\Splash\splashicon.png" />
-	  <None Remove="Resources\Splash\splashv.mp4" />
+	  <None Remove="Resources\Splash\splashicon1.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -62,8 +62,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\gif.gif" />
-	  <MauiSplashScreen Include="Resources\Splash\splashv.mp4" />
+	  <MauiSplashScreen Include="Resources\Splash\splashicon.png" Color="#2E1347" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -81,10 +80,6 @@
 	  <PackageReference Include="Syncfusion.Maui.ProgressBar" Version="23.1.43" />
 	  <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
 	  <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.5" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\splashicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
