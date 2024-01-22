@@ -4,41 +4,36 @@
 Load Shedding
 
 ## Description
-A .NET MAUI Cross-Platform mobile application to track a load schedding schedule with weather conditions forr that specific location/city. The application was developed using .NET8 MAUI and therefore should be compatible with both IOS & Android, however it was only tested on an Android(Physical Device and Amulator). This repo contains real-life production level code and the builds will be distributed to Apple App Store and Google Play store.
-
+A .NET MAUI Cross-Platform mobile application to track a load schedding schedule with weather conditions for that specific location/city. The application was developed using .NET MAUI and therefore should be compatible with both IOS & Android, however it was only tested on  Android(Physical Device and Emulator). This repo contains real-life production level code and the builds will be distributed to Apple App Store and Google Play store.
 
 ## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+https://eskomsepush.gumroad.com/l/api
+This integration uses the Eskom SePush API.
+Read the EskomSePush API Licence Agreement.
+Free: (50 requests per day) API Key from Eskom Se Push. You can pay for a higher limit.
+Do not use more than one API key from the same IP. Your key will be blocked.
 
-## Visuals
-![Alt text](Screenshot_2024-01-18-08-00-20-032_com.companyname.loadshedding.jpg)
-![Alt text](Screenshot_2024-01-18-10-11-05-838_com.companyname.loadshedding.jpg)
-![Alt text](Screenshot_2024-01-18-12-22-04-713_com.companyname.loadshedding.jpg)
+https://openweathermap.org/
+This integration uses the OpenWeatherMap.
+Read the OpenWeatherMap Licence Agreement.
+Free plan: Current weather data 
+
+https://www.syncfusion.com/
+Free: Essential Studio Enterprise Edition 23.1.44 License Key
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+It is written in C# and targets .NET8 MAUI 
+It uses Newtonsoft.Json, Syncfusion.Maui.ProgressBar, CommunityToolkit.Maui
+It is was created on Visual Studio Version 17.8.5(.NET8 and .NET Multi-platform App UI installed)
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Get Visual Studio Version 17.8.0 or later(With .NET8 and .NET MAUI)
+Update Nuget Packages to the latest updates(Excluding Sycfusion packages)
+Configure Emulator or prepare physical device (Debbuging)
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Peiso Simone
 
-## License
-For open source projects, say how it is licensed.
 
 ## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Project is in development stage, IOS version and more advancement on project stability(Test Cases and Software Engineering Improvements) needed
