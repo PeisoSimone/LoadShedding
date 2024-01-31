@@ -15,7 +15,7 @@
 		<ApplicationTitle>loadshedding</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.loadshedding</ApplicationId>
+		<ApplicationId>com.innotekso.loadshedding</ApplicationId>
 		<ApplicationIdGuid>052359fd-ebf7-413a-9313-e2fb5ed2c1e4</ApplicationIdGuid>
 
 		<!-- Versions -->
