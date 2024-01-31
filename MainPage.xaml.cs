@@ -3,6 +3,7 @@ using loadshedding.Services;
 using Microsoft.Maui.Controls;
 using Syncfusion.Maui.ProgressBar;
 using System.Text;
+using System.Threading.Channels;
 
 
 namespace loadshedding;
@@ -58,7 +59,7 @@ public partial class MainPage : ContentPage
 
             LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             await _alertServices.ShowAlert("onAppearing-An error occurred: " + ex.Message);
         }
@@ -162,18 +163,37 @@ public partial class MainPage : ContentPage
         var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
 
         string[] areaNames = loadSheddingAreaGPSResults.areas.Select(area => area.name).ToArray();
-        var selectedAreaName = await DisplayActionSheet(
+
+        if (loadSheddingAreaGPSResults.areas.Count > 0)
+        {
+            var selectedAreaName = await DisplayActionSheet(
             "Current LoadShedding Area",
             "CANCEL",
             null,
             areaNames);
 
-        if (selectedAreaName != null && selectedAreaName != "CANCEL")
+            if (selectedAreaName != null)
+            {
+                // User selected an area
+                string areaId = loadSheddingAreaGPSResults.areas
+                    .First(area => area.name == selectedAreaName).id;
+                await GetAreaLoadShedding(areaId);
+            }
+            else
+            {
+                await DisplayAlert(
+                   title: "",
+                   message: "Location Not Found!.",
+                   cancel: "OK");
+            }
+        }
+        else
         {
-            // User selected an area
-            string areaId = loadSheddingAreaGPSResults.areas
-                .First(area => area.name == selectedAreaName).id;
-            await GetAreaLoadShedding(areaId);
+            await DisplayAlert(
+              title: "",
+              message: "Location Not Found!.",
+              cancel: "OK");
+
         }
     }
 
@@ -183,18 +203,37 @@ public partial class MainPage : ContentPage
         var loadSheddingAreaSearchResults = await _loadsheddingServices.GetAreaBySearch(text);
 
         string[] areaNames = loadSheddingAreaSearchResults.areas.Select(area => area.name).ToArray();
-        var selectedAreaName = await DisplayActionSheet(
-            "Select LoadShedding Area",
-            "CANCEL",
-            null,
-            areaNames);
 
-        if (selectedAreaName != null && selectedAreaName != "CANCEL")
+        if (loadSheddingAreaSearchResults.areas.Count > 0)
         {
-            // User selected an area
-            string areaId = loadSheddingAreaSearchResults.areas
-                .First(area => area.name == selectedAreaName).id;
-            await GetAreaLoadShedding(areaId);
+            var selectedAreaName = await DisplayActionSheet(
+                "Select LoadShedding Area",
+                "CANCEL",
+                null,
+                areaNames);
+
+            if (selectedAreaName != null)
+            {
+                // User selected an area
+                string areaId = loadSheddingAreaSearchResults.areas
+                    .First(area => area.name == selectedAreaName).id;
+                await GetAreaLoadShedding(areaId);
+            }
+            else
+            {
+                await DisplayAlert(
+                   title: "",
+                   message: "Location Not Found!.",
+                   cancel: "OK");
+            }
+        }
+        else
+        {
+            await DisplayAlert(
+              title: "",
+              message: "Location Not Found!.",
+              cancel: "OK");
+
         }
     }
 
