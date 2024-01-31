@@ -4,29 +4,33 @@
              xmlns:customCotrol="clr-namespace:loadshedding.CustomControl"
              x:Class="loadshedding.MainPage"
              Title="MainPage">
-    
-    
 
-    <ScrollView>
-        <Grid BackgroundColor="#0d0118" 
+    <AbsoluteLayout>
+
+
+        <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+            <Grid BackgroundColor="#0d0118" 
               RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
               RowSpacing="20">
-            <Grid.Background>
-                <RadialGradientBrush Center="0.50,0.65" >
-                    <GradientStopCollection>
-                        <GradientStop Offset="0" Color="#7f00ff"/>
-                        <GradientStop Offset="0.3" Color="#000000"/>
-                        <GradientStop Offset="0.5" Color="#1f023a"/>
-                        <GradientStop Offset="1.0" Color="#0d0019"/>
-                    </GradientStopCollection>
-                </RadialGradientBrush>
-            </Grid.Background>
+                <Grid.Background>
+                    <RadialGradientBrush Center="0.50,0.65" >
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#7f00ff"/>
+                            <GradientStop Offset="0.3" Color="#000000"/>
+                            <GradientStop Offset="0.5" Color="#1f023a"/>
+                            <GradientStop Offset="1.0" Color="#0d0019"/>
+                        </GradientStopCollection>
+                    </RadialGradientBrush>
+                </Grid.Background>
 
-            <StackLayout Grid.Row="0"
-                         Margin="20,10,20,0"
+
+
+                <StackLayout Grid.Row="0"
+                         VerticalOptions="FillAndExpand" 
+                         Margin="20,10,20,0" 
                          Orientation="Horizontal">
-                
-                <Frame Padding="10"
+
+                    <Frame Padding="10"
                        CornerRadius="10"
                        HasShadow="True"
                        HeightRequest="40"
@@ -35,15 +39,15 @@
                        HorizontalOptions="StartAndExpand"
                        BackgroundColor="#1f023a">
 
-                    
-                    <ImageButton Source="location.png"
+
+                        <ImageButton Source="location.png"
                          HeightRequest="30"
                          WidthRequest="30"
                          HorizontalOptions="Center"
                          Clicked="Mylocation_Clicked"/>
 
-                </Frame>
-                <Frame Padding="10"
+                    </Frame>
+                    <Frame Padding="10"
                        CornerRadius="10"
                        HasShadow="True"
                        HeightRequest="40"
@@ -51,37 +55,37 @@
                        BorderColor="#08bec2"
                        HorizontalOptions="EndAndExpand"
                        BackgroundColor="#1f023a">
-                    
-                    <ImageButton Source="search.png"
+
+                        <ImageButton Source="search.png"
                              HeightRequest="30"
                              WidthRequest="30"
                              HorizontalOptions="Center"
                              Clicked="SearchLocation_Clicked"/>
-                </Frame>
-            </StackLayout>
+                    </Frame>
+                </StackLayout>
 
-            <StackLayout Grid.Row="1"
+                <StackLayout Grid.Row="1"
                          Orientation="Vertical">
 
-                <Label x:Name="LblCity"
+                    <Label x:Name="LblCity"
                        FontSize="40"
                        FontFamily="Nexa-Heavy"
                        FontAttributes="Bold"
                        HorizontalOptions="Center"
                        TextColor="#d9b3ff"/>
 
-                <Label x:Name="LblScheduleAreaName"
+                    <Label x:Name="LblScheduleAreaName"
                        FontSize="20"
                        FontFamily="Nexa-Light"
                        HorizontalOptions="Center"
                        TextColor="#9e99a3"/>
-            </StackLayout>
+                </StackLayout>
 
-            <Grid Grid.Row="2"
+                <Grid Grid.Row="2"
                   ColumnDefinitions="0.33*,0.33*,0.33*"
                   RowDefinitions="Auto, Auto">
 
-                <Label x:Name="LblTemperature"
+                    <Label x:Name="LblTemperature"
                        Grid.Row="0"
                        Grid.Column="0"
                        FontSize="Small"
@@ -89,7 +93,7 @@
                        HorizontalOptions="Center"
                        TextColor="#9e99a3"/>
 
-                <Label x:Name="LblDate"
+                    <Label x:Name="LblDate"
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="Medium"
@@ -97,19 +101,19 @@
                        HorizontalOptions="Center"
                        TextColor="#9e99a3"/>
 
-                <Label x:Name="LblWeatherDescription"
+                    <Label x:Name="LblWeatherDescription"
                        Grid.Row="0"
                        Grid.Column="2"
                        FontSize="Small"
                        FontFamily="Nexa-Light"
                        HorizontalOptions="Center"
                        TextColor="#9e99a3"/>
-            </Grid>
-            <!--timeline and highlight loadshedding schedules-->
-            <StackLayout Grid.Row="3"
+                </Grid>
+                <!--timeline and highlight loadshedding schedules-->
+                <StackLayout Grid.Row="3"
                          Orientation="Vertical">
 
-                <Frame Padding="10"
+                    <Frame Padding="10"
                        HeightRequest="50"
                        BackgroundColor="Transparent"
                        CornerRadius="10"
@@ -117,20 +121,20 @@
                        BorderColor="#08bec2"
                        Margin="5,5,5,5">
 
-                    <Grid ColumnDefinitions="1*"
+                        <Grid ColumnDefinitions="1*"
                           RowDefinitions="Auto">
 
-                        <Label x:Name="LblSchedulesCurrentStage"
+                            <Label x:Name="LblSchedulesCurrentStage"
                            Grid.Row="0"
                            Grid.Column="1"
                            FontSize="Medium"
                            FontFamily="Nexa-Light"
                            HorizontalOptions="Center"
                            TextColor="#9e99a3"/>
-                    </Grid>
-                </Frame>
-                
-                <Frame Padding="10"
+                        </Grid>
+                    </Frame>
+
+                    <Frame Padding="10"
                        HeightRequest="100"
                        CornerRadius="10"
                        HasShadow="True"
@@ -138,10 +142,10 @@
                        BorderColor="#08bec2"
                        Margin="5,5,5,0">
 
-                    <Grid ColumnDefinitions="1*"
+                        <Grid ColumnDefinitions="1*"
                           RowDefinitions="Auto,Auto,Auto">
 
-                        <Label x:Name="LblDay"
+                            <Label x:Name="LblDay"
                                Grid.Row="0"
                                Grid.Column="1"
                                FontSize="Medium"
@@ -152,7 +156,7 @@
                                TextColor="#9e99a3"/>
 
 
-                        <Label x:Name="LblStage"
+                            <Label x:Name="LblStage"
                                Grid.Row="2"
                                Grid.Column="1"
                                TextColor="#9e99a3"
@@ -161,7 +165,7 @@
                                HorizontalTextAlignment="Start"
                                SizeChanged="LblStage_LayoutChanged"/>
 
-                        <Label x:Name="LblOccure"
+                            <Label x:Name="LblOccure"
                                Grid.Row="1"
                                Grid.Column="1"
                                FontSize="Small"
@@ -170,25 +174,22 @@
                                TextColor="#9e99a3"/>
 
 
-                    </Grid>
-                </Frame>
-            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
 
-            <!--Circular ProgressBar-->
-            <StackLayout x:Name="Circular" Grid.Row="4" >
-                
+                <!--Circular ProgressBar-->
+                <StackLayout x:Name="Circular" Grid.Row="4" >
+                    <customCotrol:CircularProgressBarControl />
+                </StackLayout>
+                <!--Bottom cards-->
 
-                <customCotrol:CircularProgressBarControl />
-            </StackLayout>
-            <!--Bottom cards-->
-
-
-            <Grid Grid.Row="5"
+                <Grid Grid.Row="5"
                       RowDefinitions="Auto, Auto, Auto"
                       ColumnDefinitions="0.33*,0.33*,0.33*">
 
-                <!--Tomorrow card-->
-                <Frame Grid.Row="0" 
+                    <!--Tomorrow card-->
+                    <Frame Grid.Row="0" 
                            Grid.Column="0"
                            Padding="10"
                            HeightRequest="100"
@@ -198,11 +199,11 @@
                            BorderColor="LightGrey"
                            Margin="5,0,5,0">
 
-                    <StackLayout Orientation="Vertical">
-                        <Grid ColumnDefinitions="1*"
+                        <StackLayout Orientation="Vertical">
+                            <Grid ColumnDefinitions="1*"
                           RowDefinitions="Auto,Auto">
 
-                            <Label x:Name="LblNextDay"
+                                <Label x:Name="LblNextDay"
                                    Grid.Row="0"
                                    Grid.Column="1"
                                    FontSize="Small"
@@ -210,18 +211,18 @@
                                    HorizontalOptions="CenterAndExpand"
                                    TextColor="#d9b3ff"/>
 
-                            <Label x:Name="LblNextSchedule"
+                                <Label x:Name="LblNextSchedule"
                                    Grid.Row="1"
                                    Grid.Column="1"
                                    FontFamily="Nexa-Light"
                                    FontSize="Small"
                                    HorizontalOptions="CenterAndExpand"
                                    TextColor="#9e99a3"/>
-                        </Grid>
-                    </StackLayout>
-                </Frame>
-                <!--Tomorrow card-->
-                <Frame Grid.Row="0" Grid.Column="1"
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
+                    <!--Tomorrow card-->
+                    <Frame Grid.Row="0" Grid.Column="1"
                             Padding="10"
                                HeightRequest="100"
                                CornerRadius="10"
@@ -230,11 +231,11 @@
                                BorderColor="LightGrey"
                                Margin="5,0,5,0">
 
-                    <StackLayout Orientation="Vertical">
-                        <Grid ColumnDefinitions="1*"
+                        <StackLayout Orientation="Vertical">
+                            <Grid ColumnDefinitions="1*"
                               RowDefinitions="Auto,Auto">
 
-                            <Label x:Name="LblNextNextDay"
+                                <Label x:Name="LblNextNextDay"
                                    Grid.Row="0"
                                    Grid.Column="1"
                                    FontSize="Small"
@@ -242,18 +243,18 @@
                                    HorizontalOptions="CenterAndExpand"
                                    TextColor="#d9b3ff"/>
 
-                            <Label x:Name="LblNextNextSchedule"
+                                <Label x:Name="LblNextNextSchedule"
                                    Grid.Row="1"
                                    Grid.Column="1"
                                    FontFamily="Nexa-Light"
                                    FontSize="Small"
                                    HorizontalOptions="CenterAndExpand"
                                    TextColor="#9e99a3"/>
-                        </Grid>
-                    </StackLayout>
-                </Frame>
-                <!--Tomorrow card-->
-                <Frame Grid.Row="0" 
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
+                    <!--Tomorrow card-->
+                    <Frame Grid.Row="0" 
                        Grid.Column="2"
                        Padding="10"
                        HeightRequest="100"
@@ -263,11 +264,11 @@
                        BorderColor="LightGrey"
                        Margin="5,0,5,0">
 
-                    <StackLayout Orientation="Vertical">
-                        <Grid ColumnDefinitions="1*"
+                        <StackLayout Orientation="Vertical">
+                            <Grid ColumnDefinitions="1*"
                               RowDefinitions="Auto,Auto">
 
-                            <Label x:Name="LblNextNextNextDay"
+                                <Label x:Name="LblNextNextNextDay"
                                    Grid.Row="0"
                                    Grid.Column="1"
                                    FontSize="Small"
@@ -275,17 +276,43 @@
                                    HorizontalOptions="CenterAndExpand"
                                    TextColor="#d9b3ff"/>
 
-                            <Label x:Name="LblNextNextNextSchedule"
+                                <Label x:Name="LblNextNextNextSchedule"
                                    Grid.Row="1"
                                    Grid.Column="1"
                                    FontFamily="Nexa-Light"
                                    FontSize="Small"
                                    HorizontalOptions="CenterAndExpand"
                                    TextColor="#9e99a3"/>
-                        </Grid>
-                    </StackLayout>
-                </Frame>
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+
             </Grid>
-        </Grid>
-    </ScrollView>
+        </ScrollView>
+        <StackLayout x:Name="loadingIndicatorContainer" 
+                     IsVisible="False" 
+                     BackgroundColor="#80000000"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+            
+            <ActivityIndicator x:Name="loadingIndicator" 
+                               IsRunning="False" 
+                               IsVisible="False" 
+                               Color="Blue" 
+                               HeightRequest="100" 
+                               WidthRequest="100" 
+                               Margin="20,700,20,0"
+                               HorizontalOptions="CenterAndExpand" 
+                               VerticalOptions="CenterAndExpand" />
+            
+            <Label Text="Please wait..." 
+                   TextColor="White" 
+                   FontSize="18" 
+                   HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="CenterAndExpand" 
+                   Margin="50,100,50,0"/>
+            
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

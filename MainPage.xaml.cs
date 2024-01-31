@@ -16,8 +16,8 @@ public partial class MainPage : ContentPage
     private readonly IAlertServices _alertServices;
     private CircularProgressBarControl circularProgressBarControl;
     private SfCircularProgressBar circularProgressBar;
-    private Frame SplashScreen;
     private List<string> dayResults;
+    private bool isLoading;
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
 
@@ -31,28 +31,55 @@ public partial class MainPage : ContentPage
         circularProgressBarControl.UpdateProgressBar();
     }
 
-    protected async override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        string savedWeatherName = Preferences.Get("WeatherLocationName", string.Empty);
-        string savedLoadSheddingName = Preferences.Get("LoadSheddingLocationName", string.Empty);
+        ShowLoadingIndicator();
 
-        if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
+        try
         {
-            await GetAreaLoadShedding(savedLoadSheddingName);
-            await GetWeatherBySearch(savedWeatherName);
-        }
-        else
-        {
-            Preferences.Remove("WeatherLocationName");
-            Preferences.Remove("LoadSheddingLocationName");
+            string savedWeatherName = Preferences.Get("WeatherLocationName", string.Empty);
+            string savedLoadSheddingName = Preferences.Get("LoadSheddingLocationName", string.Empty);
 
-            await GetLocation();
-            await GetWeatherByGPS(latitude, longitude);
-            await GetLoadSheddingByGPS(latitude, longitude);
+            if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
+            {
+                await GetAreaLoadShedding(savedLoadSheddingName);
+                await GetWeatherBySearch(savedWeatherName);
+            }
+            else
+            {
+                Preferences.Remove("WeatherLocationName");
+                Preferences.Remove("LoadSheddingLocationName");
+                await GetLocation();
+                await GetWeatherByGPS(latitude, longitude);
+                await GetLoadSheddingByGPS(latitude, longitude);
+            }
+
+            LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
         }
-        LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
+        catch (Exception ex) 
+        {
+            await _alertServices.ShowAlert("onAppearing-An error occurred: " + ex.Message);
+        }
+        finally
+        {
+            HideLoadingIndicator();
+        }
+    }
+
+    private void ShowLoadingIndicator()
+    {
+        loadingIndicatorContainer.IsVisible = true;
+        loadingIndicator.IsRunning = true;
+        loadingIndicator.IsVisible = true;
+    }
+
+    private void HideLoadingIndicator()
+    {
+        loadingIndicator.IsRunning = false;
+        loadingIndicator.IsVisible = false;
+        loadingIndicatorContainer.IsVisible = false;
     }
 
     public async Task GetLocation()
@@ -372,8 +399,8 @@ public partial class MainPage : ContentPage
 
         var formattedString = new FormattedString();
 
-        NextScheduleHighlight(sbTexts,scheduleHighlight,formattedString );
-        
+        NextScheduleHighlight(sbTexts, scheduleHighlight, formattedString);
+
         LblStage.FormattedText = formattedString;
         LblStage.SizeChanged += LblStage_LayoutChanged;
 
@@ -381,7 +408,7 @@ public partial class MainPage : ContentPage
     }
 
     private void NextScheduleHighlight(string[] sbTexts, string scheduleHighlight, FormattedString formattedString)
-    { 
+    {
         foreach (var sbText in sbTexts)
         {
             if (scheduleHighlight.Equals(sbText))
@@ -420,7 +447,7 @@ public partial class MainPage : ContentPage
                 DateTime nextDay = DateTime.Today.AddDays(i);
                 LblNextDay.Text = nextDay.DayOfWeek.ToString();
 
-                if (dayResults!=null) 
+                if (dayResults != null)
                 {
                     string scheduleContent = dayResults[i].ToString();
                     string[] scheduleArray = scheduleContent.Split(' ');
@@ -437,7 +464,7 @@ public partial class MainPage : ContentPage
                 DateTime nextDay = DateTime.Today.AddDays(i);
                 LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
 
-                if(dayResults!= null)
+                if (dayResults != null)
                 {
                     string scheduleContent = dayResults[i].ToString();
                     string[] scheduleArray = scheduleContent.Split(' ');
@@ -454,7 +481,7 @@ public partial class MainPage : ContentPage
                 DateTime nextDay = DateTime.Today.AddDays(i);
                 LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
 
-                if (dayResults!= null)
+                if (dayResults != null)
                 {
                     string scheduleContent = dayResults[i].ToString();
                     string[] scheduleArray = scheduleContent.Split(' ');
