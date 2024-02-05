@@ -6,19 +6,19 @@ namespace loadshedding;
 public partial class App : Application
 {
     private readonly IWeatherServices weatherServices;
-    private readonly ILoadSheddingServices loadSheddingServices;
+    private readonly ICalenderAPIServices calendarAPIServices;
     private readonly IAlertServices alertServices;
 
-    public App(IWeatherServices weatherServices, ILoadSheddingServices loadSheddingServices, IAlertServices alertServices)
+    public App(IWeatherServices weatherServices, ICalenderAPIServices calendarAPIServices, IAlertServices alertServices)
     {
         this.weatherServices = weatherServices;
-        this.loadSheddingServices = loadSheddingServices;
+        this.calendarAPIServices = calendarAPIServices;
         this.alertServices = alertServices;
 
-        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("");//Syncfusion Key Here
+        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cWWdCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWX5dcHVUR2JdV0d0VkI=");//Syncfusion Key Here
 
         InitializeComponent();
 
-        MainPage = new MainPage(loadSheddingServices, weatherServices, alertServices);
+        MainPage = new MainPage(calendarAPIServices, weatherServices, alertServices);
     }
 }

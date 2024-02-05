@@ -35,7 +35,7 @@ public static class MauiProgram
         var apiKeys = new ApiKeysConfiguration
         {
             WeatherApiKey = apiKeysConfig?.WeatherApiKey,
-            LoadSheddingApiKey = apiKeysConfig?.LoadSheddingApiKey,
+            //LoadSheddingApiKey = apiKeysConfig?.LoadSheddingApiKey,
         };
         builder.Services.AddSingleton(apiKeys);
         builder.Services.AddHttpClient<IWeatherServices, WeatherServices>(weatherclient =>
@@ -43,10 +43,11 @@ public static class MauiProgram
             weatherclient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
             
         });
-        builder.Services.AddHttpClient<ILoadSheddingServices, LoadSheddingServices>(loadsheddigclient =>
-        {
-            loadsheddigclient.BaseAddress = new Uri("https://developer.sepush.co.za/business/2.0/");
-        });
+        //builder.Services.AddHttpClient<ILoadSheddingServices, LoadSheddingServices>(loadsheddigclient =>
+        //{
+        //    loadsheddigclient.BaseAddress = new Uri("https://developer.sepush.co.za/business/2.0/");
+        //});
+        builder.Services.AddSingleton<ICalenderAPIServices, CalenderAPIServices>();
         builder.Services.AddSingleton<IAlertServices, AlertServices>();
 
         return builder.Build();

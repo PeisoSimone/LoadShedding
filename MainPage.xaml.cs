@@ -13,8 +13,9 @@ public partial class MainPage : ContentPage
     private double latitude;
     private double longitude;
     private readonly IWeatherServices _weatherServices;
-    private readonly ILoadSheddingServices _loadsheddingServices;
+    private readonly ICalenderAPIServices _calendarAPIServices;
     private readonly IAlertServices _alertServices;
+    private  CalendarSearchServices calendarSearchServices;
     private CircularProgressBarControl circularProgressBarControl;
     private SfCircularProgressBar circularProgressBar;
     private List<string> dayResults;
@@ -22,14 +23,15 @@ public partial class MainPage : ContentPage
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
 
-    public MainPage(ILoadSheddingServices loadSheddingServices, IWeatherServices weatherServices, IAlertServices alertServices)
+    public MainPage(ICalenderAPIServices calendarAPIServices, IWeatherServices weatherServices, IAlertServices alertServices)
     {
         InitializeComponent();
         _weatherServices = weatherServices;
-        _loadsheddingServices = loadSheddingServices;
+        _calendarAPIServices = calendarAPIServices;
         _alertServices = alertServices;
         circularProgressBarControl = new CircularProgressBarControl();
         circularProgressBarControl.UpdateProgressBar();
+        calendarSearchServices = new CalendarSearchServices();
     }
 
     protected override async void OnAppearing()
@@ -41,20 +43,20 @@ public partial class MainPage : ContentPage
         try
         {
             string savedWeatherName = Preferences.Get("WeatherLocationName", string.Empty);
-            string savedLoadSheddingName = Preferences.Get("LoadSheddingLocationName", string.Empty);
+            string savedLoadSheddingName = Preferences.Get("LoadSheddingAreaLocationName", string.Empty);
 
             if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
             {
-                await GetAreaLoadShedding(savedLoadSheddingName);
+                await GetLoadSheddingBySearch(savedLoadSheddingName);
                 await GetWeatherBySearch(savedWeatherName);
             }
             else
             {
                 Preferences.Remove("WeatherLocationName");
-                Preferences.Remove("LoadSheddingLocationName");
+                Preferences.Remove("LoadSheddingAreaLocationName");
                 await GetLocation();
                 await GetWeatherByGPS(latitude, longitude);
-                await GetLoadSheddingByGPS(latitude, longitude);
+                //await GetLoadSheddingByGPS(latitude, longitude);
             }
 
             LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
@@ -158,66 +160,69 @@ public partial class MainPage : ContentPage
         LblTemperature.Text = results.main.temperature + "°C";
     }
 
-    public async Task GetLoadSheddingByGPS(double latitude, double longitude)
-    {
-        var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
+    //public async Task GetLoadSheddingByGPS(double latitude, double longitude)
+    //{
+    //    var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
 
-        string[] areaNames = loadSheddingAreaGPSResults.areas.Select(area => area.name).ToArray();
+    //    string[] areaNames = loadSheddingAreaGPSResults.areas.Select(area => area.name).ToArray();
 
-        if (loadSheddingAreaGPSResults.areas.Count > 0)
-        {
-            var selectedAreaName = await DisplayActionSheet(
-            "Current LoadShedding Area",
-            "CANCEL",
-            null,
-            areaNames);
+    //    if (loadSheddingAreaGPSResults.areas.Count > 0)
+    //    {
+    //        var selectedAreaName = await DisplayActionSheet(
+    //        "Current LoadShedding Area",
+    //        "CANCEL",
+    //        null,
+    //        areaNames);
 
-            if (selectedAreaName != null)
-            {
-                // User selected an area
-                string areaId = loadSheddingAreaGPSResults.areas
-                    .First(area => area.name == selectedAreaName).id;
-                await GetAreaLoadShedding(areaId);
-            }
-            else
-            {
-                await DisplayAlert(
-                   title: "",
-                   message: "Location Not Found!.",
-                   cancel: "OK");
-            }
-        }
-        else
-        {
-            await DisplayAlert(
-              title: "",
-              message: "Location Not Found!.",
-              cancel: "OK");
+    //        if (selectedAreaName != null)
+    //        {
+    //            // User selected an area
+    //            string areaId = loadSheddingAreaGPSResults.areas
+    //                .First(area => area.name == selectedAreaName).id;
+    //            await GetAreaLoadShedding(areaId);
+    //        }
+    //        else
+    //        {
+    //            await DisplayAlert(
+    //               title: "",
+    //               message: "Location Not Found!.",
+    //               cancel: "OK");
+    //        }
+    //    }
+    //    else
+    //    {
+    //        await DisplayAlert(
+    //          title: "",
+    //          message: "Location Not Found!.",
+    //          cancel: "OK");
 
-        }
-    }
+    //    }
+    //}
 
     //Update Area Search
     public async Task GetLoadSheddingBySearch(string text)
     {
-        var loadSheddingAreaSearchResults = await _loadsheddingServices.GetAreaBySearch(text);
 
-        string[] areaNames = loadSheddingAreaSearchResults.areas.Select(area => area.name).ToArray();
+        var loadSheddingAreaSearchResults = await calendarSearchServices.GetAreaBySearch(text);
 
-        if (loadSheddingAreaSearchResults.areas.Count > 0)
+        List<(string DisplayOption, string CalendarName)> displayOptions = loadSheddingAreaSearchResults
+            .Select(detail => (DisplayOption: $" {detail.AreaName}", CalendarName: detail.CalendarName))
+            .ToList();
+
+        if (displayOptions.Count > 0)
         {
-            var selectedAreaName = await DisplayActionSheet(
-                "Select LoadShedding Area",
-                "CANCEL",
-                null,
-                areaNames);
+            List<string> displayStrings = displayOptions.Select(option => option.DisplayOption).ToList();
 
-            if (selectedAreaName != null)
+            string selectedOption = await DisplayActionSheet("Select Area", "Cancel", null, displayStrings.ToArray());
+
+            if (!string.IsNullOrEmpty(selectedOption) && selectedOption != "Cancel")
             {
-                // User selected an area
-                string areaId = loadSheddingAreaSearchResults.areas
-                    .First(area => area.name == selectedAreaName).id;
-                await GetAreaLoadShedding(areaId);
+                string selectedCalendarName = displayOptions.First(option => option.DisplayOption == selectedOption).CalendarName;
+
+                string area = Path.GetFileNameWithoutExtension(selectedCalendarName);
+
+                await _calendarAPIServices.GetAreaOutages(area);
+                await _calendarAPIServices.GetAreaSchedules(area);
             }
             else
             {
@@ -230,10 +235,9 @@ public partial class MainPage : ContentPage
         else
         {
             await DisplayAlert(
-              title: "",
-              message: "Location Not Found!.",
-              cancel: "OK");
-
+               title: "",
+               message: "Location Not Found!.",
+               cancel: "OK");
         }
     }
 
