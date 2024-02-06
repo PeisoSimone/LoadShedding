@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls;
 using Syncfusion.Maui.ProgressBar;
 using System.Text;
 using System.Threading.Channels;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace loadshedding;
@@ -12,26 +13,30 @@ public partial class MainPage : ContentPage
 {
     private double latitude;
     private double longitude;
+
     private readonly IWeatherServices _weatherServices;
+    private readonly ICalendarSearchServices _calendarSearchServices;
     private readonly ICalenderAPIServices _calendarAPIServices;
     private readonly IAlertServices _alertServices;
-    private  CalendarSearchServices calendarSearchServices;
+
     private CircularProgressBarControl circularProgressBarControl;
     private SfCircularProgressBar circularProgressBar;
+
     private List<string> dayResults;
     private bool isLoading;
+
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
 
-    public MainPage(ICalenderAPIServices calendarAPIServices, IWeatherServices weatherServices, IAlertServices alertServices)
+    public MainPage(IWeatherServices weatherServices, ICalendarSearchServices calendarSearchServices, ICalenderAPIServices calendarAPIServices, IAlertServices alertServices)
     {
         InitializeComponent();
         _weatherServices = weatherServices;
+        _calendarSearchServices = calendarSearchServices;
         _calendarAPIServices = calendarAPIServices;
         _alertServices = alertServices;
         circularProgressBarControl = new CircularProgressBarControl();
         circularProgressBarControl.UpdateProgressBar();
-        calendarSearchServices = new CalendarSearchServices();
     }
 
     protected override async void OnAppearing()
@@ -55,7 +60,7 @@ public partial class MainPage : ContentPage
                 Preferences.Remove("WeatherLocationName");
                 Preferences.Remove("LoadSheddingAreaLocationName");
                 await GetLocation();
-                await GetWeatherByGPS(latitude, longitude);
+                await GetLocationByGPS(latitude, longitude);
                 //await GetLoadSheddingByGPS(latitude, longitude);
             }
 
@@ -103,8 +108,7 @@ public partial class MainPage : ContentPage
         if (response)
         {
             await GetLocation();
-            await GetLoadSheddingByGPS(latitude, longitude);
-            await GetWeatherByGPS(latitude, longitude);
+            await GetLocationByGPS(latitude, longitude);
         }
         else
         {
@@ -113,12 +117,6 @@ public partial class MainPage : ContentPage
                 message: "Action Cancelled.",
                 cancel: "OK");
         }
-    }
-
-    public async Task GetWeatherByGPS(double latitude, double longitude)
-    {
-        var results = await _weatherServices.GetWeatherByGPS(latitude, longitude);
-        WeatherUpdateUI(results);
     }
 
     private async void SearchLocation_Clicked(object sender, EventArgs e)
@@ -133,10 +131,10 @@ public partial class MainPage : ContentPage
 
         if (response != null)
         {
-            string results = response.Trim();
+            string inputLocation = response.Trim();
 
-            await GetLoadSheddingBySearch(results);
-            await GetWeatherBySearch(results);
+            await GetLoadSheddingBySearch(inputLocation);
+            await GetWeatherBySearch(inputLocation);
         }
         else
         {
@@ -147,17 +145,28 @@ public partial class MainPage : ContentPage
         }
     }
 
-    public async Task GetWeatherBySearch(string text)
+    public async Task GetLocationByGPS(double latitude, double longitude)
     {
-        var results = await _weatherServices.GetWeatherBySearch(text);
-        WeatherUpdateUI(results);
+        var areaLocationResults = await _weatherServices.GetWeatherByGPS(latitude, longitude);
+        WeatherUpdateUI(areaLocationResults);
+
+        string locationGPS = areaLocationResults.name;
+        await GetLoadSheddingBySearch(locationGPS);
+
+        //results name should upadate GetAreaLoadShedding(string AreaId) areaId == name
     }
 
-    public void WeatherUpdateUI(dynamic results)
+    public async Task GetWeatherBySearch(string inputLocation)
     {
-        LblCity.Text = results.name;
-        LblWeatherDescription.Text = results.weather[0].description;
-        LblTemperature.Text = results.main.temperature + "°C";
+        var weatherBySearchResults = await _weatherServices.GetWeatherBySearch(inputLocation);
+        WeatherUpdateUI(weatherBySearchResults);
+    }
+
+    public void WeatherUpdateUI(dynamic weatherBySearchResults)
+    {
+        LblCity.Text = weatherBySearchResults.name;
+        LblWeatherDescription.Text = weatherBySearchResults.weather[0].description;
+        LblTemperature.Text = weatherBySearchResults.main.temperature + "°C";
     }
 
     //public async Task GetLoadSheddingByGPS(double latitude, double longitude)
@@ -200,12 +209,11 @@ public partial class MainPage : ContentPage
     //}
 
     //Update Area Search
-    public async Task GetLoadSheddingBySearch(string text)
+    public async Task GetLoadSheddingBySearch(string inputLocation)
     {
+        var areaSearchResults = await _calendarSearchServices.GetAreaBySearch(inputLocation);
 
-        var loadSheddingAreaSearchResults = await calendarSearchServices.GetAreaBySearch(text);
-
-        List<(string DisplayOption, string CalendarName)> displayOptions = loadSheddingAreaSearchResults
+        List<(string DisplayOption, string CalendarName)> displayOptions = areaSearchResults
             .Select(detail => (DisplayOption: $" {detail.AreaName}", CalendarName: detail.CalendarName))
             .ToList();
 
@@ -219,10 +227,10 @@ public partial class MainPage : ContentPage
             {
                 string selectedCalendarName = displayOptions.First(option => option.DisplayOption == selectedOption).CalendarName;
 
-                string area = Path.GetFileNameWithoutExtension(selectedCalendarName);
+                string selectedAreaNameCalendar = Path.GetFileNameWithoutExtension(selectedCalendarName);
 
-                await _calendarAPIServices.GetAreaOutages(area);
-                await _calendarAPIServices.GetAreaSchedules(area);
+                await GetAreaLoadShedding(selectedAreaNameCalendar);
+
             }
             else
             {
@@ -241,24 +249,23 @@ public partial class MainPage : ContentPage
         }
     }
 
-    public async Task GetAreaLoadShedding(string AreaId)
+    public async Task GetAreaLoadShedding(string selectedAreaNameCalendar)
     {
-        var loadSheddingAreaResults = await _loadsheddingServices.GetAreaInformation(AreaId);
-        LoadSheddingAreaUpdateUI(loadSheddingAreaResults);
+        //var loadSheddingSchedules = await _calendarAPIServices.GetAreaSchedules(selectedAreaNameCalendar);
+        var loadSheddingOutages = await _calendarAPIServices.GetAreaOutages(selectedAreaNameCalendar);
+
+        LoadSheddingAreaUpdateUI(loadSheddingOutages);
     }
 
-    //Update Area Information
-    public void LoadSheddingAreaUpdateUI(dynamic loadSheddingAreaResults)
+
+    //Attention
+    public void LoadSheddingAreaUpdateUI(dynamic loadSheddingOutages)
     {
 
-        if (loadSheddingAreaResults.info != null)
+        if (loadSheddingOutages != null)
         {
-            LblScheduleAreaName.Text = loadSheddingAreaResults.info.name;
-        }
-
-        if (loadSheddingAreaResults.events != null && loadSheddingAreaResults.events.Count > 0)
-        {
-            LoadSheddingActive(loadSheddingAreaResults);
+            LblScheduleAreaName.Text = loadSheddingOutages[0].area_name;
+            LoadSheddingActive(loadSheddingOutages);
         }
         else
         {
@@ -266,12 +273,13 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void LoadSheddingActive(dynamic loadSheddingAreaResults)
+    //Attention
+    private void LoadSheddingActive(dynamic loadSheddingOutages)
     {
-        var firstEvent = loadSheddingAreaResults.events[0];
+        var firstEvent = loadSheddingOutages[0];
 
         EventStartTime = firstEvent.start;
-        EventEndTime = firstEvent.end;
+        EventEndTime = firstEvent.finsh;
 
         EventEndTime = EventEndTime.AddMinutes(-30);
 
@@ -281,19 +289,29 @@ public partial class MainPage : ContentPage
         circularProgressBarControl.UpdateProgressBar();
         ProgressBarUpdated();
 
-        LblSchedulesCurrentStage.Text = firstEvent.note;
+
+        LblSchedulesCurrentStage.Text = firstEvent.stage;
 
         //Check if the next LoadShedding event is today or the following day
         if (EventStartTime.Date == DateTime.Today.Date)
         {
-            LblDay.Text = loadSheddingAreaResults.schedule.days[0].name;
+            //Day name Today
+            LblDay.Text = DateTime.Today.DayOfWeek.ToString();
         }
-        else
+        else if (EventStartTime.Date == DateTime.Today.AddDays(1).Date)
         {
-            LblDay.Text = loadSheddingAreaResults.schedule.days[1].name;
+            //Day name of tomorrow
+            LblDay.Text = DateTime.Today.AddDays(1).DayOfWeek.ToString();
+
+        }
+        else if (EventStartTime.Date == DateTime.Today.AddDays(2).Date)
+        {
+            //Day name after tomorrow
+            LblDay.Text = DateTime.Today.AddDays(2).DayOfWeek.ToString();
+
         }
 
-        StageSwitch(loadSheddingAreaResults);
+        StageSwitch(loadSheddingOutages);
     }
 
     private void LoadSheddingSuspended()
@@ -323,7 +341,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void StageSwitch(dynamic loadSheddingAreaResults)
+    private void StageSwitch(dynamic loadSheddingOutages)
     {
         string currentStage = LblSchedulesCurrentStage.Text;
 
@@ -413,17 +431,17 @@ public partial class MainPage : ContentPage
             }
             if (dayResults != null)
             {
-                LoadSheddingActiveHours(loadSheddingAreaResults);
+                LoadSheddingActiveHours(loadSheddingOutages);
             }
         }
     }
 
-    private void LoadSheddingActiveHours(dynamic loadSheddingAreaResults)
+    private void LoadSheddingActiveHours(dynamic loadSheddingOutages)
     {
-        var firstEvent = loadSheddingAreaResults.events[0];
+        var firstEvent = loadSheddingOutages[0];
 
         EventStartTime = firstEvent.start;
-        EventEndTime = firstEvent.end;
+        EventEndTime = firstEvent.finsh;
 
         string SchedulesEventStart = EventStartTime.ToString("HH:mm");
         string SchedulesEventEnd = EventEndTime.ToString("HH:mm");

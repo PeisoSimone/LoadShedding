@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using System.Reflection;
 using CommunityToolkit.Maui;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace loadshedding;
 
@@ -43,11 +44,13 @@ public static class MauiProgram
             weatherclient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
             
         });
-        //builder.Services.AddHttpClient<ILoadSheddingServices, LoadSheddingServices>(loadsheddigclient =>
-        //{
-        //    loadsheddigclient.BaseAddress = new Uri("https://developer.sepush.co.za/business/2.0/");
-        //});
-        builder.Services.AddSingleton<ICalenderAPIServices, CalenderAPIServices>();
+
+        builder.Services.AddHttpClient<ICalenderAPIServices, CalenderAPIServices>(calenderapiclient =>
+        {
+            calenderapiclient.BaseAddress = new Uri("https://eskom-calendar-api.shuttleapp.rs/");
+        });
+
+        builder.Services.AddSingleton<ICalendarSearchServices, CalendarSearchServices>();
         builder.Services.AddSingleton<IAlertServices, AlertServices>();
 
         return builder.Build();

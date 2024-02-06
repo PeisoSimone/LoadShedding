@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace loadshedding.Services
 {
-    public class CalendarSearchServices
+    public interface ICalendarSearchServices
+    {
+        Task<List<(string CalendarName, string AreaName)>> GetAreaBySearch(string text);
+    }
+    public class CalendarSearchServices : ICalendarSearchServices
     {
         private readonly IAlertServices _alertServices;
 

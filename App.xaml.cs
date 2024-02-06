@@ -6,12 +6,14 @@ namespace loadshedding;
 public partial class App : Application
 {
     private readonly IWeatherServices weatherServices;
+    private readonly ICalendarSearchServices calendarSearchServices;
     private readonly ICalenderAPIServices calendarAPIServices;
     private readonly IAlertServices alertServices;
 
-    public App(IWeatherServices weatherServices, ICalenderAPIServices calendarAPIServices, IAlertServices alertServices)
+    public App(IWeatherServices weatherServices, ICalendarSearchServices calendarSearchServices, ICalenderAPIServices calendarAPIServices, IAlertServices alertServices)
     {
         this.weatherServices = weatherServices;
+        this.calendarSearchServices = calendarSearchServices;
         this.calendarAPIServices = calendarAPIServices;
         this.alertServices = alertServices;
 
@@ -19,6 +21,6 @@ public partial class App : Application
 
         InitializeComponent();
 
-        MainPage = new MainPage(calendarAPIServices, weatherServices, alertServices);
+        MainPage = new MainPage(weatherServices, calendarSearchServices, calendarAPIServices,  alertServices);
     }
 }
