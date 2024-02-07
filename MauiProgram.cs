@@ -31,20 +31,22 @@ public static class MauiProgram
         });
 
         builder.AddAppSettings();
+        builder.AddMetadata();
+
 
         var apiKeysConfig = builder.Configuration.GetSection("ApiKeys").Get<ApiKeysConfiguration>();
         var apiKeys = new ApiKeysConfiguration
         {
             WeatherApiKey = apiKeysConfig?.WeatherApiKey,
-            //LoadSheddingApiKey = apiKeysConfig?.LoadSheddingApiKey,
+            LoadSheddingApiKey = apiKeysConfig?.LoadSheddingApiKey,
         };
+
         builder.Services.AddSingleton(apiKeys);
         builder.Services.AddHttpClient<IWeatherServices, WeatherServices>(weatherclient =>
         {
             weatherclient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
-            
-        });
 
+        });
         builder.Services.AddHttpClient<ICalenderAPIServices, CalenderAPIServices>(calenderapiclient =>
         {
             calenderapiclient.BaseAddress = new Uri("https://eskom-calendar-api.shuttleapp.rs/");
@@ -56,13 +58,13 @@ public static class MauiProgram
         return builder.Build();
     }
 
-    private static void AddAppSettings(this MauiAppBuilder builder)
+    public static MauiAppBuilder AddAppSettings(this MauiAppBuilder builder)
     {
         using Stream stream = Assembly
             .GetExecutingAssembly()
             .GetManifestResourceStream("loadshedding.appsettings.json");
 
-        if(stream != null)
+        if (stream != null)
         {
             IConfigurationRoot config = new ConfigurationBuilder()
                 .AddJsonStream(stream)
@@ -70,5 +72,22 @@ public static class MauiProgram
 
             builder.Configuration.AddConfiguration(config);
         }
+        return builder;
+    }
+    public static MauiAppBuilder AddMetadata(this MauiAppBuilder builder)
+    {
+        using Stream stream = Assembly
+            .GetExecutingAssembly()
+            .GetManifestResourceStream("loadshedding.metadata.json");
+
+        if (stream != null)
+        {
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddJsonStream(stream)
+                .Build();
+
+            builder.Configuration.AddConfiguration(config);
+        }
+        return builder;
     }
 }

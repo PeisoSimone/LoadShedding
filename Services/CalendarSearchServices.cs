@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Maui.Storage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,37 +16,47 @@ namespace loadshedding.Services
     }
     public class CalendarSearchServices : ICalendarSearchServices
     {
+        private readonly IConfiguration _configuration;
         private readonly IAlertServices _alertServices;
 
-        public CalendarSearchServices( IAlertServices alertServices)
+        public CalendarSearchServices(IConfiguration configuration, IAlertServices alertServices)
         {
+            _configuration = configuration;
             _alertServices = alertServices;
         }
+
+        [Obsolete]
         public async Task<List<(string CalendarName, string AreaName)>> GetAreaBySearch(string text)
         {
             try
             {
-                string fileName = "areametadata.json";
-                string jsonFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fileName);
-
-                if (File.Exists(jsonFilePath))
+                string localAppDataPath;
+                if (Device.RuntimePlatform == Device.Android)
                 {
-                    string jsonContent = File.ReadAllText(jsonFilePath);
-                    JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
-                    JsonElement root = jsonDocument.RootElement;
-
-                    List<(string CalendarName, string AreaName)> matchingDetails = SearchAreaDetails(root, text);
-
-                    jsonDocument.Dispose();
-
-                    return matchingDetails;
+                    localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 }
-                else
+                else if (Device.RuntimePlatform == Device.iOS)
                 {
-
-                    await _alertServices.ShowAlert("Cannot find filepath");
-                    return null;
+                    localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 }
+                else // For other platforms, fallback to the original code
+                {
+                    localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                }
+                string fileName = "metadata.json";
+                string filePath = Path.Combine(localAppDataPath, fileName);
+
+
+                string jsonContent = File.ReadAllText(filePath);
+                JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
+                JsonElement root = jsonDocument.RootElement;
+
+                List<(string CalendarName, string AreaName)> matchingDetails = SearchAreaDetails(root, text);
+
+                jsonDocument.Dispose();
+
+                return matchingDetails;
+
             }
             catch (Exception ex)
             {

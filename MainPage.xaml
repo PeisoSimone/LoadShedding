@@ -156,14 +156,14 @@
                                TextColor="#9e99a3"/>
 
 
-                            <Label x:Name="LblStage"
+                            <Label x:Name="LblDaySheduleList"
                                Grid.Row="2"
                                Grid.Column="1"
                                TextColor="#9e99a3"
                                FontFamily="Nexa-Light"
                                HorizontalOptions="CenterAndExpand"
                                HorizontalTextAlignment="Start"
-                               SizeChanged="LblStage_LayoutChanged"/>
+                               SizeChanged="LblDaySheduleList_LayoutChanged"/>
 
                             <Label x:Name="LblOccure"
                                Grid.Row="1"
@@ -188,7 +188,7 @@
                       RowDefinitions="Auto, Auto, Auto"
                       ColumnDefinitions="0.33*,0.33*,0.33*">
 
-                    <!--Tomorrow card-->
+                    <!--Tomorrow card
                     <Frame Grid.Row="0" 
                            Grid.Column="0"
                            Padding="10"
@@ -220,8 +220,8 @@
                                    TextColor="#9e99a3"/>
                             </Grid>
                         </StackLayout>
-                    </Frame>
-                    <!--Tomorrow card-->
+                    </Frame>-->
+                    <!--Tomorrow card
                     <Frame Grid.Row="0" Grid.Column="1"
                             Padding="10"
                                HeightRequest="100"
@@ -253,8 +253,8 @@
                             </Grid>
                         </StackLayout>
                     </Frame>
-                    <!--Tomorrow card-->
-                    <Frame Grid.Row="0" 
+                    Tomorrow card-->
+                    <!--<Frame Grid.Row="0" 
                        Grid.Column="2"
                        Padding="10"
                        HeightRequest="100"
@@ -285,7 +285,7 @@
                                    TextColor="#9e99a3"/>
                             </Grid>
                         </StackLayout>
-                    </Frame>
+                    </Frame>-->
                 </Grid>
 
             </Grid>
