@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Maui.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Maui.Storage;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System;
 
 namespace loadshedding.Services
 {
@@ -14,58 +13,51 @@ namespace loadshedding.Services
     {
         Task<List<(string CalendarName, string AreaName)>> GetAreaBySearch(string text);
     }
+
     public class CalendarSearchServices : ICalendarSearchServices
     {
-        private readonly IConfiguration _configuration;
         private readonly IAlertServices _alertServices;
 
-        public CalendarSearchServices(IConfiguration configuration, IAlertServices alertServices)
+        public CalendarSearchServices(IAlertServices alertServices)
         {
-            _configuration = configuration;
             _alertServices = alertServices;
         }
 
-        [Obsolete]
         public async Task<List<(string CalendarName, string AreaName)>> GetAreaBySearch(string text)
+        {
+            string fileName = "loadshedding.areametadata.json"; // Adjust this to your actual resource file name
+            return await ReadAreaMetadataAsync(fileName, text);
+        }
+
+        public async Task<List<(string CalendarName, string AreaName)>> ReadAreaMetadataAsync(string fileName, string text)
         {
             try
             {
-                string localAppDataPath;
-                if (Device.RuntimePlatform == Device.Android)
+                using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(fileName);
+
+                if (stream != null)
                 {
-                    localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    using StreamReader reader = new StreamReader(stream);
+                    string jsonContent = await reader.ReadToEndAsync();
+
+                    using (JsonDocument jsonDocument = JsonDocument.Parse(jsonContent))
+                    {
+                        JsonElement root = jsonDocument.RootElement;
+                        return SearchAreaDetails(root, text);
+                    }
                 }
-                else if (Device.RuntimePlatform == Device.iOS)
+                else
                 {
-                    localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    await _alertServices.ShowAlert("File not found: " + fileName);
+                    return null;
                 }
-                else // For other platforms, fallback to the original code
-                {
-                    localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                }
-                string fileName = "metadata.json";
-                string filePath = Path.Combine(localAppDataPath, fileName);
-
-
-                string jsonContent = File.ReadAllText(filePath);
-                JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
-                JsonElement root = jsonDocument.RootElement;
-
-                List<(string CalendarName, string AreaName)> matchingDetails = SearchAreaDetails(root, text);
-
-                jsonDocument.Dispose();
-
-                return matchingDetails;
-
             }
             catch (Exception ex)
             {
-                await _alertServices.ShowAlert("Read File Error: " + ex.Message);
+                await _alertServices.ShowAlert("Error: " + ex.Message);
                 return null;
             }
         }
-
-
 
         private List<(string CalendarName, string AreaName)> SearchAreaDetails(JsonElement element, string text)
         {

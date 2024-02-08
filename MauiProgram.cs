@@ -31,14 +31,11 @@ public static class MauiProgram
         });
 
         builder.AddAppSettings();
-        builder.AddMetadata();
-
 
         var apiKeysConfig = builder.Configuration.GetSection("ApiKeys").Get<ApiKeysConfiguration>();
         var apiKeys = new ApiKeysConfiguration
         {
             WeatherApiKey = apiKeysConfig?.WeatherApiKey,
-            LoadSheddingApiKey = apiKeysConfig?.LoadSheddingApiKey,
         };
 
         builder.Services.AddSingleton(apiKeys);
@@ -63,22 +60,6 @@ public static class MauiProgram
         using Stream stream = Assembly
             .GetExecutingAssembly()
             .GetManifestResourceStream("loadshedding.appsettings.json");
-
-        if (stream != null)
-        {
-            IConfigurationRoot config = new ConfigurationBuilder()
-                .AddJsonStream(stream)
-                .Build();
-
-            builder.Configuration.AddConfiguration(config);
-        }
-        return builder;
-    }
-    public static MauiAppBuilder AddMetadata(this MauiAppBuilder builder)
-    {
-        using Stream stream = Assembly
-            .GetExecutingAssembly()
-            .GetManifestResourceStream("loadshedding.metadata.json");
 
         if (stream != null)
         {
