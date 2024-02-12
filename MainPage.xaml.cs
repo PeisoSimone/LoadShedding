@@ -52,7 +52,7 @@ public partial class MainPage : ContentPage
 
             if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
             {
-                await GetLoadSheddingBySearch(savedLoadSheddingName);
+                await GetAreaLoadShedding(savedLoadSheddingName);
                 await GetWeatherBySearch(savedWeatherName);
             }
             else
@@ -277,7 +277,7 @@ public partial class MainPage : ContentPage
     private void LoadSheddingActive(dynamic loadSheddingOutages)
     {
         var firstEvent = loadSheddingOutages[0];
-
+        //Check the next outage and also group by days
         EventStartTime = firstEvent.start;
         EventEndTime = firstEvent.finsh;
 

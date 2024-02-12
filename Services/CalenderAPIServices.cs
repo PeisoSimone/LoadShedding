@@ -1,21 +1,17 @@
 ﻿using loadshedding.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
+
+
 
 namespace loadshedding.Services
 {
     public interface ICalenderAPIServices
     {
-        Task<OutagesRoot> GetAreaOutages(string area);
+        Task<List<OutagesRoot>> GetAreaOutages(string area);
         Task<SchedulesRoot> GetAreaSchedules(string area);
     }
 
-    public class CalenderAPIServices: ICalenderAPIServices
+    public class CalenderAPIServices : ICalenderAPIServices
     {
         private readonly HttpClient _httpClient;
         private readonly IAlertServices _alertServices;
@@ -26,70 +22,72 @@ namespace loadshedding.Services
             _alertServices = alertServices;
         }
 
-    public async Task<OutagesRoot> GetAreaOutages(string area)
-    {
 
-        try
+        public async Task<List<OutagesRoot>> GetAreaOutages(string area)
         {
-            _httpClient.DefaultRequestHeaders.Clear();
-            var request = new HttpRequestMessage(HttpMethod.Get, $"outages/{area}");
-            var response = await _httpClient.SendAsync(request);
+            try
+            {
+                _httpClient.DefaultRequestHeaders.Clear();
+                var request = new HttpRequestMessage(HttpMethod.Get, $"outages/{area}");
+                var response = await _httpClient.SendAsync(request);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadFromJsonAsync<OutagesRoot>();
-                SaveLoadSheddingAreaSettings(area);
-                return content;
+                if (response.IsSuccessStatusCode)
+                {
+                    List<OutagesRoot> content = await response.Content.ReadFromJsonAsync<List<OutagesRoot>>();
+                    SaveLoadSheddingAreaSettings(area);
+                    return content;
+                }
+                else
+                {
+                    await _alertServices.ShowAlert("GetAreaOutages-API request failed with status code: " + response.StatusCode);
+                    ClearLoadSheddingAreaSettings();
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await _alertServices.ShowAlert("GetAreaOutages-API request failed with status code: " + response.StatusCode);
-                ClearLoadSheddingAreaSettings();
+                await _alertServices.ShowAlert("GetAreaOutages-An error occurred: " + ex.Message);
                 return null;
             }
         }
-        catch (Exception ex)
-        {
-            await _alertServices.ShowAlert("GetAreaOutages-An error occurred: " + ex.Message);
-            return null;
-        }
-    }
 
-    public async Task<SchedulesRoot> GetAreaSchedules(string area)
-    {
-        try
-        {
-            _httpClient.DefaultRequestHeaders.Clear();
-            var request = new HttpRequestMessage(HttpMethod.Get, $"schedules/{area}");
-            var response = await _httpClient.SendAsync(request);
 
-            if (response.IsSuccessStatusCode)
+
+        public async Task<SchedulesRoot> GetAreaSchedules(string area)
+        {
+            try
             {
-                var content = await response.Content.ReadFromJsonAsync<SchedulesRoot>();
-                SaveLoadSheddingAreaSettings(area);
-                return content;
+                _httpClient.DefaultRequestHeaders.Clear();
+                var request = new HttpRequestMessage(HttpMethod.Get, $"schedules/{area}");
+                var response = await _httpClient.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadFromJsonAsync<SchedulesRoot>();
+                    SaveLoadSheddingAreaSettings(area);
+                    return content;
+                }
+                else
+                {
+                    await _alertServices.ShowAlert("GetAreaSchedules-API request failed with status code: " + response.StatusCode);
+                    ClearLoadSheddingAreaSettings();
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await _alertServices.ShowAlert("GetAreaSchedules-API request failed with status code: " + response.StatusCode);
-                ClearLoadSheddingAreaSettings();
+                await _alertServices.ShowAlert("GetAreaSchedules-An error occurred: " + ex.Message);
                 return null;
             }
         }
-        catch (Exception ex)
+        private void SaveLoadSheddingAreaSettings(string area)
         {
-            await _alertServices.ShowAlert("GetAreaSchedules-An error occurred: " + ex.Message);
-            return null;
+            Preferences.Set("LoadSheddingAreaLocationName", area);
+        }
+
+        public void ClearLoadSheddingAreaSettings()
+        {
+            Preferences.Remove("LoadSheddingAreaLocationName");
         }
     }
-    private void SaveLoadSheddingAreaSettings(string area)
-    {
-        Preferences.Set("LoadSheddingAreaLocationName", area);
-    }
-
-    public void ClearLoadSheddingAreaSettings()
-    {
-        Preferences.Remove("LoadSheddingAreaLocationName");
-    }
-}
 }

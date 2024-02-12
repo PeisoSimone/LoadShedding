@@ -25,7 +25,7 @@ namespace loadshedding.Services
 
         public async Task<List<(string CalendarName, string AreaName)>> GetAreaBySearch(string text)
         {
-            string fileName = "loadshedding.areametadata.json"; // Adjust this to your actual resource file name
+            string fileName = "loadshedding.areametadata.json";
             return await ReadAreaMetadataAsync(fileName, text);
         }
 

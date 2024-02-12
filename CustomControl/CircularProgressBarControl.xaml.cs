@@ -97,7 +97,6 @@ namespace loadshedding.CustomControl
                 circularProgressBar.ProgressFill = new SolidColorBrush(ColorConstants.Red);//SOLID RED
             }
 
-
             circularProgressBar.TrackFill = new SolidColorBrush(ColorConstants.Red);//RED Track
 
             CircularBarContent("POWER", ColorConstants.Red, "OFF", ColorConstants.Red);

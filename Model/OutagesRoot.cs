@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,10 @@ namespace loadshedding.Model
     // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
     public class OutagesRoot
     {
-        public string AreaName { get; set; }
-        public int Stage { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime Finsh { get; set; }
-        public string Source { get; set; }
+        public string area_name { get; set; }
+        public int stage { get; set; }
+        public DateTime start { get; set; }
+        public DateTime finsh { get; set; }
+        public string source { get; set; }
     }
 }
