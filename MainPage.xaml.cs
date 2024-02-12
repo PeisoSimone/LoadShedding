@@ -1,10 +1,7 @@
 using loadshedding.CustomControl;
 using loadshedding.Services;
-using Microsoft.Maui.Controls;
 using Syncfusion.Maui.ProgressBar;
 using System.Text;
-using System.Threading.Channels;
-using static System.Net.Mime.MediaTypeNames;
 
 
 namespace loadshedding;
@@ -22,8 +19,9 @@ public partial class MainPage : ContentPage
     private CircularProgressBarControl circularProgressBarControl;
     private SfCircularProgressBar circularProgressBar;
 
-    private List<string> dayResults;
     private bool isLoading;
+    private object todayOutages;
+    public object loadSheddingOutages;
 
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
@@ -61,7 +59,6 @@ public partial class MainPage : ContentPage
                 Preferences.Remove("LoadSheddingAreaLocationName");
                 await GetLocation();
                 await GetLocationByGPS(latitude, longitude);
-                //await GetLoadSheddingByGPS(latitude, longitude);
             }
 
             LblDate.Text = DateTime.Now.ToString("dd-MMM-yyyy");
@@ -152,8 +149,6 @@ public partial class MainPage : ContentPage
 
         string locationGPS = areaLocationResults.name;
         await GetLoadSheddingBySearch(locationGPS);
-
-        //results name should upadate GetAreaLoadShedding(string AreaId) areaId == name
     }
 
     public async Task GetWeatherBySearch(string inputLocation)
@@ -168,45 +163,6 @@ public partial class MainPage : ContentPage
         LblWeatherDescription.Text = weatherBySearchResults.weather[0].description;
         LblTemperature.Text = weatherBySearchResults.main.temperature + "°C";
     }
-
-    //public async Task GetLoadSheddingByGPS(double latitude, double longitude)
-    //{
-    //    var loadSheddingAreaGPSResults = await _loadsheddingServices.GetAreasNearByGPS(latitude, longitude);
-
-    //    string[] areaNames = loadSheddingAreaGPSResults.areas.Select(area => area.name).ToArray();
-
-    //    if (loadSheddingAreaGPSResults.areas.Count > 0)
-    //    {
-    //        var selectedAreaName = await DisplayActionSheet(
-    //        "Current LoadShedding Area",
-    //        "CANCEL",
-    //        null,
-    //        areaNames);
-
-    //        if (selectedAreaName != null)
-    //        {
-    //            // User selected an area
-    //            string areaId = loadSheddingAreaGPSResults.areas
-    //                .First(area => area.name == selectedAreaName).id;
-    //            await GetAreaLoadShedding(areaId);
-    //        }
-    //        else
-    //        {
-    //            await DisplayAlert(
-    //               title: "",
-    //               message: "Location Not Found!.",
-    //               cancel: "OK");
-    //        }
-    //    }
-    //    else
-    //    {
-    //        await DisplayAlert(
-    //          title: "",
-    //          message: "Location Not Found!.",
-    //          cancel: "OK");
-
-    //    }
-    //}
 
     //Update Area Search
     public async Task GetLoadSheddingBySearch(string inputLocation)
@@ -251,20 +207,18 @@ public partial class MainPage : ContentPage
 
     public async Task GetAreaLoadShedding(string selectedAreaNameCalendar)
     {
-        //var loadSheddingSchedules = await _calendarAPIServices.GetAreaSchedules(selectedAreaNameCalendar);
         var loadSheddingOutages = await _calendarAPIServices.GetAreaOutages(selectedAreaNameCalendar);
 
         LoadSheddingAreaUpdateUI(loadSheddingOutages);
     }
 
-
-    //Attention
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingOutages)
     {
 
         if (loadSheddingOutages != null)
         {
             LblScheduleAreaName.Text = loadSheddingOutages[0].area_name;
+            LblSchedulesCurrentStage.Text = loadSheddingOutages[0].stage.ToString();
             LoadSheddingActive(loadSheddingOutages);
         }
         else
@@ -273,11 +227,15 @@ public partial class MainPage : ContentPage
         }
     }
 
-    //Attention
     private void LoadSheddingActive(dynamic loadSheddingOutages)
     {
-        var firstEvent = loadSheddingOutages[0];
-        //Check the next outage and also group by days
+        DateTime day = DateTime.Now.Date;
+
+        List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages,day);
+        List<dynamic> todayNextEventOutages = GetTodayNextEventOutages(todayAllEventsOutages);
+
+        var firstEvent = todayNextEventOutages[0];
+
         EventStartTime = firstEvent.start;
         EventEndTime = firstEvent.finsh;
 
@@ -289,30 +247,196 @@ public partial class MainPage : ContentPage
         circularProgressBarControl.UpdateProgressBar();
         ProgressBarUpdated();
 
-
-        LblSchedulesCurrentStage.Text = firstEvent.stage;
-
         //Check if the next LoadShedding event is today or the following day
         if (EventStartTime.Date == DateTime.Today.Date)
         {
-            //Day name Today
             LblDay.Text = DateTime.Today.DayOfWeek.ToString();
         }
         else if (EventStartTime.Date == DateTime.Today.AddDays(1).Date)
         {
-            //Day name of tomorrow
             LblDay.Text = DateTime.Today.AddDays(1).DayOfWeek.ToString();
-
         }
-        else if (EventStartTime.Date == DateTime.Today.AddDays(2).Date)
+
+        LoadSheddingActiveHours(todayAllEventsOutages, todayNextEventOutages);
+    }
+
+    private void LoadSheddingActiveHours(List<dynamic> todayOutages, List<dynamic> todayEventOutages)
+    {
+        var firstEvent = todayEventOutages[0];
+
+        EventStartTime = firstEvent.start;
+        EventEndTime = firstEvent.finsh;
+
+        string SchedulesEventStart = EventStartTime.ToString("HH:mm");
+        string SchedulesEventEnd = EventEndTime.ToString("HH:mm");
+        string ScheduleJoin = "-";
+
+        StringBuilder ScheduleShow = new StringBuilder();
+        ScheduleShow.Append(SchedulesEventStart);
+        ScheduleShow.Append(ScheduleJoin);
+        ScheduleShow.Append(SchedulesEventEnd);
+
+        string scheduleHighlight = ScheduleShow.ToString();
+
+        List<string> todayOutageDates = GetTodayOutagesDates(todayOutages);
+
+        var formattedString = new FormattedString();
+
+        NextScheduleHighlight(todayOutageDates, scheduleHighlight, formattedString);
+
+        LblDaySheduleList.FormattedText = formattedString;
+        LblDaySheduleList.SizeChanged += LblDaySheduleList_LayoutChanged;
+
+        FillBottomCardsUI();
+    }
+
+    public void FillBottomCardsUI()
+    {
+        for (int i = 1; i < 4; i++)
         {
-            //Day name after tomorrow
-            LblDay.Text = DateTime.Today.AddDays(2).DayOfWeek.ToString();
+            if (i == 1)
+            {
+                DateTime nextDay = DateTime.Today.AddDays(i);
+                LblNextDay.Text = nextDay.DayOfWeek.ToString();
 
+                if (loadSheddingOutages != null)
+                {
+                    DateTime day = DateTime.Now.Date.AddDays(i);
+                    GetAllTodayEventsOutages(loadSheddingOutages, day);
+
+                    string scheduleContent = todayOutages.ToString();
+                    string[] scheduleArray = scheduleContent.Split(' ');
+                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    LblNextSchedule.Text = joinedSchedule;
+                }
+                else
+                {
+                    LblNextSchedule.Text = "Suspended till further notice";
+                }
+            }
+            else if (i == 2)
+            {
+                DateTime nextDay = DateTime.Today.AddDays(i);
+                LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                if (loadSheddingOutages != null)
+                {
+                    DateTime day = DateTime.Now.Date.AddDays(i);
+                    GetAllTodayEventsOutages(loadSheddingOutages, day);
+
+                    string scheduleContent = todayOutages.ToString();
+                    string[] scheduleArray = scheduleContent.Split(' ');
+                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    LblNextNextSchedule.Text = joinedSchedule;
+                }
+                else
+                {
+                    LblNextNextSchedule.Text = "Suspended till further notice";
+                }
+            }
+            else if (i == 3)
+            {
+                DateTime nextDay = DateTime.Today.AddDays(i);
+                LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
+
+                if (loadSheddingOutages != null)
+                {
+                    DateTime day = DateTime.Now.Date.AddDays(i);
+                    GetAllTodayEventsOutages(loadSheddingOutages, day);
+
+                    string scheduleContent = todayOutages.ToString();
+                    string[] scheduleArray = scheduleContent.Split(' ');
+                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    LblNextNextNextSchedule.Text = joinedSchedule;
+                }
+                else
+                {
+                    LblNextNextNextSchedule.Text = "Suspended till further notice";
+                }
+            }
         }
+    }
 
-        //StageSwitch(loadSheddingOutages);
-        LoadSheddingActiveHours(loadSheddingOutages);
+    private List<dynamic> GetAllTodayEventsOutages(dynamic loadSheddingOutages, DateTime day)
+    {
+        List<dynamic> todayOutages = new List<dynamic>();
+
+        foreach (var outage in loadSheddingOutages)
+        {
+            string outageStart = outage.start.Date.ToString();
+
+            if (outageStart == day.ToString())
+            {
+                todayOutages.Add(outage);
+            }
+        }
+        return todayOutages;
+    }
+
+    private List<string> GetTodayOutagesDates(List<dynamic> todayOutages)
+    {
+        List<string> outageDates = new List<string>();
+
+        foreach (var outage in todayOutages)
+        {
+            string outageStart = outage.start.ToString("HH:mm");
+            string outageFinish = outage.finsh.ToString("HH:mm");
+
+                string concatenatedDates = $"{outageStart}-{outageFinish}";
+                outageDates.Add(concatenatedDates);
+        }
+        return outageDates;
+    }
+
+    private List<dynamic> GetTodayNextEventOutages(List<dynamic> todayOutages)
+    {
+        List<dynamic> todayEventOutages = new List<dynamic>();
+
+        if (todayOutages.Count > 0)
+        {
+            foreach (var outage in todayOutages)
+            {
+                DateTime currentTime = DateTime.Now;
+                DateTime evenStart = outage.start;
+
+                if (evenStart >= currentTime)
+                {
+                    todayEventOutages.Add(outage);
+                }
+            }
+        }
+        return todayEventOutages;
+    }
+
+    private void NextScheduleHighlight(List<string> todayOutageDates, string scheduleHighlight, FormattedString formattedString)
+    {
+        foreach (var sbText in todayOutageDates)
+        {
+            if (scheduleHighlight.Equals(sbText))
+            {
+                if (EventStartTime > DateTime.Now)
+                {
+                    LblOccure.Text = "Next Schedule";
+                }
+                else if (EventStartTime < DateTime.Now)
+                {
+                    LblOccure.Text = "Active Now";
+                }
+
+                var span = new Span
+                {
+                    Text = sbText + " ",
+                    FontAttributes = FontAttributes.Bold,
+                    FontSize = 20,
+                };
+
+                formattedString.Spans.Add(span);
+            }
+            else
+            {
+                formattedString.Spans.Add(new Span { Text = sbText + " " });
+            }
+        }
     }
 
     private void LoadSheddingSuspended()
@@ -332,6 +456,7 @@ public partial class MainPage : ContentPage
 
         FillBottomCardsUI();
     }
+
     private void ProgressBarUpdated()
     {
         StackLayout stackLayout = Content.FindByName<StackLayout>("Circular");
@@ -342,239 +467,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-    //private void StageSwitch(dynamic loadSheddingOutages)
-    //{
-    //    string currentStage = LblSchedulesCurrentStage.Text;
-
-    //    dayResults = new List<string>();
-
-    //    StringBuilder sb = new StringBuilder();
-
-    //    if (loadSheddingAreaResults.schedule != null)
-    //    {
-    //        var scheduleDays = loadSheddingAreaResults.schedule.days;
-
-    //        for (int i = 0; i < scheduleDays.Count; i++)
-    //        {
-    //            var stageLoadshedding = scheduleDays[i];
-
-    //            switch (currentStage)
-    //            {
-    //                case "Stage 0":
-    //                    foreach (var schedule in stageLoadshedding.stages[0])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-
-    //                case "Stage 1":
-    //                    foreach (var schedule in stageLoadshedding.stages[1])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-
-    //                case "Stage 2":
-    //                    foreach (var schedule in stageLoadshedding.stages[2])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-
-    //                case "Stage 3":
-    //                    foreach (var schedule in stageLoadshedding.stages[3])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-
-    //                case "Stage 4":
-    //                    foreach (var schedule in stageLoadshedding.stages[4])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-
-    //                case "Stage 5":
-    //                    foreach (var schedule in stageLoadshedding.stages[5])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-
-    //                case "Stage 6":
-    //                    foreach (var schedule in stageLoadshedding.stages[6])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-
-    //                case "Stage 7":
-    //                    foreach (var schedule in stageLoadshedding.stages[7])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-    //                //Test Mode case
-    //                case "Stage 8 (TESTING: current)":
-    //                    foreach (var schedule in stageLoadshedding.stages[7])
-    //                    {
-    //                        sb.Append(schedule).Append(" ");
-    //                    }
-    //                    break;
-
-    //                default:
-    //                    break;
-    //            }
-
-    //            dayResults.Add(sb.ToString());
-    //            sb.Clear();
-    //        }
-    //        if (dayResults != null)
-    //        {
-    //            LoadSheddingActiveHours(loadSheddingOutages);
-    //        }
-    //    }
-    //}
-
-    private void LoadSheddingActiveHours(dynamic loadSheddingOutages)
-    {
-        var firstEvent = loadSheddingOutages[0];
-
-        Dictionary<DateTime, List<dynamic>> groupedByDate = new Dictionary<DateTime, List<dynamic>>();
-
-        foreach (var outage in loadSheddingOutages)
-        {
-            DateTime startDate = DateTime.Parse(outage.start).Date;
-
-            if (!groupedByDate.ContainsKey(startDate))
-            {
-                groupedByDate[startDate] = new List<dynamic>();
-            }
-            groupedByDate[startDate].Add(outage);
-        }
-
-        var sortedGroups = groupedByDate.OrderBy(pair => pair.Key);
-        List<List<dynamic>> groupedItems = sortedGroups.Select(pair => pair.Value).ToList();
-
-
-        EventStartTime = firstEvent.start;
-        EventEndTime = firstEvent.finsh;
-
-        string SchedulesEventStart = EventStartTime.ToString("HH:mm");
-        string SchedulesEventEnd = EventEndTime.ToString("HH:mm");
-        string ScheduleJoin = "-";
-
-        StringBuilder ScheduleShow = new StringBuilder();
-        ScheduleShow.Append(SchedulesEventStart);
-        ScheduleShow.Append(ScheduleJoin);
-        ScheduleShow.Append(SchedulesEventEnd);
-
-        string scheduleHighlight = ScheduleShow.ToString();//Create a string of start to stop events on [0]
-
-        string result = dayResults[0].ToString();
-
-        string[] sbTexts = result.ToString().Split(" ");
-
-        var formattedString = new FormattedString();
-
-        NextScheduleHighlight(sbTexts, scheduleHighlight, formattedString);
-
-        //LblDaySheduleList.FormattedText = formattedString;
-        //LblDaySheduleList.SizeChanged += LblDaySheduleList_LayoutChanged;
-
-        FillBottomCardsUI();
-    }
-
-    private void NextScheduleHighlight(string[] sbTexts, string scheduleHighlight, FormattedString formattedString)
-    {
-        foreach (var sbText in sbTexts)
-        {
-            if (scheduleHighlight.Equals(sbText))
-            {
-                if (EventStartTime > DateTime.Now)
-                {
-                    //LblOccure.Text = "Next Schedule";
-                }
-                else if (EventStartTime < DateTime.Now)
-                {
-                    //LblOccure.Text = "Active Now";
-                }
-
-                var span = new Span
-                {
-                    Text = sbText + " ",
-                    FontAttributes = FontAttributes.Bold,
-                    FontSize = 25,
-                };
-
-                formattedString.Spans.Add(span);
-            }
-            else
-            {
-                formattedString.Spans.Add(new Span { Text = sbText + " " });
-            }
-        }
-    }
-
-    public void FillBottomCardsUI()
-    {
-        for (int i = 1; i < 4; i++)
-        {
-            if (i == 1)
-            {
-                DateTime nextDay = DateTime.Today.AddDays(i);
-                //LblNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                if (dayResults != null)
-                {
-                    string scheduleContent = dayResults[i].ToString();
-                    string[] scheduleArray = scheduleContent.Split(' ');
-                    string joinedSchedule = string.Join("\n", scheduleArray);
-                    //LblNextSchedule.Text = joinedSchedule;
-                }
-                else
-                {
-                    //LblNextSchedule.Text = "Suspended till further notice";
-                }
-            }
-            else if (i == 2)
-            {
-                DateTime nextDay = DateTime.Today.AddDays(i);
-                //LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                if (dayResults != null)
-                {
-                    string scheduleContent = dayResults[i].ToString();
-                    string[] scheduleArray = scheduleContent.Split(' ');
-                    string joinedSchedule = string.Join("\n", scheduleArray);
-                   // LblNextNextSchedule.Text = joinedSchedule;
-                }
-                else
-                {
-                   // LblNextNextSchedule.Text = "Suspended till further notice";
-                }
-            }
-            else if (i == 3)
-            {
-                DateTime nextDay = DateTime.Today.AddDays(i);
-               // LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                if (dayResults != null)
-                {
-                    string scheduleContent = dayResults[i].ToString();
-                    string[] scheduleArray = scheduleContent.Split(' ');
-                    string joinedSchedule = string.Join("\n", scheduleArray);
-                   // LblNextNextNextSchedule.Text = joinedSchedule;
-                }
-                else
-                {
-                   // LblNextNextNextSchedule.Text = "Suspended till further notice";
-                }
-            }
-        }
-    }
-
     private void LblDaySheduleList_LayoutChanged(object sender, EventArgs e)
     {
         Label lblDaySheduleList = (Label)sender;
@@ -582,6 +474,7 @@ public partial class MainPage : ContentPage
         double fontSize = CalculateFontSize(availableWidth);
         lblDaySheduleList.FontSize = fontSize;
     }
+
     private double CalculateFontSize(double availableWidth)
     {
         double baseFontSize = 20;
