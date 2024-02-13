@@ -479,7 +479,7 @@ public partial class MainPage : ContentPage
 
     private double CalculateFontSize(double availableWidth)
     {
-        double baseFontSize = 20;
+        double baseFontSize = 15;
         double calculatedFontSize = baseFontSize * availableWidth / 300;
         return Math.Min(Math.Max(calculatedFontSize, 50), 15);
     }

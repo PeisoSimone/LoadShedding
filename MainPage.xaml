@@ -113,7 +113,7 @@
                 <StackLayout Grid.Row="3"
                          Orientation="Vertical">
 
-                    <Frame Padding="5"
+                    <Frame Padding="10"
                        HeightRequest="40"
                        BackgroundColor="Transparent"
                        CornerRadius="10"
@@ -121,7 +121,7 @@
                        BorderColor="#08bec2"
                        Margin="5,5,5,5">
 
-                        <Grid ColumnDefinitions="0.7*,0.5*"
+                        <Grid ColumnDefinitions="0.6*,0.5*"
                           RowDefinitions="Auto">
                             <Label x:Name="LblSchedulesCurrentStageText"
                                 Grid.Row="0"
@@ -142,8 +142,8 @@
                         </Grid>
                     </Frame>
 
-                    <Frame Padding="5"
-                       HeightRequest="90"
+                    <Frame Padding="0" 
+                       HeightRequest="100"
                        CornerRadius="10"
                        HasShadow="True"
                        BackgroundColor="Transparent"
@@ -153,18 +153,26 @@
                         <Grid ColumnDefinitions="1*"
                           RowDefinitions="Auto,Auto,Auto">
 
-                            <Label x:Name="LblDay"
+                            <Label x:Name="LblDay" 
                                Grid.Row="0"
                                Grid.Column="1"
-                               FontSize="Medium"
+                               FontSize="Large"
                                FontFamily="Nexa-Heavy"
                                FontAttributes="Bold"
-                               Margin="0,0,0,5"    
+                               Margin="0,10,0,3"    
                                HorizontalOptions="Center"
                                TextColor="#9e99a3"/>
 
+                            <Label x:Name="LblOccure" 
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               FontSize="Small"
+                               Margin="0,5,0,1"
+                               FontFamily="Nexa-Light"
+                               HorizontalOptions="Center"
+                               TextColor="#9e99a3"/>
 
-                            <Label x:Name="LblDaySheduleList"
+                            <Label x:Name="LblDaySheduleList" 
                                Grid.Row="2"
                                Grid.Column="1"
                                TextColor="#9e99a3"
@@ -172,15 +180,6 @@
                                HorizontalOptions="CenterAndExpand"
                                HorizontalTextAlignment="Start"
                                SizeChanged="LblDaySheduleList_LayoutChanged"/>
-
-                            <Label x:Name="LblOccure"
-                               Grid.Row="1"
-                               Grid.Column="1"
-                               FontSize="Small"
-                               FontFamily="Nexa-Light"
-                               HorizontalOptions="Center"
-                               TextColor="#9e99a3"/>
-
 
                         </Grid>
                     </Frame>
@@ -199,7 +198,7 @@
                     <!--Tomorrow card-->
                     <Frame Grid.Row="0" 
                            Grid.Column="0"
-                           Padding="5"
+                           Padding="10"
                            HeightRequest="120"
                            CornerRadius="10"
                            BackgroundColor="Transparent"
@@ -231,7 +230,7 @@
                     </Frame>
                     <!--Tomorrow card-->
                     <Frame Grid.Row="0" Grid.Column="1"
-                            Padding="5"
+                            Padding="10"
                                HeightRequest="120"
                                CornerRadius="10"
                                BackgroundColor="Transparent"
@@ -264,7 +263,7 @@
                     <!--Tomorrow card-->
                     <Frame Grid.Row="0" 
                        Grid.Column="2"
-                       Padding="5"
+                       Padding="10"
                        HeightRequest="120"
                        CornerRadius="10"
                        BackgroundColor="Transparent"
