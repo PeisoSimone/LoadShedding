@@ -14,7 +14,7 @@ namespace loadshedding.Services
     public class AlertServices : IAlertServices
     {
         public async Task ShowAlert(string message)
-        {
+          {
             Page currentPage = Application.Current.MainPage;
             await currentPage.DisplayAlert("Alert Message", message, "OK");
         }

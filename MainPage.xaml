@@ -113,8 +113,8 @@
                 <StackLayout Grid.Row="3"
                          Orientation="Vertical">
 
-                    <Frame Padding="10"
-                       HeightRequest="50"
+                    <Frame Padding="5"
+                       HeightRequest="40"
                        BackgroundColor="Transparent"
                        CornerRadius="10"
                        HasShadow="True"
@@ -142,8 +142,8 @@
                         </Grid>
                     </Frame>
 
-                    <Frame Padding="10"
-                       HeightRequest="100"
+                    <Frame Padding="5"
+                       HeightRequest="90"
                        CornerRadius="10"
                        HasShadow="True"
                        BackgroundColor="Transparent"
@@ -199,8 +199,8 @@
                     <!--Tomorrow card-->
                     <Frame Grid.Row="0" 
                            Grid.Column="0"
-                           Padding="10"
-                           HeightRequest="100"
+                           Padding="5"
+                           HeightRequest="120"
                            CornerRadius="10"
                            BackgroundColor="Transparent"
                            HasShadow="True"
@@ -231,8 +231,8 @@
                     </Frame>
                     <!--Tomorrow card-->
                     <Frame Grid.Row="0" Grid.Column="1"
-                            Padding="10"
-                               HeightRequest="100"
+                            Padding="5"
+                               HeightRequest="120"
                                CornerRadius="10"
                                BackgroundColor="Transparent"
                                HasShadow="True"
@@ -264,8 +264,8 @@
                     <!--Tomorrow card-->
                     <Frame Grid.Row="0" 
                        Grid.Column="2"
-                       Padding="10"
-                       HeightRequest="100"
+                       Padding="5"
+                       HeightRequest="120"
                        CornerRadius="10"
                        BackgroundColor="Transparent"
                        HasShadow="True"

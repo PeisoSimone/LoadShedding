@@ -21,7 +21,7 @@ public partial class MainPage : ContentPage
 
     private bool isLoading;
     private object todayOutages;
-    public object loadSheddingOutages;
+    private dynamic loadSheddingOutages;
 
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
@@ -164,7 +164,6 @@ public partial class MainPage : ContentPage
         LblTemperature.Text = weatherBySearchResults.main.temperature + "°C";
     }
 
-    //Update Area Search
     public async Task GetLoadSheddingBySearch(string inputLocation)
     {
         var areaSearchResults = await _calendarSearchServices.GetAreaBySearch(inputLocation);
@@ -214,7 +213,6 @@ public partial class MainPage : ContentPage
 
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingOutages)
     {
-
         if (loadSheddingOutages != null)
         {
             LblScheduleAreaName.Text = loadSheddingOutages[0].area_name;
@@ -229,12 +227,16 @@ public partial class MainPage : ContentPage
 
     private void LoadSheddingActive(dynamic loadSheddingOutages)
     {
+
         DateTime day = DateTime.Now.Date;
 
-        List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages,day);
+        List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages, day);
         List<dynamic> todayNextEventOutages = GetTodayNextEventOutages(todayAllEventsOutages);
+        this.loadSheddingOutages = loadSheddingOutages;
 
         var firstEvent = todayNextEventOutages[0];
+        LblScheduleAreaName.Text = firstEvent.area_name;
+        LblSchedulesCurrentStage.Text = firstEvent.stage.ToString();
 
         EventStartTime = firstEvent.start;
         EventEndTime = firstEvent.finsh;
@@ -259,6 +261,7 @@ public partial class MainPage : ContentPage
 
         LoadSheddingActiveHours(todayAllEventsOutages, todayNextEventOutages);
     }
+
 
     private void LoadSheddingActiveHours(List<dynamic> todayOutages, List<dynamic> todayEventOutages)
     {
@@ -302,11 +305,10 @@ public partial class MainPage : ContentPage
                 if (loadSheddingOutages != null)
                 {
                     DateTime day = DateTime.Now.Date.AddDays(i);
-                    GetAllTodayEventsOutages(loadSheddingOutages, day);
+                    List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages, day);
+                    List<string> todayOutageDates = GetTodayOutagesDates(todayAllEventsOutages);
 
-                    string scheduleContent = todayOutages.ToString();
-                    string[] scheduleArray = scheduleContent.Split(' ');
-                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    string joinedSchedule = string.Join("\n", todayOutageDates);
                     LblNextSchedule.Text = joinedSchedule;
                 }
                 else
@@ -322,11 +324,10 @@ public partial class MainPage : ContentPage
                 if (loadSheddingOutages != null)
                 {
                     DateTime day = DateTime.Now.Date.AddDays(i);
-                    GetAllTodayEventsOutages(loadSheddingOutages, day);
+                    List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages, day);
+                    List<string> todayOutageDates = GetTodayOutagesDates(todayAllEventsOutages);
 
-                    string scheduleContent = todayOutages.ToString();
-                    string[] scheduleArray = scheduleContent.Split(' ');
-                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    string joinedSchedule = string.Join("\n", todayOutageDates);
                     LblNextNextSchedule.Text = joinedSchedule;
                 }
                 else
@@ -342,11 +343,10 @@ public partial class MainPage : ContentPage
                 if (loadSheddingOutages != null)
                 {
                     DateTime day = DateTime.Now.Date.AddDays(i);
-                    GetAllTodayEventsOutages(loadSheddingOutages, day);
+                    List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages, day);
+                    List<string> todayOutageDates = GetTodayOutagesDates(todayAllEventsOutages);
 
-                    string scheduleContent = todayOutages.ToString();
-                    string[] scheduleArray = scheduleContent.Split(' ');
-                    string joinedSchedule = string.Join("\n", scheduleArray);
+                    string joinedSchedule = string.Join("\n", todayOutageDates);
                     LblNextNextNextSchedule.Text = joinedSchedule;
                 }
                 else
@@ -373,6 +373,26 @@ public partial class MainPage : ContentPage
         return todayOutages;
     }
 
+    //Need to find a stable logic
+    public List<dynamic> GetTodayNextEventOutages(List<dynamic> todayOutages)
+    {
+        List<dynamic> todayEventOutages = new List<dynamic>();
+
+        foreach (var outage in todayOutages)
+        {
+            DateTime currentTime = DateTime.Now;
+            DateTime evenStart = outage.start;
+            DateTime evenFinish = outage.finsh;
+
+            if (evenStart > currentTime || (evenStart <= currentTime && currentTime < evenFinish))
+            {
+                todayEventOutages.Add(outage);
+            }
+        }
+        return todayEventOutages;
+    }
+
+
     private List<string> GetTodayOutagesDates(List<dynamic> todayOutages)
     {
         List<string> outageDates = new List<string>();
@@ -382,31 +402,13 @@ public partial class MainPage : ContentPage
             string outageStart = outage.start.ToString("HH:mm");
             string outageFinish = outage.finsh.ToString("HH:mm");
 
-                string concatenatedDates = $"{outageStart}-{outageFinish}";
-                outageDates.Add(concatenatedDates);
+            string concatenatedDates = $"{outageStart}-{outageFinish}";
+            outageDates.Add(concatenatedDates);
         }
         return outageDates;
     }
 
-    private List<dynamic> GetTodayNextEventOutages(List<dynamic> todayOutages)
-    {
-        List<dynamic> todayEventOutages = new List<dynamic>();
 
-        if (todayOutages.Count > 0)
-        {
-            foreach (var outage in todayOutages)
-            {
-                DateTime currentTime = DateTime.Now;
-                DateTime evenStart = outage.start;
-
-                if (evenStart >= currentTime)
-                {
-                    todayEventOutages.Add(outage);
-                }
-            }
-        }
-        return todayEventOutages;
-    }
 
     private void NextScheduleHighlight(List<string> todayOutageDates, string scheduleHighlight, FormattedString formattedString)
     {
