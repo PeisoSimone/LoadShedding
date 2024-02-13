@@ -9,8 +9,5 @@ namespace loadshedding.Model
     public class ApiKeysConfiguration
     {
         public string WeatherApiKey { get; set; }
-
-        public string LoadSheddingApiKey { get; set; }
-
     }
 }
