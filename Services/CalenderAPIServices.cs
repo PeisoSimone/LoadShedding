@@ -8,7 +8,6 @@ namespace loadshedding.Services
     public interface ICalenderAPIServices
     {
         Task<List<OutagesRoot>> GetAreaOutages(string area);
-        Task<SchedulesRoot> GetAreaSchedules(string area);
     }
 
     public class CalenderAPIServices : ICalenderAPIServices
@@ -51,35 +50,6 @@ namespace loadshedding.Services
             }
         }
 
-
-
-        public async Task<SchedulesRoot> GetAreaSchedules(string area)
-        {
-            try
-            {
-                _httpClient.DefaultRequestHeaders.Clear();
-                var request = new HttpRequestMessage(HttpMethod.Get, $"schedules/{area}");
-                var response = await _httpClient.SendAsync(request);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadFromJsonAsync<SchedulesRoot>();
-                    SaveLoadSheddingAreaSettings(area);
-                    return content;
-                }
-                else
-                {
-                    await _alertServices.ShowAlert("GetAreaSchedules-API request failed with status code: " + response.StatusCode);
-                    ClearLoadSheddingAreaSettings();
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                await _alertServices.ShowAlert("GetAreaSchedules-An error occurred: " + ex.Message);
-                return null;
-            }
-        }
         private void SaveLoadSheddingAreaSettings(string area)
         {
             Preferences.Set("LoadSheddingAreaLocationName", area);
