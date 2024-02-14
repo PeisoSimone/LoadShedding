@@ -118,13 +118,18 @@ public partial class MainPage : ContentPage
 
     private async void SearchLocation_Clicked(object sender, EventArgs e)
     {
+       await SearchLocation();
+    }
+
+    private async Task SearchLocation()
+    {
         var response = await DisplayPromptAsync(
-            title: "Search City",
-            message: "",
-            placeholder: "City Name...",
-            accept: "SEARCH",
-            cancel: "CANCEL"
-            );
+           title: "Search City",
+           message: "",
+           placeholder: "City Name...",
+           accept: "SEARCH",
+           cancel: "CANCEL"
+           );
 
         if (response != null)
         {
@@ -147,14 +152,26 @@ public partial class MainPage : ContentPage
         var areaLocationResults = await _weatherServices.GetWeatherByGPS(latitude, longitude);
         WeatherUpdateUI(areaLocationResults);
 
-        string locationGPS = areaLocationResults.name;
-        await GetLoadSheddingBySearch(locationGPS);
+        string locationName = areaLocationResults.name;
+        await GetLoadSheddingBySearch(locationName);
     }
 
     public async Task GetWeatherBySearch(string inputLocation)
     {
         var weatherBySearchResults = await _weatherServices.GetWeatherBySearch(inputLocation);
-        WeatherUpdateUI(weatherBySearchResults);
+        if (weatherBySearchResults != null)
+        {
+            WeatherUpdateUI(weatherBySearchResults);
+        }
+        else
+        {
+            await DisplayAlert(
+                   title: "",
+                   message: "City Not Found. Try Again",
+                   cancel: "OK");
+
+           await SearchLocation();
+        }
     }
 
     public void WeatherUpdateUI(dynamic weatherBySearchResults)
@@ -191,7 +208,7 @@ public partial class MainPage : ContentPage
             {
                 await DisplayAlert(
                    title: "",
-                   message: "Location Not Found!.",
+                   message: "Location Not Selected!.",
                    cancel: "OK");
             }
         }
@@ -199,7 +216,7 @@ public partial class MainPage : ContentPage
         {
             await DisplayAlert(
                title: "",
-               message: "Location Not Found!.",
+               message: "Location Not Found! Try again",
                cancel: "OK");
         }
     }
@@ -207,7 +224,6 @@ public partial class MainPage : ContentPage
     public async Task GetAreaLoadShedding(string selectedAreaNameCalendar)
     {
         var loadSheddingOutages = await _calendarAPIServices.GetAreaOutages(selectedAreaNameCalendar);
-
         LoadSheddingAreaUpdateUI(loadSheddingOutages);
     }
 
@@ -230,13 +246,14 @@ public partial class MainPage : ContentPage
 
         DateTime day = DateTime.Now.Date;
 
-        List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages, day);
-        List<dynamic> todayNextEventOutages = GetTodayNextEventOutages(todayAllEventsOutages);
+        List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
+        List<dynamic> todayNextEventOutages = GetTodayNextEventOutages(allDayEventsOutages);
         this.loadSheddingOutages = loadSheddingOutages;
 
         var firstEvent = todayNextEventOutages[0];
         LblScheduleAreaName.Text = firstEvent.area_name;
-        LblSchedulesCurrentStage.Text = firstEvent.stage.ToString();
+        LblSchedulesCurrentStage.Text = "Stage " + firstEvent.stage.ToString();
+
 
         EventStartTime = firstEvent.start;
         EventEndTime = firstEvent.finsh;
@@ -259,7 +276,7 @@ public partial class MainPage : ContentPage
             LblDay.Text = DateTime.Today.AddDays(1).DayOfWeek.ToString();
         }
 
-        LoadSheddingActiveHours(todayAllEventsOutages, todayNextEventOutages);
+        LoadSheddingActiveHours(allDayEventsOutages, todayNextEventOutages);
     }
 
 
@@ -305,8 +322,8 @@ public partial class MainPage : ContentPage
                 if (loadSheddingOutages != null)
                 {
                     DateTime day = DateTime.Now.Date.AddDays(i);
-                    List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages, day);
-                    List<string> todayOutageDates = GetTodayOutagesDates(todayAllEventsOutages);
+                    List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
+                    List<string> todayOutageDates = GetTodayOutagesDates(allDayEventsOutages);
 
                     string joinedSchedule = string.Join("\n", todayOutageDates);
                     LblNextSchedule.Text = joinedSchedule;
@@ -324,8 +341,8 @@ public partial class MainPage : ContentPage
                 if (loadSheddingOutages != null)
                 {
                     DateTime day = DateTime.Now.Date.AddDays(i);
-                    List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages, day);
-                    List<string> todayOutageDates = GetTodayOutagesDates(todayAllEventsOutages);
+                    List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
+                    List<string> todayOutageDates = GetTodayOutagesDates(allDayEventsOutages);
 
                     string joinedSchedule = string.Join("\n", todayOutageDates);
                     LblNextNextSchedule.Text = joinedSchedule;
@@ -343,8 +360,8 @@ public partial class MainPage : ContentPage
                 if (loadSheddingOutages != null)
                 {
                     DateTime day = DateTime.Now.Date.AddDays(i);
-                    List<dynamic> todayAllEventsOutages = GetAllTodayEventsOutages(loadSheddingOutages, day);
-                    List<string> todayOutageDates = GetTodayOutagesDates(todayAllEventsOutages);
+                    List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
+                    List<string> todayOutageDates = GetTodayOutagesDates(allDayEventsOutages);
 
                     string joinedSchedule = string.Join("\n", todayOutageDates);
                     LblNextNextNextSchedule.Text = joinedSchedule;
@@ -357,7 +374,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private List<dynamic> GetAllTodayEventsOutages(dynamic loadSheddingOutages, DateTime day)
+    private List<dynamic> GetAllDayEventsOutages(dynamic loadSheddingOutages, DateTime day)
     {
         List<dynamic> todayOutages = new List<dynamic>();
 

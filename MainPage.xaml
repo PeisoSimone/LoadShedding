@@ -119,24 +119,16 @@
                        BorderColor="#08bec2"
                        Margin="5,5,5,5">
 
-                        <Grid ColumnDefinitions="0.6*,0.5*"
+                        <Grid ColumnDefinitions="1*"
                           RowDefinitions="Auto">
-                            <Label x:Name="LblSchedulesCurrentStageText"
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                FontSize="Medium"
-                                FontFamily="Nexa-Light"
-                                HorizontalOptions="EndAndExpand"
-                                Text="Stage "
-                                TextColor="#9e99a3"/>
-
+              
                             <Label x:Name="LblSchedulesCurrentStage"
-                           Grid.Row="0"
-                           Grid.Column="1"
-                           FontSize="Medium"
-                           FontFamily="Nexa-Light"
-                           HorizontalOptions="StartAndExpand" 
-                           TextColor="#9e99a3"/>
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               FontSize="Medium"
+                               FontFamily="Nexa-Light"
+                               HorizontalOptions="Center" 
+                               TextColor="#9e99a3"/>
                         </Grid>
                     </Frame>
 
@@ -187,8 +179,9 @@
                 <StackLayout x:Name="Circular" Grid.Row="4" >
                     <customCotrol:CircularProgressBarControl />
                 </StackLayout>
+                
+                
                 <!--Bottom cards-->
-
                 <Grid Grid.Row="5"
                       RowDefinitions="Auto, Auto, Auto"
                       ColumnDefinitions="0.33*,0.33*,0.33*">
