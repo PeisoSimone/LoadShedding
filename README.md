@@ -1,17 +1,14 @@
-
+﻿
 
 ## Name
-Load Shedding
+LoadShedding
 
 ## Description
 A .NET MAUI Cross-Platform mobile application to track a load schedding schedule with weather conditions for that specific location/city. The application was developed using .NET MAUI and therefore should be compatible with both IOS & Android, however it was only tested on  Android(Physical Device and Emulator). This repo contains real-life production level code and the builds will be distributed to Apple App Store and Google Play store.
 
 ## Badges
-https://eskomsepush.gumroad.com/l/api
-This integration uses the Eskom SePush API.
-Read the EskomSePush API Licence Agreement.
-Free: (50 requests per day) API Key from Eskom Se Push. You can pay for a higher limit.
-Do not use more than one API key from the same IP. Your key will be blocked.
+https://eskom-calendar-api.shuttleapp.rs/
+eskom-calendar's API,created by beyarkay: https://github.com/beyarkay/eskom-calendar-api  hosted by shuttle.rs🚀. API is still on version v0.0.1.
 
 https://openweathermap.org/
 This integration uses the OpenWeatherMap.
