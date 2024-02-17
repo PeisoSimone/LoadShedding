@@ -8,7 +8,8 @@ A .NET MAUI Cross-Platform mobile application to track a load schedding schedule
 
 ## Badges
 https://eskom-calendar-api.shuttleapp.rs/
-eskom-calendar's API,created by beyarkay: https://github.com/beyarkay/eskom-calendar-api  hosted by shuttle.rs🚀. API is still on version v0.0.1.
+Eskom-calendar's API,created by beyarkay: https://github.com/beyarkay/eskom-calendar-api  
+hosted by shuttle.rs🚀. API is still on version v0.0.1.
 
 https://openweathermap.org/
 This integration uses the OpenWeatherMap.
