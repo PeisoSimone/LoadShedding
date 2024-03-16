@@ -19,8 +19,6 @@ public partial class MainPage : ContentPage
     private CircularProgressBarControl circularProgressBarControl;
     private SfCircularProgressBar circularProgressBar;
 
-    private bool isLoading;
-    private object todayOutages;
     private dynamic loadSheddingOutages;
 
     public DateTime EventStartTime { get; private set; }
@@ -118,7 +116,7 @@ public partial class MainPage : ContentPage
 
     private async void SearchLocation_Clicked(object sender, EventArgs e)
     {
-       await SearchLocation();
+        await SearchLocation();
     }
 
     private async Task SearchLocation()
@@ -170,7 +168,7 @@ public partial class MainPage : ContentPage
                    message: "City Not Found. Try Again",
                    cancel: "OK");
 
-           await SearchLocation();
+            await SearchLocation();
         }
     }
 
@@ -231,11 +229,11 @@ public partial class MainPage : ContentPage
     {
         DateTime day = DateTime.Now.Date;
         if (loadSheddingOutages != null)
-        { 
-           
+        {
+
             LblScheduleAreaName.Text = loadSheddingOutages[0].area_name;
             LblSchedulesCurrentStage.Text = loadSheddingOutages[0].stage.ToString();
-            LoadSheddingActive(loadSheddingOutages,day);
+            LoadSheddingActive(loadSheddingOutages, day);
         }
         else
         {
@@ -243,44 +241,70 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void LoadSheddingActive(dynamic loadSheddingOutages, DateTime day )
+    private void LoadSheddingActive(dynamic loadSheddingOutages, DateTime day)
     {
         List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
+
+        if (allDayEventsOutages == null || allDayEventsOutages.Count <= 0)
+        {
+            LoadSheddingData();
+            return;
+        }
+
         List<dynamic> todayNextEventOutages = GetTodayNextEventOutages(allDayEventsOutages);
 
-        for (int i = 0; i < loadSheddingOutages.Count; i++)
+        var lastItem = allDayEventsOutages[allDayEventsOutages.Count - 1];
+        DateTime lastEvenStart = lastItem.start;
+        DateTime now = DateTime.Now;
+
+        if(lastEvenStart < now)
         {
-            if (todayNextEventOutages.Count <=0)
-            {
-                LoadSheddingActive(loadSheddingOutages, day.AddDays(1));
-                return;
-            }
-            else
-            {
-                LblDay.Text = day.DayOfWeek.ToString();
-
-                var firstEvent = todayNextEventOutages[0];
-
-                LblScheduleAreaName.Text = firstEvent.area_name;
-                LblSchedulesCurrentStage.Text = "Stage " + firstEvent.stage.ToString();
-
-                EventStartTime = firstEvent.start;
-                EventEndTime = firstEvent.finsh;
-
-                EventEndTime = EventEndTime.AddMinutes(-30);
-
-                circularProgressBarControl.EventStartTime = EventStartTime;
-                circularProgressBarControl.EventEndTime = EventEndTime;
-
-                circularProgressBarControl.UpdateProgressBar();
-                ProgressBarUpdated();
-            }
+            LoadSheddingData();
+            return;
         }
-        
+
+        if (todayNextEventOutages == null || todayNextEventOutages.Count <= 0)
+        {
+            LoadSheddingActive(loadSheddingOutages, day.AddDays(1));
+            return;
+        }
+
+        var firstEvent = todayNextEventOutages[0];
+        LblDay.Text = day.DayOfWeek.ToString();
+        LblSchedulesCurrentStage.Text = "Stage " + firstEvent.stage.ToString();
+        EventStartTime = firstEvent.start;
+        EventEndTime = firstEvent.finsh.AddMinutes(-30);
+
+        circularProgressBarControl.EventStartTime = EventStartTime;
+        circularProgressBarControl.EventEndTime = EventEndTime;
+
+        circularProgressBarControl.UpdateProgressBar();
+        ProgressBarUpdated();
+
         this.loadSheddingOutages = loadSheddingOutages;
 
         LoadSheddingActiveHours(allDayEventsOutages, todayNextEventOutages);
     }
+
+
+    private void LoadSheddingData()  
+    {
+        LblSchedulesCurrentStage.Text = "Waiting for Eskom updates";
+        LblDay.Text = DateTime.Today.DayOfWeek.ToString();
+        LblDaySheduleList.Text = "Schedules to be available Soon";
+
+        DateTime EventStartTime = DateTime.Now;
+        DateTime EventEndTime = DateTime.Now;
+
+        circularProgressBarControl.EventStartTime = EventStartTime;
+        circularProgressBarControl.EventEndTime = EventEndTime;
+
+        circularProgressBarControl.UpdateProgressBar();
+        ProgressBarUpdated();
+
+        FillBottomCardsUI();
+    }
+
 
     private void LoadSheddingActiveHours(List<dynamic> todayOutages, List<dynamic> todayEventOutages)
     {
@@ -327,19 +351,19 @@ public partial class MainPage : ContentPage
                     List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
                     List<string> todayOutageDates = GetTodayOutagesDates(allDayEventsOutages);
 
-                    if(todayOutageDates.Count>0)
+                    if (todayOutageDates.Count > 0)
                     {
                         string joinedSchedule = string.Join("\n", todayOutageDates);
                         LblNextSchedule.Text = joinedSchedule;
                     }
                     else
                     {
-                        LblNextSchedule.Text = "Data Not Available";
+                        LblNextSchedule.Text = "Events Unavailable";
                     }
                 }
                 else
                 {
-                    LblNextSchedule.Text = "Suspended till further notice";
+                    LblNextSchedule.Text = "Schedules Unavailable";
                 }
             }
             else if (i == 2)
@@ -360,12 +384,12 @@ public partial class MainPage : ContentPage
                     }
                     else
                     {
-                        LblNextNextSchedule.Text = "Data Not Available";
+                        LblNextNextSchedule.Text = "Events Unavailable";
                     }
                 }
                 else
                 {
-                    LblNextNextSchedule.Text = "Suspended till further notice";
+                    LblNextNextSchedule.Text = "Schedules Unavailable";
                 }
             }
             else if (i == 3)
@@ -386,13 +410,12 @@ public partial class MainPage : ContentPage
                     }
                     else
                     {
-                        LblNextNextNextSchedule.Text = "Data Not Available" ;
+                        LblNextNextNextSchedule.Text = "Events Unavailable";
                     }
-
                 }
                 else
                 {
-                    LblNextNextNextSchedule.Text = "Suspended till further notice";
+                    LblNextNextNextSchedule.Text = "Schedules Unavailable";
                 }
             }
         }
@@ -510,7 +533,7 @@ public partial class MainPage : ContentPage
     {
         Label lblDaySheduleList = (Label)sender;
 
-        double availableWidth = lblDaySheduleList.Width;    
+        double availableWidth = lblDaySheduleList.Width;
         double fontSize = CalculateFontSize(availableWidth);
         lblDaySheduleList.FontSize = fontSize;
     }
