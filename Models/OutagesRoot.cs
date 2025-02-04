@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace loadshedding.Model
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
     public class OutagesRoot
     {
         public string area_name { get; set; }

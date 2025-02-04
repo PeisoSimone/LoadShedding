@@ -6,13 +6,10 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
+using loadshedding.Interfaces;
 
 namespace loadshedding.Services
 {
-    public interface ICalendarSearchServices
-    {
-        Task<List<(string CalendarName, string AreaName)>> GetAreaBySearch(string text);
-    }
 
     public class CalendarSearchServices : ICalendarSearchServices
     {

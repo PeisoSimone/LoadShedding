@@ -1,4 +1,5 @@
 using loadshedding.CustomControl;
+using loadshedding.Interfaces;
 using loadshedding.Services;
 using Syncfusion.Maui.ProgressBar;
 using System.Text;
@@ -13,23 +14,26 @@ public partial class MainPage : ContentPage
 
     private readonly IWeatherServices _weatherServices;
     private readonly ICalendarSearchServices _calendarSearchServices;
-    private readonly ICalenderAPIServices _calendarAPIServices;
+    private readonly ICalenderServices _calendarServices;
     private readonly IAlertServices _alertServices;
+    private readonly ILoadSheddingStatusServices _loadSheddingStatusServices;
 
     private CircularProgressBarControl circularProgressBarControl;
     private SfCircularProgressBar circularProgressBar;
 
     private dynamic loadSheddingOutages;
+    private int loadSheddingStage;
 
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
 
-    public MainPage(IWeatherServices weatherServices, ICalendarSearchServices calendarSearchServices, ICalenderAPIServices calendarAPIServices, IAlertServices alertServices)
+    public MainPage(IWeatherServices weatherServices, ICalendarSearchServices calendarSearchServices, ICalenderServices calendarServices, IAlertServices alertServices, ILoadSheddingStatusServices loadSheddingStatusServices)
     {
         InitializeComponent();
         _weatherServices = weatherServices;
+        _loadSheddingStatusServices = loadSheddingStatusServices;
         _calendarSearchServices = calendarSearchServices;
-        _calendarAPIServices = calendarAPIServices;
+        _calendarServices = calendarServices;
         _alertServices = alertServices;
         circularProgressBarControl = new CircularProgressBarControl();
         circularProgressBarControl.UpdateProgressBar();
@@ -41,6 +45,8 @@ public partial class MainPage : ContentPage
 
         ShowLoadingIndicator();
 
+        await GetLoadSheddingStatus();
+
         try
         {
             string savedWeatherName = Preferences.Get("WeatherLocationName", string.Empty);
@@ -48,7 +54,7 @@ public partial class MainPage : ContentPage
 
             if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
             {
-                await GetAreaLoadShedding(savedLoadSheddingName);
+                await GetAreaLoadShedding(savedLoadSheddingName, loadSheddingStage);
                 await GetWeatherBySearch(savedWeatherName);
             }
             else
@@ -90,6 +96,12 @@ public partial class MainPage : ContentPage
         var location = await Geolocation.GetLocationAsync();
         latitude = location.Latitude;
         longitude = location.Longitude;
+    }
+
+    public async Task GetLoadSheddingStatus() 
+    {
+        var stage = await _loadSheddingStatusServices.GetNationalStatus();
+        loadSheddingStage = 1 - stage.Status;
     }
 
     private async void Mylocation_Clicked(object sender, EventArgs e)
@@ -199,8 +211,11 @@ public partial class MainPage : ContentPage
 
                 string selectedAreaNameCalendar = Path.GetFileNameWithoutExtension(selectedCalendarName);
 
-                await GetAreaLoadShedding(selectedAreaNameCalendar);
+                var stage = await _loadSheddingStatusServices.GetNationalStatus();
+                //int loadSheddingStage = 1 - stage.Status;
+                int loadSheddingStage = 1 - stage.Status;
 
+                await GetAreaLoadShedding(selectedAreaNameCalendar, loadSheddingStage);
             }
             else
             {
@@ -219,9 +234,9 @@ public partial class MainPage : ContentPage
         }
     }
 
-    public async Task GetAreaLoadShedding(string selectedAreaNameCalendar)
+    public async Task GetAreaLoadShedding(string selectedAreaNameCalendar, int laodSheddingStage)
     {
-        var loadSheddingOutages = await _calendarAPIServices.GetAreaOutages(selectedAreaNameCalendar);
+        var loadSheddingOutages = await _calendarServices.GetAreaOutages(selectedAreaNameCalendar, laodSheddingStage);
         LoadSheddingAreaUpdateUI(loadSheddingOutages);
     }
 

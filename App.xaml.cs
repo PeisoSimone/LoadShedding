@@ -1,26 +1,29 @@
-﻿using loadshedding.Model;
+﻿using loadshedding.Interfaces;
+using loadshedding.Model;
 using loadshedding.Services;
 using Microsoft.Maui.Controls;
 
 namespace loadshedding;
 public partial class App : Application
 {
-    private readonly IWeatherServices weatherServices;
-    private readonly ICalendarSearchServices calendarSearchServices;
-    private readonly ICalenderAPIServices calendarAPIServices;
-    private readonly IAlertServices alertServices;
+    private readonly IWeatherServices _weatherServices;
+    private readonly ICalendarSearchServices _calendarSearchServices;
+    private readonly ICalenderServices _calendarServices;
+    private readonly IAlertServices _alertServices;
+    private readonly ILoadSheddingStatusServices _loadsheddingStatusServices;
 
-    public App(IWeatherServices weatherServices, ICalendarSearchServices calendarSearchServices, ICalenderAPIServices calendarAPIServices, IAlertServices alertServices)
+    public App(IWeatherServices weatherServices, ICalendarSearchServices calendarSearchServices, ICalenderServices calendarServices, IAlertServices alertServices, ILoadSheddingStatusServices loadsheddingStatusServices)
     {
-        this.weatherServices = weatherServices;
-        this.calendarSearchServices = calendarSearchServices;
-        this.calendarAPIServices = calendarAPIServices;
-        this.alertServices = alertServices;
+        _weatherServices = weatherServices;
+        _loadsheddingStatusServices = loadsheddingStatusServices;
+        _calendarSearchServices = calendarSearchServices;
+        _calendarServices = calendarServices;
+        _alertServices = alertServices;
 
         Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cWWdCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWX5dcHVUR2JdV0d0VkI=");//Syncfusion Key Here
 
         InitializeComponent();
 
-        MainPage = new MainPage(weatherServices, calendarSearchServices, calendarAPIServices,  alertServices);
+        MainPage = new MainPage(weatherServices, calendarSearchServices, calendarServices,  alertServices, loadsheddingStatusServices);
     }
 }

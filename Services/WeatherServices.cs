@@ -1,4 +1,5 @@
-﻿using loadshedding.Model;
+﻿using loadshedding.Interfaces;
+using loadshedding.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,7 @@ using System.Threading.Tasks;
 
 namespace loadshedding.Services
 {
-    public interface IWeatherServices
-    {
-        Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude);
-        Task<WeatherRoot> GetWeatherBySearch(string text);
-    }
+    
 
     public class WeatherServices : IWeatherServices
     {

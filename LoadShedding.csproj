@@ -50,10 +50,2601 @@
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	  <None Remove="areametadata.json" />
+	  <None Remove="Data\buffalo-city-block-1.csv" />
+	  <None Remove="Data\buffalo-city-block-10.csv" />
+	  <None Remove="Data\buffalo-city-block-11.csv" />
+	  <None Remove="Data\buffalo-city-block-12.csv" />
+	  <None Remove="Data\buffalo-city-block-13.csv" />
+	  <None Remove="Data\buffalo-city-block-14.csv" />
+	  <None Remove="Data\buffalo-city-block-15.csv" />
+	  <None Remove="Data\buffalo-city-block-16.csv" />
+	  <None Remove="Data\buffalo-city-block-17.csv" />
+	  <None Remove="Data\buffalo-city-block-18.csv" />
+	  <None Remove="Data\buffalo-city-block-19.csv" />
+	  <None Remove="Data\buffalo-city-block-2.csv" />
+	  <None Remove="Data\buffalo-city-block-3.csv" />
+	  <None Remove="Data\buffalo-city-block-4.csv" />
+	  <None Remove="Data\buffalo-city-block-5.csv" />
+	  <None Remove="Data\buffalo-city-block-6.csv" />
+	  <None Remove="Data\buffalo-city-block-7.csv" />
+	  <None Remove="Data\buffalo-city-block-8.csv" />
+	  <None Remove="Data\buffalo-city-block-9.csv" />
+	  <None Remove="Data\city-of-cape-town-area-1.csv" />
+	  <None Remove="Data\city-of-cape-town-area-10.csv" />
+	  <None Remove="Data\city-of-cape-town-area-11.csv" />
+	  <None Remove="Data\city-of-cape-town-area-12.csv" />
+	  <None Remove="Data\city-of-cape-town-area-13.csv" />
+	  <None Remove="Data\city-of-cape-town-area-14.csv" />
+	  <None Remove="Data\city-of-cape-town-area-15.csv" />
+	  <None Remove="Data\city-of-cape-town-area-16.csv" />
+	  <None Remove="Data\city-of-cape-town-area-2.csv" />
+	  <None Remove="Data\city-of-cape-town-area-3.csv" />
+	  <None Remove="Data\city-of-cape-town-area-4.csv" />
+	  <None Remove="Data\city-of-cape-town-area-5.csv" />
+	  <None Remove="Data\city-of-cape-town-area-6.csv" />
+	  <None Remove="Data\city-of-cape-town-area-7.csv" />
+	  <None Remove="Data\city-of-cape-town-area-8.csv" />
+	  <None Remove="Data\city-of-cape-town-area-9.csv" />
+	  <None Remove="Data\city-of-cape-town.csv" />
+	  <None Remove="Data\city-power-1.csv" />
+	  <None Remove="Data\city-power-10.csv" />
+	  <None Remove="Data\city-power-11.csv" />
+	  <None Remove="Data\city-power-12.csv" />
+	  <None Remove="Data\city-power-13.csv" />
+	  <None Remove="Data\city-power-14.csv" />
+	  <None Remove="Data\city-power-15.csv" />
+	  <None Remove="Data\city-power-16.csv" />
+	  <None Remove="Data\city-power-17.csv" />
+	  <None Remove="Data\city-power-18.csv" />
+	  <None Remove="Data\city-power-2.csv" />
+	  <None Remove="Data\city-power-3.csv" />
+	  <None Remove="Data\city-power-4.csv" />
+	  <None Remove="Data\city-power-5.csv" />
+	  <None Remove="Data\city-power-6.csv" />
+	  <None Remove="Data\city-power-7.csv" />
+	  <None Remove="Data\city-power-8.csv" />
+	  <None Remove="Data\city-power-9.csv" />
+	  <None Remove="Data\eastern-cape-adelaide.csv" />
+	  <None Remove="Data\eastern-cape-arbedeen.csv" />
+	  <None Remove="Data\eastern-cape-barklyeast.csv" />
+	  <None Remove="Data\eastern-cape-bathurst.csv" />
+	  <None Remove="Data\eastern-cape-bedford.csv" />
+	  <None Remove="Data\eastern-cape-burgersdorp.csv" />
+	  <None Remove="Data\eastern-cape-butterworth.csv" />
+	  <None Remove="Data\eastern-cape-capestfrancisbay.csv" />
+	  <None Remove="Data\eastern-cape-cathcart.csv" />
+	  <None Remove="Data\eastern-cape-cradock.csv" />
+	  <None Remove="Data\eastern-cape-dordrecht.csv" />
+	  <None Remove="Data\eastern-cape-dutywa.csv" />
+	  <None Remove="Data\eastern-cape-elliot.csv" />
+	  <None Remove="Data\eastern-cape-george.csv" />
+	  <None Remove="Data\eastern-cape-graaf-reinet.csv" />
+	  <None Remove="Data\eastern-cape-grahamstown.csv" />
+	  <None Remove="Data\eastern-cape-hofmeyer.csv" />
+	  <None Remove="Data\eastern-cape-humansdorp.csv" />
+	  <None Remove="Data\eastern-cape-indwe.csv" />
+	  <None Remove="Data\eastern-cape-jansenville.csv" />
+	  <None Remove="Data\eastern-cape-jeffreysbay.csv" />
+	  <None Remove="Data\eastern-cape-kirkwood.csv" />
+	  <None Remove="Data\eastern-cape-komga.csv" />
+	  <None Remove="Data\eastern-cape-ladygrey.csv" />
+	  <None Remove="Data\eastern-cape-maclear.csv" />
+	  <None Remove="Data\eastern-cape-marselle.csv" />
+	  <None Remove="Data\eastern-cape-matatiele.csv" />
+	  <None Remove="Data\eastern-cape-mbizana.csv" />
+	  <None Remove="Data\eastern-cape-middelburg.csv" />
+	  <None Remove="Data\eastern-cape-molteno.csv" />
+	  <None Remove="Data\eastern-cape-mthatha.csv" />
+	  <None Remove="Data\eastern-cape-oviston.csv" />
+	  <None Remove="Data\eastern-cape-peddie.csv" />
+	  <None Remove="Data\eastern-cape-portalfred.csv" />
+	  <None Remove="Data\eastern-cape-queenstown.csv" />
+	  <None Remove="Data\eastern-cape-sommerseteast.csv" />
+	  <None Remove="Data\eastern-cape-sterkskroon.csv" />
+	  <None Remove="Data\eastern-cape-steytlertville.csv" />
+	  <None Remove="Data\eastern-cape-stfrancisbay.csv" />
+	  <None Remove="Data\eastern-cape-stutterheim.csv" />
+	  <None Remove="Data\eastern-cape-tarkastad.csv" />
+	  <None Remove="Data\eastern-cape-teebus.csv" />
+	  <None Remove="Data\eastern-cape-ugie.csv" />
+	  <None Remove="Data\eastern-cape-umtata.csv" />
+	  <None Remove="Data\eastern-cape-venterstad.csv" />
+	  <None Remove="Data\eastern-cape-willowmore.csv" />
+	  <None Remove="Data\eskom-direct-1-even.csv" />
+	  <None Remove="Data\eskom-direct-1-odd.csv" />
+	  <None Remove="Data\eskom-direct-10-even.csv" />
+	  <None Remove="Data\eskom-direct-10-odd.csv" />
+	  <None Remove="Data\eskom-direct-11-even.csv" />
+	  <None Remove="Data\eskom-direct-11-odd.csv" />
+	  <None Remove="Data\eskom-direct-12-even.csv" />
+	  <None Remove="Data\eskom-direct-12-odd.csv" />
+	  <None Remove="Data\eskom-direct-13-even.csv" />
+	  <None Remove="Data\eskom-direct-13-odd.csv" />
+	  <None Remove="Data\eskom-direct-14-even.csv" />
+	  <None Remove="Data\eskom-direct-14-odd.csv" />
+	  <None Remove="Data\eskom-direct-15-even.csv" />
+	  <None Remove="Data\eskom-direct-15-odd.csv" />
+	  <None Remove="Data\eskom-direct-16-even.csv" />
+	  <None Remove="Data\eskom-direct-16-odd.csv" />
+	  <None Remove="Data\eskom-direct-2-even.csv" />
+	  <None Remove="Data\eskom-direct-2-odd.csv" />
+	  <None Remove="Data\eskom-direct-3-even.csv" />
+	  <None Remove="Data\eskom-direct-3-odd.csv" />
+	  <None Remove="Data\eskom-direct-4-even.csv" />
+	  <None Remove="Data\eskom-direct-4-odd.csv" />
+	  <None Remove="Data\eskom-direct-5-even.csv" />
+	  <None Remove="Data\eskom-direct-5-odd.csv" />
+	  <None Remove="Data\eskom-direct-6-even.csv" />
+	  <None Remove="Data\eskom-direct-6-odd.csv" />
+	  <None Remove="Data\eskom-direct-7-even.csv" />
+	  <None Remove="Data\eskom-direct-7-odd.csv" />
+	  <None Remove="Data\eskom-direct-8-even.csv" />
+	  <None Remove="Data\eskom-direct-8-odd.csv" />
+	  <None Remove="Data\eskom-direct-9-even.csv" />
+	  <None Remove="Data\eskom-direct-9-odd.csv" />
+	  <None Remove="Data\eskom.csv" />
+	  <None Remove="Data\free-state-allanridge.csv" />
+	  <None Remove="Data\free-state-bethlehem.csv" />
+	  <None Remove="Data\free-state-bethulie.csv" />
+	  <None Remove="Data\free-state-boshof.csv" />
+	  <None Remove="Data\free-state-bothaville.csv" />
+	  <None Remove="Data\free-state-brandfort.csv" />
+	  <None Remove="Data\free-state-bultfontein.csv" />
+	  <None Remove="Data\free-state-clocolan.csv" />
+	  <None Remove="Data\free-state-cornelia.csv" />
+	  <None Remove="Data\free-state-dealesville.csv" />
+	  <None Remove="Data\free-state-deneysville.csv" />
+	  <None Remove="Data\free-state-dewetsdorp.csv" />
+	  <None Remove="Data\free-state-edenburg.csv" />
+	  <None Remove="Data\free-state-edenville.csv" />
+	  <None Remove="Data\free-state-ek-ondv-van-alice.csv" />
+	  <None Remove="Data\free-state-excelsior.csv" />
+	  <None Remove="Data\free-state-ezenzeleni.csv" />
+	  <None Remove="Data\free-state-fatengtshentsho.csv" />
+	  <None Remove="Data\free-state-fauresmigh.csv" />
+	  <None Remove="Data\free-state-ficksburg.csv" />
+	  <None Remove="Data\free-state-flamingo.csv" />
+	  <None Remove="Data\free-state-fouriesburg.csv" />
+	  <None Remove="Data\free-state-frankfort.csv" />
+	  <None Remove="Data\free-state-gariep.csv" />
+	  <None Remove="Data\free-state-groenvoerlande.csv" />
+	  <None Remove="Data\free-state-harrismith.csv" />
+	  <None Remove="Data\free-state-heilbron.csv" />
+	  <None Remove="Data\free-state-hennenman.csv" />
+	  <None Remove="Data\free-state-hertzogville.csv" />
+	  <None Remove="Data\free-state-hoopstad.csv" />
+	  <None Remove="Data\free-state-ipopeng.csv" />
+	  <None Remove="Data\free-state-jagersfontein.csv" />
+	  <None Remove="Data\free-state-kestell.csv" />
+	  <None Remove="Data\free-state-koffiefontein.csv" />
+	  <None Remove="Data\free-state-koppies.csv" />
+	  <None Remove="Data\free-state-kroonstad.csv" />
+	  <None Remove="Data\free-state-ladybrand.csv" />
+	  <None Remove="Data\free-state-lesotho.csv" />
+	  <None Remove="Data\free-state-lindley.csv" />
+	  <None Remove="Data\free-state-luckhof.csv" />
+	  <None Remove="Data\free-state-mangaung-group-1.csv" />
+	  <None Remove="Data\free-state-mangaung-group-2.csv" />
+	  <None Remove="Data\free-state-mangaung-group-3.csv" />
+	  <None Remove="Data\free-state-mangaung-group-4.csv" />
+	  <None Remove="Data\free-state-mangaung-group-5.csv" />
+	  <None Remove="Data\free-state-mangaung-group-6.csv" />
+	  <None Remove="Data\free-state-marquad.csv" />
+	  <None Remove="Data\free-state-matoporong.csv" />
+	  <None Remove="Data\free-state-naleditownship.csv" />
+	  <None Remove="Data\free-state-ngwathemunic.csv" />
+	  <None Remove="Data\free-state-odendaalsrus.csv" />
+	  <None Remove="Data\free-state-oranjeville.csv" />
+	  <None Remove="Data\free-state-panorama.csv" />
+	  <None Remove="Data\free-state-parys.csv" />
+	  <None Remove="Data\free-state-paulroux.csv" />
+	  <None Remove="Data\free-state-petrusburg.csv" />
+	  <None Remove="Data\free-state-petrussteyn.csv" />
+	  <None Remove="Data\free-state-philipolis.csv" />
+	  <None Remove="Data\free-state-phiritona.csv" />
+	  <None Remove="Data\free-state-phutaditjhaba.csv" />
+	  <None Remove="Data\free-state-qwa-qwa.csv" />
+	  <None Remove="Data\free-state-reddersburg.csv" />
+	  <None Remove="Data\free-state-reitz.csv" />
+	  <None Remove="Data\free-state-riebeeckstad.csv" />
+	  <None Remove="Data\free-state-rosendal.csv" />
+	  <None Remove="Data\free-state-rouxville.csv" />
+	  <None Remove="Data\free-state-rweleleyathunya.csv" />
+	  <None Remove="Data\free-state-senekal.csv" />
+	  <None Remove="Data\free-state-seretse.csv" />
+	  <None Remove="Data\free-state-smithfield.csv" />
+	  <None Remove="Data\free-state-springfonteintown.csv" />
+	  <None Remove="Data\free-state-springfonteintruck%28garage%29.csv" />
+	  <None Remove="Data\free-state-steynsrus.csv" />
+	  <None Remove="Data\free-state-theunissen.csv" />
+	  <None Remove="Data\free-state-trompsburg.csv" />
+	  <None Remove="Data\free-state-tsheseng.csv" />
+	  <None Remove="Data\free-state-tshiame.csv" />
+	  <None Remove="Data\free-state-tweeling.csv" />
+	  <None Remove="Data\free-state-tweespruit.csv" />
+	  <None Remove="Data\free-state-vaalpark.csv" />
+	  <None Remove="Data\free-state-vanstandensrus.csv" />
+	  <None Remove="Data\free-state-veerkerde-vlei.csv" />
+	  <None Remove="Data\free-state-ventersburg.csv" />
+	  <None Remove="Data\free-state-viljoenskroon.csv" />
+	  <None Remove="Data\free-state-villiers.csv" />
+	  <None Remove="Data\free-state-virginianorth.csv" />
+	  <None Remove="Data\free-state-virginiatown.csv" />
+	  <None Remove="Data\free-state-vredefort.csv" />
+	  <None Remove="Data\free-state-w.csv" />
+	  <None Remove="Data\free-state-warden.csv" />
+	  <None Remove="Data\free-state-welkombulk.csv" />
+	  <None Remove="Data\free-state-welkomtown.csv" />
+	  <None Remove="Data\free-state-wepener.csv" />
+	  <None Remove="Data\free-state-wesselsbron.csv" />
+	  <None Remove="Data\free-state-winburg.csv" />
+	  <None Remove="Data\free-state-witsiekhoek.csv" />
+	  <None Remove="Data\free-state-zamdela.csv" />
+	  <None Remove="Data\free-state-zastron.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-1.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-10.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-11.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-12.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-13.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-14.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-15.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-16.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-2.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-3.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-4.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-5.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-6.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-7.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-8.csv" />
+	  <None Remove="Data\gauteng-ekurhuleni-block-9.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a1.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a10.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a11.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a12.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a13.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a14.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a15.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a16.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a17.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a18.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a19.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a2.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a20.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a21.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a22.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a23.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a3.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a4.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a5.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a6.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a7.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a8.csv" />
+	  <None Remove="Data\gauteng-emfuleni-area-a9.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-1.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-10.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-11.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-12.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-13.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-14.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-15.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-16.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-2.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-3.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-4.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-5.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-6.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-7.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-8.csv" />
+	  <None Remove="Data\gauteng-tshwane-group-9.csv" />
+	  <None Remove="Data\kwazulu-natal-ballito.csv" />
+	  <None Remove="Data\kwazulu-natal-dundee.csv" />
+	  <None Remove="Data\kwazulu-natal-eshowe.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-1.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-10.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-10a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-10b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-11.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-11a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-11b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-12.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-12a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-12b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-13.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-13a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-13b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-14.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-14a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-14b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-15.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-15a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-15b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-16.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-16a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-16b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-17.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-18.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-19.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-1a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-1b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-2.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-20.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-2a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-2b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-3.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-3a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-3b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-4.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-4a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-4b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-5.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-5a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-5b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-6.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-6a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-6b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-7.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-7a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-7b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-8.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-8a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-8b.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-9.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-9a.csv" />
+	  <None Remove="Data\kwazulu-natal-ethekwini-block-9b.csv" />
+	  <None Remove="Data\kwazulu-natal-fleetwood.csv" />
+	  <None Remove="Data\kwazulu-natal-glencoe.csv" />
+	  <None Remove="Data\kwazulu-natal-greytown.csv" />
+	  <None Remove="Data\kwazulu-natal-harding.csv" />
+	  <None Remove="Data\kwazulu-natal-howick.csv" />
+	  <None Remove="Data\kwazulu-natal-kodstad.csv" />
+	  <None Remove="Data\kwazulu-natal-mandeni.csv" />
+	  <None Remove="Data\kwazulu-natal-mpofana.csv" />
+	  <None Remove="Data\kwazulu-natal-mpomphomeni.csv" />
+	  <None Remove="Data\kwazulu-natal-mthonjaneni.csv" />
+	  <None Remove="Data\kwazulu-natal-newcastle.csv" />
+	  <None Remove="Data\kwazulu-natal-northern.csv" />
+	  <None Remove="Data\kwazulu-natal-nquthu.csv" />
+	  <None Remove="Data\kwazulu-natal-paulpietersburg.csv" />
+	  <None Remove="Data\kwazulu-natal-raynkonyeni.csv" />
+	  <None Remove="Data\kwazulu-natal-southern.csv" />
+	  <None Remove="Data\kwazulu-natal-stanger.csv" />
+	  <None Remove="Data\kwazulu-natal-ulundi.csv" />
+	  <None Remove="Data\kwazulu-natal-umvoti.csv" />
+	  <None Remove="Data\kwazulu-natal-uphongolo.csv" />
+	  <None Remove="Data\kwazulu-natal-utrecht.csv" />
+	  <None Remove="Data\limpopo-addney.csv" />
+	  <None Remove="Data\limpopo-alldays-dorp.csv" />
+	  <None Remove="Data\limpopo-arrie.csv" />
+	  <None Remove="Data\limpopo-bayswater.csv" />
+	  <None Remove="Data\limpopo-belabelatown.csv" />
+	  <None Remove="Data\limpopo-diepsloot.csv" />
+	  <None Remove="Data\limpopo-esoringa.csv" />
+	  <None Remove="Data\limpopo-genoa.csv" />
+	  <None Remove="Data\limpopo-gideon.csv" />
+	  <None Remove="Data\limpopo-goedetrou.csv" />
+	  <None Remove="Data\limpopo-grobblersdaltown.csv" />
+	  <None Remove="Data\limpopo-innes.csv" />
+	  <None Remove="Data\limpopo-kgapane%28duiwelskloof%29_town.csv" />
+	  <None Remove="Data\limpopo-kgatla.csv" />
+	  <None Remove="Data\limpopo-lephalale%28ellisras%29_town.csv" />
+	  <None Remove="Data\limpopo-lesedingtownship.csv" />
+	  <None Remove="Data\limpopo-magari.csv" />
+	  <None Remove="Data\limpopo-makhado%28louis_trichardt%29_town.csv" />
+	  <None Remove="Data\limpopo-marblehalltown.csv" />
+	  <None Remove="Data\limpopo-modimollenystroomtown.csv" />
+	  <None Remove="Data\limpopo-mohwadi%28dendron%29_town.csv" />
+	  <None Remove="Data\limpopo-mokhurumela.csv" />
+	  <None Remove="Data\limpopo-mokopane%28potgieterus%29town.csv" />
+	  <None Remove="Data\limpopo-montz.csv" />
+	  <None Remove="Data\limpopo-mookgophong%28naboomspruit%29.csv" />
+	  <None Remove="Data\limpopo-mosehleng.csv" />
+	  <None Remove="Data\limpopo-musinatown.csv" />
+	  <None Remove="Data\limpopo-nancefieldtownship.csv" />
+	  <None Remove="Data\limpopo-normandy.csv" />
+	  <None Remove="Data\limpopo-phagamengtownship.csv" />
+	  <None Remove="Data\limpopo-phalaborwatown.csv" />
+	  <None Remove="Data\limpopo-rooiberg.csv" />
+	  <None Remove="Data\limpopo-simson.csv" />
+	  <None Remove="Data\limpopo-swart.csv" />
+	  <None Remove="Data\limpopo-sweethome.csv" />
+	  <None Remove="Data\limpopo-thabazimbitown.csv" />
+	  <None Remove="Data\limpopo-thegrench.csv" />
+	  <None Remove="Data\limpopo-vaalwatertown.csv" />
+	  <None Remove="Data\limpopo-witten.csv" />
+	  <None Remove="Data\mpumalanga-aerorand.csv" />
+	  <None Remove="Data\mpumalanga-barberton.csv" />
+	  <None Remove="Data\mpumalanga-bethal.csv" />
+	  <None Remove="Data\mpumalanga-buffelspruit.csv" />
+	  <None Remove="Data\mpumalanga-camcoll.csv" />
+	  <None Remove="Data\mpumalanga-clever.csv" />
+	  <None Remove="Data\mpumalanga-cohen.csv" />
+	  <None Remove="Data\mpumalanga-cologne.csv" />
+	  <None Remove="Data\mpumalanga-delta.csv" />
+	  <None Remove="Data\mpumalanga-doornpoort.csv" />
+	  <None Remove="Data\mpumalanga-dryden-rural.csv" />
+	  <None Remove="Data\mpumalanga-ermelo.csv" />
+	  <None Remove="Data\mpumalanga-estancia.csv" />
+	  <None Remove="Data\mpumalanga-figtree.csv" />
+	  <None Remove="Data\mpumalanga-greyslingstad.csv" />
+	  <None Remove="Data\mpumalanga-highlands.csv" />
+	  <None Remove="Data\mpumalanga-jerusalem.csv" />
+	  <None Remove="Data\mpumalanga-kabokweni.csv" />
+	  <None Remove="Data\mpumalanga-kanyamazani.csv" />
+	  <None Remove="Data\mpumalanga-kemp.csv" />
+	  <None Remove="Data\mpumalanga-kiepersol.csv" />
+	  <None Remove="Data\mpumalanga-klipspringer.csv" />
+	  <None Remove="Data\mpumalanga-komatipoort.csv" />
+	  <None Remove="Data\mpumalanga-koorsboom.csv" />
+	  <None Remove="Data\mpumalanga-kwa-guqa.csv" />
+	  <None Remove="Data\mpumalanga-louwscreek.csv" />
+	  <None Remove="Data\mpumalanga-lyndenburg.csv" />
+	  <None Remove="Data\mpumalanga-malelane.csv" />
+	  <None Remove="Data\mpumalanga-marathon.csv" />
+	  <None Remove="Data\mpumalanga-mataffin_sub.csv" />
+	  <None Remove="Data\mpumalanga-middelburg.csv" />
+	  <None Remove="Data\mpumalanga-nelsriver_sub.csv" />
+	  <None Remove="Data\mpumalanga-nkomazi.csv" />
+	  <None Remove="Data\mpumalanga-ogies.csv" />
+	  <None Remove="Data\mpumalanga-piet-retief.csv" />
+	  <None Remove="Data\mpumalanga-sappi.csv" />
+	  <None Remove="Data\mpumalanga-secunda.csv" />
+	  <None Remove="Data\mpumalanga-sol.csv" />
+	  <None Remove="Data\mpumalanga-standerton.csv" />
+	  <None Remove="Data\mpumalanga-sundra.csv" />
+	  <None Remove="Data\mpumalanga-usuthu-west.csv" />
+	  <None Remove="Data\mpumalanga-vukuzakhe.csv" />
+	  <None Remove="Data\mpumalanga-whiteriver.csv" />
+	  <None Remove="Data\mpumalanga-wildebees.csv" />
+	  <None Remove="Data\mpumalanga-witbank_ds.csv" />
+	  <None Remove="Data\msunduzi-city-center.csv" />
+	  <None Remove="Data\msunduzi-north-western-suburbs-and-hilton.csv" />
+	  <None Remove="Data\msunduzi-northern-area-suburbs.csv" />
+	  <None Remove="Data\msunduzi-riverside.csv" />
+	  <None Remove="Data\msunduzi-western-suburbs.csv" />
+	  <None Remove="Data\msunduzi-woodburb-hesketh-mkondeni.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-1.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-10.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-11.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-12.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-13.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-14.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-15.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-16.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-17.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-18.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-19.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-2.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-3.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-4.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-5.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-6.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-7.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-8.csv" />
+	  <None Remove="Data\nelson-mandela-bay-group-9.csv" />
+	  <None Remove="Data\north-west-boikhutso.csv" />
+	  <None Remove="Data\north-west-coligny.csv" />
+	  <None Remove="Data\north-west-delareyville.csv" />
+	  <None Remove="Data\north-west-gumtrees.csv" />
+	  <None Remove="Data\north-west-hartebeesfontein.csv" />
+	  <None Remove="Data\north-west-jouberton.csv" />
+	  <None Remove="Data\north-west-klerksdorpmunic.csv" />
+	  <None Remove="Data\north-west-klerksdorpnorth.csv" />
+	  <None Remove="Data\north-west-klerksdorpwest.csv" />
+	  <None Remove="Data\north-west-koster.csv" />
+	  <None Remove="Data\north-west-leeudoringstad.csv" />
+	  <None Remove="Data\north-west-lichtenburg.csv" />
+	  <None Remove="Data\north-west-orkneymunic.csv" />
+	  <None Remove="Data\north-west-ottosdal.csv" />
+	  <None Remove="Data\north-west-potchefstroom.csv" />
+	  <None Remove="Data\north-west-sannieshof.csv" />
+	  <None Remove="Data\north-west-schweizer-reneke.csv" />
+	  <None Remove="Data\north-west-stillfontein.csv" />
+	  <None Remove="Data\north-west-swartruggens.csv" />
+	  <None Remove="Data\north-west-ventersdorp.csv" />
+	  <None Remove="Data\north-west-vryburg.csv" />
+	  <None Remove="Data\north-west-waterworkspoints.csv" />
+	  <None Remove="Data\north-west-wolmaranstad.csv" />
+	  <None Remove="Data\north-west-woodhouse.csv" />
+	  <None Remove="Data\north-west-zeerust.csv" />
+	  <None Remove="Data\northern-cape-alexanderbay.csv" />
+	  <None Remove="Data\northern-cape-augrabies.csv" />
+	  <None Remove="Data\northern-cape-backlywest.csv" />
+	  <None Remove="Data\northern-cape-bitterfontein.csv" />
+	  <None Remove="Data\northern-cape-brandvlei.csv" />
+	  <None Remove="Data\northern-cape-britstown.csv" />
+	  <None Remove="Data\northern-cape-calvinia.csv" />
+	  <None Remove="Data\northern-cape-carnarvon.csv" />
+	  <None Remove="Data\northern-cape-christiana.csv" />
+	  <None Remove="Data\northern-cape-colesberg.csv" />
+	  <None Remove="Data\northern-cape-danielskuil.csv" />
+	  <None Remove="Data\northern-cape-de-aar.csv" />
+	  <None Remove="Data\northern-cape-deben.csv" />
+	  <None Remove="Data\northern-cape-delsportshoop.csv" />
+	  <None Remove="Data\northern-cape-dingleton.csv" />
+	  <None Remove="Data\northern-cape-douglas.csv" />
+	  <None Remove="Data\northern-cape-fraserburg.csv" />
+	  <None Remove="Data\northern-cape-goodhouse.csv" />
+	  <None Remove="Data\northern-cape-groblershoop.csv" />
+	  <None Remove="Data\northern-cape-hanover.csv" />
+	  <None Remove="Data\northern-cape-hopetown.csv" />
+	  <None Remove="Data\northern-cape-jankempdorp.csv" />
+	  <None Remove="Data\northern-cape-kakamas.csv" />
+	  <None Remove="Data\northern-cape-kamieskroon.csv" />
+	  <None Remove="Data\northern-cape-kathu.csv" />
+	  <None Remove="Data\northern-cape-keimoes.csv" />
+	  <None Remove="Data\northern-cape-kenhardt.csv" />
+	  <None Remove="Data\northern-cape-koekenaap.csv" />
+	  <None Remove="Data\northern-cape-kuruman.csv" />
+	  <None Remove="Data\northern-cape-loeriesfontein.csv" />
+	  <None Remove="Data\northern-cape-loxton.csv" />
+	  <None Remove="Data\northern-cape-lutzville.csv" />
+	  <None Remove="Data\northern-cape-merweville.csv" />
+	  <None Remove="Data\northern-cape-nelspoort.csv" />
+	  <None Remove="Data\northern-cape-nieuwoudtville.csv" />
+	  <None Remove="Data\northern-cape-norvalspont.csv" />
+	  <None Remove="Data\northern-cape-noupoort.csv" />
+	  <None Remove="Data\northern-cape-okiep.csv" />
+	  <None Remove="Data\northern-cape-oliefantshoek.csv" />
+	  <None Remove="Data\northern-cape-petrusville.csv" />
+	  <None Remove="Data\northern-cape-phillipstown.csv" />
+	  <None Remove="Data\northern-cape-port-nolloth.csv" />
+	  <None Remove="Data\northern-cape-potsmasburgindustry.csv" />
+	  <None Remove="Data\northern-cape-potsmasburgtown.csv" />
+	  <None Remove="Data\northern-cape-prieska.csv" />
+	  <None Remove="Data\northern-cape-richmond.csv" />
+	  <None Remove="Data\northern-cape-rietpoort.csv" />
+	  <None Remove="Data\northern-cape-springbok.csv" />
+	  <None Remove="Data\northern-cape-steinkopf.csv" />
+	  <None Remove="Data\northern-cape-upington.csv" />
+	  <None Remove="Data\northern-cape-vanderkloof.csv" />
+	  <None Remove="Data\northern-cape-vanwyskvlei.csv" />
+	  <None Remove="Data\northern-cape-victoriawest.csv" />
+	  <None Remove="Data\northern-cape-vioolsdrift.csv" />
+	  <None Remove="Data\northern-cape-vosburg.csv" />
+	  <None Remove="Data\northern-cape-warrenton.csv" />
+	  <None Remove="Data\northern-cape-willinston.csv" />
+	  <None Remove="Data\western-cape-albertinia.csv" />
+	  <None Remove="Data\western-cape-arniston.csv" />
+	  <None Remove="Data\western-cape-ashton.csv" />
+	  <None Remove="Data\western-cape-barrydale.csv" />
+	  <None Remove="Data\western-cape-beaufort-west.csv" />
+	  <None Remove="Data\western-cape-betties-bay.csv" />
+	  <None Remove="Data\western-cape-bonnievale.csv" />
+	  <None Remove="Data\western-cape-botrivier.csv" />
+	  <None Remove="Data\western-cape-bredasdorp.csv" />
+	  <None Remove="Data\western-cape-caledon.csv" />
+	  <None Remove="Data\western-cape-calitzdorp.csv" />
+	  <None Remove="Data\western-cape-ceres.csv" />
+	  <None Remove="Data\western-cape-citrusdal.csv" />
+	  <None Remove="Data\western-cape-clanwilliam.csv" />
+	  <None Remove="Data\western-cape-darling.csv" />
+	  <None Remove="Data\western-cape-de-doorns.csv" />
+	  <None Remove="Data\western-cape-derust.csv" />
+	  <None Remove="Data\western-cape-dysselsdorp.csv" />
+	  <None Remove="Data\western-cape-elandsbaai.csv" />
+	  <None Remove="Data\western-cape-franschoek.csv" />
+	  <None Remove="Data\western-cape-gansbaai.csv" />
+	  <None Remove="Data\western-cape-genadendal.csv" />
+	  <None Remove="Data\western-cape-george.csv" />
+	  <None Remove="Data\western-cape-glentana.csv" />
+	  <None Remove="Data\western-cape-goedverwacht.csv" />
+	  <None Remove="Data\western-cape-gouda.csv" />
+	  <None Remove="Data\western-cape-graaf-water.csv" />
+	  <None Remove="Data\western-cape-grabouw.csv" />
+	  <None Remove="Data\western-cape-greyton.csv" />
+	  <None Remove="Data\western-cape-grootbrak.csv" />
+	  <None Remove="Data\western-cape-hawston.csv" />
+	  <None Remove="Data\western-cape-heidelburg.csv" />
+	  <None Remove="Data\western-cape-herbetsdal.csv" />
+	  <None Remove="Data\western-cape-hermanus.csv" />
+	  <None Remove="Data\western-cape-hopeful.csv" />
+	  <None Remove="Data\western-cape-infanta.csv" />
+	  <None Remove="Data\western-cape-klawer.csv" />
+	  <None Remove="Data\western-cape-kleinbrak.csv" />
+	  <None Remove="Data\western-cape-kleinmond.csv" />
+	  <None Remove="Data\western-cape-klipdale.csv" />
+	  <None Remove="Data\western-cape-knysna.csv" />
+	  <None Remove="Data\western-cape-ladismith.csv" />
+	  <None Remove="Data\western-cape-laingsburg.csv" />
+	  <None Remove="Data\western-cape-lambertsbaai.csv" />
+	  <None Remove="Data\western-cape-langebaan.csv" />
+	  <None Remove="Data\western-cape-lutzville.csv" />
+	  <None Remove="Data\western-cape-malgas.csv" />
+	  <None Remove="Data\western-cape-malmesbury.csv" />
+	  <None Remove="Data\western-cape-mcgregor.csv" />
+	  <None Remove="Data\western-cape-montagu.csv" />
+	  <None Remove="Data\western-cape-moorreesbury.csv" />
+	  <None Remove="Data\western-cape-mossel-bay.csv" />
+	  <None Remove="Data\western-cape-napier.csv" />
+	  <None Remove="Data\western-cape-noree.csv" />
+	  <None Remove="Data\western-cape-oudtshoorn.csv" />
+	  <None Remove="Data\western-cape-paternoster.csv" />
+	  <None Remove="Data\western-cape-piketberg.csv" />
+	  <None Remove="Data\western-cape-plettenberg-bay.csv" />
+	  <None Remove="Data\western-cape-porterville.csv" />
+	  <None Remove="Data\western-cape-princealberttown.csv" />
+	  <None Remove="Data\western-cape-pringle-bay.csv" />
+	  <None Remove="Data\western-cape-protem.csv" />
+	  <None Remove="Data\western-cape-rheenendal.csv" />
+	  <None Remove="Data\western-cape-riebeeck-kasteel.csv" />
+	  <None Remove="Data\western-cape-riebeeck-west.csv" />
+	  <None Remove="Data\western-cape-riversdale.csv" />
+	  <None Remove="Data\western-cape-riviersonderend.csv" />
+	  <None Remove="Data\western-cape-robertson.csv" />
+	  <None Remove="Data\western-cape-saldanahbay.csv" />
+	  <None Remove="Data\western-cape-stanford.csv" />
+	  <None Remove="Data\western-cape-stellenbosch.csv" />
+	  <None Remove="Data\western-cape-sthelenabay.csv" />
+	  <None Remove="Data\western-cape-stompeus-bay.csv" />
+	  <None Remove="Data\western-cape-struisbaai.csv" />
+	  <None Remove="Data\western-cape-sutherland.csv" />
+	  <None Remove="Data\western-cape-suurbraak.csv" />
+	  <None Remove="Data\western-cape-swellendam.csv" />
+	  <None Remove="Data\western-cape-tesselaarsdal.csv" />
+	  <None Remove="Data\western-cape-till-bay.csv" />
+	  <None Remove="Data\western-cape-touwsrivier.csv" />
+	  <None Remove="Data\western-cape-tulbagh.csv" />
+	  <None Remove="Data\western-cape-van-rhynsdorp.csv" />
+	  <None Remove="Data\western-cape-vanwyksdorp.csv" />
+	  <None Remove="Data\western-cape-velddrift.csv" />
+	  <None Remove="Data\western-cape-villiersdorp.csv" />
+	  <None Remove="Data\western-cape-vleesbaai.csv" />
+	  <None Remove="Data\western-cape-vredenburg.csv" />
+	  <None Remove="Data\western-cape-vredendal.csv" />
+	  <None Remove="Data\western-cape-wellington.csv" />
+	  <None Remove="Data\western-cape-witsand.csv" />
+	  <None Remove="Data\western-cape-wolseley.csv" />
+	  <None Remove="Data\western-cape-worscester.csv" />
+	  <None Remove="Data\western-cape-yzerfontein.csv" />
+	  <None Remove="Data\western-cape-zoar.csv" />
 	  <None Remove="Resources\AppIcon\zoomedicon.png" />
 	  <None Remove="Resources\Images\icon2.png" />
 	  <None Remove="Resources\Splash\splashicon.png" />
 	  <None Remove="Resources\Splash\splashicon1.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Data\buffalo-city-block-1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-10.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-11.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-12.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-13.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-14.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-15.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-16.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-17.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-18.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-19.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-7.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-8.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\buffalo-city-block-9.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-10.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-11.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-12.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-13.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-14.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-15.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-16.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-7.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-8.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town-area-9.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-of-cape-town.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-10.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-11.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-12.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-13.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-14.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-15.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-16.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-17.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-18.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-7.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-8.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\city-power-9.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-adelaide.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-arbedeen.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-barklyeast.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-bathurst.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-bedford.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-burgersdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-butterworth.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-capestfrancisbay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-cathcart.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-cradock.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-dordrecht.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-dutywa.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-elliot.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-george.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-graaf-reinet.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-grahamstown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-hofmeyer.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-humansdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-indwe.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-jansenville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-jeffreysbay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-kirkwood.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-komga.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-ladygrey.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-maclear.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-marselle.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-matatiele.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-mbizana.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-middelburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-molteno.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-mthatha.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-oviston.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-peddie.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-portalfred.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-queenstown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-sommerseteast.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-sterkskroon.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-steytlertville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-stfrancisbay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-stutterheim.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-tarkastad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-teebus.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-ugie.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-umtata.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-venterstad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eastern-cape-willowmore.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-1-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-1-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-10-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-10-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-11-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-11-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-12-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-12-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-13-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-13-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-14-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-14-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-15-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-15-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-16-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-16-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-2-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-2-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-3-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-3-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-4-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-4-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-5-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-5-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-6-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-6-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-7-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-7-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-8-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-8-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-9-even.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom-direct-9-odd.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\eskom.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-allanridge.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-bethlehem.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-bethulie.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-boshof.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-bothaville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-brandfort.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-bultfontein.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-clocolan.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-cornelia.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-dealesville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-deneysville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-dewetsdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-edenburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-edenville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-ek-ondv-van-alice.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-excelsior.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-ezenzeleni.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-fatengtshentsho.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-fauresmigh.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-ficksburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-flamingo.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-fouriesburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-frankfort.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-gariep.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-groenvoerlande.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-harrismith.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-heilbron.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-hennenman.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-hertzogville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-hoopstad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-ipopeng.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-jagersfontein.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-kestell.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-koffiefontein.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-koppies.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-kroonstad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-ladybrand.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-lesotho.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-lindley.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-luckhof.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-mangaung-group-1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-mangaung-group-2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-mangaung-group-3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-mangaung-group-4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-mangaung-group-5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-mangaung-group-6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-marquad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-matoporong.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-naleditownship.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-ngwathemunic.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-odendaalsrus.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-oranjeville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-panorama.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-parys.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-paulroux.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-petrusburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-petrussteyn.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-philipolis.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-phiritona.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-phutaditjhaba.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-qwa-qwa.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-reddersburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-reitz.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-riebeeckstad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-rosendal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-rouxville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-rweleleyathunya.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-senekal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-seretse.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-smithfield.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-springfonteintown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-springfonteintruck(garage).csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-steynsrus.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-theunissen.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-trompsburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-tsheseng.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-tshiame.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-tweeling.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-tweespruit.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-vaalpark.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-vanstandensrus.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-veerkerde-vlei.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-ventersburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-viljoenskroon.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-villiers.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-virginianorth.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-virginiatown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-vredefort.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-w.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-warden.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-welkombulk.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-welkomtown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-wepener.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-wesselsbron.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-winburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-witsiekhoek.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-zamdela.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\free-state-zastron.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-10.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-11.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-12.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-13.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-14.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-15.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-16.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-7.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-8.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-ekurhuleni-block-9.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a10.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a11.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a12.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a13.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a14.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a15.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a16.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a17.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a18.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a19.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a20.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a21.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a22.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a23.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a7.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a8.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-emfuleni-area-a9.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-10.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-11.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-12.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-13.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-14.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-15.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-16.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-7.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-8.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\gauteng-tshwane-group-9.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ballito.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-dundee.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-eshowe.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-10.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-10a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-10b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-11.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-11a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-11b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-12.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-12a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-12b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-13.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-13a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-13b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-14.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-14a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-14b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-15.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-15a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-15b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-16.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-16a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-16b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-17.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-18.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-19.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-1a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-1b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-20.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-2a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-2b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-3a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-3b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-4a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-4b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-5a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-5b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-6a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-6b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-7.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-7a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-7b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-8.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-8a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-8b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-9.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-9a.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ethekwini-block-9b.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-fleetwood.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-glencoe.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-greytown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-harding.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-howick.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-kodstad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-mandeni.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-mpofana.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-mpomphomeni.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-mthonjaneni.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-newcastle.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-northern.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-nquthu.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-paulpietersburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-raynkonyeni.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-southern.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-stanger.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-ulundi.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-umvoti.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-uphongolo.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\kwazulu-natal-utrecht.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-addney.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-alldays-dorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-arrie.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-bayswater.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-belabelatown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-diepsloot.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-esoringa.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-genoa.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-gideon.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-goedetrou.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-grobblersdaltown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-innes.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-kgapane(duiwelskloof)_town.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-kgatla.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-lephalale(ellisras)_town.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-lesedingtownship.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-magari.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-makhado(louis_trichardt)_town.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-marblehalltown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-modimollenystroomtown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-mohwadi(dendron)_town.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-mokhurumela.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-mokopane(potgieterus)town.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-montz.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-mookgophong(naboomspruit).csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-mosehleng.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-musinatown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-nancefieldtownship.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-normandy.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-phagamengtownship.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-phalaborwatown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-rooiberg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-simson.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-swart.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-sweethome.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-thabazimbitown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-thegrench.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-vaalwatertown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\limpopo-witten.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-aerorand.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-barberton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-bethal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-buffelspruit.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-camcoll.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-clever.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-cohen.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-cologne.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-delta.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-doornpoort.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-dryden-rural.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-ermelo.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-estancia.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-figtree.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-greyslingstad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-highlands.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-jerusalem.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-kabokweni.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-kanyamazani.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-kemp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-kiepersol.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-klipspringer.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-komatipoort.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-koorsboom.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-kwa-guqa.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-louwscreek.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-lyndenburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-malelane.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-marathon.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-mataffin_sub.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-middelburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-nelsriver_sub.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-nkomazi.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-ogies.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-piet-retief.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-sappi.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-secunda.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-sol.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-standerton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-sundra.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-usuthu-west.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-vukuzakhe.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-whiteriver.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-wildebees.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\mpumalanga-witbank_ds.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\msunduzi-city-center.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\msunduzi-north-western-suburbs-and-hilton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\msunduzi-northern-area-suburbs.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\msunduzi-riverside.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\msunduzi-western-suburbs.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\msunduzi-woodburb-hesketh-mkondeni.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-1.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-10.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-11.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-12.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-13.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-14.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-15.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-16.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-17.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-18.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-19.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-2.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-3.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-4.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-5.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-6.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-7.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-8.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\nelson-mandela-bay-group-9.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-boikhutso.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-coligny.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-delareyville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-gumtrees.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-hartebeesfontein.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-jouberton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-klerksdorpmunic.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-klerksdorpnorth.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-klerksdorpwest.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-koster.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-leeudoringstad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-lichtenburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-orkneymunic.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-ottosdal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-potchefstroom.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-sannieshof.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-schweizer-reneke.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-stillfontein.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-swartruggens.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-ventersdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-vryburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-waterworkspoints.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-wolmaranstad.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-woodhouse.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\north-west-zeerust.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-alexanderbay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-augrabies.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-backlywest.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-bitterfontein.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-brandvlei.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-britstown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-calvinia.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-carnarvon.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-christiana.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-colesberg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-danielskuil.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-de-aar.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-deben.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-delsportshoop.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-dingleton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-douglas.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-fraserburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-goodhouse.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-groblershoop.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-hanover.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-hopetown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-jankempdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-kakamas.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-kamieskroon.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-kathu.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-keimoes.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-kenhardt.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-koekenaap.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-kuruman.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-loeriesfontein.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-loxton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-lutzville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-merweville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-nelspoort.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-nieuwoudtville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-norvalspont.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-noupoort.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-okiep.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-oliefantshoek.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-petrusville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-phillipstown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-port-nolloth.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-potsmasburgindustry.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-potsmasburgtown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-prieska.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-richmond.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-rietpoort.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-springbok.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-steinkopf.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-upington.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-vanderkloof.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-vanwyskvlei.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-victoriawest.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-vioolsdrift.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-vosburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-warrenton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\northern-cape-willinston.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-albertinia.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-arniston.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-ashton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-barrydale.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-beaufort-west.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-betties-bay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-bonnievale.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-botrivier.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-bredasdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-caledon.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-calitzdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-ceres.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-citrusdal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-clanwilliam.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-darling.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-de-doorns.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-derust.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-dysselsdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-elandsbaai.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-franschoek.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-gansbaai.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-genadendal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-george.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-glentana.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-goedverwacht.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-gouda.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-graaf-water.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-grabouw.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-greyton.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-grootbrak.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-hawston.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-heidelburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-herbetsdal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-hermanus.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-hopeful.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-infanta.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-klawer.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-kleinbrak.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-kleinmond.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-klipdale.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-knysna.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-ladismith.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-laingsburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-lambertsbaai.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-langebaan.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-lutzville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-malgas.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-malmesbury.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-mcgregor.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-montagu.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-moorreesbury.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-mossel-bay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-napier.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-noree.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-oudtshoorn.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-paternoster.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-piketberg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-plettenberg-bay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-porterville.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-princealberttown.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-pringle-bay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-protem.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-rheenendal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-riebeeck-kasteel.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-riebeeck-west.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-riversdale.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-riviersonderend.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-robertson.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-saldanahbay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-stanford.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-stellenbosch.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-sthelenabay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-stompeus-bay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-struisbaai.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-sutherland.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-suurbraak.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-swellendam.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-tesselaarsdal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-till-bay.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-touwsrivier.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-tulbagh.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-van-rhynsdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-vanwyksdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-velddrift.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-villiersdorp.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-vleesbaai.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-vredenburg.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-vredendal.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-wellington.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-witsand.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-wolseley.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-worscester.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-yzerfontein.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Data\western-cape-zoar.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -71,13 +2662,14 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+	  <PackageReference Include="CsvHelper" Version="33.0.1" />
 	  <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions" Version="2.2.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
 	  <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="Syncfusion.Maui.Core" Version="23.1.43" />

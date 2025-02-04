@@ -1,35 +1,32 @@
-﻿using loadshedding.Model;
+﻿using CsvHelper;
+using loadshedding.Interfaces;
+using loadshedding.Model;
+using System.Formats.Asn1;
+using System.Globalization;
 using System.Net.Http.Json;
 
 
 
 namespace loadshedding.Services
 {
-    public interface ICalenderAPIServices
+    public class CalenderServices : ICalenderServices
     {
-        Task<List<OutagesRoot>> GetAreaOutages(string area);
-    }
-
-    public class CalenderAPIServices : ICalenderAPIServices
-    {
-        private readonly HttpClient _httpClient;
         private readonly IAlertServices _alertServices;
+        private readonly HttpClient _httpClient;
 
-        public CalenderAPIServices(HttpClient httpClient, IAlertServices alertServices)
+        public CalenderServices(HttpClient httpClient, IAlertServices alertServices)
         {
             _httpClient = httpClient;
             _alertServices = alertServices;
         }
-
-
-        public async Task<List<OutagesRoot>> GetAreaOutages(string area)
+        public async Task<List<OutagesRoot>> GetAreaOutages(string area, int stage)
         {
+            int staged = 2;
             try
             {
                 _httpClient.DefaultRequestHeaders.Clear();
-                var request = new HttpRequestMessage(HttpMethod.Get, $"outages/{area}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"/{area}?stage={staged}");
                 var response = await _httpClient.SendAsync(request);
-
                 if (response.IsSuccessStatusCode)
                 {
                     List<OutagesRoot> content = await response.Content.ReadFromJsonAsync<List<OutagesRoot>>();
@@ -38,19 +35,20 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    await _alertServices.ShowAlert("GetAreaOutages-API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert($"GetAreaOutages-API request failed with status code: {response.StatusCode}");
                     ClearLoadSheddingAreaSettings();
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                await _alertServices.ShowAlert("GetAreaOutages-An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert($"GetAreaOutages-An error occurred: {ex.Message}");
                 return null;
             }
         }
+        
 
-        private void SaveLoadSheddingAreaSettings(string area)
+        public void SaveLoadSheddingAreaSettings(string area)
         {
             Preferences.Set("LoadSheddingAreaLocationName", area);
         }
