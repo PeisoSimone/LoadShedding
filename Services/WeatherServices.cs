@@ -1,16 +1,10 @@
 ﻿using loadshedding.Interfaces;
 using loadshedding.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace loadshedding.Services
 {
-    
-
     public class WeatherServices : IWeatherServices
     {
         private readonly string _weatherApiKey;
@@ -36,18 +30,17 @@ namespace loadshedding.Services
                     var content = await response.Content.ReadFromJsonAsync<WeatherRoot>();
                     SaveLocationSettings(content?.name);
                     return content;
-
                 }
                 else
                 {
-                    Console.WriteLine("GetWeatherByGPS-API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert($"GetWeatherByGPS-API request failed with status code: {response.StatusCode}");
                     ClearWeatherSettings();
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetWeatherByGPS-An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert($"GetWeatherByGPS-An error occurred: {ex.Message}");
                 return null;
             }
         }
@@ -67,14 +60,14 @@ namespace loadshedding.Services
                 }
                 else
                 {
-                    Console.WriteLine("GetWeatherBySearch-API request failed with status code: " + response.StatusCode);
+                    await _alertServices.ShowAlert($"GetWeatherBySearch-API request failed with status code: {response.StatusCode}");
                     ClearWeatherSettings();
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetWeatherBySearch-An error occurred: " + ex.Message);
+                await _alertServices.ShowAlert($"GetWeatherBySearch-An error occurred: {ex.Message}");
                 return null;
             }
         }
@@ -86,7 +79,10 @@ namespace loadshedding.Services
 
         public void SaveLocationSettings(string weatherName)
         {
-            Preferences.Set("WeatherLocationName", weatherName);
+            if (weatherName != null)
+            {
+                Preferences.Set("WeatherLocationName", weatherName);
+            }
         }
     }
 }

@@ -21,11 +21,11 @@ namespace loadshedding.Services
             _httpClient = httpClientFactory.CreateClient("Supabase");
             _alertServices = alertServices;
         }
+
         public async Task<List<ScheduleRoot>> GetAreaOutages(string area, int stage)
         {
             int todayDay = DateTime.Today.Day;
             int maxDay = todayDay + 3;
-            stage = 4;
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, $"schedule?area=eq.{area}&stage=eq.{stage}&date_of_month=gte.{todayDay}&date_of_month=lte.{maxDay}");

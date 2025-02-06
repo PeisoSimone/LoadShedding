@@ -1,10 +1,6 @@
 using loadshedding.CustomControl;
 using loadshedding.Interfaces;
-using loadshedding.Services;
-using Newtonsoft.Json;
-using Syncfusion.Maui.ProgressBar;
 using System.Text;
-
 
 namespace loadshedding;
 
@@ -19,23 +15,30 @@ public partial class MainPage : ContentPage
     private readonly IAlertServices _alertServices;
     private readonly ILoadSheddingStatusServices _loadSheddingStatusServices;
 
-    private CircularProgressBarControl circularProgressBarControl;
-    private SfCircularProgressBar circularProgressBar;
+    private readonly CircularProgressBarControl circularProgressBarControl;
 
     private dynamic loadSheddingOutages;
     private int loadSheddingStage;
+    private const int StageOffset = 1;
 
     public DateTime EventStartTime { get; private set; }
     public DateTime EventEndTime { get; private set; }
 
-    public MainPage(IWeatherServices weatherServices, ICalendarSearchServices calendarSearchServices, ICalenderServices calendarServices, IAlertServices alertServices, ILoadSheddingStatusServices loadSheddingStatusServices)
+    public MainPage(
+        IWeatherServices weatherServices,
+        ICalendarSearchServices calendarSearchServices,
+        ICalenderServices calendarServices,
+        IAlertServices alertServices,
+        ILoadSheddingStatusServices loadSheddingStatusServices)
     {
         InitializeComponent();
-        _weatherServices = weatherServices;
-        _loadSheddingStatusServices = loadSheddingStatusServices;
-        _calendarSearchServices = calendarSearchServices;
-        _calendarServices = calendarServices;
-        _alertServices = alertServices;
+
+        this._weatherServices = weatherServices ?? throw new ArgumentNullException(nameof(weatherServices));
+        this._loadSheddingStatusServices = loadSheddingStatusServices ?? throw new ArgumentNullException(nameof(loadSheddingStatusServices));
+        this._calendarSearchServices = calendarSearchServices ?? throw new ArgumentNullException(nameof(calendarSearchServices));
+        this._calendarServices = calendarServices ?? throw new ArgumentNullException(nameof(calendarServices));
+        this._alertServices = alertServices ?? throw new ArgumentNullException(nameof(alertServices));
+
         circularProgressBarControl = new CircularProgressBarControl();
         circularProgressBarControl.UpdateProgressBar();
     }
@@ -51,15 +54,18 @@ public partial class MainPage : ContentPage
             string savedWeatherName = Preferences.Get("WeatherLocationName", string.Empty);
             string savedLoadSheddingName = Preferences.Get("LoadSheddingAreaLocationName", string.Empty);
 
-            if (savedLoadSheddingName.Length > 0 && savedWeatherName.Length > 0)
+            if (!string.IsNullOrWhiteSpace(savedLoadSheddingName) && !string.IsNullOrWhiteSpace(savedWeatherName))
             {
-                await GetAreaLoadShedding(savedLoadSheddingName, loadSheddingStage);
-                await GetWeatherBySearch(savedWeatherName);
+                await Task.WhenAll(
+                    GetAreaLoadShedding(savedLoadSheddingName, loadSheddingStage),
+                    GetWeatherBySearch(savedWeatherName)
+                );
             }
             else
             {
                 Preferences.Remove("WeatherLocationName");
                 Preferences.Remove("LoadSheddingAreaLocationName");
+
                 await GetLocation();
                 await GetLocationByGPS(latitude, longitude);
             }
@@ -68,13 +74,14 @@ public partial class MainPage : ContentPage
         }
         catch (Exception ex)
         {
-            await _alertServices.ShowAlert("onAppearing-An error occurred: " + ex.Message);
+            await _alertServices.ShowAlert($"Error in OnAppearing: {ex.Message}");
         }
         finally
         {
             HideLoadingIndicator();
         }
     }
+
 
     private void ShowLoadingIndicator()
     {
@@ -92,15 +99,36 @@ public partial class MainPage : ContentPage
 
     public async Task GetLocation()
     {
-        var location = await Geolocation.GetLocationAsync();
-        latitude = location.Latitude;
-        longitude = location.Longitude;
+        try
+        {
+            var location = await Geolocation.GetLocationAsync();
+            if (location != null)
+            {
+                latitude = location.Latitude;
+                longitude = location.Longitude;
+            }
+            else
+            {
+                await _alertServices.ShowAlert("Failed to retrieve GPS location.");
+            }
+        }
+        catch (Exception ex)
+        {
+            await _alertServices.ShowAlert($"Location error: {ex.Message}");
+        }
     }
 
-    public async Task GetLoadSheddingStatus() 
+    public async Task GetLoadSheddingStatus()
     {
-        var stage = await _loadSheddingStatusServices.GetNationalStatus();
-        loadSheddingStage = 1 - stage.Status; //Stages are calculated as stage - 1
+        try
+        {
+            var stage = await _loadSheddingStatusServices.GetNationalStatus();
+            loadSheddingStage = StageOffset - stage.Status;
+        }
+        catch (Exception ex)
+        {
+            await _alertServices.ShowAlert($"Failed to fetch load shedding status: {ex.Message}");
+        }
     }
 
     private async void Mylocation_Clicked(object sender, EventArgs e)
@@ -133,28 +161,28 @@ public partial class MainPage : ContentPage
     private async Task SearchLocation()
     {
         var response = await DisplayPromptAsync(
-           title: "Search City",
-           message: "",
-           placeholder: "City Name...",
-           accept: "SEARCH",
-           cancel: "CANCEL"
-           );
+            title: "Search City",
+            message: "",
+            placeholder: "City Name...",
+            accept: "SEARCH",
+            cancel: "CANCEL"
+        );
 
-        if (response != null)
+        if (!string.IsNullOrWhiteSpace(response))
         {
             string inputLocation = response.Trim();
 
-            await GetLoadSheddingBySearch(inputLocation);
-            await GetWeatherBySearch(inputLocation);
+            await Task.WhenAll(
+                GetLoadSheddingBySearch(inputLocation),
+                GetWeatherBySearch(inputLocation)
+            );
         }
         else
         {
-            await DisplayAlert(
-                title: "",
-                message: "Action Cancelled.",
-                cancel: "OK");
+            await DisplayAlert("Search Cancelled", "No input provided.", "OK");
         }
     }
+
 
     public async Task GetLocationByGPS(double latitude, double longitude)
     {

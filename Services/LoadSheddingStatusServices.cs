@@ -1,10 +1,8 @@
 ﻿using loadshedding.Interfaces;
 using loadshedding.Models;
-using System.Net.Http.Json;
 
 namespace loadshedding.Services
 {
-
     public class LoadSheddingStatusServices : ILoadSheddingStatusServices
     {
         private readonly HttpClient _httpClient;
