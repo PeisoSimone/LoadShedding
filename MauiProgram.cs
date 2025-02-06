@@ -10,6 +10,8 @@ using System.Reflection;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using loadshedding.Interfaces;
+using Supabase;
+using loadshedding.Models;
 
 namespace loadshedding;
 
@@ -19,6 +21,7 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder.UseMauiApp<App>().UseMauiCommunityToolkit();
+
 
         builder
         .UseMauiApp<App>()
@@ -39,16 +42,22 @@ public static class MauiProgram
             WeatherApiKey = apiKeysConfig?.WeatherApiKey,
         };
 
+        
+
         builder.Services.AddSingleton(apiKeys);
         builder.Services.AddHttpClient<IWeatherServices, WeatherServices>(weatherclient =>
         {
             weatherclient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/");
 
         });
-        builder.Services.AddHttpClient<ICalenderServices, CalenderServices>(calenderclient =>
+
+        var supabaseConfig = builder.Configuration.GetSection("Supabase").Get<SupabaseConfiguration>();
+        builder.Services.AddHttpClient("Supabase", client =>
         {
-            calenderclient.BaseAddress = new Uri("https://localhost:7024/api/Schedule/");
+            client.BaseAddress = new Uri("https://teqlgcsgiacnovfeirrf.supabase.co/rest/v1/");
+            client.DefaultRequestHeaders.Add("apikey", supabaseConfig.Key);
         });
+        builder.Services.AddScoped<ICalenderServices, CalenderServices>();
 
         builder.Services.AddHttpClient<ILoadSheddingStatusServices, LoadSheddingStatusServices>();
         builder.Services.AddSingleton<ILoadSheddingStatusServices, LoadSheddingStatusServices>();

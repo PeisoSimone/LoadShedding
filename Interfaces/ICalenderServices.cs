@@ -1,4 +1,5 @@
 ﻿using loadshedding.Model;
+using loadshedding.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace loadshedding.Interfaces
 {
     public interface ICalenderServices
     {
-        Task<List<OutagesRoot>> GetAreaOutages(string area, int stage);
+        Task<List<ScheduleRoot>> GetAreaOutages(string area, int stage);
         void SaveLoadSheddingAreaSettings(string area);
         void ClearLoadSheddingAreaSettings();
     }

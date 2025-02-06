@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
 using loadshedding.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace loadshedding.Services
 {
@@ -58,7 +59,8 @@ namespace loadshedding.Services
 
         private List<(string CalendarName, string AreaName)> SearchAreaDetails(JsonElement element, string text)
         {
-            List<(string CalendarName, string AreaName)> matchingDetails = new List<(string, string)>();
+            List<(string CalendarName, string AreaName)> matchingDetails = new();
+
             if (element.TryGetProperty("area_details", out JsonElement areaDetails))
             {
                 foreach (var areaDetail in areaDetails.EnumerateArray())
@@ -74,10 +76,9 @@ namespace loadshedding.Services
                                 {
                                     foreach (var name in names.EnumerateArray())
                                     {
-                                        if (name.GetString()?.Contains(text, StringComparison.OrdinalIgnoreCase) == true)
+                                        if (Regex.IsMatch(name.GetString() ?? "", $".*{Regex.Escape(text)}.*", RegexOptions.IgnoreCase))
                                         {
                                             matchingDetails.Add((calendarNameElement.GetString(), name.GetString()));
-                                            break;
                                         }
                                     }
                                 }
@@ -85,14 +86,15 @@ namespace loadshedding.Services
                                          names.GetString()?.Contains(text, StringComparison.OrdinalIgnoreCase) == true)
                                 {
                                     matchingDetails.Add((calendarNameElement.GetString(), names.GetString()));
-                                    break;
                                 }
                             }
                         }
                     }
                 }
             }
+
             return matchingDetails;
         }
+
     }
 }

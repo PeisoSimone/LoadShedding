@@ -1,6 +1,7 @@
 using loadshedding.CustomControl;
 using loadshedding.Interfaces;
 using loadshedding.Services;
+using Newtonsoft.Json;
 using Syncfusion.Maui.ProgressBar;
 using System.Text;
 
@@ -44,8 +45,6 @@ public partial class MainPage : ContentPage
         base.OnAppearing();
 
         ShowLoadingIndicator();
-
-        await GetLoadSheddingStatus();
 
         try
         {
@@ -101,7 +100,7 @@ public partial class MainPage : ContentPage
     public async Task GetLoadSheddingStatus() 
     {
         var stage = await _loadSheddingStatusServices.GetNationalStatus();
-        loadSheddingStage = 1 - stage.Status;
+        loadSheddingStage = 1 - stage.Status; //Stages are calculated as stage - 1
     }
 
     private async void Mylocation_Clicked(object sender, EventArgs e)
@@ -212,8 +211,7 @@ public partial class MainPage : ContentPage
                 string selectedAreaNameCalendar = Path.GetFileNameWithoutExtension(selectedCalendarName);
 
                 var stage = await _loadSheddingStatusServices.GetNationalStatus();
-                //int loadSheddingStage = 1 - stage.Status;
-                int loadSheddingStage = 1 - stage.Status;
+                int loadSheddingStage = 1 - stage.Status; //Stages are calculated as stage - 1
 
                 await GetAreaLoadShedding(selectedAreaNameCalendar, loadSheddingStage);
             }
@@ -243,11 +241,10 @@ public partial class MainPage : ContentPage
     public void LoadSheddingAreaUpdateUI(dynamic loadSheddingOutages)
     {
         DateTime day = DateTime.Now.Date;
-        if (loadSheddingOutages != null)
+        if (loadSheddingOutages != null && loadSheddingOutages.Count > 0)
         {
-
-            LblScheduleAreaName.Text = loadSheddingOutages[0].area_name;
-            LblSchedulesCurrentStage.Text = loadSheddingOutages[0].stage.ToString();
+            LblScheduleAreaName.Text = loadSheddingOutages[0].Area;
+            LblSchedulesCurrentStage.Text = loadSheddingOutages[0].Stage.ToString();
             LoadSheddingActive(loadSheddingOutages, day);
         }
         else
@@ -269,7 +266,7 @@ public partial class MainPage : ContentPage
         List<dynamic> todayNextEventOutages = GetTodayNextEventOutages(allDayEventsOutages);
 
         var lastItem = allDayEventsOutages[allDayEventsOutages.Count - 1];
-        DateTime lastEvenStart = lastItem.start;
+        DateTime lastEvenStart = lastItem.StartTime;
         DateTime now = DateTime.Now;
 
         if(lastEvenStart < now)
@@ -286,9 +283,9 @@ public partial class MainPage : ContentPage
 
         var firstEvent = todayNextEventOutages[0];
         LblDay.Text = day.DayOfWeek.ToString();
-        LblSchedulesCurrentStage.Text = "Stage " + firstEvent.stage.ToString();
-        EventStartTime = firstEvent.start;
-        EventEndTime = firstEvent.finsh.AddMinutes(-30);
+        LblSchedulesCurrentStage.Text = "Stage " + firstEvent.Stage.ToString();
+        EventStartTime = firstEvent.StartTime;
+        EventEndTime = firstEvent.FinishTime.AddMinutes(-30);
 
         circularProgressBarControl.EventStartTime = EventStartTime;
         circularProgressBarControl.EventEndTime = EventEndTime;
@@ -325,8 +322,8 @@ public partial class MainPage : ContentPage
     {
         var firstEvent = todayEventOutages[0];
 
-        EventStartTime = firstEvent.start;
-        EventEndTime = firstEvent.finsh;
+        EventStartTime = firstEvent.StartTime;
+        EventEndTime = firstEvent.FinishTime;
 
         string SchedulesEventStart = EventStartTime.ToString("HH:mm");
         string SchedulesEventEnd = EventEndTime.ToString("HH:mm");
@@ -442,7 +439,7 @@ public partial class MainPage : ContentPage
 
         foreach (var outage in loadSheddingOutages)
         {
-            string outageStart = outage.start.Date.ToString();
+            string outageStart = outage.StartTime.Date.ToString();
 
             if (outageStart == day.ToString())
             {
@@ -459,8 +456,8 @@ public partial class MainPage : ContentPage
         foreach (var outage in todayOutages)
         {
             DateTime currentTime = DateTime.Now;
-            DateTime evenStart = outage.start;
-            DateTime evenFinish = outage.finsh;
+            DateTime evenStart = outage.StartTime;
+            DateTime evenFinish = outage.FinishTime;
 
             if (evenStart > currentTime || (evenStart <= currentTime && currentTime < evenFinish))
             {
@@ -476,8 +473,8 @@ public partial class MainPage : ContentPage
 
         foreach (var outage in todayOutages)
         {
-            string outageStart = outage.start.ToString("HH:mm");
-            string outageFinish = outage.finsh.ToString("HH:mm");
+            string outageStart = outage.StartTime.ToString("HH:mm");
+            string outageFinish = outage.FinishTime.ToString("HH:mm");
 
             string concatenatedDates = $"{outageStart}-{outageFinish}";
             outageDates.Add(concatenatedDates);
@@ -518,6 +515,7 @@ public partial class MainPage : ContentPage
 
     private void LoadSheddingSuspended()
     {
+
         LblSchedulesCurrentStage.Text = "LoadShedding Suspended";
         LblDay.Text = DateTime.Today.DayOfWeek.ToString();
         LblDaySheduleList.Text = "No LoadShedding Today";

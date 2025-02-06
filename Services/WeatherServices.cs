@@ -84,7 +84,7 @@ namespace loadshedding.Services
             Preferences.Remove("WeatherLocationName");
         }
 
-        private void SaveLocationSettings(string weatherName)
+        public void SaveLocationSettings(string weatherName)
         {
             Preferences.Set("WeatherLocationName", weatherName);
         }

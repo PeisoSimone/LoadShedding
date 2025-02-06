@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace loadshedding.Model
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Clouds
     {
         public int all { get; set; }

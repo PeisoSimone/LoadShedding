@@ -11,5 +11,7 @@ namespace loadshedding.Interfaces
     {
         Task<WeatherRoot> GetWeatherByGPS(double latitude, double longitude);
         Task<WeatherRoot> GetWeatherBySearch(string text);
+        void ClearWeatherSettings();
+        void SaveLocationSettings(string weatherName);
     }
 }

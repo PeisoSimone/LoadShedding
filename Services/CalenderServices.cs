@@ -1,8 +1,10 @@
 ﻿using CsvHelper;
 using loadshedding.Interfaces;
 using loadshedding.Model;
+using loadshedding.Models;
 using System.Formats.Asn1;
 using System.Globalization;
+using System.Net.Http;
 using System.Net.Http.Json;
 
 
@@ -14,22 +16,23 @@ namespace loadshedding.Services
         private readonly IAlertServices _alertServices;
         private readonly HttpClient _httpClient;
 
-        public CalenderServices(HttpClient httpClient, IAlertServices alertServices)
+        public CalenderServices(IHttpClientFactory httpClientFactory, IAlertServices alertServices)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("Supabase");
             _alertServices = alertServices;
         }
-        public async Task<List<OutagesRoot>> GetAreaOutages(string area, int stage)
+        public async Task<List<ScheduleRoot>> GetAreaOutages(string area, int stage)
         {
-            int staged = 2;
+            int todayDay = DateTime.Today.Day;
+            int maxDay = todayDay + 3;
+            stage = 4;
             try
             {
-                _httpClient.DefaultRequestHeaders.Clear();
-                var request = new HttpRequestMessage(HttpMethod.Get, $"/{area}?stage={staged}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"schedule?area=eq.{area}&stage=eq.{stage}&date_of_month=gte.{todayDay}&date_of_month=lte.{maxDay}");
                 var response = await _httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
-                    List<OutagesRoot> content = await response.Content.ReadFromJsonAsync<List<OutagesRoot>>();
+                    List<ScheduleRoot> content = await response.Content.ReadFromJsonAsync<List<ScheduleRoot>>();
                     SaveLoadSheddingAreaSettings(area);
                     return content;
                 }
@@ -46,7 +49,6 @@ namespace loadshedding.Services
                 return null;
             }
         }
-        
 
         public void SaveLoadSheddingAreaSettings(string area)
         {
