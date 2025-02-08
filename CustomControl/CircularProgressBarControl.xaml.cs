@@ -153,7 +153,7 @@ namespace loadshedding.CustomControl
 
             Label textBottomLabel = new Label();
             textBottomLabel.FontAttributes = FontAttributes.Bold;
-            textBottomLabel.FontSize = 30;
+            textBottomLabel.FontSize = 20;
             textBottomLabel.FontFamily = "Nexa-Heavy";
             textBottomLabel.HorizontalTextAlignment = TextAlignment.Center;
             textBottomLabel.VerticalOptions = LayoutOptions.Start;
