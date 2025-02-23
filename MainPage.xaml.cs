@@ -49,6 +49,8 @@ public partial class MainPage : ContentPage
 
         ShowLoadingIndicator();
 
+        await GetLoadSheddingStatus();
+
         try
         {
             string savedWeatherName = Preferences.Get("WeatherLocationName", string.Empty);
@@ -123,7 +125,7 @@ public partial class MainPage : ContentPage
         try
         {
             var stage = await _loadSheddingStatusServices.GetNationalStatus();
-            loadSheddingStage = StageOffset - stage.Status;
+            loadSheddingStage =  stage.Status - StageOffset;//Stages are calculated as stage - 1
         }
         catch (Exception ex)
         {
@@ -239,7 +241,7 @@ public partial class MainPage : ContentPage
                 string selectedAreaNameCalendar = Path.GetFileNameWithoutExtension(selectedCalendarName);
 
                 var stage = await _loadSheddingStatusServices.GetNationalStatus();
-                int loadSheddingStage = 1 - stage.Status; //Stages are calculated as stage - 1
+                int loadSheddingStage = stage.Status - StageOffset; //Stages are calculated as stage - 1
 
                 await GetAreaLoadShedding(selectedAreaNameCalendar, loadSheddingStage);
             }
@@ -297,7 +299,7 @@ public partial class MainPage : ContentPage
         DateTime lastEvenStart = lastItem.StartTime;
         DateTime now = DateTime.Now;
 
-        if(lastEvenStart < now)
+        if (lastEvenStart < now && loadSheddingOutages.Count <= 0)
         {
             LoadSheddingData();
             return;
