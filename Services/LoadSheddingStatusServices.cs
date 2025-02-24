@@ -7,13 +7,10 @@ namespace loadshedding.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IAlertServices _alertServices;
-        private const string BASE_URL = "https://loadshedding.eskom.co.za/";
-        private const string STATUS_ENDPOINT = "LoadShedding/GetStatus";
 
         public LoadSheddingStatusServices(HttpClient httpClient, IAlertServices alertServices)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri(BASE_URL);
             _alertServices = alertServices;
         }
 
@@ -21,7 +18,8 @@ namespace loadshedding.Services
         {
             try
             {
-                var response = await _httpClient.GetAsync(STATUS_ENDPOINT);
+                const string endpoint = "LoadShedding/GetStatus";
+                var response = await _httpClient.GetAsync(endpoint);
 
                 if (response.IsSuccessStatusCode)
                 {

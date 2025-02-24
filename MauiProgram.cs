@@ -57,13 +57,15 @@ public static class MauiProgram
             client.BaseAddress = new Uri("https://teqlgcsgiacnovfeirrf.supabase.co/rest/v1/");
             client.DefaultRequestHeaders.Add("apikey", supabaseConfig.Key);
         });
+
+        builder.Services.AddHttpClient<ILoadSheddingStatusServices, LoadSheddingStatusServices>(loadSheddingClient =>
+        {
+            loadSheddingClient.BaseAddress = new Uri("https://loadshedding.eskom.co.za/");
+        });
+
         builder.Services.AddScoped<ICalenderServices, CalenderServices>();
 
-        builder.Services.AddHttpClient<ILoadSheddingStatusServices, LoadSheddingStatusServices>();
-        builder.Services.AddSingleton<ILoadSheddingStatusServices, LoadSheddingStatusServices>();
         builder.Services.AddSingleton<ICalendarSearchServices, CalendarSearchServices>();
-
-
         builder.Services.AddSingleton<IAlertServices, AlertServices>();
 
         return builder.Build();
