@@ -1,7 +1,9 @@
 ﻿using loadshedding.Interfaces;
-using loadshedding.Model;
 using loadshedding.Services;
-using Microsoft.Maui.Controls;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter;
+using loadshedding.Models;
 
 namespace loadshedding;
 public partial class App : Application
@@ -13,8 +15,17 @@ public partial class App : Application
     private readonly ILoadSheddingStatusServices _loadsheddingStatusServices;
     private readonly INotificationServices _notificationServices;
     private readonly LoadSheddingBackgroundService _backgroundService;
+    private readonly AppCenterConfiguration _appCenterConfig;
+    private readonly SyncfusionConfiguration _syncfusionConfiguration;
 
-    public App(IWeatherServices weatherServices, ICalendarSearchServices calendarSearchServices, ICalenderServices calendarServices, IAlertServices alertServices, ILoadSheddingStatusServices loadsheddingStatusServices, INotificationServices notificationServices, LoadSheddingBackgroundService backgroundService)
+    public App(IWeatherServices weatherServices, 
+        ICalendarSearchServices calendarSearchServices, 
+        ICalenderServices calendarServices, IAlertServices alertServices, 
+        ILoadSheddingStatusServices loadsheddingStatusServices, 
+        INotificationServices notificationServices, 
+        LoadSheddingBackgroundService backgroundService, 
+        AppCenterConfiguration appCenterConfig,
+        SyncfusionConfiguration syncfusionConfiguration)
     {
         _weatherServices = weatherServices;
         _loadsheddingStatusServices = loadsheddingStatusServices;
@@ -23,8 +34,10 @@ public partial class App : Application
         _alertServices = alertServices;
         _notificationServices = notificationServices;
         _backgroundService = backgroundService;
+        _appCenterConfig = appCenterConfig;
+        _syncfusionConfiguration = syncfusionConfiguration;
 
-        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cWWdCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWX5dcHVUR2JdV0d0VkI=");//Syncfusion Key Here
+        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(_syncfusionConfiguration.Key);
 
         InitializeComponent();
 
@@ -37,6 +50,11 @@ public partial class App : Application
     {
         base.OnStart();
 
+        //Initialise App Center
+        AppCenter.Start(
+            $"android={_appCenterConfig.AndroidKey};",
+            typeof(Analytics), typeof(Crashes));
+
         // Request notification permissions when app starts
         RequestNotificationPermission();
     }
@@ -45,5 +63,17 @@ public partial class App : Application
     {
         // Request notification permission
         var result = await Plugin.LocalNotification.LocalNotificationCenter.Current.RequestNotificationPermission();
+    }
+
+    protected override void OnSleep()
+    {
+        // Handle when your app sleeps
+        base.OnSleep();
+    }
+
+    protected override void OnResume()
+    {
+        // Handle when your app resumes
+        base.OnResume();
     }
 }

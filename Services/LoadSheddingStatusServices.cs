@@ -43,15 +43,24 @@ namespace loadshedding.Services
                         return new StatusRoot { Status = stage };
                     }
 
+                    AnalyticsHelper.TrackEvent("LoadSheddingStatusFailure",
+                        new Dictionary<string, string> { { "Invalid response format from LoadShedding API", $"{response.StatusCode}" } });
+
                     await _alertServices.ShowAlert("Invalid response format from LoadShedding API");
                     return null;
                 }
+
+                AnalyticsHelper.TrackEvent("LoadSheddingStatusFailure",
+                    new Dictionary<string, string> { { "Could not get National LoadShedding Status. Status Code", $"{response.StatusCode}" } });
 
                 await _alertServices.ShowAlert($"Could not get National LoadShedding Status. Status Code: {response.StatusCode}");
                 return null;
             }
             catch (Exception ex)
             {
+                AnalyticsHelper.TrackEvent("LoadSheddingStatusFailure",
+                    new Dictionary<string, string> { { "GetNationalStatus failed", $"{ex.Message}" } });
+
                 await _alertServices.ShowAlert($"GetNationalStatus failed: {ex.Message}");
                 return null;
             }

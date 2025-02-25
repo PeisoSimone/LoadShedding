@@ -12,6 +12,9 @@ using loadshedding.Interfaces;
 using Supabase;
 using loadshedding.Models;
 using Plugin.LocalNotification;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace loadshedding;
 
@@ -39,11 +42,18 @@ public static class MauiProgram
 
         // Configure API keys
         var apiKeysConfig = builder.Configuration.GetSection("ApiKeys").Get<ApiKeysConfiguration>();
+        var appCenterConfig = builder.Configuration.GetSection("AppCenter").Get<AppCenterConfiguration>();
+        var supabaseConfig = builder.Configuration.GetSection("Supabase").Get<SupabaseConfiguration>();
+        var syncfusionConfig = builder.Configuration.GetSection("Syncfusion").Get<SyncfusionConfiguration>();
+
         var apiKeys = new ApiKeysConfiguration
         {
             WeatherApiKey = apiKeysConfig?.WeatherApiKey,
         };
-        builder.Services.AddSingleton(apiKeys);
+
+        builder.Services.AddSingleton(apiKeys ?? new ApiKeysConfiguration());
+        builder.Services.AddSingleton(appCenterConfig ?? new AppCenterConfiguration());
+        builder.Services.AddSingleton(syncfusionConfig ?? new SyncfusionConfiguration());
 
         // Weather client
         builder.Services.AddHttpClient<IWeatherServices, WeatherServices>(weatherclient =>
@@ -52,7 +62,6 @@ public static class MauiProgram
         });
 
         // Supabase configuration
-        var supabaseConfig = builder.Configuration.GetSection("Supabase").Get<SupabaseConfiguration>();
         builder.Services.AddHttpClient("Supabase", client =>
         {
             client.BaseAddress = new Uri("https://teqlgcsgiacnovfeirrf.supabase.co/rest/v1/");
