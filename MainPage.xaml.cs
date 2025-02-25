@@ -14,6 +14,7 @@ public partial class MainPage : ContentPage
     private readonly ICalenderServices _calendarServices;
     private readonly IAlertServices _alertServices;
     private readonly ILoadSheddingStatusServices _loadSheddingStatusServices;
+    private readonly INotificationServices _notificationServices;
 
     private readonly CircularProgressBarControl circularProgressBarControl;
 
@@ -29,7 +30,8 @@ public partial class MainPage : ContentPage
         ICalendarSearchServices calendarSearchServices,
         ICalenderServices calendarServices,
         IAlertServices alertServices,
-        ILoadSheddingStatusServices loadSheddingStatusServices)
+        ILoadSheddingStatusServices loadSheddingStatusServices,
+        INotificationServices notificationServices)
     {
         InitializeComponent();
 
@@ -38,6 +40,7 @@ public partial class MainPage : ContentPage
         this._calendarSearchServices = calendarSearchServices ?? throw new ArgumentNullException(nameof(calendarSearchServices));
         this._calendarServices = calendarServices ?? throw new ArgumentNullException(nameof(calendarServices));
         this._alertServices = alertServices ?? throw new ArgumentNullException(nameof(alertServices));
+        this._notificationServices = notificationServices ?? throw new ArgumentNullException(nameof(alertServices));
 
         circularProgressBarControl = new CircularProgressBarControl();
         circularProgressBarControl.UpdateProgressBar();
@@ -125,7 +128,7 @@ public partial class MainPage : ContentPage
         try
         {
             var stage = await _loadSheddingStatusServices.GetNationalStatus();
-            loadSheddingStage =  stage.Status - StageOffset;//Stages are calculated as stage - 1
+            loadSheddingStage = stage.Status - StageOffset;//Stages are calculated as stage - 1
         }
         catch (Exception ex)
         {
@@ -217,7 +220,7 @@ public partial class MainPage : ContentPage
     {
         LblCity.Text = weatherBySearchResults.name;
         LblWeatherDescription.Text = weatherBySearchResults.weather[0].description;
-        LblTemperature.Text = weatherBySearchResults.main.temperature + "°C";
+        LblTemperature.Text = weatherBySearchResults.main.temperature + "?C";
     }
 
     public async Task GetLoadSheddingBySearch(string inputLocation)
@@ -320,6 +323,17 @@ public partial class MainPage : ContentPage
         circularProgressBarControl.EventStartTime = EventStartTime;
         circularProgressBarControl.EventEndTime = EventEndTime;
 
+        // Schedule 15-minute reminders
+        DateTime notifyBeforeStart = EventStartTime.AddMinutes(-15);
+        DateTime notifyBeforeEnd = EventEndTime.AddMinutes(-15);
+
+        if (notifyBeforeStart > DateTime.Now)
+        {
+            _notificationServices.ShowNotification("Upcoming Load-Shedding", $"Power will go off at {EventStartTime:t}.", notifyBeforeStart);
+        }
+
+        _notificationServices.ShowNotification("Power Restoration", $"Power will be restored at {EventEndTime:t}.", notifyBeforeEnd);
+
         circularProgressBarControl.UpdateProgressBar();
         ProgressBarUpdated();
 
@@ -329,7 +343,7 @@ public partial class MainPage : ContentPage
     }
 
 
-    private void LoadSheddingData()  
+    private void LoadSheddingData()
     {
         LblSchedulesCurrentStage.Text = "Waiting for Eskom updates";
         LblDay.Text = DateTime.Today.DayOfWeek.ToString();
@@ -346,7 +360,6 @@ public partial class MainPage : ContentPage
 
         FillBottomCardsUI();
     }
-
 
     private void LoadSheddingActiveHours(List<dynamic> todayOutages, List<dynamic> todayEventOutages)
     {
@@ -463,7 +476,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private List<dynamic> GetAllDayEventsOutages(dynamic loadSheddingOutages, DateTime day)
+    private static List<dynamic> GetAllDayEventsOutages(dynamic loadSheddingOutages, DateTime day)
     {
         List<dynamic> todayOutages = new List<dynamic>();
 
@@ -479,7 +492,7 @@ public partial class MainPage : ContentPage
         return todayOutages;
     }
 
-    public List<dynamic> GetTodayNextEventOutages(List<dynamic> todayOutages)
+    public static List<dynamic> GetTodayNextEventOutages(List<dynamic> todayOutages)
     {
         List<dynamic> todayEventOutages = new List<dynamic>();
 
@@ -497,7 +510,7 @@ public partial class MainPage : ContentPage
         return todayEventOutages;
     }
 
-    private List<string> GetTodayOutagesDates(List<dynamic> todayOutages)
+    private static List<string> GetTodayOutagesDates(List<dynamic> todayOutages)
     {
         List<string> outageDates = new List<string>();
 
@@ -516,7 +529,7 @@ public partial class MainPage : ContentPage
     {
         foreach (var sbText in todayOutageDates)
         {
-            if (scheduleHighlight.Equals(sbText))
+            if (scheduleHighlight.Equals(sbText, StringComparison.OrdinalIgnoreCase))
             {
                 if (EventStartTime > DateTime.Now)
                 {
@@ -581,7 +594,7 @@ public partial class MainPage : ContentPage
         lblDaySheduleList.FontSize = fontSize;
     }
 
-    private double CalculateFontSize(double availableWidth)
+    private static double CalculateFontSize(double availableWidth)
     {
         double baseFontSize = 15;
         double calculatedFontSize = baseFontSize * availableWidth / 300;

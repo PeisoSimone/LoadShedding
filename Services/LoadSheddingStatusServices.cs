@@ -1,4 +1,7 @@
 ﻿using loadshedding.Interfaces;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using loadshedding.Models;
 
 namespace loadshedding.Services
@@ -7,11 +10,17 @@ namespace loadshedding.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IAlertServices _alertServices;
+        private readonly INotificationServices _notificationServices;
+        private int _lastStage = -1;
 
-        public LoadSheddingStatusServices(HttpClient httpClient, IAlertServices alertServices)
+        public LoadSheddingStatusServices(
+            HttpClient httpClient,
+            IAlertServices alertServices,
+            INotificationServices notificationServices)
         {
             _httpClient = httpClient;
             _alertServices = alertServices;
+            _notificationServices = notificationServices;
         }
 
         public async Task<StatusRoot> GetNationalStatus()
@@ -26,6 +35,11 @@ namespace loadshedding.Services
                     var statusValue = await response.Content.ReadAsStringAsync();
                     if (int.TryParse(statusValue, out int stage))
                     {
+                        if (_lastStage != -1 && _lastStage != stage)
+                        {
+                            _notificationServices.ShowNotification("Load-Shedding Update", $"Stage changed to {stage}");
+                        }
+                        _lastStage = stage;
                         return new StatusRoot { Status = stage };
                     }
 
