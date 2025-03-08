@@ -37,11 +37,11 @@ namespace loadshedding.Services
                 {
                     var content = await response.Content.ReadFromJsonAsync<WeatherRoot>();
 
-                    if (_lastLocation != null && _lastLocation != content?.name)
-                    {
-                        _notificationServices.ShowNotification("Weather Location Update", $"Weather location changed to {content?.name}");
-                        AnalyticsHelper.TrackWeatherLocationChange(_lastLocation, content?.name);
-                    }
+                    //if (_lastLocation != null && _lastLocation != content?.name)
+                    //{
+                    //    _notificationServices.ShowNotification("Weather Location Update", $"Weather location changed to {content?.name}");
+                    //    AnalyticsHelper.TrackWeatherLocationChange(_lastLocation, content?.name);
+                    //}
                     _lastLocation = content?.name;
 
                     SaveLocationSettings(content?.name);
@@ -86,11 +86,11 @@ namespace loadshedding.Services
                 {
                     var content = await response.Content.ReadFromJsonAsync<WeatherRoot>();
 
-                    if (_lastLocation != null && _lastLocation != content?.name)
-                    {
-                        _notificationServices.ShowNotification("Weather Location Update", $"Weather location changed to {content?.name}");
-                        AnalyticsHelper.TrackWeatherLocationChange(_lastLocation, content?.name);
-                    }
+                    //if (_lastLocation != null && _lastLocation != content?.name)
+                    //{
+                    //    _notificationServices.ShowNotification("Weather Location Update", $"Weather location changed to {content?.name}");
+                    //    AnalyticsHelper.TrackWeatherLocationChange(_lastLocation, content?.name);
+                    //}
                     _lastLocation = content?.name;
 
                     SaveLocationSettings(content?.name);

@@ -324,15 +324,18 @@ public partial class MainPage : ContentPage
         circularProgressBarControl.EventEndTime = EventEndTime;
 
         // Schedule 15-minute reminders
-        DateTime notifyBeforeStart = EventStartTime.AddMinutes(-15);
-        DateTime notifyBeforeEnd = EventEndTime.AddMinutes(-15);
+        DateTime notifyBeforeStart = EventStartTime.AddMinutes(-30);
+        DateTime notifyBeforeEnd = EventEndTime.AddMinutes(-30);
 
-        if (notifyBeforeStart > DateTime.Now)
+        if (DateTime.Now > notifyBeforeStart && DateTime.Now < EventStartTime)
         {
-            _notificationServices.ShowNotification("Upcoming Load-Shedding", $"Power will go off at {EventStartTime:t}.", notifyBeforeStart);
+            _notificationServices.ShowNotification("Upcoming LoadShedding", $"Power will go off at {EventStartTime:t}.", notifyBeforeStart);
         }
 
-        _notificationServices.ShowNotification("Power Restoration", $"Power will be restored at {EventEndTime:t}.", notifyBeforeEnd);
+        if (DateTime.Now > notifyBeforeEnd && DateTime.Now < EventEndTime)
+        {
+            _notificationServices.ShowNotification("Power Restoration", $"Power will be restored at {EventEndTime:t}.", notifyBeforeEnd);
+        }
 
         circularProgressBarControl.UpdateProgressBar();
         ProgressBarUpdated();
@@ -393,85 +396,42 @@ public partial class MainPage : ContentPage
 
     public void FillBottomCardsUI()
     {
-        for (int i = 1; i < 4; i++)
+        int dayOffset;
+        if (EventStartTime.Date >= DateTime.Today && EventStartTime.Date <= DateTime.Today.AddDays(3))
         {
-            if (i == 1)
+            dayOffset = (EventStartTime.Date - DateTime.Today).Days;
+        }
+        else
+        {
+            dayOffset = 0;
+        }
+
+        Label[] dayLabels = { LblNextDay, LblNextNextDay, LblNextNextNextDay };
+        Label[] scheduleLabels = { LblNextSchedule, LblNextNextSchedule, LblNextNextNextSchedule };
+
+        for (int i = 0; i < dayLabels.Length; i++)
+        {
+            DateTime targetDay = DateTime.Today.AddDays(i + 1 + dayOffset);
+
+            dayLabels[i].Text = targetDay.DayOfWeek.ToString();
+
+            if (loadSheddingOutages != null)
             {
-                DateTime nextDay = DateTime.Today.AddDays(i);
-                LblNextDay.Text = nextDay.DayOfWeek.ToString();
+                List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, targetDay);
+                List<string> outagesDates = GetTodayOutagesDates(allDayEventsOutages);
 
-                if (loadSheddingOutages != null)
+                if (outagesDates.Count > 0)
                 {
-                    DateTime day = DateTime.Now.Date.AddDays(i);
-                    List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
-                    List<string> todayOutageDates = GetTodayOutagesDates(allDayEventsOutages);
-
-                    if (todayOutageDates.Count > 0)
-                    {
-                        string joinedSchedule = string.Join("\n", todayOutageDates);
-                        LblNextSchedule.Text = joinedSchedule;
-                    }
-                    else
-                    {
-                        LblNextSchedule.Text = "Events Unavailable";
-                    }
+                    scheduleLabels[i].Text = string.Join("\n", outagesDates);
                 }
                 else
                 {
-                    LblNextSchedule.Text = "Schedules Unavailable";
+                    scheduleLabels[i].Text = "Events Unavailable";
                 }
             }
-            else if (i == 2)
+            else
             {
-                DateTime nextDay = DateTime.Today.AddDays(i);
-                LblNextNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                if (loadSheddingOutages != null)
-                {
-                    DateTime day = DateTime.Now.Date.AddDays(i);
-                    List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
-                    List<string> todayOutageDates = GetTodayOutagesDates(allDayEventsOutages);
-
-                    if (todayOutageDates.Count > 0)
-                    {
-                        string joinedSchedule = string.Join("\n", todayOutageDates);
-                        LblNextNextSchedule.Text = joinedSchedule;
-                    }
-                    else
-                    {
-                        LblNextNextSchedule.Text = "Events Unavailable";
-                    }
-                }
-                else
-                {
-                    LblNextNextSchedule.Text = "Schedules Unavailable";
-                }
-            }
-            else if (i == 3)
-            {
-                DateTime nextDay = DateTime.Today.AddDays(i);
-                LblNextNextNextDay.Text = nextDay.DayOfWeek.ToString();
-
-                if (loadSheddingOutages != null)
-                {
-                    DateTime day = DateTime.Now.Date.AddDays(i);
-                    List<dynamic> allDayEventsOutages = GetAllDayEventsOutages(loadSheddingOutages, day);
-                    List<string> todayOutageDates = GetTodayOutagesDates(allDayEventsOutages);
-
-                    if (todayOutageDates.Count > 0)
-                    {
-                        string joinedSchedule = string.Join("\n", todayOutageDates);
-                        LblNextNextNextSchedule.Text = joinedSchedule;
-                    }
-                    else
-                    {
-                        LblNextNextNextSchedule.Text = "Events Unavailable";
-                    }
-                }
-                else
-                {
-                    LblNextNextNextSchedule.Text = "Schedules Unavailable";
-                }
+                scheduleLabels[i].Text = "Schedules Unavailable";
             }
         }
     }

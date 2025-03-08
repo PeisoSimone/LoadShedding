@@ -30,7 +30,7 @@ namespace loadshedding.Services
         public async Task<List<ScheduleRoot>> GetAreaOutages(string area, int stage)
         {
             int todayDay = DateTime.Today.Day;
-            int maxDay = todayDay + 3;
+            int maxDay = todayDay + 7;
             string endpoint = $"schedule?area=eq.{area}&stage=eq.{stage}&date_of_month=gte.{todayDay}&date_of_month=lte.{maxDay}";
 
             try
@@ -42,11 +42,11 @@ namespace loadshedding.Services
                 {
                     List<ScheduleRoot> content = await response.Content.ReadFromJsonAsync<List<ScheduleRoot>>();
 
-                    if (_lastArea != null && _lastArea != area)
-                    {
-                        _notificationServices.ShowNotification("Load-Shedding Area Update", $"Area changed to {area}");
-                        AnalyticsHelper.TrackLoadSheddingAreaChange(_lastArea, area);
-                    }
+                    //if (_lastArea != null && _lastArea != area)
+                    //{
+                    //    _notificationServices.ShowNotification("Load-Shedding Area Update", $"Area changed to {area}");
+                    //    AnalyticsHelper.TrackLoadSheddingAreaChange(_lastArea, area);
+                    //}
                     _lastArea = area;
 
                     SaveLoadSheddingAreaSettings(area);

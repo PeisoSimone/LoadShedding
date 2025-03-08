@@ -11,16 +11,20 @@ namespace loadshedding.Services
         private readonly HttpClient _httpClient;
         private readonly IAlertServices _alertServices;
         private readonly INotificationServices _notificationServices;
+        private readonly ICalenderServices _calenderServices;
         private int _lastStage = -1;
 
         public LoadSheddingStatusServices(
             HttpClient httpClient,
             IAlertServices alertServices,
-            INotificationServices notificationServices)
+            INotificationServices notificationServices,
+            ICalenderServices calenderServices
+            )
         {
             _httpClient = httpClient;
             _alertServices = alertServices;
             _notificationServices = notificationServices;
+            _calenderServices = calenderServices;
         }
 
         public async Task<StatusRoot> GetNationalStatus()
@@ -37,7 +41,26 @@ namespace loadshedding.Services
                     {
                         if (_lastStage != -1 && _lastStage != stage)
                         {
-                            _notificationServices.ShowNotification("Load-Shedding Update", $"Stage changed to {stage}");
+                            if (_lastStage < 0)
+                            {
+                                _notificationServices.ShowNotification("Load-Shedding Update", $"LoadShedding is Active: Stage {stage}");
+
+                                string savedLoadSheddingName = Preferences.Get("LoadSheddingAreaLocationName", string.Empty);
+
+                                if (!string.IsNullOrWhiteSpace(savedLoadSheddingName) )
+                                {
+                                    await _calenderServices.GetAreaOutages(savedLoadSheddingName, stage);
+                                }
+
+                            }
+                            else if (stage < 1)
+                            {
+                                _notificationServices.ShowNotification("Load-Shedding Update", $"LoadShedding is Suspended");
+                            }
+                            else 
+                            {
+                                _notificationServices.ShowNotification("Load-Shedding Update", $"Stage changed to {stage}");
+                            }
                         }
                         _lastStage = stage;
                         return new StatusRoot { Status = stage };

@@ -4,7 +4,6 @@ using loadshedding.Interfaces;
 
 namespace loadshedding.Services
 {
-    
     public class LoadSheddingBackgroundService
     {
         private readonly ILoadSheddingStatusServices _statusServices;
@@ -17,7 +16,7 @@ namespace loadshedding.Services
 
         public void Start()
         {
-            _timer = new System.Timers.Timer(900000); // Check every 15 minutes
+            _timer = new System.Timers.Timer(60000); // Check every second (1000ms)
             _timer.Elapsed += async (sender, e) => await CheckStatus();
             _timer.Start();
         }
